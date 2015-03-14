@@ -8,7 +8,6 @@ public class StraightWE extends Path implements IPathActions {
 
 	public void setParameters(int pos) {
 		
-		this.pos = pos;
 		ent = pos-1; // calculate entrance
 		exit = pos+1; // Calculate exit
 		
