@@ -1,7 +1,8 @@
 
-abstract class critter
+abstract class critter  
 {
 	private int speed;
+	private  int type;
 	private double health;
 	private boolean onpath; 
 	private double positionx=0;
@@ -21,20 +22,23 @@ abstract class critter
 		System.out.println("Speed is:"+this.speed+
 				            "Health is:"+this.health);
 	}
-
+	public  int gettype()
+	{
+		return type;
+	}
 	//when critters receive hit from tower 
 	//,we have to set new health according to the damage
-	public void updatehealth(double damage)
+	protected void updatehealth(double damage)
 	{
 		
 		this.health=this.health-damage;
 		
 		if(this.health<=0)
 		{
-			
+			updatelife();
 			//reward player money
 			//call method to increment amount of money of player
-			//incrementbank(10*critter.gettype());
+			
 		}
 		
 	}
@@ -58,6 +62,8 @@ abstract class critter
 	public void minuslife()
 	{
 		this.onpath=false;
+		
+		updatemoney();
 		//call a method to decrement life of player
 		//decrementbank(10*(critter.gettype());
 		
