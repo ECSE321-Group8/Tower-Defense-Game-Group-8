@@ -10,10 +10,10 @@ public class Game implements Iupdate{
 		}
 		public void updatelife()
 		{
-			life=life-critter.gettype();
+			life=life-critter.gettype();//Why can i call gettype();
 		}
 		public void updatemoney()
 		{
-			this.money=this.money+critter.gettype();
+			this.money=this.money+critter.gettype();//
 		}
 }
