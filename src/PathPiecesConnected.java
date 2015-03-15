@@ -25,6 +25,23 @@ public class PathPiecesConnected {
 	public void setUp() throws Exception {
 		m = new Map(10,10);
 		p1 = new StraightWE(0,10);
+		p2 = new StraightWE(0,10);
+		p2.rotate();
+		p3 = new StraightNS(0,10);
+		p4 = new StraightNS(0,10);
+		p4.rotate();
+		p5 = new TurnEN(0,10);
+		p6 = new TurnEN(0,10);
+		p6.rotate();
+		p7 = new TurnNW(0,10);
+		p8 = new TurnNW(0,10);
+		p8.rotate();
+		p9 = new TurnSE(0,10);
+		p10 = new TurnSE(0,10);
+		p10.rotate();
+		p11 = new TurnWS(0,10);
+		p12 = new TurnWS(0,10);
+		p12.rotate();
 		/*
 		System.out.println(p1.getEntrance());
 		System.out.println(p1.getExit());
