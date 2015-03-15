@@ -19,6 +19,64 @@ public class Map {
 		
 	}
 	
+	public boolean inValidSpot(Path p1){
+		// Checks to see it the path piece placed expects an entrance or exit piece out of bounds
+		int currentRow = calculaterow(p1.getPos());
+		int nextRow=0;
+		if(Math.abs(p1.getPos()-p1.getEntrance())==1){
+			// If the absolute value of the difference between the current position and its entrance is 1 ...
+			// Checking to see if the entrance is expected to be outside of the left or right edges of Map
+			nextRow = calculaterow(p1.getEntrance());
+			if(currentRow!=nextRow){
+				// This means that the entrance expected is not to the left or to the right
+				// In other words, the entrance is expected in another row
+				return false;
+			}
+		}
+		if(Math.abs(p1.getPos()-p1.getExit())==1){
+			// If the absolute value of the difference between the current position and its exit is 1 ...
+			// Checking to see if the exit is expected to be outside of the left or right edges of Map
+			nextRow = calculaterow(p1.getExit());
+			if(currentRow!=nextRow){
+				// This means that the exit expected is not to the left or to the right
+				// In other words, the exit is expected in another row
+				return false;
+			}
+		}
+		if(Math.abs(p1.getPos()-p1.getEntrance())==width){
+			nextRow = calculaterow(p1.getEntrance());
+			if(((double)p1.getEntrance()/width)<0 || nextRow>(calculaterow(height*width-1))){
+				//Less than zero would make it on top of the top edge
+				//First term calculated in this manner because any negative entrance between -1 and 
+				// -width+1 will have an integer rounded to zero. The double casting will give an 
+				// accurate number without losing the sign
+				
+				//Greater than height*width-1 would make in lower than the bottom edge
+				return false;
+			}
+		}
+		if(Math.abs(p1.getPos()-p1.getExit())==width){
+			nextRow = calculaterow(p1.getExit());
+			if(((double)p1.getExit()/width)<0 || nextRow>(calculaterow(height*width-1))){
+				return false;
+			}
+		}
+		return true;
+		
+	}
+	
+	public boolean connected(Path p1,Path p2){
+		// Checks if p1 and p2 are connected
+		if(p1.getExit()==p2.getPos()&&p1.getPos()==p2.getEntrance()){
+			// If the exit of the first tile is equal to the position of the second tile
+			// AND if the entrance of the second tile is equal to the position of the first tile
+			return true;
+		}
+		else{
+			return false;
+		}
+	
+	}
 	public void addPathPiece(Path p){ 
 		// add path p to temp linked list
 		temp.add(p);
