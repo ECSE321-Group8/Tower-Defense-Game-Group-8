@@ -14,16 +14,22 @@ public class PathPiecesConnected {
 	Path p5; // Will be TurnEN
 	Path p6; // Will be TurnEN rotated
 	Path p7; // Will be TurnNW
-	Path p8; //
+	Path p8; // Will be TurnNW rotated
+	Path p9; // will be TurnSE
+	Path p10; // will be TurnSE rotated
+	Path p11; // will be TurnWS
+	Path p12; // will be TurnWS rotated
 	
 	
 	@Before
 	public void setUp() throws Exception {
 		m = new Map(10,10);
 		p1 = new StraightWE(0,10);
+		/*
 		System.out.println(p1.getEntrance());
 		System.out.println(p1.getExit());
 		System.out.println(m.inValidSpot(p1));
+		*/
 	}
 
 	@Test
