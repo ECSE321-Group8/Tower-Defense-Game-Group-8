@@ -8,6 +8,13 @@ public class PathPiecesConnected {
 	
 	Map m;
 	Path p1; // Will be StraigthWE
+	Path p2; // Will be StraigthWE rotated
+	Path p3; // Will be StraightNS
+	Path p4; // Will be StraigthNS rotated
+	Path p5; // Will be TurnEN
+	Path p6; // Will be TurnEN rotated
+	Path p7; // Will be TurnNW
+	Path p8; //
 	
 	
 	@Before
@@ -34,6 +41,7 @@ public class PathPiecesConnected {
 		 */
 
 		assertFalse("Case 1-a: did not work.",m.inValidSpot(p1));
+		
 		
 		
 	}
