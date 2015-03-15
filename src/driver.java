@@ -11,6 +11,7 @@ public class driver {
 		System.out.println(s1.getEntrance());
 		System.out.println(s1.getExit());
 		System.out.println((double)-1/10);
+		System.out.println(99/10);
 
 	}
 
