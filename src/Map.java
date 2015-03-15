@@ -21,6 +21,17 @@ public class Map {
 	
 	public boolean inValidSpot(Path p1){
 		// Checks to see it the path piece placed expects an entrance or exit piece out of bounds
+		
+		int largestRow = (height*width-1)/width;
+		
+		// if entrance or exit pos expected is negative, know it is expecting a path outside the top bound
+		if(p1.getEntrance()<0 || p1.getExit()<0){
+			return false;
+		}
+		// if entrance or exit's row greater than the maximum row, know it is expecting a path outside bottom bound
+		if(calculaterow(p1.getEntrance())>largestRow || calculaterow(p1.getExit())>largestRow){
+			return false;
+		}
 		int currentRow = calculaterow(p1.getPos());
 		int nextRow=0;
 		if(Math.abs(p1.getPos()-p1.getEntrance())==1){
@@ -45,7 +56,7 @@ public class Map {
 		}
 		if(Math.abs(p1.getPos()-p1.getEntrance())==width){
 			nextRow = calculaterow(p1.getEntrance());
-			if(((double)p1.getEntrance()/width)<0 || nextRow>(calculaterow(height*width-1))){
+			if(p1.getEntrance()<0 || nextRow>(calculaterow(height*width-1))){
 				//Less than zero would make it on top of the top edge
 				//First term calculated in this manner because any negative entrance between -1 and 
 				// -width+1 will have an integer rounded to zero. The double casting will give an 
@@ -57,7 +68,7 @@ public class Map {
 		}
 		if(Math.abs(p1.getPos()-p1.getExit())==width){
 			nextRow = calculaterow(p1.getExit());
-			if(((double)p1.getExit()/width)<0 || nextRow>(calculaterow(height*width-1))){
+			if(p1.getEntrance()<0 || nextRow>(calculaterow(height*width-1))){
 				return false;
 			}
 		}
