@@ -57,13 +57,25 @@ public class PathPiecesConnected {
 		 *   a) For StriaightWE
 		 *   b) For StraightNS
 		 *   c) For TurnEN
-		 *   d) For TurnNW
+		 *   d) For TurnNW (Should be true)
 		 *   e) For TurnSE
 		 *   f) For TurnWS
 		 *   Each one of these has to be repeated for a rotate form of the path as well
 		 */
 
 		assertFalse("Case 1-a: did not work.",m.inValidSpot(p1));
+		assertFalse("Case 1-a(r): did not work.",m.inValidSpot(p2));
+		assertFalse("Case 1-b: did not work.",m.inValidSpot(p3));
+		assertFalse("Case 1-b(r): did not work.", m.inValidSpot(p4));
+		assertFalse("Case 1-c: did not work.",m.inValidSpot(p5));
+		assertFalse("Case 1-c(r): did not work.",m.inValidSpot(p6));
+		assertTrue("Case 1-d: did not work.",m.inValidSpot(p7));
+		assertTrue("Case 1-d(r): did not work.",m.inValidSpot(p8));
+		assertFalse("Case 1-e: did not work.",m.inValidSpot(p9));
+		assertFalse("Case 1-e(r): did not work.", m.inValidSpot(p10));
+		assertFalse("Case 1-f: did not work.", m.inValidSpot(p11));
+		assertFalse("Case 1-f(r): did not work.",m.inValidSpot(p12));
+		// worked
 		
 		
 		
