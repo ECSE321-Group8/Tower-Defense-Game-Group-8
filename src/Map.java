@@ -4,8 +4,8 @@ import java.util.LinkedList;
 public class Map {
 	
 	private Tile grid [][]; // hold the Map path and scenery
-	private int height; // height of map
-	private int width; // Width of Map
+	static int height; // height of map
+	static int width; // Width of Map
 	LinkedList <Path> temp = new LinkedList<Path>(); // List of the Path
 	Path entryPoint; // Entry point
 	Path exitPoint; // Exit point
