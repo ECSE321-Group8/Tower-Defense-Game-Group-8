@@ -1,3 +1,5 @@
+import views.MapSize;
+
 
 public class driver {
 
@@ -12,6 +14,9 @@ public class driver {
 		System.out.println(s1.getExit());
 		System.out.println((double)-1/10);
 		System.out.println(99/10);
+		
+		MapSize ms = new MapSize();
+		// Works
 
 	}
 
