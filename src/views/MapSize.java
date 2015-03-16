@@ -10,7 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class MapSize extends JFrame implements ActionListener{
+public class MapSize extends JPanel implements ActionListener{
 	
 	JFrame f1;
 	JPanel p1;
