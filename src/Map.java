@@ -88,9 +88,16 @@ public class Map {
 		}
 	
 	}
+	
+	/*
+	 * WORK ON THESE TWO METHODS TO CREATE 2D array 
+	 */
+	
 	public void addPathPiece(Path p){ 
 		// add path p to temp linked list
 		temp.add(p);
+		
+		
 	}
 	
 	public void removePathPiece(Path p){
