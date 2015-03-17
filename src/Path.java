@@ -9,6 +9,14 @@ public class Path extends Tile{
 	public boolean edgeType; // If it is an entrance or exit
 	public boolean visited; // Check if the tile was visited during verification process
 	
+	/*
+	 * How the subclasses of Path or named:
+	 * First its the description of the Path
+	 * Then, the first capital letter describes where the entrance is from
+	 * The second capital letter describes where the exit is
+	 * Both the entrance and exit are relative to the current position of the Path 
+	 */
+	
 	//Constructor 
 	public Path(int pos,int width){
 		this.pos = pos;
