@@ -13,19 +13,26 @@ public class Map {
 	
 	/*
 	 *  //Make the map a singleton 
-	 * private static Map myMap= new Map(int height, int width);
+	 * private static Map myMap;
 	 *
-	 * private Map(int height, int width){
-	 * 		this.height=height;
-	 * 		this.width=width;
+	 * //constructor
+	 * private Map(){
+	 * 		this.setHeight(10); // here is the place where the user would define the size
+	 * 		this.setWidth(10);  //a variable should be passed from a super class 
 	 * 		grid= new Tile[height][width];
 	 * }
 	 * 
+	 * 
 	 * public static Map getInstance(){
+	 * 		myMap = new Map();
 	 * 		return myMap;
 	 * }
 	 * 
 	 * //Method to setHeight
+	 * private void setHeight(int h){
+	 * 		height = h;
+	 * }
+	 * 
 	 * //Method to setWidth
 	 * //Method to initialize the Grid (I am not sure we need this
 	 * //Could be done in the constructor since no variables are needed to be passed)

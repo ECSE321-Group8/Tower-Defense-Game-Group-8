@@ -9,6 +9,7 @@ public class Path extends Tile{
 	public boolean edgeType; // If it is an entrance or exit
 	public boolean visited; // Check if the tile was visited during verification process
 	
+	//Constructor 
 	public Path(int pos,int width){
 		this.pos = pos;
 		this.width = width;
