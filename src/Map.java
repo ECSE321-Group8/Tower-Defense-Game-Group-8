@@ -6,52 +6,48 @@ public class Map {
 	private Tile grid [][]; // hold the Map path and scenery
 	static int height; // height of map
 	static int width; // Width of Map
+	
+	//private?
 	LinkedList <Path> temp = new LinkedList<Path>(); // List of the Path
 	Path entryPoint; // Entry point
 	Path exitPoint; // Exit point
 	private String heading = ""; // To determine next logical path piece
 	
-	/*
-	 *  //Make the map a singleton 
-	 * private static Map myMap;
-	 *
-	 * //constructor
-	 * private Map(){
-	 * 		this.setHeight(10); // here is the place where the user would define the size
-	 * 		this.setWidth(10);  //a variable should be passed from a super class 
-	 * 		grid= new Tile[height][width];
-	 * }
-	 * 
-	 * 
-	 * public static Map getInstance(){
-	 * 		myMap = new Map();
-	 * 		return myMap;
-	 * }
-	 * 
-	 * //Method to setHeight
-	 * private void setHeight(int h){
-	 * 		height = h;
-	 * }
-	 * 
-	 * //Method to setWidth
-	 * //Method to initialize the Grid (I am not sure we need this
-	 * //Could be done in the constructor since no variables are needed to be passed)
-	 *  
-	 * 
-	 *	//all other methods included and modified
-	 
-	 * 
-	 */
+/*
+ * Make map a singleton
+ */
+	private static Map instanceMap=null;
 	
-	
-	//Constructor 
-	public Map(int height, int width){
-		
-		this.height = height;
-		this.width = width;
-		grid = new Tile [height][width];
+	private Map(){
 		
 	}
+	public static Map getInstance(){
+		if(instanceMap==null)
+			instanceMap=new Map();
+		return instanceMap;
+	}
+	
+	public void setMap(int h, int w){
+		height=h;
+		width=w;
+		grid=new Tile[height][width];
+	}
+	
+	public void setGrid(int y, int x, Tile k){
+		grid[y][x]=k;
+	}
+	
+	public Tile getGrid(int y, int x){
+		return grid[y][x];
+	}
+	
+	
+//	public Map(int height, int width){
+//		
+//		this.height = height;
+//		this.width = width;
+//		grid = new Tile [height][width];	
+//	}
 	
 	public boolean inValidSpot(Path p1){
 		// Checks to see it the path piece placed expects an entrance or exit piece out of bounds
