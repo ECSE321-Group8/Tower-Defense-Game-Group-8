@@ -9,8 +9,8 @@ public class TurnNW extends Path implements IPathActions {
 	@Override
 	public void setParameters(int pos) {
 
-		ent = pos + width; // calculate exit
-		exit = pos + 1; // calculate exit
+		ent = pos - width; // calculate exit
+		exit = pos - 1; // calculate exit
 		
 	}
 

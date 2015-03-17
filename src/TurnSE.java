@@ -8,8 +8,8 @@ public class TurnSE extends Path implements IPathActions {
 
 	public void setParameters(int pos) {
 		
-		ent = pos - width; // calculate entrance
-		exit = pos - 1; // calculate exit
+		ent = pos + width; // calculate entrance
+		exit = pos + 1; // calculate exit
 	}
 	
 }
