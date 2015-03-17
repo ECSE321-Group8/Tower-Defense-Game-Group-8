@@ -358,26 +358,26 @@ public class PathPiecesConnected {
 		
 		
 		
-	/*
-	 * TEST #2: for the connected path 
-	 * Make sure the tiles are properly connected 
-	 * entry 2 = exit 1
-	 * 
-	 * There will be 4 cases, where a  Tile is placed:
-	 * 1)on the top 
-	 * 2)on the right
-	 * 3)on the left
-	 * 4)on the bottom
-	 * 
-	 * The tiles will be tested in their original position
-	 * (i.e without rotating)
-	 * 
-	 * These are the positions where the tiles would be
-	 * 		    |01|		
-	 * 		|10||11||12|	
-	 * 		    |21|		
-	 *
-	 */
+/*
+ * TEST #2: for the connected path 
+ * Make sure the tiles are properly connected 
+ * entry 2 = exit 1
+ * 
+ * There will be 4 cases, where a  Tile is placed:
+ * 1)on the top 
+ * 2)on the right
+ * 3)on the left
+ * 4)on the bottom
+ * 
+ * The tiles will be tested in their original position
+ * (i.e without rotating)
+ * 
+ * These are the positions where the tiles would be
+ * 		    |01|		
+ * 		|10||11||12|	
+ * 		    |21|		
+ *
+ */
 		
 	//Path tiles of different types are initialized to the 11th Tile
 		p1= new StraightWE(11,10);
@@ -428,15 +428,15 @@ public class PathPiecesConnected {
 		assertFalse("Case 1 turnSE-turnWS: did not work.",m.connected(p12, p9));	
 		
 		assertFalse("Case 1 turnWS-turnWS: did not work.",m.connected(p12, p11));	
-
-
-		/*
-		 * CASE#2:Test placing the other tile at the right
-		 * note: the order in which the tiles are compared is very important 
-		 * the function "compare" has as first argument the initial position 
-		 * and the second argument is the final position
-		 * Therefore we need to make sure the directions of the tiles are also correct 
-		 */
+	
+		
+	/*
+	 * CASE#2:Test placing the other tile at the right
+	 * note: the order in which the tiles are compared is very important 
+	 * the function "compare" has as first argument the initial position 
+	 * and the second argument is the final position
+	 * Therefore we need to make sure the directions of the tiles are also correct 
+	 */
 		p2= new StraightWE(12,10);
 		p4= new StraightNS(12,10);
 		p6= new TurnEN(12,10);
@@ -471,6 +471,79 @@ public class PathPiecesConnected {
 		assertTrue("Case 2 turnSE-turnWS: did not work.",m.connected(p9, p12));	
 			
 		assertFalse("Case 2 turnWS-turnWS: did not work.",m.connected(p12, p11));	
+		
+		
+		
+	/*
+	 * CASE#3:Test placing the other tile at the left
+	 * note: the order in which the tiles are compared is very important 
+	 * the function "compare" has as first argument the initial position 
+	 * and the second argument is the final position
+	 * Therefore we need to make sure the directions of the tiles are also correct 
+	*/
+		p2= new StraightWE(10,10);
+		p4= new StraightNS(10,10);
+		p6= new TurnEN(10,10);
+		p8= new TurnNW(10,10);
+		p10= new TurnSE(10,10);
+		p12=new TurnWS(10,10);
+		
+		
+		assertFalse("Case 3 WE-NS: did not work.",m.connected(p2,p3));
+		assertFalse("Case 3 turnEN-NS: did not work.",m.connected(p6,p3));
+		assertFalse("Case 3 turnNW-NS: did not work.",m.connected(p8, p3));
+		assertFalse("Case 3 turnSE-NS: did not work.",m.connected(p10, p3));
+		assertFalse("Case 3 turnWS-NS: did not work.",m.connected(p12, p3));
+				
+		assertFalse("Case 3 turnEN-WE: did not work.",m.connected(p1,p6));
+		assertFalse("Case 3 turnNW-WE	: did not work.",m.connected(p1,p8));
+		assertTrue("Case 3 turnSE-WE: did not work.",m.connected(p10,p1));
+		assertFalse("Case 3 turnWS-WE: did not work.",m.connected(p1,p12));
+				
+		assertFalse("Case 3 turnEN-turnNW: did not work.",m.connected(p8, p5));
+		assertFalse("Case 3 turnEN-turnSE: did not work.",m.connected(p5, p10));
+		assertFalse("Case 3 turnEN-turnWS: did not work.",m.connected(p5, p12));
+			
+		assertFalse("Case 3 turnNW-turnSE: did not work.",m.connected(p10, p7));
+		assertFalse("Case 3 turnNW-turnWS: did not work.",m.connected(p12, p7));		
+		
+		assertFalse("Case 3 turnSE-turnWS: did not work.",m.connected(p9, p12));	
+				
+
+	/*
+	 * CASE#4: Test placing the other tile at the bottom
+	 * note: the order in which the tiles are compared is very important 
+	 * the function "compare" has as first argument the initial position 
+	 * and the second argument is the final position
+	 * Therefore we need to make sure the directions of the tiles are also correct 
+	*/
+		p2= new StraightWE(21,10);
+		p4= new StraightNS(21,10);
+		p6= new TurnEN(21,10);
+		p8= new TurnNW(21,10);
+		p10= new TurnSE(21,10);
+		p12=new TurnWS(21,10);
+		
+			
+		assertFalse("Case 4 WE-NS: did not work.",m.connected(p2,p3));
+		assertFalse("Case 4 turnEN-NS: did not work.",m.connected(p6,p3));
+		assertTrue("Case 4 turnNW-NS: did not work.",m.connected(p3, p8));
+		assertFalse("Case 4 turnSE-NS: did not work.",m.connected(p10, p3));
+		assertFalse("Case 4 turnWS-NS: did not work.",m.connected(p12, p3));
+					
+		assertFalse("Case 4 turnEN-WE: did not work.",m.connected(p1,p6));
+		assertFalse("Case 4 turnNW-WE	: did not work.",m.connected(p1,p8));
+		assertFalse("Case 4 turnSE-WE: did not work.",m.connected(p1,p10));
+		assertFalse("Case 4 turnWS-WE: did not work.",m.connected(p1,p12));
+				
+		assertFalse("Case 4 turnEN-turnNW: did not work.",m.connected(p8, p5));
+		assertFalse("Case 4 turnEN-turnSE: did not work.",m.connected(p5, p10));
+		assertFalse("Case 4 turnEN-turnWS: did not work.",m.connected(p5, p12));
+				
+		assertFalse("Case 4 turnNW-turnSE: did not work.",m.connected(p10, p7));
+		assertFalse("Case 4 turnNW-turnWS: did not work.",m.connected(p12, p7));		
+			
+		assertFalse("Case 4 turnSE-turnWS: did not work.",m.connected(p9, p12));	
 
 	}
 
