@@ -346,6 +346,65 @@ public class PathPiecesConnected {
 		assertFalse("Case 1-f: did not work.", m.inValidSpot(p11));
 		assertFalse("Case 1-f(r): did not work.",m.inValidSpot(p12));
 		//worked
+		
+		
+		
+	/*
+	 * TEST #2: for the connected path 
+	 * Make sure the tiles are properly connected 
+	 * entry 2 = exit 1
+	 * 
+	 * There will be 4 cases, where a  Tile is placed:
+	 * 1)on the top 
+	 * 2)on the right
+	 * 3)on the left
+	 * 4)on the bottom
+	 * 
+	 * The tiles will be tested in their original position
+	 * (i.e without rotating)
+	 * 
+	 * These are the positions where the tiles would be
+	 * 		    |01|		
+	 * 		|10||11||12|	
+	 * 		    |21|		
+	 *
+	 */
+		
+	//Path tiles of different types are initialized to the 11th Tile
+		p1= new StraightWE(11,10);
+		p3= new StraightNS(11,10);
+		p5= new TurnEN(11,10);
+		p7= new TurnNW(11,10);
+		p9= new TurnSE(11,10);
+		p11=new TurnWS(11,10);
+		
+	/*
+	 * CASE#1:Test placing the other tile at the top
+	 */
+		p2= new StraightWE(1,10);
+		p4= new StraightNS(1,10);
+		p6= new TurnEN(1,10);
+		p8= new TurnNW(1,10);
+		p10= new TurnSE(1,10);
+		p12=new TurnWS(1,10);
+		
+		
+		assertTrue("Case 1 NS-NS: did not work.",m.connected(p4,p3));
+		assertFalse("Case 1 WE-NS: did not work.",m.connected(p2,p3));
+		assertFalse("Case 1 turnEN-NS: did not work.",m.connected(p6,p3));
+		assertFalse("Case 1 turnNW-NS: did not work.",m.connected(p8, p3));
+		assertFalse("Case 1 turnSE-NS: did not work.",m.connected(p10, p3));
+		assertTrue("Case 1 turnWS-NS: did not work.",m.connected(p12, p3));
+		
+		
+		assertFalse("Case 1 WE-WE: did not work.",m.connected(p2,p1));
+		assertFalse("Case 1 turnEN-WE: did not work.",m.connected(p6,p1));
+		assertFalse("Case 1 turnNW-WE	: did not work.",m.connected(p8, p1));
+		assertFalse("Case 1 turnSE-WE: did not work.",m.connected(p10, p1));
+		assertFalse("Case 1 turnWS-WE: did not work.",m.connected(p12, p1));
+	
+	
+	
 	}
 
 }
