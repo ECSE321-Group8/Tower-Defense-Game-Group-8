@@ -257,6 +257,50 @@ public class PathPiecesConnected {
 		assertTrue("Case 1-f(r): did not work.",m.inValidSpot(p12));
 		// worked
 		
+		/*
+		 *  Case 6: See if can recognize expecting out of bounds from bottom (excluding corners)
+		 *   a) For StriaightWE
+		 *   b) For StraightNS (false)
+		 *   c) For TurnEN (false)
+		 *   d) For TurnNW
+		 *   e) For TurnSE (false)
+		 *   f) For TurnWS 
+		 *   Each one of these has to be repeated for a rotated form of the path as well
+		 */
+		
+		// Position 91-98 is the top of a 10x10 grid (excludes the corners)
+		p1 = new StraightWE(98,10);
+		p2 = new StraightWE(97,10);
+		p2.rotate();
+		p3 = new StraightNS(96,10);
+		p4 = new StraightNS(95,10);
+		p4.rotate();
+		p5 = new TurnEN(94,10);
+		p6 = new TurnEN(93,10);
+		p6.rotate();
+		p7 = new TurnNW(92,10);
+		p8 = new TurnNW(91,10);
+		p8.rotate();
+		p9 = new TurnSE(98,10);
+		p10 = new TurnSE(97,10);
+		p10.rotate();
+		p11 = new TurnWS(96,10);
+		p12 = new TurnWS(95,10);
+		p12.rotate();
+				
+		assertTrue("Case 1-a: did not work.",m.inValidSpot(p1));
+		assertTrue("Case 1-a(r): did not work.",m.inValidSpot(p2));
+		assertFalse("Case 1-b: did not work.",m.inValidSpot(p3));
+		assertFalse("Case 1-b(r): did not work.", m.inValidSpot(p4));
+		assertTrue("Case 1-c: did not work.",m.inValidSpot(p5));
+		assertTrue("Case 1-c(r): did not work.",m.inValidSpot(p6));
+		assertFalse("Case 1-d: did not work.",m.inValidSpot(p7));
+		assertFalse("Case 1-d(r): did not work.",m.inValidSpot(p8));
+		assertTrue("Case 1-e: did not work.",m.inValidSpot(p9));
+		assertTrue("Case 1-e(r): did not work.", m.inValidSpot(p10));
+		assertFalse("Case 1-f: did not work.", m.inValidSpot(p11));
+		assertFalse("Case 1-f(r): did not work.",m.inValidSpot(p12));
+		// worked
 		
 	}
 
