@@ -11,6 +11,33 @@ public class Map {
 	Path exitPoint; // Exit point
 	private String heading = ""; // To determine next logical path piece
 	
+	/*
+	 *  //Make the map a singleton 
+	 * private static Map myMap= new Map(int height, int width);
+	 *
+	 * private Map(int height, int width){
+	 * 		this.height=height;
+	 * 		this.width=width;
+	 * 		grid= new Tile[height][width];
+	 * }
+	 * 
+	 * public static Map getInstance(){
+	 * 		return myMap;
+	 * }
+	 * 
+	 * //Method to setHeight
+	 * //Method to setWidth
+	 * //Method to initialize the Grid (I am not sure we need this
+	 * //Could be done in the constructor since no variables are needed to be passed)
+	 *  
+	 * 
+	 *	//all other methods included and modified
+	 
+	 * 
+	 */
+	
+	
+	//Constructor 
 	public Map(int height, int width){
 		
 		this.height = height;
