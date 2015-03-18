@@ -1,11 +1,10 @@
 
 public class critter3 extends critter{
 	 
-		  private int speed =1;
-		  private double health =10.0;
-		  
-		 public critter3()
-			{
-				super();
-			}
+	 public critter3()
+		{
+		 speed =1;
+			health=10.0;
+			typeCritter=3;
+		}
 	 }
