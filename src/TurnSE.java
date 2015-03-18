@@ -1,7 +1,7 @@
 
 public class TurnSE extends Path implements IPathActions {
 
-	public TurnSE(int pos, int width) {
+	public TurnSE(int pos) {
 		super(pos);
 		setParameters(pos);
 	}

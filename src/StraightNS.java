@@ -1,7 +1,7 @@
 
 public class StraightNS extends Path implements IPathActions {
 
-	public StraightNS(int pos, int width) {
+	public StraightNS(int pos) {
 		super(pos);
 		setParameters(pos);
 	}

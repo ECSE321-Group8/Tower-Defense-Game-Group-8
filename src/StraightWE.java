@@ -1,7 +1,7 @@
 
 public class StraightWE extends Path implements IPathActions {
 	
-	public StraightWE(int pos, int width){
+	public StraightWE(int pos){
 		super(pos);
 		setParameters(pos);
 	}

@@ -25,23 +25,23 @@ public class PathPiecesConnected {
 	public void setUp() throws Exception {
 		m = Map.getInstance();
 		m.setMap(10,10);
-		p1 = new StraightWE(0,10);
-		p2 = new StraightWE(0,10);
+		p1 = new StraightWE(0);
+		p2 = new StraightWE(0);
 		p2.rotate();
-		p3 = new StraightNS(0,10);
-		p4 = new StraightNS(0,10);
+		p3 = new StraightNS(0);
+		p4 = new StraightNS(0);
 		p4.rotate();
-		p5 = new TurnEN(0,10);
-		p6 = new TurnEN(0,10);
+		p5 = new TurnEN(0);
+		p6 = new TurnEN(0);
 		p6.rotate();
-		p7 = new TurnNW(0,10);
-		p8 = new TurnNW(0,10);
+		p7 = new TurnNW(0);
+		p8 = new TurnNW(0);
 		p8.rotate();
-		p9 = new TurnSE(0,10);
-		p10 = new TurnSE(0,10);
+		p9 = new TurnSE(0);
+		p10 = new TurnSE(0);
 		p10.rotate();
-		p11 = new TurnWS(0,10);
-		p12 = new TurnWS(0,10);
+		p11 = new TurnWS(0);
+		p12 = new TurnWS(0);
 		p12.rotate();
 		/*
 		System.out.println(p1.getEntrance());
@@ -93,23 +93,23 @@ public class PathPiecesConnected {
 		 */
 		
 		// Position 9 is the top right of a 10x10 grid
-		p1 = new StraightWE(9,10);
-		p2 = new StraightWE(9,10);
+		p1 = new StraightWE(9);
+		p2 = new StraightWE(9);
 		p2.rotate();
-		p3 = new StraightNS(9,10);
-		p4 = new StraightNS(9,10);
+		p3 = new StraightNS(9);
+		p4 = new StraightNS(9);
 		p4.rotate();
-		p5 = new TurnEN(9,10);
-		p6 = new TurnEN(9,10);
+		p5 = new TurnEN(9);
+		p6 = new TurnEN(9);
 		p6.rotate();
-		p7 = new TurnNW(9,10);
-		p8 = new TurnNW(9,10);
+		p7 = new TurnNW(9);
+		p8 = new TurnNW(9);
 		p8.rotate();
-		p9 = new TurnSE(9,10);
-		p10 = new TurnSE(9,10);
+		p9 = new TurnSE(9);
+		p10 = new TurnSE(9);
 		p10.rotate();
-		p11 = new TurnWS(9,10);
-		p12 = new TurnWS(9,10);
+		p11 = new TurnWS(9);
+		p12 = new TurnWS(9);
 		p12.rotate();
 		
 		assertFalse("Case 2-a: did not work.",m.inValidSpot(p1));
@@ -138,23 +138,23 @@ public class PathPiecesConnected {
 		 */
 		
 		// Position 90 is the top right of a 10x10 grid
-		p1 = new StraightWE(90,10);
-		p2 = new StraightWE(90,10);
+		p1 = new StraightWE(90);
+		p2 = new StraightWE(90);
 		p2.rotate();
-		p3 = new StraightNS(90,10);
-		p4 = new StraightNS(90,10);
+		p3 = new StraightNS(90);
+		p4 = new StraightNS(90);
 		p4.rotate();
-		p5 = new TurnEN(90,10);
-		p6 = new TurnEN(90,10);
+		p5 = new TurnEN(90);
+		p6 = new TurnEN(90);
 		p6.rotate();
-		p7 = new TurnNW(90,10);
-		p8 = new TurnNW(90,10);
+		p7 = new TurnNW(90);
+		p8 = new TurnNW(90);
 		p8.rotate();
-		p9 = new TurnSE(90,10);
-		p10 = new TurnSE(90,10);
+		p9 = new TurnSE(90);
+		p10 = new TurnSE(90);
 		p10.rotate();
-		p11 = new TurnWS(90,10);
-		p12 = new TurnWS(90,10);
+		p11 = new TurnWS(90);
+		p12 = new TurnWS(90);
 		p12.rotate();
 		
 		assertFalse("Case 3-a: did not work.",m.inValidSpot(p1));
@@ -183,23 +183,23 @@ public class PathPiecesConnected {
 		 */
 		
 		// Position 99 is the top right of a 10x10 grid
-		p1 = new StraightWE(99,10);
-		p2 = new StraightWE(99,10);
+		p1 = new StraightWE(99);
+		p2 = new StraightWE(99);
 		p2.rotate();
-		p3 = new StraightNS(99,10);
-		p4 = new StraightNS(99,10);
+		p3 = new StraightNS(99);
+		p4 = new StraightNS(99);
 		p4.rotate();
-		p5 = new TurnEN(99,10);
-		p6 = new TurnEN(99,10);
+		p5 = new TurnEN(99);
+		p6 = new TurnEN(99);
 		p6.rotate();
-		p7 = new TurnNW(99,10);
-		p8 = new TurnNW(99,10);
+		p7 = new TurnNW(99);
+		p8 = new TurnNW(99);
 		p8.rotate();
-		p9 = new TurnSE(99,10);
-		p10 = new TurnSE(99,10);
+		p9 = new TurnSE(99);
+		p10 = new TurnSE(99);
 		p10.rotate();
-		p11 = new TurnWS(99,10);
-		p12 = new TurnWS(99,10);
+		p11 = new TurnWS(99);
+		p12 = new TurnWS(99);
 		p12.rotate();
 		
 		assertFalse("Case 4-a: did not work.",m.inValidSpot(p1));
@@ -231,23 +231,23 @@ public class PathPiecesConnected {
 		 */
 		
 		// Position 1-8 is the top of a 10x10 grid (excludes the corners)
-		p1 = new StraightWE(1,10);
-		p2 = new StraightWE(2,10);
+		p1 = new StraightWE(1);
+		p2 = new StraightWE(2);
 		p2.rotate();
-		p3 = new StraightNS(3,10);
-		p4 = new StraightNS(4,10);
+		p3 = new StraightNS(3);
+		p4 = new StraightNS(4);
 		p4.rotate();
-		p5 = new TurnEN(5,10);
-		p6 = new TurnEN(6,10);
+		p5 = new TurnEN(5);
+		p6 = new TurnEN(6);
 		p6.rotate();
-		p7 = new TurnNW(7,10);
-		p8 = new TurnNW(8,10);
+		p7 = new TurnNW(7);
+		p8 = new TurnNW(8);
 		p8.rotate();
-		p9 = new TurnSE(1,10);
-		p10 = new TurnSE(2,10);
+		p9 = new TurnSE(1);
+		p10 = new TurnSE(2);
 		p10.rotate();
-		p11 = new TurnWS(3,10);
-		p12 = new TurnWS(4,10);
+		p11 = new TurnWS(3);
+		p12 = new TurnWS(4);
 		p12.rotate();
 				
 		assertTrue("Case 5-a: did not work.",m.inValidSpot(p1));
@@ -279,23 +279,23 @@ public class PathPiecesConnected {
 		 */
 		
 		// Position 91-98 is the top of a 10x10 grid (excludes the corners)
-		p1 = new StraightWE(98,10);
-		p2 = new StraightWE(97,10);
+		p1 = new StraightWE(98);
+		p2 = new StraightWE(97);
 		p2.rotate();
-		p3 = new StraightNS(96,10);
-		p4 = new StraightNS(95,10);
+		p3 = new StraightNS(96);
+		p4 = new StraightNS(95);
 		p4.rotate();
-		p5 = new TurnEN(94,10);
-		p6 = new TurnEN(93,10);
+		p5 = new TurnEN(94);
+		p6 = new TurnEN(93);
 		p6.rotate();
-		p7 = new TurnNW(92,10);
-		p8 = new TurnNW(91,10);
+		p7 = new TurnNW(92);
+		p8 = new TurnNW(91);
 		p8.rotate();
-		p9 = new TurnSE(98,10);
-		p10 = new TurnSE(97,10);
+		p9 = new TurnSE(98);
+		p10 = new TurnSE(97);
 		p10.rotate();
-		p11 = new TurnWS(96,10);
-		p12 = new TurnWS(95,10);
+		p11 = new TurnWS(96);
+		p12 = new TurnWS(95);
 		p12.rotate();
 				
 		assertTrue("Case 6-a: did not work.",m.inValidSpot(p1));
@@ -324,23 +324,23 @@ public class PathPiecesConnected {
 		 */
 		
 		// Position 10 in increments of 10 is the left side of a 10x10 grid (excludes the corners)
-		p1 = new StraightWE(10,10);
-		p2 = new StraightWE(20,10);
+		p1 = new StraightWE(10);
+		p2 = new StraightWE(20);
 		p2.rotate();
-		p3 = new StraightNS(30,10);
-		p4 = new StraightNS(40,10);
+		p3 = new StraightNS(30);
+		p4 = new StraightNS(40);
 		p4.rotate();
-		p5 = new TurnEN(50,10);
-		p6 = new TurnEN(60,10);
+		p5 = new TurnEN(50);
+		p6 = new TurnEN(60);
 		p6.rotate();
-		p7 = new TurnNW(70,10);
-		p8 = new TurnNW(80,10);
+		p7 = new TurnNW(70);
+		p8 = new TurnNW(80);
 		p8.rotate();
-		p9 = new TurnSE(70,10);
-		p10 = new TurnSE(60,10);
+		p9 = new TurnSE(70);
+		p10 = new TurnSE(60);
 		p10.rotate();
-		p11 = new TurnWS(50,10);
-		p12 = new TurnWS(40,10);
+		p11 = new TurnWS(50);
+		p12 = new TurnWS(40);
 		p12.rotate();
 				
 		assertFalse("Case 7-a: did not work.",m.inValidSpot(p1));
@@ -381,12 +381,12 @@ public class PathPiecesConnected {
  */
 		
 	//Path tiles of different types are initialized to the 11th Tile
-		p1= new StraightWE(11,10);
-		p3= new StraightNS(11,10);
-		p5= new TurnEN(11,10);
-		p7= new TurnNW(11,10);
-		p9= new TurnSE(11,10);
-		p11=new TurnWS(11,10);
+		p1= new StraightWE(11);
+		p3= new StraightNS(11);
+		p5= new TurnEN(11);
+		p7= new TurnNW(11);
+		p9= new TurnSE(11);
+		p11=new TurnWS(11);
 		
 	/*
 	 * CASE#1:Test placing the other tile at the top
@@ -395,12 +395,12 @@ public class PathPiecesConnected {
 	 * and the second argument is the final position
 	 * Therefore we need to make sure the directions of the tiles are also correct 
 	 */
-		p2= new StraightWE(1,10);
-		p4= new StraightNS(1,10);
-		p6= new TurnEN(1,10);
-		p8= new TurnNW(1,10);
-		p10= new TurnSE(1,10);
-		p12=new TurnWS(1,10);
+		p2= new StraightWE(1);
+		p4= new StraightNS(1);
+		p6= new TurnEN(1);
+		p8= new TurnNW(1);
+		p10= new TurnSE(1);
+		p12=new TurnWS(1);
 		
 		
 		assertTrue("Case 1 NS-NS: did not work.",m.connected(p4,p3));
@@ -438,12 +438,12 @@ public class PathPiecesConnected {
 	 * and the second argument is the final position
 	 * Therefore we need to make sure the directions of the tiles are also correct 
 	 */
-		p2= new StraightWE(12,10);
-		p4= new StraightNS(12,10);
-		p6= new TurnEN(12,10);
-		p8= new TurnNW(12,10);
-		p10= new TurnSE(12,10);
-		p12=new TurnWS(12,10);
+		p2= new StraightWE(12);
+		p4= new StraightNS(12);
+		p6= new TurnEN(12);
+		p8= new TurnNW(12);
+		p10= new TurnSE(12);
+		p12=new TurnWS(12);
 		
 		
 		assertFalse("Case 2 NS-NS: did not work.",m.connected(p4,p3));
@@ -482,12 +482,12 @@ public class PathPiecesConnected {
 	 * and the second argument is the final position
 	 * Therefore we need to make sure the directions of the tiles are also correct 
 	*/
-		p2= new StraightWE(10,10);
-		p4= new StraightNS(10,10);
-		p6= new TurnEN(10,10);
-		p8= new TurnNW(10,10);
-		p10= new TurnSE(10,10);
-		p12=new TurnWS(10,10);
+		p2= new StraightWE(10);
+		p4= new StraightNS(10);
+		p6= new TurnEN(10);
+		p8= new TurnNW(10);
+		p10= new TurnSE(10);
+		p12=new TurnWS(10);
 		
 		
 		assertFalse("Case 3 WE-NS: did not work.",m.connected(p2,p3));
@@ -518,12 +518,12 @@ public class PathPiecesConnected {
 	 * and the second argument is the final position
 	 * Therefore we need to make sure the directions of the tiles are also correct 
 	*/
-		p2= new StraightWE(21,10);
-		p4= new StraightNS(21,10);
-		p6= new TurnEN(21,10);
-		p8= new TurnNW(21,10);
-		p10= new TurnSE(21,10);
-		p12=new TurnWS(21,10);
+		p2= new StraightWE(21);
+		p4= new StraightNS(21);
+		p6= new TurnEN(21);
+		p8= new TurnNW(21);
+		p10= new TurnSE(21);
+		p12=new TurnWS(21);
 		
 			
 		assertFalse("Case 4 WE-NS: did not work.",m.connected(p2,p3));

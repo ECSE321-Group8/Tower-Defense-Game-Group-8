@@ -1,7 +1,7 @@
 
 public class TurnNW extends Path implements IPathActions {
 
-	public TurnNW(int pos, int width) {
+	public TurnNW(int pos) {
 		super(pos);
 		setParameters(pos);
 	}

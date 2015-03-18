@@ -1,7 +1,7 @@
 
 public class TurnEN extends Path implements IPathActions {
 
-	public TurnEN(int pos, int width) {
+	public TurnEN(int pos) {
 		super(pos);
 		setParameters(pos);
 	}
