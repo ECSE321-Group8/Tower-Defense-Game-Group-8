@@ -2,15 +2,15 @@
 public class StraightNS extends Path implements IPathActions {
 
 	public StraightNS(int pos, int width) {
-		super(pos, width);
+		super(pos);
 		setParameters(pos);
 	}
 
 	@Override
 	public void setParameters(int pos) {
 
-		ent = pos - width; // calculate entrance
-		exit = pos + width; // calculate exit
+		ent = pos - Map.getWidth(); // calculate entrance
+		exit = pos + Map.getWidth(); // calculate exit
 		
 	}
 

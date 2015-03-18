@@ -4,7 +4,7 @@ public class Path extends Tile{
 	// Will try them as public first then see if can change the variables to private
 	public int ent; // Tile from where critter will enter
 	public int exit; // Till which the critter will exit
-	public int width; // width of the Map Used to calculate exit/entrance of tile
+	//public int width; // width of the Map Used to calculate exit/entrance of tile
 	public boolean isEdge; // If this tile is an entrance or exit or if it is part of path
 	public boolean edgeType; // If it is an entrance or exit
 	public boolean visited; // Check if the tile was visited during verification process
@@ -18,24 +18,18 @@ public class Path extends Tile{
 	 */
 	
 	//Constructor 
-	public Path(int pos,int width){
+	public Path(int pos/*,int width*/){
 		this.pos = pos;
-		this.width = width;
+		//this.width = width;
 	}
-	
+	 	
 	public void rotate() { // Rotate piece
 		int temp = ent;
 		ent = exit;
 		exit = temp; 
 	}
 	
-	public int getEntrance(){ // return entrance of tile
-		return ent;
-	}
-	
-	public int getExit(){ // return exit of tile
-		return exit;
-	}
+
 	
 	public void setisEdge(){ //setting that there it may be either an entrance or exit
 		isEdge = true;
@@ -50,16 +44,24 @@ public class Path extends Tile{
 		edgeType = true;
 		ent = pos;
 	}
+	public int getEntry(){
+		return ent;
+	}
 	
+
 	public void setExit(){ //setting tile as exit point
 		setisEdge();
 		edgeType = false;
 		exit = pos;
 	}
-	
-	public boolean getedgeType(){ // getting the boolean which denotes if entry or exit point
-		return edgeType;
+	public int getExit(){ // return exit of tile
+		return exit;
 	}
+	
+	
+//	public boolean getedgeType(){ // getting the boolean which denotes if entry or exit point
+//		return edgeType;
+//	}
 	
 	public void setVisited(boolean visited){
 		this.visited = visited;
@@ -68,5 +70,23 @@ public class Path extends Tile{
 	public boolean getVisited(){
 		return visited;
 	}
-
+	
+	
+	//Methods to return the col and row of the entry and exit of the Path
+	public int getEntryCol(){
+		return getCol(this.getEntry());
+	}
+	public int getEntryRow(){
+		return getRow(this.getEntry());
+	}
+	
+	public int getExitCol(){
+		return getCol(this.getExit());
+	}
+	public int getExitRow(){
+		return getRow(this.getExit());		
+	}
+	
+	
+	
 }

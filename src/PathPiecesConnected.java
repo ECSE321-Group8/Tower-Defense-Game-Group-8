@@ -23,7 +23,8 @@ public class PathPiecesConnected {
 	
 	@Before
 	public void setUp() throws Exception {
-		m = new Map(10,10);
+		m = Map.getInstance();
+		m.setMap(10,10);
 		p1 = new StraightWE(0,10);
 		p2 = new StraightWE(0,10);
 		p2.rotate();

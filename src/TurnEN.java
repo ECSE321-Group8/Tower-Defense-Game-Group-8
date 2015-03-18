@@ -2,14 +2,14 @@
 public class TurnEN extends Path implements IPathActions {
 
 	public TurnEN(int pos, int width) {
-		super(pos, width);
+		super(pos);
 		setParameters(pos);
 	}
 
 	public void setParameters(int pos) {
 
 		ent = pos + 1; // calculate entrance
-		exit = pos - width; // calculate exit
+		exit = pos - Map.getWidth(); // calculate exit
 		
 	}
 	

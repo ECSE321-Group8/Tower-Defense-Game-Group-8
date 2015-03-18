@@ -10,17 +10,31 @@ public abstract class Tile {
 	}
 	
 	/*
-	 * Method that returns the Row coordinate of the Tile
+	 * Method that returns the Row coordinate of a Tile
 	 */
-	public int getRow(int pos){
-		return (pos/Map.width);
+	public int getRow(){
+		return (pos/Map.getWidth());
+	}
+	public int getRow(int n){
+		return (n/Map.getWidth());
 	}
 	
+
 	/*
 	 * Method that returns the Col coordinate of the Tile 
 	 */
-	public int getCol(int pos){
-		return pos%(Map.width);
+	public int getCol(){
+		return pos%(Map.getWidth());
+	}
+	public int getCol(int n){
+		return n%(Map.getWidth());
 	}
 	
+	
+	public boolean isPath(){
+		if (this instanceof Path)
+			return true;
+		else
+			return false;
+	}
 }
