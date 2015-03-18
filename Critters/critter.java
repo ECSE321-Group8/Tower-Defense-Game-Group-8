@@ -1,12 +1,12 @@
 
 abstract class critter  
 {
-	private int speed;
-	private  int type;
-	private double health;
-	private boolean onpath; 
-	private double positionx=0;
-	private double positiony=0;
+	public int speed;
+	public  int typeCritter;
+	public double health;
+	public boolean onPath; 
+	public double positionX=0;
+	public double positionY=0;
 	
 	// assume that entry gate is at(0,0)
 	//at the beginning the critters are on path
