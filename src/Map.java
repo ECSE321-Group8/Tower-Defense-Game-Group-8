@@ -26,13 +26,23 @@ public class Map {
 			instanceMap=new Map();
 		return instanceMap;
 	}
-	
+	//SETTERS 
 	public void setMap(int h, int w){
 		height=h;
 		width=w;
 		grid=new Tile[height][width];
 	}
 	
+	//GETTERS
+	public int getHeight(){
+		return height;
+	}
+	
+	public static int getWidth(){
+		return width;
+	}	
+	
+	//GRID
 	public void setGrid(int y, int x, Tile k){
 		grid[y][x]=k;
 	}
@@ -41,6 +51,24 @@ public class Map {
 		return grid[y][x];
 	}
 	
+	public void setCellToPath(int pos){
+		Path p = new Path(pos);
+		grid[p.getRow()][p.getCol()]= p;
+	}
+	
+	public void setCellToScenery(int pos){
+		Scenery s = new Scenery(pos);
+		grid[s.getRow()][s.getCol()]=s;
+		
+	}
+	
+	//not sure if we need this
+	public void setCellToNull(int pos){
+		Empty t = new Empty(pos);
+		grid[t.getRow()][t.getCol()]=t;
+	}
+	
+	//TESTS
 	public boolean inValidSpot(Path p1){
 		// Checks to see it the path piece placed expects an entrance or exit piece out of bounds
 		
@@ -119,17 +147,6 @@ public class Map {
 	public void removePathPiece(Path p){
 		temp.remove(p); //Remove from linked list
 	}
-	
-	
-	//ADD SETTER for height and width (do we need this?)
 
-	
-	public int getHeight(){
-		return height;
-	}
-	
-	public static int getWidth(){
-		return width;
-	}
 	
 }
