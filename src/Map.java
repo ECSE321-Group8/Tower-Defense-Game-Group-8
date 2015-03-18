@@ -19,8 +19,8 @@ public class Map {
 	private static Map instanceMap=null;
 	
 	private Map(){
-		
 	}
+	
 	public static Map getInstance(){
 		if(instanceMap==null)
 			instanceMap=new Map();
@@ -43,13 +43,13 @@ public class Map {
 	}	
 	
 	//GRID
-	public void setGrid(int y, int x, Tile k){
-		grid[y][x]=k;
-	}
-	
-	public Tile getGrid(int y, int x){
-		return grid[y][x];
-	}
+//	public void setGrid(int y, int x, Tile k){
+//		grid[y][x]=k;
+//	}
+//	
+//	public Tile getGrid(int y, int x){
+//		return grid[y][x];
+//	}
 	
 	public void setCellToPath(int pos){
 		Path p = new Path(pos);
