@@ -1,5 +1,5 @@
 
-abstract class critter  
+abstract class Critter  
 {
 	public int speed;
 	public  int typeCritter;
