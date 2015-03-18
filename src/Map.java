@@ -41,15 +41,6 @@ public class Map {
 		return grid[y][x];
 	}
 	
-	
-//	public Map(int height, int width){
-//		
-//		this.height = height;
-//		this.width = width;
-//		grid = new Tile [height][width];	
-//	}
-	
-	
 	public boolean inValidSpot(Path p1){
 		// Checks to see it the path piece placed expects an entrance or exit piece out of bounds
 		
@@ -109,15 +100,12 @@ public class Map {
 	
 	public boolean connected(Path p1,Path p2){
 		// Checks if p1 and p2 are connected
-		if(p1.getExit()==p2.getPos()&&p1.getPos()==p2.getEntry()){
+		if(p1.getExit()==p2.getPos()&&p1.getPos()==p2.getEntry())
 			// If the exit of the first tile is equal to the position of the second tile
 			// AND if the entrance of the second tile is equal to the position of the first tile
 			return true;
-		}
-		else{
-			return false;
-		}
-	
+		else
+			return false;	
 	}
 	
 	/*
@@ -125,19 +113,15 @@ public class Map {
 	 */
 	
 	public void addPathPiece(Path p){ 
-		// add path p to temp linked list
-		temp.add(p);
-		
-		
+		temp.add(p); //Add to linked list 	
 	}
 	
 	public void removePathPiece(Path p){
-		// remove path p from temp linked list
-		temp.remove(p);
+		temp.remove(p); //Remove from linked list
 	}
 	
 	
-	//ADD SETTER for height and width 
+	//ADD SETTER for height and width (do we need this?)
 
 	
 	public int getHeight(){
@@ -148,12 +132,4 @@ public class Map {
 		return width;
 	}
 	
-//	public int calculaterow(int pos){// calculate row index
-//		return pos/width;
-//	}
-//	
-//	public int calculatecolumn(int pos){// calculate column index
-//		return pos%width;
-//	}
-//	
 }
