@@ -2,6 +2,7 @@ package views;
 
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.TextField;
@@ -58,9 +59,18 @@ public class TestView extends JFrame implements ActionListener{
 		confirm = new JButton("OK");
 		confirm.addActionListener(this);
 		
+		/*
+		 * Doesn't change anything
+		rowField.setPreferredSize(new Dimension(50,20));
+		columnField.setPreferredSize(new Dimension(50,20));
+		confirm.setPreferredSize(new Dimension(50,20));
+		*/
+		
 		p1.add(rowField);
 		p1.add(columnField);
 		p1.add(confirm);
+		
+		
 		
 		p2.add(p1, mainLayout.EAST);
 		add(p2);
