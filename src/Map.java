@@ -54,6 +54,7 @@ public class Map {
 	public void setCellToPath(int pos){
 		Path p = new Path(pos);
 		grid[p.getRow()][p.getCol()]= p;
+		temp.add(p);
 	}
 	
 	public void setCellToScenery(int pos){
