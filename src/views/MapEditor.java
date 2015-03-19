@@ -25,7 +25,7 @@ public class MapEditor extends JFrame implements ActionListener {
 		p1.setLayout(new BorderLayout());
 		p1.add("Center",mS);
 		*/
-		p1.add(mS, bL.EAST);
+		p1.add(mS, bL.CENTER);
 		init();
 	}
 	
