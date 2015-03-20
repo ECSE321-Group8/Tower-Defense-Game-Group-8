@@ -49,7 +49,10 @@ public class Frame extends JFrame implements KeyListener{
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
 		// System.out.println("Pressed Key!");
-		// Must create cases to not allow going outside grid and not going back to an already colored part of grid
+		
+		// Link for KeyCodes: http://docs.oracle.com/javase/7/docs/api/java/awt/event/KeyEvent.html
+		
+		// Must create cases not going back to an already colored part of grid
 		// Need to also know if first piece was added or not
 		if(e.getKeyCode() == KeyEvent.VK_UP){
 			mG.setXcor(mG.getXcor()-1);
