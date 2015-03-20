@@ -53,6 +53,7 @@ public class Map {
 	//move to top afterwards
 	private int currentPos=-1;
 	Path currentPath;//=new Path(currentPos);
+	
 	private static int caseEdge=4;
 	
 	public void setCellToPath(int pos){//how to check for the end???
@@ -99,8 +100,9 @@ public class Map {
 			int dEntry= currentPath.getDirection(lastPos);
 
 			
-			if (dExit<0||dExit>=4||dEntry<0||dEntry>=4)
+			if (dExit<0||dExit>3||dEntry<0||dEntry>3)
 				return; //the two tiles are not connected
+			
 			
 			PathType type =Map.createPathTileOfType(dExit,dEntry);
 			Path p =PathFactory.makePath(type, currentPos);
@@ -120,9 +122,15 @@ public class Map {
 			currentPath=new Path(currentPos);	
 		}
 	}
+	
 	public void finilizePath(){
 		//
 	}
+	
+	public void deletePath(int pos){
+		//
+	}
+	
 	
 	public void setCellToScenery(int pos){
 		Scenery s = new Scenery(pos);
@@ -212,20 +220,6 @@ public class Map {
 			return false;
 	}
 	
-	
-	
-	/*
-	 * I don't think we need these anymore
-	 */
-	
-//	public void addPathPiece(Path p){ 
-//		temp.add(p); //Add to linked list 	
-//	}
-//	
-//	public void removePathPiece(Path p){
-//		temp.remove(p); //Remove from linked list
-//	}
-//	
 	
 	//PATH FACTORY
 	public static PathType createPathTileOfType(int s, int e){
