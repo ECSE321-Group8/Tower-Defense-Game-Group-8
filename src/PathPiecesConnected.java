@@ -19,29 +19,37 @@ public class PathPiecesConnected {
 	Path p10; // will be TurnSE rotated
 	Path p11; // will be TurnWS
 	Path p12; // will be TurnWS rotated
+
 	
+	//N=0, E=1, S=2, W=3
+	PathType straightWE = Map.createPathTileOfType(3,1);
+	PathType straightNS =Map.createPathTileOfType(0,2);
+	PathType turnEN = Map.createPathTileOfType(1,0);
+	PathType turnNW = Map.createPathTileOfType(0,3);
+	PathType turnSE = Map.createPathTileOfType(2,1);
+	PathType turnWS = Map.createPathTileOfType(3,2);
 	
 	@Before
 	public void setUp() throws Exception {
 		m = Map.getInstance();
 		m.setMap(10,10);
-		p1 = new StraightWE(0);
-		p2 = new StraightWE(0);
+		p1 = PathFactory.makePath(straightWE,0);
+		p2 = PathFactory.makePath(straightWE,0);
 		p2.rotate();
-		p3 = new StraightNS(0);
-		p4 = new StraightNS(0);
+		p3 = PathFactory.makePath(straightNS,0);
+		p4 = PathFactory.makePath(straightNS,0);
 		p4.rotate();
-		p5 = new TurnEN(0);
-		p6 = new TurnEN(0);
+		p5 = PathFactory.makePath(turnEN,0);
+		p6 = PathFactory.makePath(turnEN,0);
 		p6.rotate();
-		p7 = new TurnNW(0);
-		p8 = new TurnNW(0);
+		p7 = PathFactory.makePath(turnNW,0);
+		p8 = PathFactory.makePath(turnNW,0);
 		p8.rotate();
-		p9 = new TurnSE(0);
-		p10 = new TurnSE(0);
+		p9 = PathFactory.makePath(turnSE,0);
+		p10 = PathFactory.makePath(turnSE,0);
 		p10.rotate();
-		p11 = new TurnWS(0);
-		p12 = new TurnWS(0);
+		p11 = PathFactory.makePath(turnWS,0);
+		p12 = PathFactory.makePath(turnWS,0);
 		p12.rotate();
 		/*
 		System.out.println(p1.getEntrance());
@@ -93,23 +101,23 @@ public class PathPiecesConnected {
 		 */
 		
 		// Position 9 is the top right of a 10x10 grid
-		p1 = new StraightWE(9);
-		p2 = new StraightWE(9);
+		p1 = PathFactory.makePath(straightWE,9);
+		p2 = PathFactory.makePath(straightWE,9);
 		p2.rotate();
-		p3 = new StraightNS(9);
-		p4 = new StraightNS(9);
+		p3 = PathFactory.makePath(straightNS,9);
+		p4 = PathFactory.makePath(straightNS,9);
 		p4.rotate();
-		p5 = new TurnEN(9);
-		p6 = new TurnEN(9);
+		p5 = PathFactory.makePath(turnEN,9);
+		p6 = PathFactory.makePath(turnEN,9);
 		p6.rotate();
-		p7 = new TurnNW(9);
-		p8 = new TurnNW(9);
+		p7 = PathFactory.makePath(turnNW,9);
+		p8 = PathFactory.makePath(turnNW,9);
 		p8.rotate();
-		p9 = new TurnSE(9);
-		p10 = new TurnSE(9);
+		p9 = PathFactory.makePath(turnSE,9);
+		p10 = PathFactory.makePath(turnSE,9);
 		p10.rotate();
-		p11 = new TurnWS(9);
-		p12 = new TurnWS(9);
+		p11 = PathFactory.makePath(turnWS,9);
+		p12 = PathFactory.makePath(turnWS,9);
 		p12.rotate();
 		
 		assertFalse("Case 2-a: did not work.",m.inValidSpot(p1));
@@ -138,23 +146,23 @@ public class PathPiecesConnected {
 		 */
 		
 		// Position 90 is the top right of a 10x10 grid
-		p1 = new StraightWE(90);
-		p2 = new StraightWE(90);
+		p1 = PathFactory.makePath(straightWE,90);
+		p2 = PathFactory.makePath(straightWE,90);
 		p2.rotate();
-		p3 = new StraightNS(90);
-		p4 = new StraightNS(90);
+		p3 = PathFactory.makePath(straightNS,90);
+		p4 = PathFactory.makePath(straightNS,90);
 		p4.rotate();
-		p5 = new TurnEN(90);
-		p6 = new TurnEN(90);
+		p5 = PathFactory.makePath(turnEN,90);
+		p6 = PathFactory.makePath(turnEN,90);
 		p6.rotate();
-		p7 = new TurnNW(90);
-		p8 = new TurnNW(90);
+		p7 = PathFactory.makePath(turnNW,90);
+		p8 = PathFactory.makePath(turnNW,90);
 		p8.rotate();
-		p9 = new TurnSE(90);
-		p10 = new TurnSE(90);
+		p9 = PathFactory.makePath(turnSE,90);
+		p10 = PathFactory.makePath(turnSE,90);
 		p10.rotate();
-		p11 = new TurnWS(90);
-		p12 = new TurnWS(90);
+		p11 = PathFactory.makePath(turnWS,90);
+		p12 = PathFactory.makePath(turnWS,90);
 		p12.rotate();
 		
 		assertFalse("Case 3-a: did not work.",m.inValidSpot(p1));
@@ -183,23 +191,23 @@ public class PathPiecesConnected {
 		 */
 		
 		// Position 99 is the top right of a 10x10 grid
-		p1 = new StraightWE(99);
-		p2 = new StraightWE(99);
+		p1 = PathFactory.makePath(straightWE,99);
+		p2 = PathFactory.makePath(straightWE,99);
 		p2.rotate();
-		p3 = new StraightNS(99);
-		p4 = new StraightNS(99);
+		p3 = PathFactory.makePath(straightNS,99);
+		p4 = PathFactory.makePath(straightNS,99);
 		p4.rotate();
-		p5 = new TurnEN(99);
-		p6 = new TurnEN(99);
+		p5 = PathFactory.makePath(turnEN,99);
+		p6 = PathFactory.makePath(turnEN,99);
 		p6.rotate();
-		p7 = new TurnNW(99);
-		p8 = new TurnNW(99);
+		p7 = PathFactory.makePath(turnNW,99);
+		p8 = PathFactory.makePath(turnNW,99);
 		p8.rotate();
-		p9 = new TurnSE(99);
-		p10 = new TurnSE(99);
+		p9 = PathFactory.makePath(turnSE,99);
+		p10 = PathFactory.makePath(turnSE,99);
 		p10.rotate();
-		p11 = new TurnWS(99);
-		p12 = new TurnWS(99);
+		p11 = PathFactory.makePath(turnWS,99);
+		p12 = PathFactory.makePath(turnWS,99);
 		p12.rotate();
 		
 		assertFalse("Case 4-a: did not work.",m.inValidSpot(p1));
@@ -231,23 +239,23 @@ public class PathPiecesConnected {
 		 */
 		
 		// Position 1-8 is the top of a 10x10 grid (excludes the corners)
-		p1 = new StraightWE(1);
-		p2 = new StraightWE(2);
+		p1 = PathFactory.makePath(straightWE,1);
+		p2 = PathFactory.makePath(straightWE,2);
 		p2.rotate();
-		p3 = new StraightNS(3);
-		p4 = new StraightNS(4);
+		p3 = PathFactory.makePath(straightNS,3);
+		p4 = PathFactory.makePath(straightNS,4);
 		p4.rotate();
-		p5 = new TurnEN(5);
-		p6 = new TurnEN(6);
+		p5 = PathFactory.makePath(turnEN,5);
+		p6 = PathFactory.makePath(turnEN,6);
 		p6.rotate();
-		p7 = new TurnNW(7);
-		p8 = new TurnNW(8);
+		p7 = PathFactory.makePath(turnNW,7);
+		p8 = PathFactory.makePath(turnNW,8);
 		p8.rotate();
-		p9 = new TurnSE(1);
-		p10 = new TurnSE(2);
+		p9 = PathFactory.makePath(turnSE,1);
+		p10 = PathFactory.makePath(turnSE,2);
 		p10.rotate();
-		p11 = new TurnWS(3);
-		p12 = new TurnWS(4);
+		p11 = PathFactory.makePath(turnWS,3);
+		p12 = PathFactory.makePath(turnWS,4);
 		p12.rotate();
 				
 		assertTrue("Case 5-a: did not work.",m.inValidSpot(p1));
@@ -279,23 +287,23 @@ public class PathPiecesConnected {
 		 */
 		
 		// Position 91-98 is the top of a 10x10 grid (excludes the corners)
-		p1 = new StraightWE(98);
-		p2 = new StraightWE(97);
+		p1 = PathFactory.makePath(straightWE,98);
+		p2 = PathFactory.makePath(straightWE,97);
 		p2.rotate();
-		p3 = new StraightNS(96);
-		p4 = new StraightNS(95);
+		p3 = PathFactory.makePath(straightNS,96);
+		p4 = PathFactory.makePath(straightNS,95);
 		p4.rotate();
-		p5 = new TurnEN(94);
-		p6 = new TurnEN(93);
+		p5 = PathFactory.makePath(turnEN,94);
+		p6 = PathFactory.makePath(turnEN,93);
 		p6.rotate();
-		p7 = new TurnNW(92);
-		p8 = new TurnNW(91);
+		p7 = PathFactory.makePath(turnNW,92);
+		p8 = PathFactory.makePath(turnNW,91);
 		p8.rotate();
-		p9 = new TurnSE(98);
-		p10 = new TurnSE(97);
+		p9 = PathFactory.makePath(turnSE,98);
+		p10 = PathFactory.makePath(turnSE,97);
 		p10.rotate();
-		p11 = new TurnWS(96);
-		p12 = new TurnWS(95);
+		p11 = PathFactory.makePath(turnWS,96);
+		p12 = PathFactory.makePath(turnWS,95);
 		p12.rotate();
 				
 		assertTrue("Case 6-a: did not work.",m.inValidSpot(p1));
@@ -324,23 +332,23 @@ public class PathPiecesConnected {
 		 */
 		
 		// Position 10 in increments of 10 is the left side of a 10x10 grid (excludes the corners)
-		p1 = new StraightWE(10);
-		p2 = new StraightWE(20);
+		p1 = PathFactory.makePath(straightWE,10);
+		p2 = PathFactory.makePath(straightWE,20);
 		p2.rotate();
-		p3 = new StraightNS(30);
-		p4 = new StraightNS(40);
+		p3 = PathFactory.makePath(straightNS,30);
+		p4 = PathFactory.makePath(straightNS,40);
 		p4.rotate();
-		p5 = new TurnEN(50);
-		p6 = new TurnEN(60);
+		p5 = PathFactory.makePath(turnEN,50);
+		p6 = PathFactory.makePath(turnEN,60);
 		p6.rotate();
-		p7 = new TurnNW(70);
-		p8 = new TurnNW(80);
+		p7 = PathFactory.makePath(turnNW,70);
+		p8 = PathFactory.makePath(turnNW,80);
 		p8.rotate();
-		p9 = new TurnSE(70);
-		p10 = new TurnSE(60);
+		p9 = PathFactory.makePath(turnSE,10);
+		p10 = PathFactory.makePath(turnSE,20);
 		p10.rotate();
-		p11 = new TurnWS(50);
-		p12 = new TurnWS(40);
+		p11 = PathFactory.makePath(turnWS,30);
+		p12 = PathFactory.makePath(turnWS,40);
 		p12.rotate();
 				
 		assertFalse("Case 7-a: did not work.",m.inValidSpot(p1));
@@ -381,12 +389,13 @@ public class PathPiecesConnected {
  */
 		
 	//Path tiles of different types are initialized to the 11th Tile
-		p1= new StraightWE(11);
-		p3= new StraightNS(11);
-		p5= new TurnEN(11);
-		p7= new TurnNW(11);
-		p9= new TurnSE(11);
-		p11=new TurnWS(11);
+		p1 = PathFactory.makePath(straightWE,11);
+		p3 = PathFactory.makePath(straightNS,11);
+		p5 = PathFactory.makePath(turnEN,11);
+		p7 = PathFactory.makePath(turnNW,11);
+		p9 = PathFactory.makePath(turnSE,11);
+		p11 = PathFactory.makePath(turnWS,11);
+
 		
 	/*
 	 * CASE#1:Test placing the other tile at the top
@@ -395,12 +404,12 @@ public class PathPiecesConnected {
 	 * and the second argument is the final position
 	 * Therefore we need to make sure the directions of the tiles are also correct 
 	 */
-		p2= new StraightWE(1);
-		p4= new StraightNS(1);
-		p6= new TurnEN(1);
-		p8= new TurnNW(1);
-		p10= new TurnSE(1);
-		p12=new TurnWS(1);
+		p2 = PathFactory.makePath(straightWE,1);
+		p4 = PathFactory.makePath(straightNS,1);
+		p6 = PathFactory.makePath(turnEN,1);
+		p8 = PathFactory.makePath(turnNW,1);
+		p10 = PathFactory.makePath(turnSE,1);
+		p12 = PathFactory.makePath(turnWS,1);
 		
 		
 		assertTrue("Case 1 NS-NS: did not work.",m.connected(p4,p3));
@@ -438,12 +447,12 @@ public class PathPiecesConnected {
 	 * and the second argument is the final position
 	 * Therefore we need to make sure the directions of the tiles are also correct 
 	 */
-		p2= new StraightWE(12);
-		p4= new StraightNS(12);
-		p6= new TurnEN(12);
-		p8= new TurnNW(12);
-		p10= new TurnSE(12);
-		p12=new TurnWS(12);
+		p2 = PathFactory.makePath(straightWE,12);
+		p4 = PathFactory.makePath(straightNS,12);
+		p6 = PathFactory.makePath(turnEN,12);
+		p8 = PathFactory.makePath(turnNW,12);
+		p10 = PathFactory.makePath(turnSE,12);
+		p12 = PathFactory.makePath(turnWS,12);
 		
 		
 		assertFalse("Case 2 NS-NS: did not work.",m.connected(p4,p3));
@@ -482,12 +491,12 @@ public class PathPiecesConnected {
 	 * and the second argument is the final position
 	 * Therefore we need to make sure the directions of the tiles are also correct 
 	*/
-		p2= new StraightWE(10);
-		p4= new StraightNS(10);
-		p6= new TurnEN(10);
-		p8= new TurnNW(10);
-		p10= new TurnSE(10);
-		p12=new TurnWS(10);
+		p2 = PathFactory.makePath(straightWE,10);
+		p4 = PathFactory.makePath(straightNS,10);
+		p6 = PathFactory.makePath(turnEN,10);
+		p8 = PathFactory.makePath(turnNW,10);
+		p10 = PathFactory.makePath(turnSE,10);
+		p12 = PathFactory.makePath(turnWS,10);
 		
 		
 		assertFalse("Case 3 WE-NS: did not work.",m.connected(p2,p3));
@@ -518,12 +527,12 @@ public class PathPiecesConnected {
 	 * and the second argument is the final position
 	 * Therefore we need to make sure the directions of the tiles are also correct 
 	*/
-		p2= new StraightWE(21);
-		p4= new StraightNS(21);
-		p6= new TurnEN(21);
-		p8= new TurnNW(21);
-		p10= new TurnSE(21);
-		p12=new TurnWS(21);
+		p2 = PathFactory.makePath(straightWE,21);
+		p4 = PathFactory.makePath(straightNS,21);
+		p6 = PathFactory.makePath(turnEN,21);
+		p8 = PathFactory.makePath(turnNW,21);
+		p10 = PathFactory.makePath(turnSE,21);
+		p12 = PathFactory.makePath(turnWS,21);
 		
 			
 		assertFalse("Case 4 WE-NS: did not work.",m.connected(p2,p3));

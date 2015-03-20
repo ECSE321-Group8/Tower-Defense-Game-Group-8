@@ -4,7 +4,7 @@ import views.MapSize;
 public class driver {
 
 	public static void main(String[] args) {
-		PathType p = Map.createPathTileOfType(1,2);//TypeStraightWE
+		PathType p = Map.createPathTileOfType(1,3);//TypeStraightWE
 		Tile t1 = PathFactory.makePath(p, 5);
 		Path p1 = (Path)t1;
 		System.out.println();
