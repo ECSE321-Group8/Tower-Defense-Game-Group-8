@@ -43,6 +43,10 @@ public class Frame extends JFrame implements KeyListener{
 	
 	public void init(){
 		setVisible(true);
+		// This must always happen after the setVisible has been activated as true or else it will be zero
+		Dimension actualSize = this.getContentPane().getSize();
+		System.out.println(actualSize.width);
+		System.out.println(actualSize.height);
 	}
 
 	@Override
