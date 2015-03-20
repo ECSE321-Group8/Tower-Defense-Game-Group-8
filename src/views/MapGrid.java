@@ -81,7 +81,15 @@ public class MapGrid extends JPanel implements MouseListener{
 	}
 
 	public void setXcor(int xcor) {
-		this.xcor = xcor;
+		if(xcor<0){
+			this.xcor=0;
+		}
+		else if(xcor>=gridRows){
+			this.xcor = gridRows-1;
+		}
+		else{
+			this.xcor = xcor;
+		}
 	}
 
 	public int getYcor() {
@@ -89,7 +97,15 @@ public class MapGrid extends JPanel implements MouseListener{
 	}
 
 	public void setYcor(int ycor) {
-		this.ycor = ycor;
+		if(ycor<0){
+			this.ycor = 0;
+		}
+		else if(ycor>=gridColumns){
+			this.ycor = gridColumns-1;
+		}
+		else{
+			this.ycor = ycor;
+		}
 	}
 	
 	public void setGrid(int x, int y, int value){
