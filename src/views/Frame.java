@@ -44,6 +44,7 @@ public class Frame extends JFrame implements KeyListener{
 	public void init(){
 		setVisible(true);
 		// This must always happen after the setVisible has been activated as true or else it will be zero
+		// http://stackoverflow.com/questions/13474795/get-the-real-size-of-a-jframe-content
 		Dimension actualSize = this.getContentPane().getSize();
 		System.out.println(actualSize.width);
 		System.out.println(actualSize.height);
