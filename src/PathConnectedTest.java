@@ -4,7 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 
-public class PathPiecesConnected {
+public class PathConnectedTest {
 	
 	Map m;
 	Path p1; // Will be StraigthWE
@@ -559,7 +559,7 @@ public class PathPiecesConnected {
 		
 		
 		
-		//TESTING NEW METHOD CONNECTED ROTATE
+		//TESTING NEW METHOD CONNECTED_ROTATE
 		p1=PathFactory.makePath(straightWE,25);
 		p2=PathFactory.makePath(straightWE,26);
 		p2.rotate();

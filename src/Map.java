@@ -13,9 +13,6 @@ public class Map {
 	Path exitPoint; // Exit point
 	private String heading = ""; // To determine next logical path piece
 	
-/*
- * Make map a singleton
- */
 	private static Map instanceMap=null;
 	
 	private Map(){
