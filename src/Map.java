@@ -137,6 +137,16 @@ public class Map {
 			return false;	
 	}
 	
+	//tiles are connected but the directions are inverted
+	public boolean connectedRotate(Path p1, Path p2){
+		if((p1.getExit()==p2.getPos()&&p2.getExit()==p1.getPos())||(p1.getEntry()==p2.getPos()&&p2.getEntry()==p1.getPos()))
+			return true;
+		else 
+			return false;
+	}
+	
+	
+	
 	/*
 	 * WORK ON THESE TWO METHODS TO CREATE 2D array 
 	 */

@@ -554,6 +554,20 @@ public class PathPiecesConnected {
 		assertFalse("Case 4 turnNW-turnWS: did not work.",m.connected(p12, p7));		
 			
 		assertFalse("Case 4 turnSE-turnWS: did not work.",m.connected(p9, p12));	
+		
+		
+		
+		
+		
+		//TESTING NEW METHOD CONNECTED ROTATE
+		p1=PathFactory.makePath(straightWE,25);
+		p2=PathFactory.makePath(straightWE,26);
+		p2.rotate();
+		
+		assertTrue("connected Rotate didnt work", m.connectedRotate(p1, p2));
+		assertFalse("connected properly didnt work", m.connected(p1, p2));
+		
+		
 
 	}
 
