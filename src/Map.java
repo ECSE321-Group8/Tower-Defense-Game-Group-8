@@ -3,17 +3,18 @@ import java.util.LinkedList;
 
 public class Map {
 	
-	private Tile grid [][]; // hold the Map path and scenery
+	private static Tile grid [][]; // hold the Map path and scenery
 	private static int height; // height of map
 	private static int width; // Width of Map
 	
 	//private?
-	LinkedList <Path> temp = new LinkedList<Path>(); // List of the Path
+	static LinkedList <Path> temp = new LinkedList<Path>(); // List of the Path
 	Path entryPoint; // Entry point
 	Path exitPoint; // Exit point
 	private String heading = ""; // To determine next logical path piece
 	
 	private static Map instanceMap=null;
+	
 	
 	private Map(){
 	}
@@ -40,18 +41,87 @@ public class Map {
 	}	
 	
 	//GRID
-//	public void setGrid(int y, int x, Tile k){
-//		grid[y][x]=k;
-//	}
-//	
-//	public Tile getGrid(int y, int x){
-//		return grid[y][x];
-//	}
+	public static void setGrid(int y, int x, Tile k){
+		grid[y][x]=k;
+	}
 	
-	public void setCellToPath(int pos){
-		Path p = new Path(pos);
-		grid[p.getRow()][p.getCol()]= p;
-		temp.add(p);
+	public static Tile getGrid(int y, int x){
+		return grid[y][x];
+	}
+	
+	
+	//move to top afterwards
+	private int currentPos=-1;
+	Path currentPath;//=new Path(currentPos);
+	private static int caseEdge=4;
+	
+	public void setCellToPath(int pos){//how to check for the end???
+		if(pos<0||pos>width*height-1)
+			return;// the position entered is not valid
+			
+		if(temp.isEmpty()){//no path tile have been defined
+			if(currentPos<0){//start hasn't been placed		
+				currentPos=pos;
+				currentPath=new Path(currentPos);
+			}
+			else{
+				int d = currentPath.getDirection(pos);
+				if (d<0||d>=4)
+					return; //the two tiles are not connected
+				
+				PathType type =Map.createPathTileOfType(d, caseEdge);
+				Path p =PathFactory.makePath(type, currentPos);
+				
+				//fix direction of tile
+				if(p.getEntry()==pos)
+					p.rotate();
+				//validate spot (for entry/exit)
+
+				//set as Path entry point 
+				p.setStart();
+				entryPoint=p;
+				
+				//add to grid and list
+				p.storePathTile();
+				
+				//update current
+				currentPos=pos;
+				currentPath=new Path(currentPos);		
+			}		
+		}
+		else{
+			
+			if (getGrid(pos/width, pos%width).isPath())
+				return;//causes intersection
+			
+			int dExit = currentPath.getDirection(pos);
+			int lastPos= temp.peekLast().getPos();
+			int dEntry= currentPath.getDirection(lastPos);
+
+			
+			if (dExit<0||dExit>=4||dEntry<0||dEntry>=4)
+				return; //the two tiles are not connected
+			
+			PathType type =Map.createPathTileOfType(dExit,dEntry);
+			Path p =PathFactory.makePath(type, currentPos);
+			
+			//fix direction of tile
+			if(p.getEntry()==pos)
+				p.rotate();
+			
+			if(!inValidSpot(p))
+				return; //
+			
+			//add to grid and list
+			p.storePathTile();
+			
+			//update current
+			currentPos=pos;
+			currentPath=new Path(currentPos);	
+		}
+	}
+	public void finilizePath(){
+		//
 	}
 	
 	public void setCellToScenery(int pos){
@@ -145,31 +215,32 @@ public class Map {
 	
 	
 	/*
-	 * WORK ON THESE TWO METHODS TO CREATE 2D array 
+	 * I don't think we need these anymore
 	 */
 	
-	public void addPathPiece(Path p){ 
-		temp.add(p); //Add to linked list 	
-	}
-	
-	public void removePathPiece(Path p){
-		temp.remove(p); //Remove from linked list
-	}
-	
+//	public void addPathPiece(Path p){ 
+//		temp.add(p); //Add to linked list 	
+//	}
+//	
+//	public void removePathPiece(Path p){
+//		temp.remove(p); //Remove from linked list
+//	}
+//	
 	
 	//PATH FACTORY
 	public static PathType createPathTileOfType(int s, int e){
 		//N=0, E=1, S=2, W=3
+		//if the pathTile is an edge, exit/entry would be indicated and 
 		int type; 
 		if ((s==0&&e==1)||(s==1&&e==0))
 			type= 0;//NE
-		else if ((s==0&&e==2)||(s==2&&e==0))
+		else if ((s==0&&e==2)||(s==2&&e==0)||(s==0&&e==4)||(s==2&&e==4))
 			type=1;//NS
 		else if ((s==0&&e==3)||(s==3&&e==0))
 			type = 2;//NW
 		else if ((s==1&&e==2)||(s==2&&e==1))
 			type = 3;//SE
-		else if ((s==1&&e==3)||(s==3&&e==1))
+		else if ((s==1&&e==3)||(s==3&&e==1)||(s==3&&e==4)||(s==1&&e==4))
 			type=4;//WE
 		else if ((s==2&&e==3)||(s==3&&e==2))
 			type= 5;//SW
@@ -190,7 +261,7 @@ public class Map {
 		case 5:
 			return PathType.turnWS;
 		default:
-			return PathType.straightNS;//error
+			return PathType.noDirection;//error
 		}
 	}	
 }

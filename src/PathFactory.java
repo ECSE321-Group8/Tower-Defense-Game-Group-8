@@ -30,7 +30,8 @@ public class PathFactory {
 			path.entry=path.getWest();
 			path.exit=path.getSouth();
 			break;
-			
+		case noDirection:
+			path=null;
 		
 		default:
 			path=null;

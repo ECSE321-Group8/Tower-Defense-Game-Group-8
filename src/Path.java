@@ -24,7 +24,6 @@ public class Path extends Tile{
 	//Constructor 
 	public Path(int pos){
 		this.pos=pos;	
-		isVisited=false;
 	}
 	 	
 	
@@ -98,7 +97,28 @@ public class Path extends Tile{
 	public int getEast(){
 		return pos+1;
 	}
+	
+	
+	
+	//Calculate direction
+	public int getDirection(int p){
+		if (p==this.getNorth())
+			return 0;
+		else if (p==this.getEast())
+			return 1;
+		else if(p==this.getSouth())
+			return 2;
+		else if (p==this.getWest())
+			return 3;
+		else
+			return -1;// error
+		
+	}
+	public void storePathTile(){
+		Map.setGrid(this.getRow(),this.getCol(),this);
+		Map.temp.add(this);
 
+	}
 	
 	
 }
