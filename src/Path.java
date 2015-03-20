@@ -1,14 +1,18 @@
 
 public class Path extends Tile{
 	
-	// Will try them as public first then see if can change the variables to private
-	public int ent; // Tile from where critter will enter
-	public int exit; // Till which the critter will exit
-	//public int width; // width of the Map Used to calculate exit/entrance of tile
-	public boolean isEdge; // If this tile is an entrance or exit or if it is part of path
-	public boolean edgeType; // If it is an entrance or exit
-	public boolean visited; // Check if the tile was visited during verification process
 	
+	//privacy of the attributes might change 
+	//Attributes of the tile itself
+	public int entry;
+	public int exit;
+	
+	
+	//Validate
+	public boolean isEdge;//entry or exit of the Path
+	public boolean isStart;//or isExit
+	public boolean isVisited;
+
 	/*
 	 * How the subclasses of Path or named:
 	 * First its the description of the Path
@@ -18,57 +22,50 @@ public class Path extends Tile{
 	 */
 	
 	//Constructor 
-	public Path(int pos/*,int width*/){
-		this.pos = pos;
-		//this.width = width;
+	public Path(int pos){
+		this.pos=pos;	
+		isVisited=false;
 	}
 	 	
-	public void rotate() { // Rotate piece
-		int temp = ent;
-		ent = exit;
-		exit = temp; 
+	
+	public void rotate(){
+		int temp=entry;
+		entry =exit;
+		exit = temp;
 	}
 	
-
 	
-	public void setisEdge(){ //setting that there it may be either an entrance or exit
-		isEdge = true;
+	//SETTERS
+	public void setIsEdge(){//either Star or End
+		isEdge=true;
+	}
+	public void setStart(){
+		setIsEdge();
+		isStart = true;
+		entry = pos;
+	}
+	public void setEnd(){
+		setIsEdge();
+		isStart=false;
+		exit=pos;
+	}
+	public void setVisited(boolean visited){
+		isVisited = visited;
 	}
 	
-	public boolean getisEdge(){ //know if its a regular path or either entrance or exit
+	
+	//GETTERS
+	public boolean getIsEdge(){
 		return isEdge;
 	}
-	
-	public void setEntry(){ //setting tile as entry point
-		setisEdge();
-		edgeType = true;
-		ent = pos;
-	}
 	public int getEntry(){
-		return ent;
+		return entry;
 	}
-	
-
-	public void setExit(){ //setting tile as exit point
-		setisEdge();
-		edgeType = false;
-		exit = pos;
-	}
-	public int getExit(){ // return exit of tile
+	public int getExit(){
 		return exit;
 	}
-	
-	
-//	public boolean getedgeType(){ // getting the boolean which denotes if entry or exit point
-//		return edgeType;
-//	}
-	
-	public void setVisited(boolean visited){
-		this.visited = visited;
-	}
-	
 	public boolean getVisited(){
-		return visited;
+		return isVisited;
 	}
 	
 	
@@ -86,7 +83,22 @@ public class Path extends Tile{
 	public int getExitRow(){
 		return getRow(this.getExit());		
 	}
+		
 	
+	//Get position of the tiles connected
+	public int getNorth(){
+		return pos-Map.getWidth();
+	}
+	public int getSouth(){
+		return pos+Map.getWidth();
+	}
+	public int getWest(){
+		return pos-1;
+	}
+	public int getEast(){
+		return pos+1;
+	}
+
 	
 	
 }

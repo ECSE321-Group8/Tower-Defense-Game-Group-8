@@ -148,6 +148,42 @@ public class Map {
 	public void removePathPiece(Path p){
 		temp.remove(p); //Remove from linked list
 	}
-
 	
+	
+	//PATH FACTORY
+	public static PathType createPathTileOfType(int s, int e){
+		//N=0, E=1, S=2, W=3
+		int type; 
+		if ((s==0&&e==1)||(s==1&&e==0))
+			type= 0;//NE
+		else if ((s==0&&e==2)||(s==2&&e==0))
+			type=1;//NS
+		else if ((s==0&&e==3)||(s==3&&e==0))
+			type = 2;//NW
+		else if ((s==1&&e==2)||(s==2&&e==1))
+			type = 3;//SE
+		else if ((s==1&&e==3)||(s==3&&e==1))
+			type=4;//WE
+		else if ((s==2&&e==3)||(s==3&&e==2))
+			type= 5;//SW
+		else 
+			type= -1;//error 
+
+		switch(type){
+		case 0:
+			return PathType.turnEN;
+		case 1:
+			return PathType.straightNS;
+		case 2:
+			return PathType.turnNW;
+		case 3:
+			return PathType.turnSE;
+		case 4:
+			return PathType.straightWE;
+		case 5:
+			return PathType.turnWS;
+		default:
+			return PathType.straightNS;//error
+		}
+	}	
 }
