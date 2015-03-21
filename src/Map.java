@@ -180,6 +180,7 @@ public class Map {
 				return false;
 			}
 		}
+		/*
 		if(Math.abs(p1.getPos()-p1.getEntry())==width){
 			nextRow = p1.getEntryRow();
 			if(p1.getEntry()<0 || nextRow>(height-1/width)){//it used to be calculaterow(height*width-1
@@ -198,6 +199,7 @@ public class Map {
 				return false;
 			}
 		}
+		*/
 		return true;
 		
 	}
