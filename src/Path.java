@@ -35,7 +35,7 @@ public class Path extends Tile{
 	
 	
 	//SETTERS
-	public void setIsEdge(){//either Star or End
+	public void setIsEdge(){//either Start or End
 		isEdge=true;
 	}
 	public void setStart(){
