@@ -11,8 +11,7 @@ public class Map {
 	static LinkedList <Path> temp = new LinkedList<Path>(); // List of the Path
 	Path entryPoint; // Entry point
 	Path exitPoint; // Exit point
-	private String heading = ""; // To determine next logical path piece
-	
+		
 	private static Map instanceMap=null;
 	
 	
@@ -55,12 +54,21 @@ public class Map {
 	Path currentPath;//=new Path(currentPos);
 	
 	private static int caseEdge=4;
+	private static boolean completePath=false;
+	
+	public static void setCompletePath(boolean n){
+		completePath=n;
+	}
+	public static boolean getCompletePath(){
+		return completePath;
+	}
 	
 	public void setCellToPath(int pos){//how to check for the end???
-		if(pos<0||pos>width*height-1)
-			return;// the position entered is not valid
-			
-		if(temp.isEmpty()){//no path tile have been defined
+		
+		if(pos<0||pos>width*height-1||getCompletePath())
+			return;// the position entered is not valid or the path has already been completed
+		
+		else if(temp.isEmpty()){//no path tile have been defined
 			if(currentPos<0){//start hasn't been placed		
 				currentPos=pos;
 				currentPath=new Path(currentPos);
@@ -69,7 +77,6 @@ public class Map {
 				int d = currentPath.getDirection(pos);
 				if (d<0||d>=4)
 					return; //the two tiles are not connected
-				
 				PathType type =Map.createPathTileOfType(d, caseEdge);
 				Path p =PathFactory.makePath(type, currentPos);
 				
@@ -124,11 +131,27 @@ public class Map {
 	}
 	
 	public void finilizePath(){
-		//
+		int LastPos=temp.peekLast().getPos();
+		
+		int d = currentPath.getDirection(LastPos);
+		PathType type = Map.createPathTileOfType(d,caseEdge);
+		Path p = PathFactory.makePath(type,currentPos);
+		
+		if(p.getEntry()!= LastPos)
+			p.rotate();
+		p.setEnd();
+		exitPoint=p;
+		p.storePathTile();
+		
+		setCompletePath(true);
 	}
 	
 	public void deletePath(int pos){
-		//
+		//pop 
+		//remove last node from the list
+		// set the last pathTile inserted in the array as 
+		// empty (not scenery)
+		
 	}
 	
 	
