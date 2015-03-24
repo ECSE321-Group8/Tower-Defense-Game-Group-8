@@ -64,12 +64,14 @@ public class Map {
 	//When setting the path tile to a specific type (if it is an edge, it is type 4)
 	private static int caseEdge=4;
 	
-	/*
-	 * This method sets a tile to a specific type given the title that came before and the one that come after
-	 * There is a currentPos variable that points one position ahead. This tile hasn't been given a type yet. 
-	 * It will check if the position is a valid one.
+	/**
+	 * This method sets a tile to a specific path type (given title that came before and the one that comes after).
+	 * There is a currentPos variable that points one position ahead (This tile hasn't been given a type yet). 
+	 * It will check if the new position (pos) is a valid one.
 	 * It will push the need tile into the linked list (that contains the path)
 	 * It will update the grid, with Path and scenery tiles 
+	 * 
+	 * @param pos
 	 */
 	public void setCellToPath(int pos){//how to check for the end???
 		
@@ -138,7 +140,7 @@ public class Map {
 		}
 	}
 	
-	/*
+	/**
 	 * Once the path has been completed, this method will initialize the currentPos to a type of path.
 	 * It will store it in the linked list and the grid. 
 	 */
@@ -161,7 +163,8 @@ public class Map {
 		}
 		
 	}	
-	/*
+
+	/**
 	 * It will delete the last path tile introduced to the linked list. 
 	 * It will update the position of current to the end of the path.
 	 * If an element was deleted it will return an incomplete Path.
@@ -185,6 +188,9 @@ public class Map {
 		}
 	}
 	
+	/**
+	 * it will set cells in the grid that haven't been initialized to Path to Scenery
+	 */
 	public void setRemainingToScenery(){
 		for(int i=0;i<grid.length;i++){
 			for(int j=0;j<grid[0].length;j++){
