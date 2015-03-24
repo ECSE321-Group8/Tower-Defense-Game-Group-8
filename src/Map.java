@@ -11,7 +11,12 @@ public class Map {
 	static LinkedList <Path> temp = new LinkedList<Path>(); // List of the Path
 	Path entryPoint; // Entry point
 	Path exitPoint; // Exit point
-		
+	
+	//Path variables
+	private static boolean completePath=false;
+	private int currentPos=-1;
+	Path currentPath;
+	
 	private static Map instanceMap=null;
 	
 	
@@ -29,6 +34,9 @@ public class Map {
 		width=w;
 		grid=new Tile[height][width];
 	}
+	public static void setCompletePath(boolean n){
+		completePath=n;
+	}
 	
 	//GETTERS
 	public int getHeight(){
@@ -38,6 +46,10 @@ public class Map {
 	public static int getWidth(){
 		return width;
 	}	
+	
+	public static boolean getCompletePath(){
+		return completePath;
+	}
 	
 	//GRID
 	public static void setGrid(int y, int x, Tile k){
@@ -49,20 +61,16 @@ public class Map {
 	}
 	
 	
-	//move to top afterwards
-	private int currentPos=-1;
-	Path currentPath;//=new Path(currentPos);
-	
+	//When setting the path tile to a specific type (if it is an edge, it is type 4)
 	private static int caseEdge=4;
-	private static boolean completePath=false;
 	
-	public static void setCompletePath(boolean n){
-		completePath=n;
-	}
-	public static boolean getCompletePath(){
-		return completePath;
-	}
-	
+	/*
+	 * This method sets a tile to a specific type given the title that came before and the one that come after
+	 * There is a currentPos variable that points one position ahead. This tile hasn't been given a type yet. 
+	 * It will check if the position is a valid one.
+	 * It will push the need tile into the linked list (that contains the path)
+	 * It will update the grid, with Path and scenery tiles 
+	 */
 	public void setCellToPath(int pos){//how to check for the end???
 		
 		if(pos<0||pos>width*height-1||getCompletePath())
@@ -130,27 +138,58 @@ public class Map {
 		}
 	}
 	
-	public void finilizePath(){
-		int LastPos=temp.peekLast().getPos();
+	/*
+	 * Once the path has been completed, this method will initialize the currentPos to a type of path.
+	 * It will store it in the linked list and the grid. 
+	 */
+	public void finalizePath(){
+		if(getCompletePath()||temp.isEmpty())
+			return;//path has already been finalized or there is no path defined
+		else{
+			int LastPos=temp.peekLast().getPos();
+			int d = currentPath.getDirection(LastPos);
+			PathType type = Map.createPathTileOfType(d,caseEdge);
+			Path p = PathFactory.makePath(type,currentPos);
+			
+			if(p.getEntry()!= LastPos)
+				p.rotate();
+			p.setEnd();
+			exitPoint=p;
+			p.storePathTile();
+			
+			setCompletePath(true);
+		}
 		
-		int d = currentPath.getDirection(LastPos);
-		PathType type = Map.createPathTileOfType(d,caseEdge);
-		Path p = PathFactory.makePath(type,currentPos);
+	}	
+	/*
+	 * It will delete the last path tile introduced to the linked list. 
+	 * It will update the position of current
+	 * and set current to the end of the path.
+	 * THIS METHOD WILL BE USED IF THE PATH HASNT BEEN COMPLETED YET 
+	 */
+	public void deleteLastPathTile(){
+		Path lastP;
+		if(temp.isEmpty()){
+			if(currentPos!=-1)
+				currentPos=-1;//start has been deleted
+			return;//the list is empty
+		}
+		else if(getCompletePath()){//
+			lastP=temp.removeLast();
+			setCompletePath(false);//since the last node was removed
+			currentPos=temp.removeLast().getPos();
+			currentPath=new Path(currentPos);
+			finalizePath();
+		}
+		else{
+			
+		}
+					
 		
-		if(p.getEntry()!= LastPos)
-			p.rotate();
-		p.setEnd();
-		exitPoint=p;
-		p.storePathTile();
-		
-		setCompletePath(true);
-	}
-	
-	public void deletePath(int pos){
-		//pop 
-		//remove last node from the list
-		// set the last pathTile inserted in the array as 
-		// empty (not scenery)
+			//pop 
+			//remove last node from the list
+			// set the last pathTile inserted in the array as 
+			// empty (not scenery)
 		
 	}
 	
@@ -227,6 +266,11 @@ public class Map {
 		
 	}
 	
+	
+	/*
+	 * THESE TWO METHODS ARE USED FOR TESTING PURPOSES 
+	 * ARE NOT NEEDED IN THE CODE
+	 */
 	public boolean connected(Path p1,Path p2){
 		// Checks if p1 and p2 are connected
 		if(p1.getExit()==p2.getPos()&&p1.getPos()==p2.getEntry())
@@ -236,7 +280,7 @@ public class Map {
 		else
 			return false;	
 	}
-	
+
 	//tiles are connected but the directions are inverted
 	public boolean connectedRotate(Path p1, Path p2){
 		if((p1.getExit()==p2.getPos()&&p2.getExit()==p1.getPos())||(p1.getEntry()==p2.getPos()&&p2.getEntry()==p1.getPos()))

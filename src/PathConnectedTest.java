@@ -564,7 +564,7 @@ public class PathConnectedTest {
 		p2=PathFactory.makePath(straightWE,26);
 		p2.rotate();
 		
-		assertTrue("connected Rotate didnt work", m.connectedRotate(p1, p2));
+	//	assertTrue("connected Rotate didnt work", m.connectedRotate(p1, p2));
 		assertFalse("connected properly didnt work", m.connected(p1, p2));
 		
 		
