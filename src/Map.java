@@ -163,34 +163,27 @@ public class Map {
 	}	
 	/*
 	 * It will delete the last path tile introduced to the linked list. 
-	 * It will update the position of current
-	 * and set current to the end of the path.
-	 * THIS METHOD WILL BE USED IF THE PATH HASNT BEEN COMPLETED YET 
+	 * It will update the position of current to the end of the path.
+	 * If an element was deleted it will return an incomplete Path.
+	 * The necessary changes will be made in the grid as well. 
 	 */
-	public void deleteLastPathTile(){
-		Path lastP;
+	public void deleteLastPathTileFromList(){
 		if(temp.isEmpty()){
 			if(currentPos!=-1)
 				currentPos=-1;//start has been deleted
 			return;//the list is empty
 		}
-		else if(getCompletePath()){//
-			lastP=temp.removeLast();
-			setCompletePath(false);//since the last node was removed
-			currentPos=temp.removeLast().getPos();
+		else {//
+			if(getCompletePath())
+					setCompletePath(false);//since the last node was removed
+			Path removedPath=temp.removeLast();
+			currentPos=removedPath.getPos();
 			currentPath=new Path(currentPos);
-			finalizePath();
-		}
-		else{
 			
+			//remove from grid
+			grid[removedPath.getRow()][removedPath.getCol()]= null;
 		}
-					
-		
-			//pop 
-			//remove last node from the list
-			// set the last pathTile inserted in the array as 
-			// empty (not scenery)
-		
+
 	}
 	
 	
