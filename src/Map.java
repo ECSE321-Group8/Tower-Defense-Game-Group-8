@@ -167,7 +167,7 @@ public class Map {
 	 * If an element was deleted it will return an incomplete Path.
 	 * The necessary changes will be made in the grid as well. 
 	 */
-	public void deleteLastPathTileFromList(){
+	public void deleteLastPathTile(){
 		if(temp.isEmpty()){
 			if(currentPos!=-1)
 				currentPos=-1;//start has been deleted
