@@ -183,22 +183,17 @@ public class Map {
 			//remove from grid
 			grid[removedPath.getRow()][removedPath.getCol()]= null;
 		}
-
 	}
 	
-	
-	public void setCellToScenery(int pos){
-		Scenery s = new Scenery(pos);
-		grid[s.getRow()][s.getCol()]=s;
+	public void setRemainingToScenery(){
+		for(int i=0;i<grid.length;i++){
+			for(int j=0;j<grid[0].length;j++){
+				if(grid[i][j]==null)
+					grid[i][j]=new Scenery(i*grid[0].length+j);
+			}
+		}
+	}
 		
-	}
-	
-	//not sure if we need this
-	public void setCellToNull(int pos){
-		Empty t = new Empty(pos);
-		grid[t.getRow()][t.getCol()]=t;
-	}
-	
 	//TESTS
 	public boolean inValidSpot(Path p1){
 		// Checks to see it the path piece placed expects an entrance or exit piece out of bounds
