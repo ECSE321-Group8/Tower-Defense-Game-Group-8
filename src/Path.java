@@ -23,7 +23,7 @@ public class Path extends Tile{
 	
 	//Constructor 
 	public Path(int pos){
-		this.pos=pos;	
+		this.setPos(pos);	
 	}
 	 	
 	
@@ -41,12 +41,12 @@ public class Path extends Tile{
 	public void setStart(){
 		setIsEdge();
 		isStart = true;
-		entry = pos;
+		entry = getPos();
 	}
 	public void setEnd(){
 		setIsEdge();
 		isStart=false;
-		exit=pos;
+		exit=getPos();
 	}
 	public void setVisited(boolean visited){
 		isVisited = visited;
@@ -86,16 +86,16 @@ public class Path extends Tile{
 	
 	//Get position of the tiles connected
 	public int getNorth(){
-		return pos-Map.getWidth();
+		return getPos()-Map.getWidth();
 	}
 	public int getSouth(){
-		return pos+Map.getWidth();
+		return getPos()+Map.getWidth();
 	}
 	public int getWest(){
-		return pos-1;
+		return getPos()-1;
 	}
 	public int getEast(){
-		return pos+1;
+		return getPos()+1;
 	}
 	
 	

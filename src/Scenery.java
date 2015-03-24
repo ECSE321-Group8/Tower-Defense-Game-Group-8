@@ -5,7 +5,7 @@ public class Scenery extends Tile{
 	private boolean towerPresent;
 	
 	public Scenery(int pos){
-		this.pos = pos;	
+		this.setPos(pos);	
 		towerPresent=false;
 	}
 	
