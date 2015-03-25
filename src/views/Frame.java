@@ -11,12 +11,16 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 public class Frame extends JFrame implements KeyListener{
 
 	final static String APPNAME = "FRAME!";
 	public static Dimension size = new Dimension (1000,550);
 	private MapGrid mG;
+	// Try to add this to the layout:
+	// http://docs.oracle.com/javase/tutorial/uiswing/components/splitpane.html
+	
 	
 	public Frame(){
 		setTitle(APPNAME);
@@ -24,15 +28,27 @@ public class Frame extends JFrame implements KeyListener{
 		// setResizable(false);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		JPanel blankPanel = new JPanel();
+		int sizeofSplit = 200;
 		
 		addKeyListener(this); // Does not work in the JPanel
 		System.out.println(this.getWidth());
 		System.out.println(this.getHeight());
-		mG = new MapGrid(this.getWidth(),this.getHeight(),10,20);
-		add(mG);
+		setVisible(true);
+		// Not this gets the the size of the actual frame (without borders)
+		mG = new MapGrid(this.getContentPane().getSize().width-sizeofSplit,this.getContentPane().getSize().height,10,20);
+		// TODO: Need to make left side grid of Map and right side where we set size of map and other options
+		// Can only have this after panels initialized
+		SplitPane sP = new SplitPane(blankPanel,mG,sizeofSplit);
+		// add(mG);
+		add(sP);
+		
+		/*
+		 * Doesn't work
 		Dimension size = mG.getSize();
-		System.out.println(size.getWidth());
-		System.out.println(size.getHeight());
+		System.out.println(size.width);
+		System.out.println(size.height);
+		*/
 		init();
 		
 	}
@@ -46,7 +62,7 @@ public class Frame extends JFrame implements KeyListener{
 		// This must always happen after the setVisible has been activated as true or else it will be zero
 		// http://stackoverflow.com/questions/13474795/get-the-real-size-of-a-jframe-content
 		Dimension actualSize = this.getContentPane().getSize();
-		System.out.println(actualSize.width);
+		System.out.println("Here " + actualSize.width);
 		System.out.println(actualSize.height);
 	}
 
@@ -78,6 +94,9 @@ public class Frame extends JFrame implements KeyListener{
 			mG.setYcor(mG.getYcor()+1);
 			mG.setGrid(mG.getXcor(), mG.getYcor(), 1);
 			mG.repaint();
+		}
+		if(e.getKeyCode() == KeyEvent.VK_BACK_SPACE){
+			System.out.println("BACKSPACE!");
 		}
 	}
 
