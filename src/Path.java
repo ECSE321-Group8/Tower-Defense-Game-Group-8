@@ -6,12 +6,11 @@ public class Path extends Tile{
 	//Attributes of the tile itself
 	public int entry;
 	public int exit;
-	
-	
+		
 	//Validate
 	public boolean isEdge;//entry or exit of the Path
 	public boolean isStart;//or isExit
-	public boolean isVisited;
+	//public boolean isVisited;
 
 	/*
 	 * How the subclasses of Path or named:
@@ -48,10 +47,10 @@ public class Path extends Tile{
 		isStart=false;
 		exit=getPos();
 	}
-	public void setVisited(boolean visited){
-		isVisited = visited;
-	}
-	
+//	public void setVisited(boolean visited){
+//		isVisited = visited;
+//	}
+//	
 	
 	//GETTERS
 	public boolean getIsEdge(){
@@ -63,9 +62,9 @@ public class Path extends Tile{
 	public int getExit(){
 		return exit;
 	}
-	public boolean getVisited(){
-		return isVisited;
-	}
+//	public boolean getVisited(){
+//		return isVisited;
+//	}
 	
 	
 	//Methods to return the col and row of the entry and exit of the Path

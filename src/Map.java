@@ -1,4 +1,5 @@
 import java.util.LinkedList;
+import java.util.ListIterator;
 
 
 public class Map {
@@ -7,7 +8,7 @@ public class Map {
 	private static int height; // height of map
 	private static int width; // Width of Map
 	
-	//private?
+	//private
 	static LinkedList <Path> temp = new LinkedList<Path>(); // List of the Path
 	Path entryPoint; // Entry point
 	Path exitPoint; // Exit point
@@ -109,8 +110,9 @@ public class Map {
 		}
 		else{
 			
-			if (getGrid(pos/width, pos%width).isPath())
-				return;//causes intersection
+			if (getGrid(pos/width, pos%width)!=null)
+				if(getGrid(pos/width, pos%width).isPath())
+					return;//causes intersection
 			
 			int dExit = currentPath.getDirection(pos);
 			int lastPos= temp.peekLast().getPos();
@@ -177,8 +179,10 @@ public class Map {
 			return;//the list is empty
 		}
 		else {//
-			if(getCompletePath())
-					setCompletePath(false);//since the last node was removed
+			if(getCompletePath()){
+					setCompletePath(false);
+					exitPoint=null;
+			}//since the last node was removed
 			Path removedPath=temp.removeLast();
 			currentPos=removedPath.getPos();
 			currentPath=new Path(currentPos);
@@ -282,6 +286,14 @@ public class Map {
 		else 
 			return false;
 	}
+	
+	public void printPath(){
+		ListIterator<Path> listIterator =temp.listIterator();
+		while(listIterator.hasNext()){
+			System.out.print(" "+listIterator.next().getPos()+" ");
+		}
+	}
+	
 	
 	
 	//PATH FACTORY
