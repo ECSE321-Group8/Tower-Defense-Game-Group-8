@@ -28,8 +28,6 @@ public class MapGrid extends JPanel implements MouseListener{
 		
 		repaint();
 		setVisible(true);
-		System.out.println(this.getWidth());
-		System.out.println(this.getHeight());
 	}
 	
 	public void paintComponent(Graphics g){
@@ -147,40 +145,6 @@ public class MapGrid extends JPanel implements MouseListener{
 		// TODO Auto-generated method stub
 		
 	}
-	/*
-	@Override
-	public void keyPressed(KeyEvent e) {
-		// TODO Auto-generated method stub
-		int keyCode = e.getKeyCode();
-		System.out.println("key code = " + keyCode
-                + " ("
-                + KeyEvent.getKeyText(keyCode)
-                + ")");
-		if(e.getKeyCode() == 38){
-			System.out.println("Pressed Up!");
-			xcor = xcor-1;
-			tempGrid[xcor][ycor] = 1;
-			repaint();
-		}
-		
-	}
-
-	@Override
-	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void keyTyped(KeyEvent e) {
-		// TODO Auto-generated method stub
-		int keyCode = e.getKeyCode();
-		System.out.println("key code = " + keyCode
-                + " ("
-                + KeyEvent.getKeyText(keyCode)
-                + ")");
-	}
-	*/
 	
 
 }
