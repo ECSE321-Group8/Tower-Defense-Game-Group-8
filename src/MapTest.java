@@ -52,9 +52,18 @@ public class MapTest {
 
 	@Test
 	public void test() {
-		assertTrue(m.getCompletePath());
+		//CASE 1:create a path 
+			//check if the tiles of the path are connected correctly
 		
-		//fail("Not yet implemented");
+		//CASE 2:create a path and try to make intersections (invalid positions)
+		//CASE 3:delete last node and finalize
+		//CASE 4:delete and add 
+		//CASE 5:delete when there is only the start has been set
+		//CASE 6:delete when there is not path set nor a start 
+		
+		
+		assertTrue(m.getCompletePath());
+
 	}
 
 }
