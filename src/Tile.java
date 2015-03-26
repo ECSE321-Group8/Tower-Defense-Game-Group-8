@@ -38,4 +38,11 @@ public abstract class Tile {
 		else
 			return false;
 	}
+	
+	public boolean isScenery(){
+		if (this instanceof Scenery)
+			return true;
+		else
+			return false;
+	}
 }

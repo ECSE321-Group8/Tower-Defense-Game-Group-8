@@ -10,8 +10,8 @@ public class Map {
 	
 	//private
 	static LinkedList <Path> temp = new LinkedList<Path>(); // List of the Path
-	Path entryPoint; // Entry point
-	Path exitPoint; // Exit point
+	private Path entryPoint; // Entry point
+	private Path exitPoint; // Exit point
 	
 	//Path variables
 	private static boolean completePath=false;
@@ -35,6 +35,13 @@ public class Map {
 		width=w;
 		grid=new Tile[height][width];
 	}
+	public void setEntryPoint(Path p){
+		entryPoint=p;
+	}
+	public void setExitPoint(Path p){
+		exitPoint=p;
+	}
+	
 	public void setCompletePath(boolean n){
 		completePath=n;
 	}
@@ -47,10 +54,16 @@ public class Map {
 	public static int getWidth(){
 		return width;
 	}	
-	
+	public Path getEntryPoint(){
+		return entryPoint;
+	}
+	public Path getExitPoint(){
+		return exitPoint;
+	}
 	public boolean getCompletePath(){
 		return completePath;
 	}
+	
 	
 	//GRID
 	public static void setGrid(int y, int x, Tile k){
@@ -98,7 +111,7 @@ public class Map {
 
 				//set as Path entry point 
 				p.setStart();
-				entryPoint=p;
+				setEntryPoint(p);
 				
 				//add to grid and list
 				p.storePathTile();
@@ -158,7 +171,7 @@ public class Map {
 			if(p.getEntry()!= LastPos)
 				p.rotate();
 			p.setEnd();
-			exitPoint=p;
+			setExitPoint(p);
 			p.storePathTile();
 			
 			setCompletePath(true);
@@ -174,16 +187,18 @@ public class Map {
 	 */
 	public void deleteLastPathTile(){
 		if(temp.isEmpty()){
-			if(currentPos!=-1)
-				currentPos=-1;//start has been deleted
+			if(currentPos!=-1){
+				currentPos=-1;
+				setEntryPoint(null);//start has been deleted
+			}
 			return;//the list is empty
 		}
 		else {//
 			if(getCompletePath()){
 					setCompletePath(false);
-					exitPoint=null;
+					setExitPoint(null);
 			}//since the last node was removed
-			else//if the path wasn't complete
+			else//if the path wasn't complete (should it be scenery?)
 				currentPath=null;
 			
 			Path removedPath=temp.removeLast();
@@ -314,6 +329,28 @@ public class Map {
 		while(listIterator.hasNext()){
 			System.out.print(listIterator.next().getPos()+" ");
 		}
+	}
+	
+	/**
+	 * This method will print the contents of the 2D array
+	 * GRID. It will print 1 is the cell contains a path tile 
+	 * 0 if there is a Scenery Tile and - if it is null
+	 */
+	public void printGrid(){
+		for(int i=0;i<getHeight();i++){
+			for(int j=0;j<getWidth();j++){
+				if(grid[i][j]==null)
+					System.out.print("- ");
+				else if(getGrid(i,j).isPath())
+					System.out.print("1 ");
+				else if(getGrid(i,j).isScenery())
+					System.out.print("0 ");
+				else
+					System.out.print("? ");
+			}
+			System.out.println("");
+		}
+		System.out.println();
 	}
 	
 	
