@@ -11,16 +11,15 @@ public class MapTest {
 	@Before
 	public void setUp()throws Exception{
 		m=Map.getInstance();
-		m.setMap(4,4);
+		m.setMap(10,10);
 		
 		//Valid Path 
 		m.setCellToPath(0);
 		m.setCellToPath(1);
-		m.setCellToPath(5);
-		m.setCellToPath(6);
+		m.setCellToPath(2);
 		m.setCellToPath(3);
-		m.setCellToPath(10);
-		//bad tiles
+		m.setCellToPath(4);
+		m.setCellToPath(5);
 		m.setCellToPath(6);
 		m.setCellToPath(7);
 		//correct 
@@ -46,23 +45,6 @@ public class MapTest {
 		
 		System.out.println();
 		System.out.println(m.entryPoint.getPos());
-		System.out.println(m.exitPoint.getPos());
-		
-		
-		m.deleteLastPathTile();
-		
-		m.printPath();
-		
-		System.out.println();
-		System.out.println(m.currentPos);
-		System.out.println(m.currentPath.getPos());
-		System.out.println(m.entryPoint.getPos());
-		
-		m.finalizePath();
-		
-		m.setRemainingToScenery();
-		m.printPath();
-		System.out.println();
 		System.out.println(m.exitPoint.getPos());
 		
 	}
