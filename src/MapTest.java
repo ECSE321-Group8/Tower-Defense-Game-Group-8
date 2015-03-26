@@ -33,10 +33,10 @@ public class MapTest {
 		
 		for(int i=0;i<m.getHeight();i++){
 			for(int j=0;j<Map.getWidth();j++){
-				if(Map.getGrid(i,j).isPath())
-					System.out.print(" 1 ");
+				if(m.getGrid(i,j).isPath())
+					System.out.print("1 ");
 				else 
-					System.out.print(" 0 ");
+					System.out.print("0 ");
 			}
 			System.out.println("");
 		}
@@ -54,15 +54,23 @@ public class MapTest {
 		m.printPath();
 		
 		System.out.println();
+		System.out.println(m.currentPos);
+		System.out.println(m.currentPath.getPos());
 		System.out.println(m.entryPoint.getPos());
 		
-		//System.out.println(m.exitPoint.getPos());
+		m.finalizePath();
+		
+		m.setRemainingToScenery();
+		m.printPath();
+		System.out.println();
+		System.out.println(m.exitPoint.getPos());
+		
 	}
 	
 
 	@Test
 	public void test() {
-		assertFalse(Map.getCompletePath());
+		assertTrue(m.getCompletePath());
 		
 		//fail("Not yet implemented");
 	}

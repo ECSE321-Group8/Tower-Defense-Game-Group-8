@@ -5,7 +5,7 @@ import java.util.ListIterator;
 public class Map {
 	
 	private static Tile grid [][]; // hold the Map path and scenery
-	private static int height; // height of map
+	private int height; // height of map
 	private static int width; // Width of Map
 	
 	//private
@@ -15,7 +15,7 @@ public class Map {
 	
 	//Path variables
 	private static boolean completePath=false;
-	private int currentPos=-1;
+	int currentPos=-1;
 	Path currentPath;
 	
 	private static Map instanceMap=null;
@@ -35,7 +35,7 @@ public class Map {
 		width=w;
 		grid=new Tile[height][width];
 	}
-	public static void setCompletePath(boolean n){
+	public void setCompletePath(boolean n){
 		completePath=n;
 	}
 	
@@ -48,7 +48,7 @@ public class Map {
 		return width;
 	}	
 	
-	public static boolean getCompletePath(){
+	public boolean getCompletePath(){
 		return completePath;
 	}
 	
@@ -57,7 +57,7 @@ public class Map {
 		grid[y][x]=k;
 	}
 	
-	public static Tile getGrid(int y, int x){
+	public Tile getGrid(int y, int x){
 		return grid[y][x];
 	}
 	
@@ -183,6 +183,9 @@ public class Map {
 					setCompletePath(false);
 					exitPoint=null;
 			}//since the last node was removed
+			else//if the path wasn't complete
+				currentPath=null;
+			
 			Path removedPath=temp.removeLast();
 			currentPos=removedPath.getPos();
 			currentPath=new Path(currentPos);
@@ -193,7 +196,7 @@ public class Map {
 	}
 	
 	/**
-	 * it will set cells in the grid that haven't been initialized to Path to Scenery
+	 * Set cells on the grid that haven't been initialized to Path to Scenery
 	 */
 	public void setRemainingToScenery(){
 		for(int i=0;i<grid.length;i++){
@@ -205,6 +208,11 @@ public class Map {
 	}
 		
 	//TESTS
+	/**
+	 * Tests whether a spot is Valid for a specific type of Path Tile
+	 * @param p1: Path Tile being tested
+	 * @return
+	 */
 	public boolean inValidSpot(Path p1){
 		// Checks to see it the path piece placed expects an entrance or exit piece out of bounds
 		
@@ -269,6 +277,12 @@ public class Map {
 	 * THESE TWO METHODS ARE USED FOR TESTING PURPOSES 
 	 * ARE NOT NEEDED IN THE CODE
 	 */
+	/**
+	 * Tests if two path tiles are connected properly
+	 * @param p1: Path Tile 1
+	 * @param p2: Path Tile 2
+	 * @return
+	 */
 	public boolean connected(Path p1,Path p2){
 		// Checks if p1 and p2 are connected
 		if(p1.getExit()==p2.getPos()&&p1.getPos()==p2.getEntry())
@@ -279,7 +293,12 @@ public class Map {
 			return false;	
 	}
 
-	//tiles are connected but the directions are inverted
+	/**
+	 * Checks if a rotation is needed to make two Path Tiles connected
+	 * @param p1: PathTile 1
+	 * @param p2: PathTile 2
+	 * @return 
+	 */
 	public boolean connectedRotate(Path p1, Path p2){
 		if((p1.getExit()==p2.getPos()&&p2.getExit()==p1.getPos())||(p1.getEntry()==p2.getPos()&&p2.getEntry()==p1.getPos()))
 			return true;
@@ -287,16 +306,28 @@ public class Map {
 			return false;
 	}
 	
+	/**
+	 * Method prints the position of the Path Tiles
+	 */
 	public void printPath(){
 		ListIterator<Path> listIterator =temp.listIterator();
 		while(listIterator.hasNext()){
-			System.out.print(" "+listIterator.next().getPos()+" ");
+			System.out.print(listIterator.next().getPos()+" ");
 		}
 	}
 	
 	
 	
-	//PATH FACTORY
+
+	/**
+	 * This is a Path Factory 
+	 * It initializes a Path Tile to certain position
+	 * It will be given a type depending on where the entrance and the exit are placed.
+	 * 
+	 * @param s: entrance of the path
+	 * @param e: exit of the Path
+	 * @return
+	 */
 	public static PathType createPathTileOfType(int s, int e){
 		//N=0, E=1, S=2, W=3
 		//if the pathTile is an edge, exit/entry would be indicated and 
