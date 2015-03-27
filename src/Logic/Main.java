@@ -1,6 +1,6 @@
 package Logic;
-import views.MapEditor;
-import views.TestView;
+import Presentation.MapEditor;
+import Presentation.TestView;
 
 
 public class Main {
