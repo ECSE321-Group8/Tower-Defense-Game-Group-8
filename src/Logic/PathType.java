@@ -1,3 +1,4 @@
+package Logic;
 
 public enum PathType {
 	straightNS,straightWE,turnEN,turnNW,turnSE,turnWS,noDirection

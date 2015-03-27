@@ -1,3 +1,4 @@
+package Logic;
 
 public class Scenery extends Tile{
 	

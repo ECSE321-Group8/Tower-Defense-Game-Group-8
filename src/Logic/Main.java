@@ -1,3 +1,4 @@
+package Logic;
 import views.MapEditor;
 import views.TestView;
 

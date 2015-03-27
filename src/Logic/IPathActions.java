@@ -1,3 +1,4 @@
+package Logic;
 /*
  * All comments with 2 slashes are general to the Path
  * All comments with 4 slashes are general to the Tile
