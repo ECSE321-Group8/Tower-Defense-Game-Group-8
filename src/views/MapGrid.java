@@ -13,7 +13,7 @@ public class MapGrid extends JPanel implements MouseListener{
 	private int gridSize;
 	private boolean startSet;
 	private int [][] tempGrid; 
-	private int xcor,ycor;
+	private int xcor,ycor, xOffset, yOffset;
 	
 	private boolean start = true;
 	
@@ -41,6 +41,8 @@ public class MapGrid extends JPanel implements MouseListener{
 		else{
 			gridSize = panelHeight/gridRows;
 		}
+		xOffset = (panelWidth - gridSize*gridColumns)/2;
+		yOffset = (panelHeight - gridSize*gridRows)/2;
 		
 		drawGrid(g);
 		
@@ -58,18 +60,19 @@ public class MapGrid extends JPanel implements MouseListener{
 				if(tempGrid[j][i]==0){
 					
 					g.setColor(Color.GRAY);
-					g.fillRect(i*gridSize, j*gridSize, gridSize, gridSize);
+					g.fillRect(i*gridSize+xOffset, j*gridSize+yOffset, gridSize, gridSize);
 
 				}
 				else{
 					g.setColor(Color.PINK);
-					g.fillRect(i*gridSize, j*gridSize, gridSize, gridSize);
+					g.fillRect(i*gridSize+xOffset, j*gridSize+yOffset, gridSize, gridSize);
 				}
 				g.setColor(Color.BLACK);
-				g.drawRect(i*gridSize, j*gridSize, gridSize, gridSize);
+				g.drawRect(i*gridSize+xOffset, j*gridSize+yOffset, gridSize, gridSize);
 			}
 		}
 	}
+	
 	
 	public int getXcor() {
 		return xcor;
@@ -111,16 +114,16 @@ public class MapGrid extends JPanel implements MouseListener{
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
-		if(start){ // For the start piece; can only make one
+			// TODO: Catch exception where clicked outside of area
 			System.out.println("X: " + e.getX() + "\tY: " + e.getY());
-			ycor = e.getX();
-			xcor = e.getY();
+			ycor = e.getX()-xOffset;
+			xcor = e.getY()-yOffset;
 			tempGrid[xcor/gridSize][ycor/gridSize] = 1;
 			xcor = xcor/gridSize;
 			ycor = ycor/gridSize;
 			repaint();
 			start = false;
-		}
+		
 	}
 
 
@@ -147,6 +150,5 @@ public class MapGrid extends JPanel implements MouseListener{
 		// TODO Auto-generated method stub
 		
 	}
-	
 
 }

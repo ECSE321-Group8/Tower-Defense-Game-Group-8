@@ -6,31 +6,39 @@ package views;
  * Room.java
  */
 
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Label;
 import java.awt.ScrollPane;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
-public class Frame extends JFrame implements KeyListener{
+public class Frame extends JFrame implements KeyListener, ActionListener{
 
 	final static String APPNAME = "FRAME!";
 	public static Dimension size = new Dimension (1000,550);
 	private MapGrid mG;
+	// http://docs.oracle.com/javase/7/docs/api/java/awt/GridBagConstraints.html
 	private GridBagConstraints gbc = new GridBagConstraints();
 	ScrollPane scrollSection;
 	JPanel editorOptions;
-	
+	JPanel blankPanel;
 	JLabel lRows;
 	JLabel lColumns;
 	JTextField tRows;
 	JTextField tColumns;
+	JButton confirm;
 	// Try to add this to the layout:
 	// http://docs.oracle.com/javase/tutorial/uiswing/components/splitpane.html
 	
@@ -41,7 +49,7 @@ public class Frame extends JFrame implements KeyListener{
 		// setResizable(false);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		JPanel blankPanel = new JPanel();
+		blankPanel = new JPanel(new BorderLayout());
 		int sizeofSplit = 200;
 		
 		addKeyListener(this); // Does not work in the JPanel
@@ -49,13 +57,14 @@ public class Frame extends JFrame implements KeyListener{
 		System.out.println(this.getHeight());
 		setVisible(true);
 		// Not this gets the the size of the actual frame (without borders)
-		mG = new MapGrid(this.getContentPane().getSize().width-sizeofSplit,this.getContentPane().getSize().height,10,20);
+		mG = new MapGrid(this.getContentPane().getSize().width-sizeofSplit,this.getContentPane().getSize().height,20,10);
 		// TODO: Need to make left side grid of Map and right side where we set size of map and other options
 		
 		// Options to edit the Map
 		setupMapOptions();
 		
 		blankPanel.add(scrollSection);
+		setVisible(true);
 		// Can only have this after panels initialized
 		SplitPane sP = new SplitPane(blankPanel,mG,sizeofSplit);
 		// add(mG);
@@ -69,6 +78,7 @@ public class Frame extends JFrame implements KeyListener{
 		System.out.println(size.width);
 		System.out.println(size.height);
 		*/
+		
 		init();
 		
 	}
@@ -89,7 +99,11 @@ public class Frame extends JFrame implements KeyListener{
 	
 	private void setupMapOptions() {
 		// TODO Auto-generated method stub
+		// To test a very long string
+		JLabel test = new JLabel("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+		
 		scrollSection = new ScrollPane();
+		
 		editorOptions = new JPanel();
 		// http://www.tutorialspoint.com/awt/awt_gridbaglayout.htm
 		editorOptions.setLayout(new GridBagLayout());
@@ -99,6 +113,14 @@ public class Frame extends JFrame implements KeyListener{
 		tRows = new JTextField("10");
 		tColumns = new JTextField("10");
 		
+		confirm = new JButton("OK");
+		confirm.addActionListener(this);
+		
+		
+		gbc.weightx = 1.0; // Makes it take up whole horizontal area
+		//gbc.weighty = 1.0; // Makes it take up whole vertical area
+		
+		gbc.fill = GridBagConstraints.HORIZONTAL;
 		gbc.gridx = 0;
 		gbc.gridy = 0;
 		editorOptions.add(lRows, gbc);
@@ -115,12 +137,27 @@ public class Frame extends JFrame implements KeyListener{
 		gbc.gridy = 1;
 		editorOptions.add(tColumns,gbc);
 		
+		gbc.fill = GridBagConstraints.HORIZONTAL;
+		gbc.gridx = 0;
+		gbc.gridy = 2;
+		gbc.gridwidth = 2; // So that it covers two columns
+		editorOptions.add(confirm, gbc);
+		
+		/*
+		gbc.gridx = 0;
+		gbc.gridy= 3;
+		// gbc.fill = GridBagConstraints.HORIZONTAL;
+		gbc.gridwidth = 2;
+		editorOptions.add(test, gbc);
+		*/
+		
+		
 		scrollSection.add(editorOptions);
 		
 	}
 
 	@Override
-	public void keyPressed(KeyEvent e) {
+	public void keyPressed(KeyEvent b) {
 		// TODO Auto-generated method stub
 		// System.out.println("Pressed Key!");
 		
@@ -128,29 +165,34 @@ public class Frame extends JFrame implements KeyListener{
 		
 		// Must create cases not going back to an already colored part of grid
 		// Need to also know if first piece was added or not
-		if(e.getKeyCode() == KeyEvent.VK_UP){
+		
+		if(b.getKeyCode() == KeyEvent.VK_UP){
 			mG.setXcor(mG.getXcor()-1);
 			mG.setGrid(mG.getXcor(), mG.getYcor(), 1);
 			mG.repaint();
 		}
-		if(e.getKeyCode() == KeyEvent.VK_DOWN){
+		if(b.getKeyCode() == KeyEvent.VK_DOWN){
 			mG.setXcor(mG.getXcor()+1);
 			mG.setGrid(mG.getXcor(), mG.getYcor(), 1);
 			mG.repaint();
 		}
-		if(e.getKeyCode() == KeyEvent.VK_LEFT){
+		if(b.getKeyCode() == KeyEvent.VK_LEFT){
 			mG.setYcor(mG.getYcor()-1);
 			mG.setGrid(mG.getXcor(), mG.getYcor(), 1);
 			mG.repaint();
 		}
-		if(e.getKeyCode() == KeyEvent.VK_RIGHT){
+		if(b.getKeyCode() == KeyEvent.VK_RIGHT){
 			mG.setYcor(mG.getYcor()+1);
 			mG.setGrid(mG.getXcor(), mG.getYcor(), 1);
 			mG.repaint();
 		}
-		if(e.getKeyCode() == KeyEvent.VK_BACK_SPACE){
+		if(b.getKeyCode() == KeyEvent.VK_BACK_SPACE){
 			System.out.println("BACKSPACE!");
 		}
+		if(b.getKeyCode() == KeyEvent.VK_ENTER){
+			System.out.println("ENTER!");
+		}
+		
 	}
 
 	@Override
@@ -163,6 +205,18 @@ public class Frame extends JFrame implements KeyListener{
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		if(e.getActionCommand() == "OK"){
+			System.out.println("PRESSED OK!");
+			confirm.setEnabled(false);
+			tRows.setEditable(false);
+			tColumns.setEditable(false);
+			confirm.setFocusable(false);
+		}
 	}
 	
 	
