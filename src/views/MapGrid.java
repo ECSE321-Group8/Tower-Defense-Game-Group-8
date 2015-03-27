@@ -3,7 +3,9 @@ package views;
 import java.awt.*;
 import java.awt.event.*;
 
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 public class MapGrid extends JPanel implements MouseListener{
 	
@@ -12,7 +14,7 @@ public class MapGrid extends JPanel implements MouseListener{
 	private boolean startSet;
 	private int [][] tempGrid; 
 	private int xcor,ycor;
-
+	
 	private boolean start = true;
 	
 	public MapGrid(int panelWidth, int panelHeight, int gridRows, int gridColumns){
@@ -29,7 +31,7 @@ public class MapGrid extends JPanel implements MouseListener{
 		repaint();
 		setVisible(true);
 	}
-	
+
 	public void paintComponent(Graphics g){
 		
 		// Works for a square sized Window
