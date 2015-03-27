@@ -111,17 +111,18 @@ public class Map {
 				if(p.getEntry()==pos)
 					p.rotate();
 				//validate spot (for entry/exit)
-
+				
 				//set as Path entry point 
 				p.setStart();
 				setEntryPoint(p);
 				
 				//add to grid and list
 				p.storePathTile();
-				
+
 				//update current
 				currentPos=pos;
 				currentPath=new Path(currentPos);		
+				setGrid(currentPath.getRow(),currentPath.getCol(),currentPath);
 			}		
 		}
 		else{

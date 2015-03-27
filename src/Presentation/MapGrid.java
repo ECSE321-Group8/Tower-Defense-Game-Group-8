@@ -7,6 +7,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import Logic.Map;
+
 public class MapGrid extends JPanel implements MouseListener{
 	
 	private int panelWidth,panelHeight, gridRows, gridColumns;
@@ -17,11 +19,15 @@ public class MapGrid extends JPanel implements MouseListener{
 	
 	private boolean start = true;
 	
+	private Map myMap;
+	
+	
 	public MapGrid(int panelWidth, int panelHeight){
 		
 		startSet = false; // Do not want to paint until the Dimension has been set
 		this.panelWidth = panelWidth;
 		this.panelHeight = panelHeight;
+		myMap=Map.getInstance();
 		
 		addMouseListener(this);
 		
@@ -54,7 +60,7 @@ public class MapGrid extends JPanel implements MouseListener{
 		for(int i=0;i<gridColumns;i++){
 			for(int j=0;j<gridRows;j++){
 				// g.drawRect(i*gridSize, j*gridSize, gridSize, gridSize);
-				
+				//MAP GRID (LOGIC)
 				if(tempGrid[j][i]==0){
 					
 					g.setColor(Color.GRAY);
@@ -121,6 +127,16 @@ public class MapGrid extends JPanel implements MouseListener{
 			tempGrid[xcor/gridSize][ycor/gridSize] = 1;
 			xcor = xcor/gridSize;
 			ycor = ycor/gridSize;
+			
+			//X AND Y COORDINATE ARE INVERTED!!! 
+			//Y=WIDTH and X=HEIGHT
+			
+			myMap.setCellToPath(xcor*Map.getWidth()+ycor);
+			myMap.printGrid();
+			System.out.println();
+			//add path Tile METHOD
+			//delete 
+			
 			repaint();
 			// start = false;
 		}
@@ -156,6 +172,7 @@ public class MapGrid extends JPanel implements MouseListener{
 		this.gridRows = gridRows;
 		this.gridColumns = gridColumns;
 		tempGrid = new int[gridRows][gridColumns];
+		myMap.setMap(gridRows, gridColumns);
 		startSet = true;
 		repaint();
 	}

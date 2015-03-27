@@ -24,6 +24,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
+import Logic.Map;
+
 public class Frame extends JFrame implements KeyListener, ActionListener{
 
 	final static String APPNAME = "FRAME!";
@@ -48,12 +50,13 @@ public class Frame extends JFrame implements KeyListener, ActionListener{
 	int realHeight, realWidth;
 	// Try to add this to the layout:
 	// http://docs.oracle.com/javase/tutorial/uiswing/components/splitpane.html
+//  	Map myMap;
 	
 	
 	public Frame(){
 		setTitle(APPNAME);
 		setSize(size);
-		// setResizable(false);
+		setResizable(false);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		blankPanel = new JPanel(new BorderLayout());
@@ -108,7 +111,7 @@ public class Frame extends JFrame implements KeyListener, ActionListener{
 	private void setupMapOptions() {
 		// TODO Auto-generated method stub
 		// To test a very long string
-		JLabel test = new JLabel("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+		//JLabel test = new JLabel("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
 		
 		scrollSection = new ScrollPane();
 		
@@ -236,8 +239,12 @@ public class Frame extends JFrame implements KeyListener, ActionListener{
 				confirm.setEnabled(false);
 				tRows.setEditable(false);
 				tColumns.setEditable(false);
-				mG.setDimensions(Integer.parseInt(tRows.getText()), Integer.parseInt(tColumns.getText()));
+//				myMap=Map.getInstance();
+//				myMap.setMap(rows,columns);
+				mG.setDimensions(rows, columns);
 			}
+			
+			
 		}
 	}
 	
