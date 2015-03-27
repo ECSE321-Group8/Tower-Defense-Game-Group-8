@@ -96,6 +96,8 @@ public class Map {
 			if(currentPos<0){//start hasn't been placed		
 				currentPos=pos;
 				currentPath=new Path(currentPos);
+				setEntryPoint(currentPath);
+				setGrid(currentPath.getRow(),currentPath.getCol(),currentPath);
 			}
 			else{
 				int d = currentPath.getDirection(pos);
@@ -152,6 +154,7 @@ public class Map {
 			//update current
 			currentPos=pos;
 			currentPath=new Path(currentPos);	
+			setGrid(currentPath.getRow(),currentPath.getCol(),currentPath);
 		}
 	}
 	
@@ -190,6 +193,8 @@ public class Map {
 			if(currentPos!=-1){
 				currentPos=-1;
 				setEntryPoint(null);//start has been deleted
+				grid[currentPath.getRow()][currentPath.getCol()]= null;
+				currentPath=null;
 			}
 			return;//the list is empty
 		}
@@ -199,14 +204,12 @@ public class Map {
 					setExitPoint(null);
 			}//since the last node was removed
 			else//if the path wasn't complete (should it be scenery?)
+				grid[currentPath.getRow()][currentPath.getCol()]= null;
 				currentPath=null;
 			
 			Path removedPath=temp.removeLast();
 			currentPos=removedPath.getPos();
 			currentPath=new Path(currentPos);
-			
-			//remove from grid
-			grid[removedPath.getRow()][removedPath.getCol()]= null;
 		}
 	}
 	
