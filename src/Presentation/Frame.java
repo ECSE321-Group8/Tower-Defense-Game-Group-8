@@ -27,7 +27,7 @@ import javax.swing.JTextField;
 public class Frame extends JFrame implements KeyListener, ActionListener{
 
 	final static String APPNAME = "FRAME!";
-	public static Dimension size = new Dimension (1000,550);
+	public static Dimension size = new Dimension (700,550);
 	private MapGrid mG;
 	// http://docs.oracle.com/javase/7/docs/api/java/awt/GridBagConstraints.html
 	private GridBagConstraints gbc = new GridBagConstraints();
@@ -38,7 +38,14 @@ public class Frame extends JFrame implements KeyListener, ActionListener{
 	JLabel lColumns;
 	JTextField tRows;
 	JTextField tColumns;
+	private int rows;
+	private int columns;
 	JButton confirm;
+	int sizeofSplit = 200;
+	SplitPane sP;
+	JPanel nothing;
+	private boolean valid = false;
+	int realHeight, realWidth;
 	// Try to add this to the layout:
 	// http://docs.oracle.com/javase/tutorial/uiswing/components/splitpane.html
 	
@@ -50,14 +57,17 @@ public class Frame extends JFrame implements KeyListener, ActionListener{
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		blankPanel = new JPanel(new BorderLayout());
-		int sizeofSplit = 200;
+		nothing = new JPanel();
 		
 		addKeyListener(this); // Does not work in the JPanel
 		System.out.println(this.getWidth());
 		System.out.println(this.getHeight());
 		setVisible(true);
 		// Not this gets the the size of the actual frame (without borders)
-		mG = new MapGrid(this.getContentPane().getSize().width-sizeofSplit,this.getContentPane().getSize().height,20,10);
+		realHeight = this.getContentPane().getSize().height-10;
+		realWidth = this.getContentPane().getSize().width;
+		System.out.println(this.getContentPane().getSize().width+" "+this.getContentPane().getSize().height);
+		mG = new MapGrid(realWidth-sizeofSplit,realHeight-10);
 		// TODO: Need to make left side grid of Map and right side where we set size of map and other options
 		
 		// Options to edit the Map
@@ -66,11 +76,9 @@ public class Frame extends JFrame implements KeyListener, ActionListener{
 		blankPanel.add(scrollSection);
 		setVisible(true);
 		// Can only have this after panels initialized
-		SplitPane sP = new SplitPane(blankPanel,mG,sizeofSplit);
+		sP = new SplitPane(blankPanel,mG,sizeofSplit);
 		// add(mG);
 		add(sP);
-		
-		
 		
 		/*
 		 * Doesn't work
@@ -212,10 +220,24 @@ public class Frame extends JFrame implements KeyListener, ActionListener{
 		// TODO Auto-generated method stub
 		if(e.getActionCommand() == "OK"){
 			System.out.println("PRESSED OK!");
-			confirm.setEnabled(false);
-			tRows.setEditable(false);
-			tColumns.setEditable(false);
-			confirm.setFocusable(false);
+			
+			try{
+				rows = Integer.parseInt(tRows.getText());
+				columns =  Integer.parseInt(tColumns.getText());
+				valid = true;
+			}
+			catch(NumberFormatException e1){
+				
+			}
+			if(rows<=1 || columns<=1 || rows>(realHeight/10) || columns>(realWidth/10)){
+				valid = false;
+			}
+			if(valid){
+				confirm.setEnabled(false);
+				tRows.setEditable(false);
+				tColumns.setEditable(false);
+				mG.setDimensions(Integer.parseInt(tRows.getText()), Integer.parseInt(tColumns.getText()));
+			}
 		}
 	}
 	

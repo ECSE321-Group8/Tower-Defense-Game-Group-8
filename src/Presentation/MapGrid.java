@@ -17,23 +17,21 @@ public class MapGrid extends JPanel implements MouseListener{
 	
 	private boolean start = true;
 	
-	public MapGrid(int panelWidth, int panelHeight, int gridRows, int gridColumns){
-		// this.setLayout(new BorderLayout());
+	public MapGrid(int panelWidth, int panelHeight){
+		
+		startSet = false; // Do not want to paint until the Dimension has been set
 		this.panelWidth = panelWidth;
 		this.panelHeight = panelHeight;
-		this.gridRows = gridRows;
-		this.gridColumns = gridColumns;
-		// addKeyListener(this);
+		
 		addMouseListener(this);
 		
-		tempGrid = new int[gridRows][gridColumns];
-		
-		repaint();
 		setVisible(true);
 	}
 
 	public void paintComponent(Graphics g){
 		
+		
+		if(startSet){
 		// Works for a square sized Window
 		if(panelHeight/gridRows>=panelWidth/gridColumns){
 			gridSize = panelWidth/gridColumns;
@@ -45,7 +43,7 @@ public class MapGrid extends JPanel implements MouseListener{
 		yOffset = (panelHeight - gridSize*gridRows)/2;
 		
 		drawGrid(g);
-		
+		}
 	}
 
 	private void drawGrid(Graphics g) {
@@ -114,7 +112,9 @@ public class MapGrid extends JPanel implements MouseListener{
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
-			// TODO: Catch exception where clicked outside of area
+			
+		// TODO: Catch exception where clicked outside of area
+		if(startSet){
 			System.out.println("X: " + e.getX() + "\tY: " + e.getY());
 			ycor = e.getX()-xOffset;
 			xcor = e.getY()-yOffset;
@@ -122,7 +122,8 @@ public class MapGrid extends JPanel implements MouseListener{
 			xcor = xcor/gridSize;
 			ycor = ycor/gridSize;
 			repaint();
-			start = false;
+			// start = false;
+		}
 		
 	}
 
@@ -149,6 +150,14 @@ public class MapGrid extends JPanel implements MouseListener{
 	public void mouseReleased(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	public void setDimensions(int gridRows, int gridColumns){
+		this.gridRows = gridRows;
+		this.gridColumns = gridColumns;
+		tempGrid = new int[gridRows][gridColumns];
+		startSet = true;
+		repaint();
 	}
 
 }
