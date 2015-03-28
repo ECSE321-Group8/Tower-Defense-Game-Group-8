@@ -182,7 +182,10 @@ public class Frame extends JFrame implements KeyListener, ActionListener{
 		scrollSection.add(editorOptions);
 		
 	}
-
+	/*
+	 * Once a button is pressed, the arrow keys do not work
+	 * 
+	 */
 	@Override
 	public void keyPressed(KeyEvent b) {
 		// TODO Auto-generated method stub
@@ -194,24 +197,36 @@ public class Frame extends JFrame implements KeyListener, ActionListener{
 		// Need to also know if first piece was added or not
 		
 		if(b.getKeyCode() == KeyEvent.VK_UP){
+			System.out.println("UP!");
+			/*
 			mG.setXcor(mG.getXcor()-1);
 			mG.setGrid(mG.getXcor(), mG.getYcor(), 1);
 			mG.repaint();
+			*/
 		}
 		if(b.getKeyCode() == KeyEvent.VK_DOWN){
+			System.out.println("DOWN!");
+			/*
 			mG.setXcor(mG.getXcor()+1);
 			mG.setGrid(mG.getXcor(), mG.getYcor(), 1);
 			mG.repaint();
+			*/
 		}
 		if(b.getKeyCode() == KeyEvent.VK_LEFT){
+			System.out.println("LEFT!");
+			/*
 			mG.setYcor(mG.getYcor()-1);
 			mG.setGrid(mG.getXcor(), mG.getYcor(), 1);
 			mG.repaint();
+			*/
 		}
 		if(b.getKeyCode() == KeyEvent.VK_RIGHT){
+			System.out.println("RIGHT!");
+			/*
 			mG.setYcor(mG.getYcor()+1);
 			mG.setGrid(mG.getXcor(), mG.getYcor(), 1);
 			mG.repaint();
+			*/
 		}
 		if(b.getKeyCode() == KeyEvent.VK_BACK_SPACE){
 			System.out.println("BACKSPACE!");
