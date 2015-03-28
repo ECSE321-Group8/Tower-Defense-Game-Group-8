@@ -3,23 +3,42 @@
 import java.util.List;
 import java.util.LinkedList;
 
-public class wave {
+public class wave  {
 	
-	private List <critter> wave;
-	private int level;
+	private static LinkedList <critter> wavelist=new LinkedList<critter>();;
+//	private static int level;
+//
+//	public static int getlevel()
+//	{
+//		return level;
+//	}
 	public wave(int level)
 	{
-		List <critter> wave = new LinkedList <critter>();
 		//for the first wave only critter1 will be created
 		//for the second wave critter2 also will be created
 		//for the third wave all type of critters will be created
 		//as number of wave will increase the number of critters will also increase
+	//	List<critter> wavelist=new LinkedList<critter>();
 		
-		if(level==1)
+		if(level==0)//for testing
+		{
+			for(int p=0;p<3;p++)
+			{
+				wavelist.add(new critter1());
+//				try {
+//					Thread.sleep(2000);
+//				} catch (InterruptedException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
+			}
+		}
+		else if(level==1)
 		{	
 			for(int i=0;i<=5;i++)
 			{
-				wave.add(new critter1());
+				getWavelist().add(new critter1());
+				//System.out.println(wavelist.size());
 			}
 
 		}
@@ -27,10 +46,10 @@ public class wave {
 		{
 			for(int j=0;j<=3;j++)
 			{
-				wave.add(new critter2());
+				getWavelist().add(new critter2());
 				for(int q=0;q<3;q++)
 				{
-					wave.add(new critter1());
+					getWavelist().add(new critter1());
 				}
 			}
 		}
@@ -38,15 +57,15 @@ public class wave {
 		{
 			for(int j=0;j<=3;j++)
 			{
-				wave.add(new critter3());
+				getWavelist().add(new critter3());
 				
 				for(int q=0;q<3;q++)
 				{
-					wave.add(new critter2());
+					getWavelist().add(new critter2());
 					
 					for(int w=0;w<3;w++)
 					{
-						wave.add(new critter1());
+						getWavelist().add(new critter1());
 					}
 				}
 			}
@@ -55,20 +74,25 @@ public class wave {
 		{
 			for(int j=0;j<=level;j++)
 			{
-				wave.add(new critter3());
+				getWavelist().add(new critter3());
 				
 				for(int q=0;q<=level;q++)
 				{
-					wave.add(new critter2());
+					getWavelist().add(new critter2());
 					
 					for(int w=0;w<=level;w++)
 					{
-						wave.add(new critter1());
+						getWavelist().add(new critter1());
 					}
 				}
 			
-		}	
+			}	
 		}
 	
 	}
+	public static LinkedList <critter> getWavelist() {
+		return wavelist;
+	}
+	
+	
 }
