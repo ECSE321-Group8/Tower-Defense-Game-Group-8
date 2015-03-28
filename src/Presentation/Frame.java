@@ -43,6 +43,7 @@ public class Frame extends JFrame implements KeyListener, ActionListener{
 	private int rows;
 	private int columns;
 	JButton confirm;
+	private JButton finalize;
 	int sizeofSplit = 200;
 	SplitPane sP;
 	JPanel nothing;
@@ -50,7 +51,10 @@ public class Frame extends JFrame implements KeyListener, ActionListener{
 	int realHeight, realWidth;
 	// Try to add this to the layout:
 	// http://docs.oracle.com/javase/tutorial/uiswing/components/splitpane.html
-//  	Map myMap;
+	Map myMap;
+	
+	
+	
 	
 	
 	public Frame(){
@@ -92,6 +96,8 @@ public class Frame extends JFrame implements KeyListener, ActionListener{
 		
 		init();
 		
+		myMap=Map.getInstance();
+		
 	}
 	
 	public static void main (String args []){
@@ -127,6 +133,9 @@ public class Frame extends JFrame implements KeyListener, ActionListener{
 		confirm = new JButton("OK");
 		confirm.addActionListener(this);
 		
+		finalize = new JButton("Done");
+		finalize.addActionListener(this);
+		
 		
 		gbc.weightx = 1.0; // Makes it take up whole horizontal area
 		//gbc.weighty = 1.0; // Makes it take up whole vertical area
@@ -153,6 +162,13 @@ public class Frame extends JFrame implements KeyListener, ActionListener{
 		gbc.gridy = 2;
 		gbc.gridwidth = 2; // So that it covers two columns
 		editorOptions.add(confirm, gbc);
+		
+		gbc.fill=GridBagConstraints.HORIZONTAL;
+		gbc.gridx=0;
+		gbc.gridy=3;
+		gbc.gridwidth=2;
+		editorOptions.add(finalize, gbc);
+		
 		
 		/*
 		gbc.gridx = 0;
@@ -245,6 +261,19 @@ public class Frame extends JFrame implements KeyListener, ActionListener{
 			}
 			
 			
+		}
+		
+		else if (e.getActionCommand()=="Done"){
+			
+			System.out.println("I AM DONE");
+		
+		myMap.finalizePath();
+		mG.repaint();
+		myMap.printPath();
+		myMap.printGrid();
+
+
+		
 		}
 	}
 	

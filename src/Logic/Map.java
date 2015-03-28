@@ -180,7 +180,9 @@ public class Map {
 			p.storePathTile();
 			
 			setCompletePath(true);
+			setRemainingToScenery();
 		}
+		
 		
 	}	
 
@@ -204,6 +206,8 @@ public class Map {
 			if(getCompletePath()){
 					setCompletePath(false);
 					setExitPoint(null);
+					removeScenery();
+					
 			}//since the last node was removed
 			else//if the path wasn't complete (should it be scenery?)
 				grid[currentPath.getRow()][currentPath.getCol()]= null;
@@ -223,6 +227,14 @@ public class Map {
 			for(int j=0;j<grid[0].length;j++){
 				if(grid[i][j]==null)
 					grid[i][j]=new Scenery(i*grid[0].length+j);
+			}
+		}
+	}
+	public void removeScenery(){
+		for(int i=0;i<grid.length;i++){
+			for(int j=0;j<grid[0].length;j++){
+				if(grid[i][j].isScenery())
+					grid[i][j]=null;
 			}
 		}
 	}

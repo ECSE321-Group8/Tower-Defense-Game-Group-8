@@ -61,14 +61,18 @@ public class MapGrid extends JPanel implements MouseListener{
 			for(int j=0;j<gridRows;j++){
 				// g.drawRect(i*gridSize, j*gridSize, gridSize, gridSize);
 				//MAP GRID (LOGIC)
-				if(tempGrid[j][i]==0){
+				if(myMap.getGrid(j, i)==null){
 					
-					g.setColor(Color.GRAY);
+					g.setColor(Color.WHITE);
 					g.fillRect(i*gridSize+xOffset, j*gridSize+yOffset, gridSize, gridSize);
 
 				}
+				else if(myMap.getGrid(j, i).isPath()){
+					g.setColor(Color.BLUE);
+					g.fillRect(i*gridSize+xOffset, j*gridSize+yOffset, gridSize, gridSize);
+				}
 				else{
-					g.setColor(Color.PINK);
+					g.setColor(Color.GREEN);
 					g.fillRect(i*gridSize+xOffset, j*gridSize+yOffset, gridSize, gridSize);
 				}
 				g.setColor(Color.BLACK);
@@ -130,9 +134,18 @@ public class MapGrid extends JPanel implements MouseListener{
 			
 			//X AND Y COORDINATE ARE INVERTED!!! 
 			//Y=WIDTH and X=HEIGHT
+
+			if (myMap.getGrid(xcor,ycor)==null)//||myMap.getGrid(ycor, xcor).isScenery())
+				myMap.setCellToPath(xcor*Map.getWidth()+ycor);
+			else if(myMap.getGrid(xcor, ycor).isPath())
+					myMap.deleteLastPathTile();
+			else	{
+				
+			}		
+
 			
-			myMap.setCellToPath(xcor*Map.getWidth()+ycor);
 			myMap.printGrid();
+			myMap.printPath();
 			System.out.println();
 			//add path Tile METHOD
 			//delete 
@@ -176,5 +189,6 @@ public class MapGrid extends JPanel implements MouseListener{
 		startSet = true;
 		repaint();
 	}
+
 
 }
