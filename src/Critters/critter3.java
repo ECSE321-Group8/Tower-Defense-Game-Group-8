@@ -1,3 +1,4 @@
+package Critters;
 
 public class critter3 extends critter{
 	 

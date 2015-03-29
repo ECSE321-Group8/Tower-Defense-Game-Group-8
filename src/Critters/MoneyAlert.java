@@ -1,7 +1,7 @@
+package Critters;
 
-public class LifeAlert implements Iobserver {
-	
-	public LifeAlert(Game myGame) {
+public class MoneyAlert implements Iobserver {
+	public MoneyAlert(Game myGame) {
 		super();
 		this.observedGame=myGame;
 		// TODO Auto-generated constructor stub
@@ -10,8 +10,8 @@ public class LifeAlert implements Iobserver {
 	@Override
 	public void update() {
 		// TODO Auto-generated method stub
-		int newLife=observedGame.getLife();
-		System.out.println("newLife"+newLife);
+		double newMoney=observedGame.getMoney();
+		System.out.println("newMoney"+newMoney);
 
 	}
 	private Game observedGame;

@@ -1,3 +1,4 @@
+package Critters;
 
 public class Life extends Subject {
 
