@@ -2,10 +2,11 @@ package Critters;
 
 public class Game extends Subject{
 	
-	public Game(int life,double money)
+	public Game(int life,double money,int wave)
 	{
 		myLife=new Life(life);
 		myMoney=new Money(money);
+		myWave=new wave(wave);
 	}
 	public void getGame()
 	{
@@ -19,6 +20,12 @@ public class Game extends Subject{
 	{
 		return myMoney.getMoney();
 	}
+	public int getNumberOfCritters() {
+		// TODO Auto-generated method stub
+		return myWave.getNumberOfCritters();
+	}
 	protected static Life myLife;
-	protected  static Money myMoney;
+	protected static Money myMoney;
+	protected static wave myWave;
+	
 }

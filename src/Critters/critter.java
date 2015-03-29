@@ -42,7 +42,8 @@ public class critter {
 		if(this.health<=0)
 		{
 			Game.myMoney.changeMoney(typeCritter*3);
-			
+			Game.myWave.decrementCritter();
+			//decrementCritter();
 			
 			//reward player money
 			//call method to increment amount of money of player
@@ -86,6 +87,7 @@ public class critter {
 		{
 			Game.myLife.decreaseLife(1);
 			Game.myMoney.changeMoney(-typeCritter*3);
+			Game.myWave.decrementCritter();
 		}
 	}
 
