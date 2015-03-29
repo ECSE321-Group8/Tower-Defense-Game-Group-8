@@ -3,15 +3,11 @@
 import java.util.List;
 import java.util.LinkedList;
 
-public class wave  {
+public class wave extends Subject{
 	
 	private static LinkedList <critter> wavelist=new LinkedList<critter>();;
-//	private static int level;
-//
-//	public static int getlevel()
-//	{
-//		return level;
-//	}
+	//Will be better implemented as a factory in assignment 3
+
 	public wave(int level)
 	{
 		//for the first wave only critter1 will be created
@@ -24,6 +20,7 @@ public class wave  {
 		{
 			for(int p=0;p<3;p++)
 			{
+				new critter1();
 				wavelist.add(new critter1());
 //				try {
 //					Thread.sleep(2000);

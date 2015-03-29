@@ -1,29 +1,23 @@
 
 public class Game extends Subject{
 	
-	public Game()
+	public Game(int life,double money)
 	{
-		this.myMoney=1000.0;
-		this.myLife=10;
+		myLife=new Life(life);
+		myMoney=new Money(money);
 	}
-	public void decrementLife(int amount) {
-			myLife=myLife-amount;		
-			notifyAllObservers();
-	}
-	public void changeMyMoney(double amount)
+	public void getGame()
 	{
-			myMoney=myMoney +amount;
-			notifyAllObservers();
-			
+		System.out.println("PLAYER'S LIFE IS : "+getLife()+"     AMOUNT OF MONEY : "+getMoney());
 	}
-	public int getMyLife() {
-		return myLife;
+	public int getLife() {
+		// TODO Auto-generated method stub
+		return myLife.getLife();
 	}
-		
-	public double getMyMoney() {
-		return myMoney;
+	public double getMoney()
+	{
+		return myMoney.getMoney();
 	}
-	private double myMoney;
-	private int myLife;
-
+	protected static Life myLife;
+	protected  static Money myMoney;
 }

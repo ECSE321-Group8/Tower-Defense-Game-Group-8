@@ -1,11 +1,11 @@
 
-public class critter extends Game 
-{
+public class critter {
 	public int speed;
 	public  static int typeCritter;
 	public double health;
-	public boolean onPath; 
+	public boolean alive; 
 	public double positionX=0;
+	
 	public double positionY=0;
 	
 	// assume that entry gate is at(0,0)
@@ -14,7 +14,7 @@ public class critter extends Game
 	
 	public critter()
 	{
-		System.out.println("NewCritter:"+getTypeCritter());
+		//System.out.println("NewCritter:"+getTypeCritter());
 //		typeCritter=getType();
 	
 	}
@@ -25,8 +25,9 @@ public class critter extends Game
 	//when critters are inspected
 	public void inspect()
 	{
-		System.out.println("Speed is:"+this.speed+
-				            "   Health is:"+this.health);
+		System.out.println("Speed is : "+this.speed+
+				            " \nHealth is : "+this.health
+				            +"\nCritter's Type : "+getTypeCritter());
 	}
 
 	
@@ -39,8 +40,9 @@ public class critter extends Game
 		this.health=this.health-damage;
 		if(this.health<=0)
 		{
-			notifyAllObservers();
-			//changeMyMoney(10.0);	
+			Game.myMoney.changeMoney(typeCritter*3);
+			
+			
 			//reward player money
 			//call method to increment amount of money of player
 		}		
@@ -60,15 +62,8 @@ public class critter extends Game
 	//we have to minus one life and remove the critter
 	//according to the description we have to decrease amount of money of player
 	//proportional to strength of critter
-	public void minuslife()
-	{
-		this.onPath=false;	
 	
-		decrementLife(1);
-		notifyAllObservers();
-		//call a method to decrement life of player
-	}
-	public boolean onPath()
+	public boolean alive()
 	{
 		if(health==0)
 		{
@@ -79,12 +74,18 @@ public class critter extends Game
 			return true;
 		}
 	}
-	public void move()
+	public void move(double positionX,double positionY)
 	{
 		if ( speed!=0 && health!=0 )
 		{
 			//change positionx and positiony according to the set up of the path
 			// increment one tile then multipy by speed		
 		}
+		if(positionX==10 && positionY==10)//suppose end point
+		{
+			Game.myLife.decreaseLife(1);
+			Game.myMoney.changeMoney(-typeCritter*3);
+		}
 	}
+
 }
