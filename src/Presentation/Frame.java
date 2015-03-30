@@ -1,10 +1,5 @@
 package Presentation;
 
-/*
- * Classes Related to this example
- * Screen.java
- * Room.java
- */
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -33,29 +28,35 @@ public class Frame extends JFrame implements KeyListener, ActionListener{
 	private MapGrid mG;
 	// http://docs.oracle.com/javase/7/docs/api/java/awt/GridBagConstraints.html
 	private GridBagConstraints gbc = new GridBagConstraints();
-	ScrollPane scrollSection;
-	JPanel editorOptions;
-	JPanel blankPanel;
-	JLabel lRows;
-	JLabel lColumns;
-	JTextField tRows;
-	JTextField tColumns;
+	private ScrollPane scrollSection;
+	private JPanel editorOptions;
+	private JPanel blankPanel;
+	private JPanel nothing;
+	
+	private JLabel lRows;
+	private JLabel lColumns;
+	private JLabel lMapName;
+	
+	private JTextField tRows;
+	private JTextField tColumns;
+	private JTextField tMapName;
+	
+	private final int sizeofSplit = 200;
 	private int rows;
 	private int columns;
-	JButton confirm;
+	private int realHeight, realWidth;
+	
+	private JButton confirm;
 	private JButton finalize;
-	int sizeofSplit = 200;
-	SplitPane sP;
-	JPanel nothing;
+	private JButton save;
+	private JButton open;
+	
 	private boolean valid = false;
-	int realHeight, realWidth;
+	
 	// Try to add this to the layout:
 	// http://docs.oracle.com/javase/tutorial/uiswing/components/splitpane.html
-	Map myMap;
-	
-	
-	
-	
+	private SplitPane sP;
+	private Map myMap;
 	
 	public Frame(){
 		setTitle(APPNAME);
@@ -129,6 +130,8 @@ public class Frame extends JFrame implements KeyListener, ActionListener{
 		lColumns = new JLabel("Columns: ");
 		tRows = new JTextField("10");
 		tColumns = new JTextField("10");
+		lMapName = new JLabel("Map Name: ");
+		tMapName = new JTextField("Map 1");
 		
 		confirm = new JButton("OK");
 		confirm.addActionListener(this);
@@ -136,6 +139,11 @@ public class Frame extends JFrame implements KeyListener, ActionListener{
 		finalize = new JButton("Done");
 		finalize.addActionListener(this);
 		
+		save = new JButton("Save");
+		save.addActionListener(this);
+		
+		open = new JButton("Open");
+		open.addActionListener(this);
 		
 		gbc.weightx = 1.0; // Makes it take up whole horizontal area
 		//gbc.weighty = 1.0; // Makes it take up whole vertical area
@@ -157,19 +165,37 @@ public class Frame extends JFrame implements KeyListener, ActionListener{
 		gbc.gridy = 1;
 		editorOptions.add(tColumns,gbc);
 		
-		gbc.fill = GridBagConstraints.HORIZONTAL;
 		gbc.gridx = 0;
 		gbc.gridy = 2;
+		editorOptions.add(lMapName,gbc);
+		
+		gbc.gridx = 1;
+		gbc.gridy = 2;
+		editorOptions.add(tMapName,gbc);
+		
+		gbc.fill = GridBagConstraints.HORIZONTAL;
+		gbc.gridx = 0;
+		gbc.gridy = 3;
 		gbc.gridwidth = 2; // So that it covers two columns
 		editorOptions.add(confirm, gbc);
 		
 		gbc.fill=GridBagConstraints.HORIZONTAL;
 		gbc.gridx=0;
-		gbc.gridy=3;
+		gbc.gridy=4;
 		gbc.gridwidth=2;
 		editorOptions.add(finalize, gbc);
 		
+		gbc.fill=GridBagConstraints.HORIZONTAL;
+		gbc.gridx=0;
+		gbc.gridy=5;
+		gbc.gridwidth=2;
+		editorOptions.add(save, gbc);
 		
+		gbc.fill=GridBagConstraints.HORIZONTAL;
+		gbc.gridx=0;
+		gbc.gridy=6;
+		gbc.gridwidth=2;
+		editorOptions.add(open, gbc);
 		/*
 		gbc.gridx = 0;
 		gbc.gridy= 3;
@@ -289,6 +315,16 @@ public class Frame extends JFrame implements KeyListener, ActionListener{
 
 
 		
+		}
+		
+		else if(e.getActionCommand()=="Save"){
+			
+			System.out.println("Time to Save a Map!");
+		}
+		
+		else if(e.getActionCommand()=="Open"){
+			
+			System.out.println("Time to Open a Map!");
 		}
 	}
 	
