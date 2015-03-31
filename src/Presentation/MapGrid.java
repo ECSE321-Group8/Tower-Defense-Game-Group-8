@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import Logic.Map;
+import Logic.Path;
 
 public class MapGrid extends JPanel implements MouseListener{
 	
@@ -16,6 +17,7 @@ public class MapGrid extends JPanel implements MouseListener{
 	private boolean startSet;
 	private int [][] tempGrid; 
 	private int xcor,ycor, xOffset, yOffset;
+	private boolean completedView = false;
 	
 	private boolean start = true;
 	
@@ -54,7 +56,7 @@ public class MapGrid extends JPanel implements MouseListener{
 
 	private void drawGrid(Graphics g) {
 		// TODO Auto-generated method stub
-		
+		Path tempPath;
 		g.clearRect(0, 0, getWidth(), getHeight()); // Clear the screen
 		
 		for(int i=0;i<gridColumns;i++){
@@ -62,14 +64,21 @@ public class MapGrid extends JPanel implements MouseListener{
 				// g.drawRect(i*gridSize, j*gridSize, gridSize, gridSize);
 				//MAP GRID (LOGIC)
 				if(myMap.getGrid(j, i)==null){
-					
 					g.setColor(Color.WHITE);
 					g.fillRect(i*gridSize+xOffset, j*gridSize+yOffset, gridSize, gridSize);
 
 				}
 				else if(myMap.getGrid(j, i).isPath()){
-					g.setColor(Color.BLUE);
-					g.fillRect(i*gridSize+xOffset, j*gridSize+yOffset, gridSize, gridSize);
+					tempPath = (Path)myMap.getGrid(j, i);
+					if(tempPath.getPos()!=myMap.getCurrentPos()||completedView){
+						g.setColor(Color.BLUE);
+						g.fillRect(i*gridSize+xOffset, j*gridSize+yOffset, gridSize, gridSize);
+					}
+					else{
+						// To show the current position of the path
+						g.setColor(Color.YELLOW);
+						g.fillRect(i*gridSize+xOffset, j*gridSize+yOffset, gridSize, gridSize);
+					}
 				}
 				else{
 					g.setColor(Color.GREEN);
@@ -79,9 +88,20 @@ public class MapGrid extends JPanel implements MouseListener{
 				g.drawRect(i*gridSize+xOffset, j*gridSize+yOffset, gridSize, gridSize);
 			}
 		}
+		
+		// how polygons are drawn
+		/*
+		int xpoints[] = {0,10,0};
+		int ypoints[] = {0,10,20};
+		g.drawPolygon(xpoints, ypoints, 3);
+		*/
 	}
 	
 	
+	public void setCompletedView(boolean completedView) {
+		this.completedView = completedView;
+	}
+
 	public int getXcor() {
 		return xcor;
 	}
@@ -137,8 +157,11 @@ public class MapGrid extends JPanel implements MouseListener{
 
 			if (myMap.getGrid(xcor,ycor)==null)//||myMap.getGrid(ycor, xcor).isScenery())
 				myMap.setCellToPath(xcor*Map.getWidth()+ycor);
-			else if(myMap.getGrid(xcor, ycor).isPath())
-					myMap.deleteLastPathTile();
+			else if(myMap.getGrid(xcor, ycor).isPath()){
+				myMap.deleteLastPathTile();
+				setCompletedView(false);
+			}
+				
 			else	{
 				
 			}		

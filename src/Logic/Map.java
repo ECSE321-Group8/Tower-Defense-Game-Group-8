@@ -66,6 +66,10 @@ public class Map {
 	}
 	
 	
+	public int getCurrentPos() {
+		return currentPos;
+	}
+
 	//GRID
 	public static void setGrid(int y, int x, Tile k){
 		grid[y][x]=k;

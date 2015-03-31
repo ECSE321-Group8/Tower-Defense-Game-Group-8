@@ -309,10 +309,11 @@ public class Frame extends JFrame implements KeyListener, ActionListener{
 			System.out.println("I AM DONE");
 		
 		myMap.finalizePath();
+		mG.setCompletedView(true);
 		mG.repaint();
 		myMap.printPath();
 		myMap.printGrid();
-
+		
 
 		
 		}
