@@ -18,6 +18,8 @@ public class MapGrid extends JPanel implements MouseListener{
 	private int [][] tempGrid; 
 	private int xcor,ycor, xOffset, yOffset;
 	private boolean completedView = false;
+	private int xpoints[] = new int[3]; // three points for triangles
+	private int ypoints[] = new int[3];
 	
 	private boolean start = true;
 	
@@ -73,6 +75,7 @@ public class MapGrid extends JPanel implements MouseListener{
 					if(tempPath.getPos()!=myMap.getCurrentPos()||completedView){
 						g.setColor(Color.BLUE);
 						g.fillRect(i*gridSize+xOffset, j*gridSize+yOffset, gridSize, gridSize);
+						drawTriangle(0, i, j, g);
 					}
 					else{
 						// To show the current position of the path
@@ -95,6 +98,25 @@ public class MapGrid extends JPanel implements MouseListener{
 		int ypoints[] = {0,10,20};
 		g.drawPolygon(xpoints, ypoints, 3);
 		*/
+	}
+	
+	public void drawTriangle(int exitPoint, int icoor, int jcoor, Graphics g){
+		switch(exitPoint){
+			case 0:
+				xpoints[0] = icoor*gridSize+xOffset+(gridSize)/4;
+				ypoints[0] = jcoor*gridSize+yOffset+(gridSize)/4;
+				xpoints[1] = xpoints[0] + gridSize/4;
+				ypoints[1] = ypoints[0] + gridSize/4;
+				xpoints[2] = xpoints[0];
+				ypoints[2] = ypoints[1] + gridSize/4;
+		}
+		/*
+		for(int i=0;i<xpoints.length;i++){
+			System.out.println(xpoints[i]+ " " + ypoints[i]);
+		}
+		*/
+		g.setColor(Color.BLACK); // Always set a color before drawing
+		g.drawPolygon(xpoints, ypoints, 3);
 	}
 	
 	
