@@ -461,6 +461,10 @@ public class Map {
 		String path = new File (".").getAbsolutePath();
 		String fileName=path.concat("//Maps//"+name+".txt");
 		File file = new File(fileName);
+		Map m=Map.getInstance();
+		m=null;
+		m=Map.getInstance();
+		
 		
 		try {
 			ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(file));
@@ -468,15 +472,18 @@ public class Map {
 			int height=inputStream.readInt();
 			System.out.println("width: "+width);
 			System.out.println("height: "+height);
-			int pathPos=0;
+			m.setMap(height, width);
+			int pathPos=inputStream.readInt();
 			System.out.println("The Path is:");
 			while(pathPos>=0){
-				pathPos=inputStream.readInt();
+				m.setCellToPath(pathPos);
 				System.out.println(pathPos);
-				
+				pathPos=inputStream.readInt();
+
 			}
 			inputStream.close();
-			
+			m.finalizePath();
+			m.setRemainingToScenery();
 		
 		
 		
