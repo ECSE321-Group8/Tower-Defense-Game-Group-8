@@ -190,6 +190,7 @@ public class MapTest {
 		m.saveMap("test2");
 		System.out.println("done saving");
 
+
 		m.deleteLastPathTile();
 		m.setCellToPath(23);
 		m.setCellToPath(24);
@@ -199,9 +200,7 @@ public class MapTest {
 		m.printGrid();
 		m.saveMap("test3");
 		System.out.println("done saving");
-		
-		
-		
+
 	}
 
 }

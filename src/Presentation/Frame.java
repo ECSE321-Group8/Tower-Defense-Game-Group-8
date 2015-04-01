@@ -319,12 +319,12 @@ public class Frame extends JFrame implements KeyListener, ActionListener{
 		}
 		
 		else if(e.getActionCommand()=="Save"){
-			
+			myMap.saveMap(tMapName.getText());
 			System.out.println("Time to Save a Map!");
 		}
 		
 		else if(e.getActionCommand()=="Open"){
-			
+			myMap.openMap(tMapName.getText());
 			System.out.println("Time to Open a Map!");
 		}
 	}
