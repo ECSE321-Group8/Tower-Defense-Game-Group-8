@@ -77,6 +77,8 @@ public class MapGrid extends JPanel implements MouseListener{
 						g.fillRect(i*gridSize+xOffset, j*gridSize+yOffset, gridSize, gridSize);
 						// drawTriangle(3, i, j, g); // Testing to see if each case works
 						drawTriangle(tempPath.getDirection(tempPath.getExit()), i, j, g); // Drawing triangle to show direction of path
+						// http://forum.processing.org/one/topic/the-opposite-of-a-color.html
+						// Link for complementary color calculation
 					}
 					else{
 						// To show the current position of the path

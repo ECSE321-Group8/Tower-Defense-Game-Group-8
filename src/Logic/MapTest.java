@@ -191,6 +191,7 @@ public class MapTest {
 		System.out.println("done saving");
 		m.openMap("test2");
 		System.out.println("opening");
+		m.printGrid();
 		
 	}
 
