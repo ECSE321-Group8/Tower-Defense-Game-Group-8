@@ -1,6 +1,11 @@
 package Logic;
 import static org.junit.Assert.*;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -13,6 +18,8 @@ public class MapTest {
 	public void setUp()throws Exception{
 		m=Map.getInstance();
 		m.setMap(5,5);	
+		
+		
 	}
 	
 
@@ -177,6 +184,14 @@ public class MapTest {
 			m.printPath();
 			System.out.println();
 			m.printGrid();
+			
+			
+//STEP #8 : SAVING CREATED MAP
+		m.saveMap("test2");
+		System.out.println("done saving");
+		m.openMap("test2");
+		System.out.println("opening");
+		
 	}
 
 }

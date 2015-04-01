@@ -3,6 +3,10 @@ package Logic;
 public class Path extends Tile{
 	
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	//privacy of the attributes might change 
 	//Attributes of the tile itself
 	public int entry;

@@ -1,4 +1,5 @@
 package Logic;
+import java.io.*;
 import java.util.LinkedList;
 import java.util.ListIterator;
 
@@ -422,4 +423,71 @@ public class Map {
 			return PathType.noDirection;//error
 		}
 	}	
+	
+	
+	//SAVE MAP
+	
+	public void saveMap(String name){
+		String path = new File (".").getAbsolutePath();
+		//System.out.println(path);
+		ObjectOutputStream outputStream;
+		
+		String fileName=path.concat("//Maps//"+name+".txt");
+		File file = new File(fileName);
+	
+		
+		try {
+			outputStream = new ObjectOutputStream(new FileOutputStream(file));
+			outputStream.writeInt(getWidth());
+			outputStream.writeInt(getHeight());
+			
+			for (Path p : temp){
+				outputStream.writeInt(p.getPos());
+			}
+			outputStream.writeInt(-1);
+			
+			outputStream.flush();
+			outputStream.close();
+			
+			
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void openMap(String name){
+		String path = new File (".").getAbsolutePath();
+		String fileName=path.concat("//Maps//"+name+".txt");
+		File file = new File(fileName);
+		
+		try {
+			ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(file));
+			int width=inputStream.readInt();
+			int height=inputStream.readInt();
+			System.out.println("width: "+width);
+			System.out.println("height: "+height);
+			int pathPos=0;
+			System.out.println("The Path is:");
+			while(pathPos>=0){
+				pathPos=inputStream.readInt();
+				System.out.println(pathPos);
+				
+			}
+			inputStream.close();
+			
+		
+		
+		
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
 }

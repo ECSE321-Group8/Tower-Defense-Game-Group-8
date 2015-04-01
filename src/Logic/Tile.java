@@ -1,7 +1,12 @@
 package Logic;
 
-public abstract class Tile {
+
+public abstract class Tile{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int pos;
 	
 	public int getPos(){
