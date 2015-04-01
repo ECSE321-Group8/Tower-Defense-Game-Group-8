@@ -75,7 +75,8 @@ public class MapGrid extends JPanel implements MouseListener{
 					if(tempPath.getPos()!=myMap.getCurrentPos()||completedView){
 						g.setColor(Color.BLUE);
 						g.fillRect(i*gridSize+xOffset, j*gridSize+yOffset, gridSize, gridSize);
-						drawTriangle(0, i, j, g);
+						// drawTriangle(3, i, j, g); // Testing to see if each case works
+						drawTriangle(tempPath.getDirection(tempPath.getExit()), i, j, g); // Drawing triangle to show direction of path
 					}
 					else{
 						// To show the current position of the path
@@ -102,13 +103,44 @@ public class MapGrid extends JPanel implements MouseListener{
 	
 	public void drawTriangle(int exitPoint, int icoor, int jcoor, Graphics g){
 		switch(exitPoint){
+			// North
 			case 0:
 				xpoints[0] = icoor*gridSize+xOffset+(gridSize)/4;
-				ypoints[0] = jcoor*gridSize+yOffset+(gridSize)/4;
+				ypoints[0] = jcoor*gridSize+yOffset+3*(gridSize)/4;
 				xpoints[1] = xpoints[0] + gridSize/4;
+				ypoints[1] = ypoints[0] - gridSize/2;
+				xpoints[2] = xpoints[1] + gridSize/4;
+				ypoints[2] = ypoints[0];
+				break;
+			// East
+			case 1:
+				xpoints[0] = icoor*gridSize+xOffset+(gridSize)/4;
+				ypoints[0] = jcoor*gridSize+yOffset+(gridSize)/4;
+				xpoints[1] = xpoints[0] + gridSize/2;
 				ypoints[1] = ypoints[0] + gridSize/4;
 				xpoints[2] = xpoints[0];
 				ypoints[2] = ypoints[1] + gridSize/4;
+				break;
+			// South
+			case 2:
+				xpoints[0] = icoor*gridSize+xOffset+(gridSize)/4;
+				ypoints[0] = jcoor*gridSize+yOffset+(gridSize)/4;
+				xpoints[1] = xpoints[0] + gridSize/2;
+				ypoints[1] = ypoints[0];
+				xpoints[2] = xpoints[0] + gridSize/4;
+				ypoints[2] = ypoints[0] + gridSize/2;
+				break;
+			// West (Enter correct logic)
+			case 3:
+				xpoints[0] = icoor*gridSize+xOffset+3*(gridSize)/4;
+				ypoints[0] = jcoor*gridSize+yOffset+(gridSize)/4;
+				xpoints[1] = xpoints[0];
+				ypoints[1] = ypoints[0] + gridSize/2;
+				xpoints[2] = xpoints[0] - gridSize/2;
+				ypoints[2] = ypoints[0] + gridSize/4;
+				break;
+			default:
+				break;
 		}
 		/*
 		for(int i=0;i<xpoints.length;i++){
