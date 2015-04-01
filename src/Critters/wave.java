@@ -39,6 +39,7 @@ public class wave extends Subject{
 		return numberOfCritters;
 	}
 	public void decrementCritter() {
+		//you need to know which critter has been hit!! 
 		numberOfCritters--;
 		notifyAllObservers();
 	//	wavelist.

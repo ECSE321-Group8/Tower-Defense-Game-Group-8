@@ -189,8 +189,18 @@ public class MapTest {
 //STEP #8 : SAVING CREATED MAP
 		m.saveMap("test2");
 		System.out.println("done saving");
-		m.openMap("test2");
-		System.out.println("opening");
+
+		m.deleteLastPathTile();
+		m.setCellToPath(23);
+		m.setCellToPath(24);
+		m.setCellToPath(19);
+		m.finalizePath();
+		m.setRemainingToScenery();
+		m.printGrid();
+		m.saveMap("test3");
+		System.out.println("done saving");
+		
+		
 		
 	}
 

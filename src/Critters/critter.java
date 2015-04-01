@@ -86,7 +86,7 @@ public class critter {
 		if(positionX==10 && positionY==10)//suppose end point
 		{
 			Game.myLife.decreaseLife(1);
-			Game.myMoney.changeMoney(-typeCritter*3);
+			//Game.myMoney.changeMoney(-typeCritter*3);//I DONT THINK WE LOOSE MONEY !! 
 			Game.myWave.decrementCritter();
 		}
 	}

@@ -430,14 +430,16 @@ public class Map {
 	public void saveMap(String name){
 		String path = new File (".").getAbsolutePath();
 		//System.out.println(path);
-		ObjectOutputStream outputStream;
+		ObjectOutputStream outputStream=null;
 		
 		String fileName=path.concat("//Maps//"+name+".txt");
 		File file = new File(fileName);
+		
 	
 		
 		try {
-			outputStream = new ObjectOutputStream(new FileOutputStream(file));
+			FileOutputStream fileOutputStream =new FileOutputStream(file);
+			outputStream = new ObjectOutputStream(fileOutputStream);
 			outputStream.writeInt(getWidth());
 			outputStream.writeInt(getHeight());
 			
@@ -446,6 +448,7 @@ public class Map {
 			}
 			outputStream.writeInt(-1);
 			
+			fileOutputStream.close();
 			outputStream.flush();
 			outputStream.close();
 			
@@ -455,36 +458,45 @@ public class Map {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+
 	}
 	
 	public void openMap(String name){
+		ObjectInputStream inputStream=null;
 		String path = new File (".").getAbsolutePath();
 		String fileName=path.concat("//Maps//"+name+".txt");
 		File file = new File(fileName);
 		Map m=Map.getInstance();
-		m=null;
-		m=Map.getInstance();
-		
+		Map.temp = new LinkedList<Path>();
+
 		
 		try {
-			ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(file));
+			FileInputStream fileInputStream=new FileInputStream(file);
+			inputStream = new ObjectInputStream(fileInputStream);
 			int width=inputStream.readInt();
 			int height=inputStream.readInt();
-		//	System.out.println("width: "+width);
-		//	System.out.println("height: "+height);
+//			System.out.println("width: "+width);
+//			System.out.println("height: "+height);
+
 			m.setMap(height, width);
-			int pathPos=inputStream.readInt();
-		//	System.out.println("The Path is:");
-			while(pathPos>=0){
-				m.setCellToPath(pathPos);
-		//		System.out.println(pathPos);
-				pathPos=inputStream.readInt();
+			
+			m.setCompletePath(false);
+			m.currentPos=-1;
+			m.currentPath=null;
+			int pPos=0;
+			pPos=inputStream.readInt();
+
+			//System.out.println("The Path is:");
+			while(pPos>=0){
+				m.setCellToPath(pPos);
+			//	System.out.println(pPos);
+				pPos=inputStream.readInt();
 
 			}
+			fileInputStream.close();
 			inputStream.close();
 			m.finalizePath();
-			m.setRemainingToScenery();
-		
+	
 		
 		
 		} catch (FileNotFoundException e) {
