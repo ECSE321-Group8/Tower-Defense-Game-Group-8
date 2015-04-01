@@ -470,14 +470,14 @@ public class Map {
 			ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(file));
 			int width=inputStream.readInt();
 			int height=inputStream.readInt();
-			System.out.println("width: "+width);
-			System.out.println("height: "+height);
+		//	System.out.println("width: "+width);
+		//	System.out.println("height: "+height);
 			m.setMap(height, width);
 			int pathPos=inputStream.readInt();
-			System.out.println("The Path is:");
+		//	System.out.println("The Path is:");
 			while(pathPos>=0){
 				m.setCellToPath(pathPos);
-				System.out.println(pathPos);
+		//		System.out.println(pathPos);
 				pathPos=inputStream.readInt();
 
 			}
