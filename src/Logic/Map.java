@@ -235,6 +235,10 @@ public class Map {
 			}
 		}
 	}
+	
+	/**
+	 * Sets a tile that was initialize as Scenery to Null 
+	 */
 	public void removeScenery(){
 		for(int i=0;i<grid.length;i++){
 			for(int j=0;j<grid[0].length;j++){
@@ -425,7 +429,7 @@ public class Map {
 	}	
 	
 	
-	//SAVE MAP
+	//SAVE/OPEN MAP
 	/**
 	 * Method that saves the size and path of a Map. 
 	 * The name given is also saved. 
@@ -607,7 +611,7 @@ public class Map {
 	/**
 	 * Will check if a name has already been used to store a Map 
 	 * @param name: that will be validated 
-	 * @return true if the name has ben used before. 
+	 * @return true if the name has been used before. 
 	 */
 	public boolean nameAlreadyExists(String name){
 		FileReader r;
