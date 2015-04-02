@@ -187,7 +187,7 @@ public class MapTest {
 			
 			
 //STEP #8 : SAVING CREATED MAP
-		m.saveMap("test2");
+		m.saveMap("test4");
 		System.out.println("done saving");
 
 
@@ -198,7 +198,7 @@ public class MapTest {
 		m.finalizePath();
 		m.setRemainingToScenery();
 		m.printGrid();
-		m.saveMap("test3");
+		m.saveMap("test5");
 		System.out.println("done saving");
 
 	}
