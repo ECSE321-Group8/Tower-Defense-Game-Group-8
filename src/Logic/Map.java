@@ -453,15 +453,17 @@ public class Map {
 			
 			
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+			System.out.println("Problem opening the file "+name+".txt");
+			//e.printStackTrace();
 		} catch (IOException e) {
-			e.printStackTrace();
+			System.out.println("Problem with output to file "+name+".txt");
+			//e.printStackTrace();
 		}
 
 	}
 	
 	public void openMap(String name){
-		ObjectInputStream inputStream=null;
+		ObjectInputStream inputStream;
 		String path = new File (".").getAbsolutePath();
 		String fileName=path.concat("//Maps//"+name+".txt");
 		File file = new File(fileName);
@@ -498,11 +500,11 @@ public class Map {
 		
 		
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("Problem opening the file "+ name+".txt");
+		//	e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("Problem reading the file"+ name+".txt");
+		//	e.printStackTrace();
 		}
 		
 	}
