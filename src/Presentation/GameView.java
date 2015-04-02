@@ -11,6 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.LinkedList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -31,10 +32,12 @@ public class GameView extends JFrame implements KeyListener, ActionListener {
 	private JPanel gameOptions;
 	private JPanel mainPanel;
 	private JPanel options;
+	private JPanel opening;
+	private JPanel mapEditing;
 	private JPanel towerInfo;
 	private JPanel critterInfo;
 	private CardLayout layout;
-	private String [] cardLayoutLabels = new String [3]; 
+	private LinkedList<String> cardLayoutLabels = new <String>LinkedList(); 
 	// http://www.tutorialspoint.com/awt/awt_cardlayout.htm
 	// https://docs.oracle.com/javase/tutorial/uiswing/layout/card.html
 	
@@ -44,20 +47,31 @@ public class GameView extends JFrame implements KeyListener, ActionListener {
 	// http://stackoverflow.com/questions/2788080/reading-a-text-file-in-java
 	
 	private JLabel lMapName;
+	private JLabel lRows;
+	private JLabel lColumns;
 	
 	private JTextField tMapName;
+	private JTextField tRows;
+	private JTextField tColumns;
 	
 	private final int sizeofSplit = 200;
 	private int realHeight, realWidth;
 	private int changeCounter = 0;
 	
+	private JButton newMap;
 	private JButton open;
 	private JButton change;
 	private JButton towerb;
 	private JButton critterb;
+	private JButton start;
+	private JButton finalize;
+	private JButton save;
+	private JButton back;
+	private JButton edit;
 	
 	private SplitPane sP;
 	private Map myMap;
+
 	
 	public GameView(){
 		setTitle(APPNAME);
@@ -88,8 +102,18 @@ public class GameView extends JFrame implements KeyListener, ActionListener {
 		towerInfo.setLayout(new GridBagLayout());
 		critterInfo = new JPanel();
 		critterInfo.setLayout(new GridBagLayout());
+		mapEditing = new JPanel();
+		mapEditing.setLayout(new GridBagLayout());
+		opening = new JPanel();
+		opening.setLayout(new GridBagLayout());
+		
 		layout = new CardLayout();
 		options.setLayout(layout);
+		
+		lRows = new JLabel("Rows: ");
+		lColumns = new JLabel("Columns: ");
+		tRows = new JTextField("10");
+		tColumns = new JTextField("10");
 		
 		open = new JButton("Open");
 		open.addActionListener(this);
@@ -100,24 +124,107 @@ public class GameView extends JFrame implements KeyListener, ActionListener {
 		critterb = new JButton("Critter Button");
 		critterb.addActionListener(this);
 		
+		newMap = new JButton("New Map");
+		newMap.addActionListener(this);
+		
+		start = new JButton("Start");
+		start.addActionListener(this);
+		
+		finalize = new JButton("Done");
+		finalize.addActionListener(this);
+		finalize.setEnabled(false); // Only can do so after Map Size Set
+		
+		save = new JButton("Save");
+		save.addActionListener(this);
+		save.setEnabled(false);// Only want to be able to press after started making Map
+		
+		back = new JButton("Back");
+		back.addActionListener(this);
+		
+		edit = new JButton("Edit");
+		edit.addActionListener(this);
+		
 		gbc.weightx = 1.0;
 		gbc.fill = GridBagConstraints.HORIZONTAL;
 		gbc.gridx = 0;
 		gbc.gridy = 0;
 		
-		gameOptions.add(open,gbc);
+		gameOptions.add(newMap,gbc);
 		towerInfo.add(towerb, gbc);
 		critterInfo.add(critterb, gbc);
+		
+		// Setting up the Map Editing View
+		
+		gbc.fill = GridBagConstraints.HORIZONTAL;
+		gbc.gridx = 0;
+		gbc.gridy = 0;
+		
+		mapEditing.add(lRows, gbc);
+		
+		gbc.fill = GridBagConstraints.HORIZONTAL;
+		gbc.gridx = 1;
+		gbc.gridy = 0;
+		
+		mapEditing.add(tRows,gbc);
+		
+		gbc.fill = GridBagConstraints.HORIZONTAL;
+		gbc.gridx = 0;
+		gbc.gridy = 1;
+		
+		mapEditing.add(lColumns, gbc);
+		
+		gbc.fill = GridBagConstraints.HORIZONTAL;
+		gbc.gridx = 1;
+		gbc.gridy = 1;
+		
+		mapEditing.add(tColumns,gbc);
+		
+		// gbc.fill = GridBagConstraints.HORIZONTAL;
+		gbc.gridx = 0;
+		gbc.gridy = 2;
+		gbc.gridwidth = 2;
+		
+		mapEditing.add(start,gbc);
+		
+		// gbc.fill = GridBagConstraints.HORIZONTAL;
+		gbc.gridx = 0;
+		gbc.gridy = 3;
+		gbc.gridwidth = 2;
+		
+		mapEditing.add(edit,gbc);
+		
+		// gbc.fill = GridBagConstraints.HORIZONTAL;
+		gbc.gridx = 0;
+		gbc.gridy = 4;
+		gbc.gridwidth = 2;
+		
+		mapEditing.add(save,gbc);
+		
+		// gbc.fill = GridBagConstraints.HORIZONTAL;
+		gbc.gridx = 0;
+		gbc.gridy = 5;
+		gbc.gridwidth = 2;
+		
+		mapEditing.add(back,gbc);
+		// The Main Menu
+		
+		gbc.gridx = 0;
+		gbc.gridy = 1;
+		gbc.fill = GridBagConstraints.HORIZONTAL;
+		
+		gameOptions.add(open,gbc);
 		
 		options.add("Game",gameOptions);
 		options.add("Tower", towerInfo);
 		options.add("Critter", critterInfo);
+		options.add("Editing", mapEditing);
 		
-		cardLayoutLabels[0] = "Game";
-		cardLayoutLabels[1] = "Tower";
-		cardLayoutLabels[2] = "Critter";
+		cardLayoutLabels.add("Game");
+		cardLayoutLabels.add("Tower");
+		cardLayoutLabels.add("Critter");
+		cardLayoutLabels.add("Editing");
 		
-		layout.show(options, cardLayoutLabels[0]);
+		layout.show(options, "Game");
 		setVisible(true);
 	}
 
@@ -139,10 +246,11 @@ public class GameView extends JFrame implements KeyListener, ActionListener {
 		if(e.getActionCommand() == "Change"){
 			System.out.println("Changed!");
 			changeCounter++;
-			if(changeCounter>2){
+			if(changeCounter>cardLayoutLabels.size()-1){
 				changeCounter = 0;
 			}
-			layout.show(options, cardLayoutLabels[changeCounter]);
+			layout.show(options, cardLayoutLabels.get(changeCounter));
+			setVisible(true);
 		}
 		else if(e.getActionCommand()== "Open"){
 			System.out.println("Pressed Open");

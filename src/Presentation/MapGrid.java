@@ -260,6 +260,9 @@ public class MapGrid extends JPanel implements MouseListener{
 		
 	}
 	
+	
+	// TODO Need to change the way dimensions are taken;
+	// Different case for when we open a file or a new map
 	public void setDimensions(int gridRows, int gridColumns){
 		this.gridRows = gridRows;
 		this.gridColumns = gridColumns;

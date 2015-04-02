@@ -122,7 +122,7 @@ public class Frame extends JFrame implements KeyListener, ActionListener{
 		
 		scrollSection = new ScrollPane();
 		
-		editorOptions = new JPanel();
+		editorOptions  =new JPanel();
 		// http://www.tutorialspoint.com/awt/awt_gridbaglayout.htm
 		editorOptions.setLayout(new GridBagLayout());
 		
