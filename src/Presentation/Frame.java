@@ -325,6 +325,8 @@ public class Frame extends JFrame implements KeyListener, ActionListener{
 		
 		else if(e.getActionCommand()=="Open"){
 			myMap.openMap(tMapName.getText());
+			mG.repaint();
+			myMap.printGrid();
 			System.out.println("Time to Open a Map!");
 		}
 	}
