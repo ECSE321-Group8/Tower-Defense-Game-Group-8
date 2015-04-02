@@ -196,7 +196,6 @@ public class MapTest {
 		m.setCellToPath(24);
 		m.setCellToPath(19);
 		m.finalizePath();
-		m.setRemainingToScenery();
 		m.printGrid();
 		m.saveMap("test5");
 		System.out.println("done saving");

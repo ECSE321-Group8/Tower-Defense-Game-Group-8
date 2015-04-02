@@ -448,7 +448,6 @@ public class Map {
 			}
 			outputStream.writeInt(-1);
 			
-			fileOutputStream.close();
 			outputStream.flush();
 			outputStream.close();
 			
@@ -493,7 +492,6 @@ public class Map {
 				pPos=inputStream.readInt();
 
 			}
-			fileInputStream.close();
 			inputStream.close();
 			m.finalizePath();
 	
