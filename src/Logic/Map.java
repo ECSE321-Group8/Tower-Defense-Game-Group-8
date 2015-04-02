@@ -426,7 +426,12 @@ public class Map {
 	
 	
 	//SAVE MAP
-	
+	/**
+	 * Method that saves the size and path of a Map. 
+	 * The name given is also saved. 
+	 * If the name already exists, it doesn't overwrite the file. 
+	 * @param name: given 
+	 */
 	public void saveMap(String name){
 		String path = new File (".").getAbsolutePath();
 		//System.out.println(path);
@@ -464,6 +469,12 @@ public class Map {
 
 	}
 	
+	/**
+	 * Open a given Map 
+	 * If the Map is not found, nothing is open.
+	 * @param name: name given to the Map 
+	 * 
+	 */
 	public void openMap(String name){
 		ObjectInputStream inputStream;
 		String path = new File (".").getAbsolutePath();
@@ -512,7 +523,11 @@ public class Map {
 		
 
 	}
-
+	/**
+	 * Stores the name given to a Map
+	 * If the name already exists, it doesn't rewrite it. 
+	 * @param name: give to the map. 
+	 */
 	public void saveMapName( String name){
 		
 		if(!nameAlreadyExists(name)){
@@ -530,7 +545,11 @@ public class Map {
 		else
 			return;
 	}
-	
+	/**
+	 * will delete the map name from records. 
+	 * If the name does not exits on the records, it will do nothing. 
+	 * @param name: of the map that will be deleted 
+	 */
 	public void deleteMapName(String name){
 		LinkedList<String> names=new LinkedList<String>();
 		boolean present = false;
@@ -585,6 +604,11 @@ public class Map {
 		
 	}
 	
+	/**
+	 * Will check if a name has already been used to store a Map 
+	 * @param name: that will be validated 
+	 * @return true if the name has ben used before. 
+	 */
 	public boolean nameAlreadyExists(String name){
 		FileReader r;
 		try {
