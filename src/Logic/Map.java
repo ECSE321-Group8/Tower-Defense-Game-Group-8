@@ -15,6 +15,9 @@ public class Map {
 	private Path entryPoint; // Entry point
 	private Path exitPoint; // Exit point
 	
+	
+	
+	
 	//Path variables
 	private static boolean completePath=false;
 	int currentPos=-1;
@@ -31,6 +34,10 @@ public class Map {
 			instanceMap=new Map();
 		return instanceMap;
 	}
+	
+	
+	
+	
 	//SETTERS 
 	public void setMap(int h, int w){
 		height=h;
@@ -47,6 +54,9 @@ public class Map {
 	public void setCompletePath(boolean n){
 		completePath=n;
 	}
+	
+	
+	
 	
 	//GETTERS
 	public int getHeight(){
@@ -65,12 +75,13 @@ public class Map {
 	public boolean getCompletePath(){
 		return completePath;
 	}
-	
-	
 	public int getCurrentPos() {
 		return currentPos;
 	}
 
+	
+	
+	
 	//GRID
 	public static void setGrid(int y, int x, Tile k){
 		grid[y][x]=k;
@@ -80,10 +91,18 @@ public class Map {
 		return grid[y][x];
 	}
 	
+
+	
+	
+	
+	
+	
 	
 	//When setting the path tile to a specific type (if it is an edge, it is type 4)
 	private static int caseEdge=4;
 	
+	
+	//SET TILES TO A SPECIFIC TYPE
 	/**
 	 * This method sets a tile to a specific path type (given title that came before and the one that comes after).
 	 * There is a currentPos variable that points one position ahead (This tile hasn't been given a type yet). 
@@ -248,6 +267,14 @@ public class Map {
 		}
 	}
 		
+	
+	
+	
+	
+	
+	
+	
+	
 	//TESTS
 	/**
 	 * Tests whether a spot is Valid for a specific type of Path Tile
@@ -313,11 +340,6 @@ public class Map {
 		
 	}
 	
-	
-	/*
-	 * THESE TWO METHODS ARE USED FOR TESTING PURPOSES 
-	 * ARE NOT NEEDED IN THE CODE
-	 */
 	/**
 	 * Tests if two path tiles are connected properly
 	 * @param p1: Path Tile 1
@@ -347,6 +369,13 @@ public class Map {
 			return false;
 	}
 	
+	
+	
+	
+	
+	
+	
+	//PRINTING 
 	/**
 	 * Method prints the position of the Path Tiles
 	 */
@@ -381,7 +410,14 @@ public class Map {
 	
 	
 	
-
+	
+	
+	
+	
+	
+	
+	
+	//FACTORY
 	/**
 	 * This is a Path Factory 
 	 * It initializes a Path Tile to certain position
@@ -427,6 +463,13 @@ public class Map {
 			return PathType.noDirection;//error
 		}
 	}	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	//SAVE/OPEN MAP
