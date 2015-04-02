@@ -450,7 +450,7 @@ public class Map {
 			
 			outputStream.flush();
 			outputStream.close();
-			
+			saveMapName(name);
 			
 		} catch (FileNotFoundException e) {
 			System.out.println("Problem opening the file "+name+".txt");
@@ -459,6 +459,8 @@ public class Map {
 			System.out.println("Problem with output to file "+name+".txt");
 			//e.printStackTrace();
 		}
+		
+
 
 	}
 	
@@ -507,6 +509,113 @@ public class Map {
 		//	e.printStackTrace();
 		}
 		
+		
+
 	}
+
+	public void saveMapName( String name){
+		
+		if(!nameAlreadyExists(name)){
+			try {
+				FileWriter w= new FileWriter(new File("mapRecords.txt"),true);
+				w.write(name+"\n");
+				w.write(System.lineSeparator())	;
+				w.flush();
+				w.close();
+			} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			}
+		}
+		else
+			return;
+	}
+	
+	public void deleteMapName(String name){
+		LinkedList<String> names=new LinkedList<String>();
+		boolean present = false;
+		FileReader r;
+		try {
+			r = new FileReader ("mapRecords.txt");
+			BufferedReader b = new BufferedReader (r);
+			String s=b.readLine();
+			
+			while(s!=null){
+				if(s.equals(name))
+					present =true; 
+				
+				names.add(s);
+				s=b.readLine();
+				
+			}
+
+			r.close();
+			b.close();
+			
+			
+		} catch (FileNotFoundException e) {
+			System.out.println("File not found");
+			// TODO Auto-generated catch block
+			//e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			//e.printStackTrace();
+			System.out.println("Can't read file");
+		}
+
+		if (present){
+			names.remove(name);
+			
+			try {
+				FileWriter w= new FileWriter(new File("mapRecords.txt"));
+				for (String n: names){
+					w.write(n+"\n");
+					w.write(System.lineSeparator())	;
+				}	
+				w.flush();
+				w.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				//e.printStackTrace();
+				System.out.println("Can't write to the file");
+			}
+		}
+		else //there is nothing to remove the file is not present 
+			return;
+		
+	}
+	
+	public boolean nameAlreadyExists(String name){
+		FileReader r;
+		try {
+			r = new FileReader ("mapRecords.txt");
+			BufferedReader b = new BufferedReader (r);
+			String s=b.readLine();
+			
+			while(s!=null){
+				if(s.equals(name))
+					return true;
+				else 
+					s=b.readLine();
+			}
+
+			r.close();
+			b.close();
+			
+			
+		} catch (FileNotFoundException e) {
+			System.out.println("File not found");
+			// TODO Auto-generated catch block
+			//e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			//e.printStackTrace();
+			System.out.println("Can't read file");
+		}
+
+		return false;
+		
+	}
+	
 	
 }
