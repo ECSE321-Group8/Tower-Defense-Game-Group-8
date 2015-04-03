@@ -14,9 +14,11 @@ import java.awt.event.KeyListener;
 import java.util.LinkedList;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import Logic.Map;
@@ -28,6 +30,8 @@ public class GameView extends JFrame implements KeyListener, ActionListener {
 	private MapGrid mG;
 	
 	private GridBagConstraints gbc = new GridBagConstraints();
+	private GridBagConstraints gbc2 = new GridBagConstraints();
+	private GridBagConstraints gbc3 = new GridBagConstraints();
 	private ScrollPane scrollSection;
 	private JPanel gameOptions;
 	private JPanel mainPanel;
@@ -47,10 +51,12 @@ public class GameView extends JFrame implements KeyListener, ActionListener {
 	// http://stackoverflow.com/questions/2788080/reading-a-text-file-in-java
 	
 	private JLabel lMapName;
+	private JLabel lMapName1;
 	private JLabel lRows;
 	private JLabel lColumns;
 	
 	private JTextField tMapName;
+	private JTextField tMapName1;
 	private JTextField tRows;
 	private JTextField tColumns;
 	
@@ -68,6 +74,18 @@ public class GameView extends JFrame implements KeyListener, ActionListener {
 	private JButton save;
 	private JButton back;
 	private JButton edit;
+	private JButton play;
+	private JButton editAgain;
+	private JButton back2;
+	
+	// For Tower Info:
+	private JLabel towerName;
+	private JTextArea towerStats;
+	
+	private JComboBox towerStrategy;
+	
+	private JButton upgrade;
+	private JButton sell;
 	
 	private SplitPane sP;
 	private Map myMap;
@@ -94,7 +112,8 @@ public class GameView extends JFrame implements KeyListener, ActionListener {
 	}
 	
 	private void leftSideOptions() {
-		// TODO Auto-generated method stub
+		// TODO Create different grid bag constraints for each panel
+		// Create different JComponents for each panel
 		options = new JPanel();
 		gameOptions = new JPanel();
 		gameOptions.setLayout(new GridBagLayout());
@@ -114,6 +133,11 @@ public class GameView extends JFrame implements KeyListener, ActionListener {
 		lColumns = new JLabel("Columns: ");
 		tRows = new JTextField("10");
 		tColumns = new JTextField("10");
+		lMapName = new JLabel("Map Name: ");
+		tMapName = new JTextField("Map 1");
+		lMapName1 = new JLabel("Map Name: ");
+		tMapName1 = new JTextField("Map 1");
+		towerName = new JLabel("Tower");
 		
 		open = new JButton("Open");
 		open.addActionListener(this);
@@ -143,6 +167,29 @@ public class GameView extends JFrame implements KeyListener, ActionListener {
 		
 		edit = new JButton("Edit");
 		edit.addActionListener(this);
+		edit.setEnabled(false);
+		
+		play = new JButton("Play");
+		play.addActionListener(this);
+		
+		editAgain = new JButton("Edit");
+		editAgain.addActionListener(this);
+		
+		back2 = new JButton("Back");
+		back2.addActionListener(this);
+		
+		sell = new JButton ("Sell");
+		sell.addActionListener(this);
+		
+		upgrade = new JButton ("Upgrade");
+		upgrade.addActionListener(this);
+		
+		towerStats = new JTextArea("Power=\nRange=\nCool Down=");
+		
+		String [] strategyOptions = {"First","Last","Most Health","Least Health"};
+		towerStrategy = new JComboBox(strategyOptions);
+		towerStrategy.setSelectedIndex(1);
+		towerStrategy.addActionListener(this);
 		
 		gbc.weightx = 1.0;
 		gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -179,30 +226,42 @@ public class GameView extends JFrame implements KeyListener, ActionListener {
 		
 		mapEditing.add(tColumns,gbc);
 		
-		// gbc.fill = GridBagConstraints.HORIZONTAL;
+		gbc.fill = GridBagConstraints.HORIZONTAL;
 		gbc.gridx = 0;
 		gbc.gridy = 2;
-		gbc.gridwidth = 2;
 		
-		mapEditing.add(start,gbc);
+		mapEditing.add(lMapName,gbc);
+		
+		gbc.fill = GridBagConstraints.HORIZONTAL;
+		gbc.gridx = 1;
+		gbc.gridy = 2;
+		
+		mapEditing.add(tMapName,gbc);
 		
 		// gbc.fill = GridBagConstraints.HORIZONTAL;
 		gbc.gridx = 0;
 		gbc.gridy = 3;
 		gbc.gridwidth = 2;
 		
-		mapEditing.add(edit,gbc);
+		mapEditing.add(start,gbc);
 		
 		// gbc.fill = GridBagConstraints.HORIZONTAL;
 		gbc.gridx = 0;
 		gbc.gridy = 4;
 		gbc.gridwidth = 2;
 		
-		mapEditing.add(save,gbc);
+		mapEditing.add(edit,gbc);
 		
 		// gbc.fill = GridBagConstraints.HORIZONTAL;
 		gbc.gridx = 0;
 		gbc.gridy = 5;
+		gbc.gridwidth = 2;
+		
+		mapEditing.add(save,gbc);
+		
+		// gbc.fill = GridBagConstraints.HORIZONTAL;
+		gbc.gridx = 0;
+		gbc.gridy = 6;
 		gbc.gridwidth = 2;
 		
 		mapEditing.add(back,gbc);
@@ -210,19 +269,104 @@ public class GameView extends JFrame implements KeyListener, ActionListener {
 		
 		gbc.gridx = 0;
 		gbc.gridy = 1;
-		gbc.fill = GridBagConstraints.HORIZONTAL;
+		// gbc.fill = GridBagConstraints.HORIZONTAL;
 		
 		gameOptions.add(open,gbc);
+		
+		// The Opening New Game
+		
+		gbc2.weightx = 1.0;
+		gbc2.fill = GridBagConstraints.HORIZONTAL;
+		gbc2.gridx = 0;
+		gbc2.gridy = 0;
+		
+		opening.add(lMapName1,gbc2);
+		
+		gbc2.fill = GridBagConstraints.HORIZONTAL;
+		gbc2.gridx = 1; // Don't know why this makes be use 2
+		gbc2.gridy = 0;
+		
+		opening.add(tMapName1,gbc2);
+		
+		gbc2.fill = GridBagConstraints.HORIZONTAL;
+		gbc2.gridx = 0;
+		gbc2.gridy = 1;
+		gbc2.gridwidth = 2;
+		
+		opening.add(editAgain,gbc2);
+		
+		gbc2.fill = GridBagConstraints.HORIZONTAL;
+		gbc2.gridx = 0;
+		gbc2.gridy = 2;
+		gbc2.gridwidth = 2;
+		
+		opening.add(back2,gbc2);
+		
+		/*
+		gbc.gridx = 0;
+		gbc.gridy = 2;
+		// gbc.gridwidth = 2;
+		
+		opening.add(edit);
+		*/
+		
+		gbc2.gridx = 0;
+		gbc2.gridy = 3;
+		gbc2.gridwidth = 2;
+		
+		opening.add(play,gbc2);
+		
+		/*
+		gbc.gridx = 0;
+		gbc.gridy = 4;
+		gbc.gridwidth = 2;
+		
+		opening.add(back);
+		*/
+		
+		// Tower Info
+		
+		gbc3.weightx = 1.0;
+		gbc3.fill = GridBagConstraints.HORIZONTAL;
+		gbc3.gridx = 0;
+		gbc3.gridy = 1;
+		
+		towerInfo.add(towerName,gbc3);
+		
+		gbc3.gridx = 0;
+		gbc3.gridy = 2;
+		// gbc3.gridheight = 3;
+		
+		towerInfo.add(towerStats, gbc3);
+		
+		gbc3.gridx = 0;
+		gbc3.gridy = 3;
+		
+		towerInfo.add(towerStrategy,gbc3);
+		
+		gbc3.gridx = 0;
+		gbc3.gridy = 4;
+		
+		towerInfo.add(upgrade, gbc3);
+		
+		gbc3.gridx = 0;
+		gbc3.gridy = 5;
+		
+		towerInfo.add(sell, gbc3);
+		
+		
 		
 		options.add("Game",gameOptions);
 		options.add("Tower", towerInfo);
 		options.add("Critter", critterInfo);
 		options.add("Editing", mapEditing);
+		options.add("Opening", opening);
 		
 		cardLayoutLabels.add("Game");
 		cardLayoutLabels.add("Tower");
 		cardLayoutLabels.add("Critter");
 		cardLayoutLabels.add("Editing");
+		cardLayoutLabels.add("Opening");
 		
 		layout.show(options, "Game");
 		setVisible(true);
@@ -252,8 +396,10 @@ public class GameView extends JFrame implements KeyListener, ActionListener {
 			layout.show(options, cardLayoutLabels.get(changeCounter));
 			setVisible(true);
 		}
-		else if(e.getActionCommand()== "Open"){
+		else if(e.getSource() == open){
 			System.out.println("Pressed Open");
+			layout.show(options, "Opening");
+			setVisible(true);
 		}
 		else if(e.getActionCommand()== "Tower Button"){
 			System.out.println("Tower Button");
@@ -261,6 +407,29 @@ public class GameView extends JFrame implements KeyListener, ActionListener {
 		else if(e.getActionCommand()== "Critter Button"){
 			System.out.println("Critter Button");
 		}
+		else if(e.getSource() == play){ // This is how to get event of a button using it's variable name
+			System.out.println("Pressed Play!");
+		}
+		else if(e.getSource() == newMap){
+			System.out.println("Starting a new Map");
+			layout.show(options, "Editing");
+			setVisible(true);
+		}
+		else if(e.getSource() == back){
+			System.out.println("Going back to main Menu");
+			layout.show(options, "Game");
+			setVisible(true);
+		}
+		else if(e.getSource() == back2){
+			System.out.println("Going back to main Menu");
+			layout.show(options, "Game");
+			setVisible(true);
+		}
+		else if(e.getSource() == towerStrategy){
+			System.out.println("The Selected Strategy was: " + towerStrategy.getSelectedIndex());
+		}
+		// http://stackoverflow.com/questions/13791987/keyboard-input-stops-working-in-swing-application-a-calculator-after-clicking
+		requestFocusInWindow(); // Allows for keyboard listener to work after button pressed
 	}
 
 	@Override
