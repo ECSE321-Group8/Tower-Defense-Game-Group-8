@@ -6,7 +6,7 @@ public class critter2 extends critter{
 		{
 			super();
 			speed =3;
-			health=5.0;
+			health=5;
 			typeCritter=2;
 		}
 
