@@ -1,4 +1,5 @@
 package Presentation;
+import Logic.Tower;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -53,7 +54,62 @@ public class MapGrid extends JPanel implements MouseListener{
 		yOffset = (panelHeight - gridSize*gridRows)/2;
 		
 		drawGrid(g);
+		drawTowers(g);
 		}
+	}
+
+	private void drawTowers(Graphics g) {
+		// TODO Auto-generated method stub
+		// TODO Change the colors according to methods
+		if(true){ // To test; take out if statement after
+		for(int i=0;i<gridRows;i++){
+			for(int j=0;j<gridColumns;j++){
+				/*
+				Tower t; // Get the tower object if it exists
+				g.setColor(towerBaseColour(t));
+				*/
+				g.setColor(Color.LIGHT_GRAY);
+				g.fillRect(i*gridSize+xOffset+gridSize/8, j*gridSize+yOffset+gridSize/8, 3*gridSize/4, 3*gridSize/4);
+				/*
+				g.setColor(towerTypeColour(t));
+				*/
+				g.setColor(Color.RED);
+				g.fillOval(i*gridSize+xOffset+gridSize/4, j*gridSize+yOffset+gridSize/4, gridSize/2, gridSize/2);
+			}
+		}
+		}
+	}
+
+	private Color towerTypeColour(Tower t) {
+		// TODO Auto-generated method stub
+		// Would get the type of tower:
+		int towerType=1;
+		if(towerType==1){ // Regular
+			return Color.RED;
+		}
+		else if(towerType==2){
+			return Color.BLUE;
+		}
+		else if(towerType==3){
+			return Color.YELLOW;
+		}
+		return null;
+	}
+
+	private Color towerBaseColour(Tower t) {
+		// TODO Auto-generated method stub
+		// would get the upgrade level of the towers:
+		int upgradeLevel=1;
+		if(upgradeLevel==1){ // Level 1
+			return Color.LIGHT_GRAY;
+		}
+		else if(upgradeLevel==2){
+			return Color.DARK_GRAY;
+		}
+		else if(upgradeLevel==3){
+			return Color.BLACK;
+		}
+		return null;
 	}
 
 	private void drawGrid(Graphics g) {
