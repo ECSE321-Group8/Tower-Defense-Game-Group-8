@@ -1,3 +1,5 @@
+package TestingMovingObject;
+
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
