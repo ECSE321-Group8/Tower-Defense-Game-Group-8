@@ -492,6 +492,7 @@ public class Map {
 		try {
 			FileOutputStream fileOutputStream =new FileOutputStream(file);
 			outputStream = new ObjectOutputStream(fileOutputStream);
+		
 			outputStream.writeInt(getWidth());
 			outputStream.writeInt(getHeight());
 			
@@ -527,8 +528,11 @@ public class Map {
 		String path = new File (".").getAbsolutePath();
 		String fileName=path.concat("//Maps//"+name+".txt");
 		File file = new File(fileName);
+		
 		Map m=Map.getInstance();
-		Map.temp = new LinkedList<Path>();
+		temp.clear();
+		
+		//Map.temp = new LinkedList<Path>();
 
 		
 		try {
@@ -544,6 +548,8 @@ public class Map {
 			m.setCompletePath(false);
 			m.currentPos=-1;
 			m.currentPath=null;
+			
+			
 			int pPos=0;
 			pPos=inputStream.readInt();
 
@@ -554,6 +560,7 @@ public class Map {
 				pPos=inputStream.readInt();
 
 			}
+			
 			inputStream.close();
 			m.finalizePath();
 	
@@ -586,12 +593,14 @@ public class Map {
 				w.close();
 			} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			//e.printStackTrace();
+			System.out.println("Can't write to file");
 			}
 		}
 		else
 			return;
 	}
+	
 	/**
 	 * will delete the map name from records. 
 	 * If the name does not exits on the records, it will do nothing. 
@@ -599,6 +608,7 @@ public class Map {
 	 */
 	public void deleteMapName(String name){
 		LinkedList<String> names=new LinkedList<String>();
+		
 		boolean present = false;
 		FileReader r;
 		try {
@@ -628,6 +638,7 @@ public class Map {
 			//e.printStackTrace();
 			System.out.println("Can't read file");
 		}
+		
 
 		if (present){
 			names.remove(name);
