@@ -329,6 +329,8 @@ public class Frame extends JFrame implements KeyListener, ActionListener{
 			myMap.printGrid();
 			System.out.println("Time to Open a Map!");
 		}
+		
+		requestFocusInWindow();
 	}
 	
 	

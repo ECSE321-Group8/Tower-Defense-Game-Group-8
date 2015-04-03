@@ -505,6 +505,9 @@ public class GameView extends JFrame implements KeyListener, ActionListener {
 			layout.show(options, "Opening");
 			setVisible(true);
 		}
+		else if(e.getSource()==save){
+			myMap.saveMap(tMapName.getText());
+		}
 		else if(e.getActionCommand()== "Tower Button"){
 			System.out.println("Tower Button");
 		}

@@ -38,9 +38,11 @@ public class wave extends Subject{
 	public  int getNumberOfCritters() {
 		return numberOfCritters;
 	}
+	// TODO correct critter must be removed from LinkedList waveList
+	// There is a specific critter that needs to be removed; each critter needs an ID
 	public void decrementCritter() {
 		//you need to know which critter has been hit!! 
-		//decrementcritter just decrement the number of critter in the wave when a critter dies.
+		//decrement critter just decrement the number of critter in the wave when a critter dies.
 		//it does not change when critters' health decrease
 		//This method will only be called when a critter dies
 		numberOfCritters--;
