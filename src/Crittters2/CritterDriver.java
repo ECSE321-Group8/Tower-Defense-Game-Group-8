@@ -1,6 +1,6 @@
 package Crittters2;
 
-import Critters.critter;
+//import Critters.critter;
 
 public class CritterDriver {
 
@@ -24,9 +24,10 @@ public class CritterDriver {
 		
 		
 		try {
-			critter2.critterSlowedDown(20);
 			Thread.sleep(1000);
-			critter2.critterSlowedDown(-20);
+			critter2.critterSlowedDown(10);
+			Thread.sleep(1000);
+			critter2.critterSlowedDown(-10);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

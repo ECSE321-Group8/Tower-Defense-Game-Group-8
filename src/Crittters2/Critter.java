@@ -104,16 +104,17 @@ public class Critter implements Runnable{
 		int i;
 		while(!path.isEmpty()){
 			i=path.pop();
+			long startTime = System.nanoTime();
 			this.setPosition(i);
 			try {
 				//System.out.println("sleeping");
-				Thread.sleep(((long)10000)/((long)this.getSpeed()));
+				Thread.sleep(((long)100000)/((long)this.getSpeed()));
 				//System.out.println("wake up");
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			System.out.println(this.getID()+": "+this.getPosition());
+			System.out.println(this.getID()+": "+this.getPosition()+" time: "+(System.nanoTime()-startTime));
 		}
 		
 		this.setPosition(-1);	//out of bounds
