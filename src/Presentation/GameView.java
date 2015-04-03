@@ -65,6 +65,8 @@ public class GameView extends JFrame implements KeyListener, ActionListener {
 	private JTextField tRows;
 	private JTextField tColumns;
 	
+	private JTextArea nameOfMaps;
+	
 	private final int sizeofSplit = 200;
 	private int realHeight, realWidth;
 	private int changeCounter = 0;
@@ -118,11 +120,12 @@ public class GameView extends JFrame implements KeyListener, ActionListener {
 		realHeight = this.getContentPane().getSize().height-10;
 		realWidth = this.getContentPane().getSize().width;
 		mG = new MapGrid(realWidth-sizeofSplit,realHeight-10);
+		myMap=Map.getInstance();
 		// mainPanel.add(mG);
 		leftSideOptions();
 		splitViewSetUp();
 		
-		myMap=Map.getInstance();
+		
 		
 	}
 	
@@ -155,6 +158,8 @@ public class GameView extends JFrame implements KeyListener, ActionListener {
 		lMapName1 = new JLabel("Map Name: ");
 		tMapName1 = new JTextField("Map 1");
 		towerName = new JLabel("Tower");
+		
+		nameOfMaps = new JTextArea(myMap.printMapRecords());
 		
 		open = new JButton("Open");
 		open.addActionListener(this);
@@ -347,6 +352,12 @@ public class GameView extends JFrame implements KeyListener, ActionListener {
 		gbc2.gridwidth = 2;
 		
 		opening.add(play,gbc2);
+		
+		gbc2.gridx = 0;
+		gbc2.gridy = 4;
+		gbc2.gridwidth = 2;
+		
+		opening.add(nameOfMaps, gbc2);
 		
 		/*
 		gbc.gridx = 0;
