@@ -576,6 +576,7 @@ public class GameView extends JFrame implements KeyListener, ActionListener {
 		if(b.getKeyCode() == KeyEvent.VK_BACK_SPACE){
 			System.out.println("BACKSPACE!");
 			myMap.deleteLastPathTile();
+			mG.setCompletedView(false);
 			mG.repaint();
 		}
 		if(b.getKeyCode() == KeyEvent.VK_ENTER){
