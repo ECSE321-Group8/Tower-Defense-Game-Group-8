@@ -8,7 +8,7 @@ public class Critter implements Runnable{
 	private int speed;
 	private int resistance;
 	private int worth;
-	
+	/////private int Speeddmg;
 	private int position;
 	private int ID;
 	
@@ -47,7 +47,9 @@ public class Critter implements Runnable{
 	public int getWorth(){
 		return worth;
 	}
-	
+	/////public int getSpeeddmg(){
+	/////	return Speeddmg;
+	/////}	
 	
 	//SETTERS
 	public void setHealth(int n){
@@ -68,6 +70,13 @@ public class Critter implements Runnable{
 	public void setWorth(){
 		worth = 2*this.getHealth()+this.getSpeed()+3*this.getResistance();
 	}
+	/////public void addSpeeddmg(int n){
+	/////	Speeddmg=Speeddmg + n;
+	/////	if (Speeddmg>1000){Speeddmg=1000;}//just caps it so it can't freeze forever
+	/////}
+	/////public void resetSpeeddmg(){
+	/////	Speeddmg=0;
+	/////}
 	
 	
 	//test
@@ -109,6 +118,11 @@ public class Critter implements Runnable{
 			try {
 				//System.out.println("sleeping");
 				Thread.sleep(((long)100000)/((long)this.getSpeed()));
+				
+				/////Thread.sleep((long)Speeddmg);
+				/////this.resetSpeeddmg();
+				
+				
 				//System.out.println("wake up");
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
