@@ -3,11 +3,11 @@ package Critters;
 public class critter {
 	public int speed;
 	public  static int typeCritter;
-	public double health;
+	public int health;
 	public boolean alive; 
-	public double positionX=0;
+	public int positionX=0;
 	
-	public double positionY=0;
+	public int positionY=0;
 	
 	// assume that entry gate is at(0,0)
 	//at the beginning the critters are on path
@@ -35,7 +35,7 @@ public class critter {
 	
 	//when critters receive hit from tower 
 	//,we have to set new health according to the damage
-	public void updateHealth(double damage)
+	public void updateHealth(int damage)
 	{
 	
 		this.health=this.health-damage;
