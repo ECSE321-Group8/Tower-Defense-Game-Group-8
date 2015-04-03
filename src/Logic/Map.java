@@ -587,7 +587,7 @@ public class Map {
 		if(!nameAlreadyExists(name)){
 			try {
 				FileWriter w= new FileWriter(new File("mapRecords.txt"),true);
-				w.write(name+"\n");
+				w.write(name);
 				w.write(System.lineSeparator())	;
 				w.flush();
 				w.close();
