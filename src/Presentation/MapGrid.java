@@ -267,7 +267,6 @@ public class MapGrid extends JPanel implements MouseListener{
 		this.gridRows = gridRows;
 		this.gridColumns = gridColumns;
 		tempGrid = new int[gridRows][gridColumns];
-		myMap.setMap(gridRows, gridColumns);
 		startSet = true;
 		repaint();
 	}

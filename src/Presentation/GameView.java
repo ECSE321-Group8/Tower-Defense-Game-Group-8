@@ -29,9 +29,12 @@ public class GameView extends JFrame implements KeyListener, ActionListener {
 	public static Dimension size = new Dimension (700,550);
 	private MapGrid mG;
 	
+	private boolean valid;
+	
 	private GridBagConstraints gbc = new GridBagConstraints();
 	private GridBagConstraints gbc2 = new GridBagConstraints();
 	private GridBagConstraints gbc3 = new GridBagConstraints();
+	private GridBagConstraints gbc4 = new GridBagConstraints();
 	private ScrollPane scrollSection;
 	private JPanel gameOptions;
 	private JPanel mainPanel;
@@ -39,8 +42,10 @@ public class GameView extends JFrame implements KeyListener, ActionListener {
 	private JPanel opening;
 	private JPanel mapEditing;
 	private JPanel towerInfo;
+	private JPanel towerPurchase;
 	private JPanel critterInfo;
 	private CardLayout layout;
+	private CardLayout layout2;
 	private LinkedList<String> cardLayoutLabels = new <String>LinkedList(); 
 	// http://www.tutorialspoint.com/awt/awt_cardlayout.htm
 	// https://docs.oracle.com/javase/tutorial/uiswing/layout/card.html
@@ -54,7 +59,7 @@ public class GameView extends JFrame implements KeyListener, ActionListener {
 	private JLabel lMapName1;
 	private JLabel lRows;
 	private JLabel lColumns;
-	
+
 	private JTextField tMapName;
 	private JTextField tMapName1;
 	private JTextField tRows;
@@ -63,6 +68,8 @@ public class GameView extends JFrame implements KeyListener, ActionListener {
 	private final int sizeofSplit = 200;
 	private int realHeight, realWidth;
 	private int changeCounter = 0;
+	private int rows;
+	private int columns;
 	
 	private JButton newMap;
 	private JButton open;
@@ -81,11 +88,15 @@ public class GameView extends JFrame implements KeyListener, ActionListener {
 	// For Tower Info:
 	private JLabel towerName;
 	private JTextArea towerStats;
+	private JLabel buyTower;
 	
-	private JComboBox towerStrategy;
+	private JComboBox<String> towerStrategy;
 	
 	private JButton upgrade;
 	private JButton sell;
+	private JButton regularTower;
+	private JButton freezeTower;
+	private JButton shotgunTower;
 	
 	private SplitPane sP;
 	private Map myMap;
@@ -100,14 +111,18 @@ public class GameView extends JFrame implements KeyListener, ActionListener {
 		mainPanel = new JPanel(new BorderLayout());
 		change = new JButton("Change");
 		change.addActionListener(this);
-		mainPanel.add(change);
+		// mainPanel.add(change);
 		addKeyListener(this);
 		setVisible(true);
 		
+		realHeight = this.getContentPane().getSize().height-10;
+		realWidth = this.getContentPane().getSize().width;
 		mG = new MapGrid(realWidth-sizeofSplit,realHeight-10);
-		
+		// mainPanel.add(mG);
 		leftSideOptions();
 		splitViewSetUp();
+		
+		myMap=Map.getInstance();
 		
 	}
 	
@@ -125,6 +140,8 @@ public class GameView extends JFrame implements KeyListener, ActionListener {
 		mapEditing.setLayout(new GridBagLayout());
 		opening = new JPanel();
 		opening.setLayout(new GridBagLayout());
+		towerPurchase = new JPanel();
+		towerPurchase.setLayout(new GridBagLayout());
 		
 		layout = new CardLayout();
 		options.setLayout(layout);
@@ -183,6 +200,15 @@ public class GameView extends JFrame implements KeyListener, ActionListener {
 		
 		upgrade = new JButton ("Upgrade");
 		upgrade.addActionListener(this);
+		
+		regularTower = new JButton("Regular");
+		regularTower.addActionListener(this);
+		
+		freezeTower = new JButton("Freeze");
+		freezeTower.addActionListener(this);
+		
+		shotgunTower = new JButton("Shotgun");
+		shotgunTower.addActionListener(this);
 		
 		towerStats = new JTextArea("Power=\nRange=\nCool Down=");
 		
@@ -262,6 +288,12 @@ public class GameView extends JFrame implements KeyListener, ActionListener {
 		// gbc.fill = GridBagConstraints.HORIZONTAL;
 		gbc.gridx = 0;
 		gbc.gridy = 6;
+		gbc.gridwidth = 2;
+		
+		mapEditing.add(finalize,gbc);
+		
+		gbc.gridx = 0;
+		gbc.gridy = 7;
 		gbc.gridwidth = 2;
 		
 		mapEditing.add(back,gbc);
@@ -354,19 +386,38 @@ public class GameView extends JFrame implements KeyListener, ActionListener {
 		
 		towerInfo.add(sell, gbc3);
 		
+		// Tower Purchase
 		
+		gbc4.weightx = 1.0;
+		gbc4.gridx = 0;
+		gbc4.gridy = 0;
+		gbc4.fill = GridBagConstraints.HORIZONTAL;
+		
+		towerPurchase.add(regularTower, gbc4);
+		
+		gbc4.gridx = 0;
+		gbc4.gridy = 1;
+		
+		towerPurchase.add(freezeTower, gbc4);
+		
+		gbc4.gridx = 0;
+		gbc4.gridy = 2;
+		
+		towerPurchase.add(shotgunTower, gbc4);
 		
 		options.add("Game",gameOptions);
 		options.add("Tower", towerInfo);
 		options.add("Critter", critterInfo);
 		options.add("Editing", mapEditing);
 		options.add("Opening", opening);
+		options.add("Tower Purchase", towerPurchase);
 		
 		cardLayoutLabels.add("Game");
 		cardLayoutLabels.add("Tower");
 		cardLayoutLabels.add("Critter");
 		cardLayoutLabels.add("Editing");
 		cardLayoutLabels.add("Opening");
+		cardLayoutLabels.add("Tower Purchase");
 		
 		layout.show(options, "Game");
 		setVisible(true);
@@ -374,7 +425,7 @@ public class GameView extends JFrame implements KeyListener, ActionListener {
 
 	private void splitViewSetUp() {
 		// TODO Auto-generated method stub
-		sP = new SplitPane(options,mainPanel, sizeofSplit);
+		sP = new SplitPane(options,mG, sizeofSplit);
 		add(sP);
 		setVisible(true);
 	}
@@ -395,6 +446,41 @@ public class GameView extends JFrame implements KeyListener, ActionListener {
 			}
 			layout.show(options, cardLayoutLabels.get(changeCounter));
 			setVisible(true);
+		}
+		else if(e.getSource() == start){
+			System.out.println("Pressed Start");
+			try{
+				rows = Integer.parseInt(tRows.getText());
+				columns =  Integer.parseInt(tColumns.getText());
+				valid = true;
+				System.out.println("The rows: "+rows+ " columns: "+columns);
+			}
+			catch(NumberFormatException e1){
+				
+			}
+			if(rows<=1 || columns<=1 || rows>(realHeight/10) || columns>(realWidth/10)){
+				valid = false;
+			}
+			if(valid){
+				start.setEnabled(false);
+				finalize.setEnabled(true);
+				edit.setEnabled(true);
+				tRows.setEditable(false);
+				tColumns.setEditable(false);
+				//myMap=Map.getInstance();
+				// myMap.setMap(rows,columns);
+				mG.setDimensions(rows, columns);
+				myMap.setMap(rows, columns);
+			}
+		}
+		else if(e.getSource() == play){
+			System.out.println("Start Playing Game");
+		}
+		else if(e.getSource()==edit){
+			save.setEnabled(false);
+		}
+		else if(e.getSource() == finalize){
+			save.setEnabled(true);
 		}
 		else if(e.getSource() == open){
 			System.out.println("Pressed Open");
@@ -428,14 +514,60 @@ public class GameView extends JFrame implements KeyListener, ActionListener {
 		else if(e.getSource() == towerStrategy){
 			System.out.println("The Selected Strategy was: " + towerStrategy.getSelectedIndex());
 		}
+		else if(e.getSource() == regularTower){
+			System.out.println("Adding Regular Tower");
+		}
+		else if(e.getSource() == freezeTower){
+			System.out.println("Adding Freeze Tower");
+		}
+		else if(e.getSource() == shotgunTower){
+			System.out.println("Adding Shotgun Tower");
+		}
 		// http://stackoverflow.com/questions/13791987/keyboard-input-stops-working-in-swing-application-a-calculator-after-clicking
 		requestFocusInWindow(); // Allows for keyboard listener to work after button pressed
 	}
 
 	@Override
-	public void keyPressed(KeyEvent e) {
+	public void keyPressed(KeyEvent b) {
 		// TODO Auto-generated method stub
-		
+		if(b.getKeyCode() == KeyEvent.VK_UP){
+			System.out.println("UP!");
+			/*
+			mG.setXcor(mG.getXcor()-1);
+			mG.setGrid(mG.getXcor(), mG.getYcor(), 1);
+			mG.repaint();
+			*/
+		}
+		if(b.getKeyCode() == KeyEvent.VK_DOWN){
+			System.out.println("DOWN!");
+			/*
+			mG.setXcor(mG.getXcor()+1);
+			mG.setGrid(mG.getXcor(), mG.getYcor(), 1);
+			mG.repaint();
+			*/
+		}
+		if(b.getKeyCode() == KeyEvent.VK_LEFT){
+			System.out.println("LEFT!");
+			/*
+			mG.setYcor(mG.getYcor()-1);
+			mG.setGrid(mG.getXcor(), mG.getYcor(), 1);
+			mG.repaint();
+			*/
+		}
+		if(b.getKeyCode() == KeyEvent.VK_RIGHT){
+			System.out.println("RIGHT!");
+			/*
+			mG.setYcor(mG.getYcor()+1);
+			mG.setGrid(mG.getXcor(), mG.getYcor(), 1);
+			mG.repaint();
+			*/
+		}
+		if(b.getKeyCode() == KeyEvent.VK_BACK_SPACE){
+			System.out.println("BACKSPACE!");
+		}
+		if(b.getKeyCode() == KeyEvent.VK_ENTER){
+			System.out.println("ENTER!");
+		}
 	}
 
 	@Override
