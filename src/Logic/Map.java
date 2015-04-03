@@ -20,8 +20,8 @@ public class Map {
 	
 	//Path variables
 	private static boolean completePath=false;
-	int currentPos=-1;
-	Path currentPath;
+	private int currentPos=-1;
+	private Path currentPath;
 	
 	private static Map instanceMap=null;
 	

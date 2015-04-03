@@ -13,8 +13,8 @@ public class Path extends Tile{
 	public int exit;
 		
 	//Validate
-	public boolean isEdge;//entry or exit of the Path
-	public boolean isStart;//or isExit
+	private boolean isEdge;//entry or exit of the Path
+	private boolean isStart;//or isExit
 	//public boolean isVisited;
 
 	/*

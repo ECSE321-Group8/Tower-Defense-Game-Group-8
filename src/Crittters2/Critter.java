@@ -90,12 +90,12 @@ public class Critter implements Runnable{
 	}
 	//critter is hit and is slowed down
 	public void critterSlowedDown(int n){
-		if(this.getSpeed()>1)//can't have speed zero
+		if(this.getSpeed()>n)//can't have speed zero
 			this.speed-=n;
 	}
 	//critter is hit and loses resistance
 	public void critterLosesResistance(int n){
-		if(this.getResistance()>1)
+		if(this.getResistance()>n)
 			this.resistance-=n;
 	}
 	
@@ -106,14 +106,14 @@ public class Critter implements Runnable{
 			i=path.pop();
 			this.setPosition(i);
 			try {
-				System.out.println("sleeping");
+				//System.out.println("sleeping");
 				Thread.sleep(((long)10000)/((long)this.getSpeed()));
-				System.out.println("wake up");
+				//System.out.println("wake up");
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			System.out.println(this.getPosition());
+			System.out.println(this.getID()+": "+this.getPosition());
 		}
 		
 		this.setPosition(-1);	//out of bounds
