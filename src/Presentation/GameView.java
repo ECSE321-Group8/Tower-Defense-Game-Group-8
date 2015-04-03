@@ -518,6 +518,7 @@ public class GameView extends JFrame implements KeyListener, ActionListener {
 		}
 		else if(e.getSource()==save){
 			myMap.saveMap(tMapName.getText());
+			nameOfMaps.setText(myMap.printMapRecords());
 		}
 		else if(e.getActionCommand()== "Tower Button"){
 			System.out.println("Tower Button");
@@ -530,6 +531,9 @@ public class GameView extends JFrame implements KeyListener, ActionListener {
 		}
 		else if(e.getSource() == newMap){
 			System.out.println("Starting a new Map");
+			tRows.setEditable(true);
+			tColumns.setEditable(true);
+			start.setEnabled(true);
 			layout.show(options, "Editing");
 			setVisible(true);
 		}
