@@ -479,8 +479,23 @@ public class GameView extends JFrame implements KeyListener, ActionListener {
 		else if(e.getSource()==edit){
 			save.setEnabled(false);
 		}
+		else if(e.getSource()==editAgain){
+			// This is were we open the Map to re edit
+			myMap.openMap(tMapName1.getText());
+			mG.setDimensions(myMap.getHeight(), myMap.getWidth());
+			mG.setCompletedView(true);
+			start.setEnabled(false);
+			finalize.setEnabled(true);
+			edit.setEnabled(true);
+			tRows.setEditable(false);
+			tColumns.setEditable(false);
+			mG.repaint();
+			layout.show(options, "Editing");
+			setVisible(true);
+		}
 		else if(e.getSource() == finalize){
 			save.setEnabled(true);
+			edit.setEnabled(true);
 			myMap.finalizePath();
 			mG.setCompletedView(true);
 			mG.repaint();
@@ -575,12 +590,16 @@ public class GameView extends JFrame implements KeyListener, ActionListener {
 		}
 		if(b.getKeyCode() == KeyEvent.VK_BACK_SPACE){
 			System.out.println("BACKSPACE!");
+			save.setEnabled(false);
+			edit.setEnabled(false);
 			myMap.deleteLastPathTile();
 			mG.setCompletedView(false);
 			mG.repaint();
 		}
 		if(b.getKeyCode() == KeyEvent.VK_ENTER){
 			System.out.println("ENTER!");
+			save.setEnabled(true);
+			edit.setEnabled(true);
 			myMap.finalizePath();
 			mG.setCompletedView(true);
 			mG.repaint();
