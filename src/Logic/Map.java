@@ -698,6 +698,36 @@ public class Map {
 		return false;
 		
 	}
+	public String printMapRecords(){
+		String allS = "These are the Maps stored:";
+		FileReader r;
+		try {
+			r = new FileReader ("mapRecords.txt");
+			BufferedReader b = new BufferedReader (r);
+			String s=b.readLine();
+			
+			while(s!=null){
+				
+				allS=allS+System.lineSeparator()+s;
+				s=b.readLine();
+				}
+
+			r.close();
+			b.close();
+			
+			
+		} catch (FileNotFoundException e) {
+			System.out.println("File not found");
+			// TODO Auto-generated catch block
+			//e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			//e.printStackTrace();
+			System.out.println("Can't read file");
+		}
+	//	System.out.println(allS);
+		return allS;
+	}
 	
 	
 }
