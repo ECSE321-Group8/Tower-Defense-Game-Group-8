@@ -481,6 +481,9 @@ public class GameView extends JFrame implements KeyListener, ActionListener {
 		}
 		else if(e.getSource() == finalize){
 			save.setEnabled(true);
+			myMap.finalizePath();
+			mG.setCompletedView(true);
+			mG.repaint();
 		}
 		else if(e.getSource() == open){
 			System.out.println("Pressed Open");
@@ -537,6 +540,8 @@ public class GameView extends JFrame implements KeyListener, ActionListener {
 			mG.setGrid(mG.getXcor(), mG.getYcor(), 1);
 			mG.repaint();
 			*/
+			myMap.setCellToPath(myMap.getCurrentPos()-myMap.getWidth());
+			mG.repaint();
 		}
 		if(b.getKeyCode() == KeyEvent.VK_DOWN){
 			System.out.println("DOWN!");
@@ -545,6 +550,8 @@ public class GameView extends JFrame implements KeyListener, ActionListener {
 			mG.setGrid(mG.getXcor(), mG.getYcor(), 1);
 			mG.repaint();
 			*/
+			myMap.setCellToPath(myMap.getCurrentPos()+myMap.getWidth());
+			mG.repaint();
 		}
 		if(b.getKeyCode() == KeyEvent.VK_LEFT){
 			System.out.println("LEFT!");
@@ -553,6 +560,8 @@ public class GameView extends JFrame implements KeyListener, ActionListener {
 			mG.setGrid(mG.getXcor(), mG.getYcor(), 1);
 			mG.repaint();
 			*/
+			myMap.setCellToPath(myMap.getCurrentPos()-1);
+			mG.repaint();
 		}
 		if(b.getKeyCode() == KeyEvent.VK_RIGHT){
 			System.out.println("RIGHT!");
@@ -561,12 +570,19 @@ public class GameView extends JFrame implements KeyListener, ActionListener {
 			mG.setGrid(mG.getXcor(), mG.getYcor(), 1);
 			mG.repaint();
 			*/
+			myMap.setCellToPath(myMap.getCurrentPos()+1);
+			mG.repaint();
 		}
 		if(b.getKeyCode() == KeyEvent.VK_BACK_SPACE){
 			System.out.println("BACKSPACE!");
+			myMap.deleteLastPathTile();
+			mG.repaint();
 		}
 		if(b.getKeyCode() == KeyEvent.VK_ENTER){
 			System.out.println("ENTER!");
+			myMap.finalizePath();
+			mG.setCompletedView(true);
+			mG.repaint();
 		}
 	}
 
