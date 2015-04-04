@@ -1,30 +1,42 @@
 package Crittters2;
 import java.util.*;
 
+import Logic.*;
+import Logic.Map;
+
 
 public class Critter implements Runnable{
+
+	private LinkedList<Path> aPath=new LinkedList<Path>();//accesses through the Map
 
 	private int health;
 	private int speed;
 	private int resistance;
 	private int worth;
-	private int Speeddmg=0;
+	
 	private int position;
 	private int ID;
+	
+	private Thread t;
+	Map m = Map.getInstance();
+	
 	
 	public Critter(int ID){
 		setPosition(-1);
 		setID(ID);
-		aPath.add(0);
-		aPath.add(1);
-		aPath.add(2);
-		aPath.add(3);
-		aPath.add(4);
-		aPath.add(5);
-		aPath.add(6);
-		aPath.add(7);
-		aPath.add(8);
-		aPath.add(9);
+		setThread();
+		setPath();
+//		
+//		aPath.add(0);
+//		aPath.add(1);
+//		aPath.add(2);
+//		aPath.add(3);
+//		aPath.add(4);
+//		aPath.add(5);
+//		aPath.add(6);
+//		aPath.add(7);
+//		aPath.add(8);
+//		aPath.add(9);
 		
 	}
 	
@@ -47,16 +59,17 @@ public class Critter implements Runnable{
 	public int getWorth(){
 		return worth;
 	}
-	public int getSpeeddmg(){
-		return Speeddmg;
-	}	
+	public Thread getThread(){
+		return t;
+	}
+	public LinkedList<Path> getPath(){
+		return aPath;
+	}
+	
 	
 	//SETTERS
 	public void setHealth(int n){
 		health=n;
-	}
-	public void reduceHealth(int n){
-		health-=n;
 	}
 	public void setSpeed(int n){
 		speed=n;
@@ -73,14 +86,13 @@ public class Critter implements Runnable{
 	public void setWorth(){
 		worth = 2*this.getHealth()+this.getSpeed()+3*this.getResistance();
 	}
-	public void addSpeeddmg(int n){
-		Speeddmg=Speeddmg + n;
-		if (Speeddmg>100000){Speeddmg=100000;}//just caps it so it can't freeze forever
+	public void setThread(){
+		t=this.startMoving();
 	}
-	public void resetSpeeddmg(){
-		Speeddmg=0;
+	public void setPath(){
+		for (Path p: m.getPath())
+			aPath.add(p);
 	}
-	
 	
 	//test
 	public String toString(){
@@ -102,58 +114,48 @@ public class Critter implements Runnable{
 	}
 	//critter is hit and is slowed down
 	public void critterSlowedDown(int n){
-		if(this.getSpeed()>n)//can't have speed zero
+		if(this.getSpeed()>1)//can't have speed zero
 			this.speed-=n;
 	}
 	//critter is hit and loses resistance
 	public void critterLosesResistance(int n){
-		if(this.getResistance()>n)
+		if(this.getResistance()>1)
 			this.resistance-=n;
 	}
 	
-	public void moveAlongPath(LinkedList<Integer> path){
+	public void moveAlongPath(LinkedList<Path> path){
 
-		int i;
-		long temp;
+		Path i;
 		while(!path.isEmpty()){
 			i=path.pop();
-			long startTime = System.nanoTime();
-			this.setPosition(i);
+			this.setPosition(i.getPos());
 			try {
-				//System.out.println("sleeping");
-				temp=(((long)10000)/((long)this.getSpeed()))+Speeddmg;
-				this.resetSpeeddmg();
-				Thread.sleep(temp);
-				
-				
-				
-				//System.out.println("wake up");
+			//System.out.println("sleeping");
+				Thread.sleep(((long)1)/((long)this.getSpeed()));
+			//System.out.println("wake up");
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			System.out.println(this.getID()+": "+this.getPosition()+" time: "+(System.nanoTime()-startTime)+" health: "+this.getHealth());
+			System.out.println(this.getID()+": "+this.getPosition());
 		}
 		
 		this.setPosition(-1);	//out of bounds
 		
 	}
 
-	LinkedList<Integer> aPath=new LinkedList<Integer>();//accesses through the Map
 
-
-	
 	
 	@Override
 	public void run() {
-		LinkedList<Integer> path = new LinkedList<Integer>();
-		for (int i: aPath){
-			path.add(i);
+		//LinkedList<Integer> path = new LinkedList<Integer>();
+		for (Path i: m.getPath()){
+			aPath.add(i);
 
 		}
-		System.out.println("running");
-		moveAlongPath(path);
-		System.out.println("done");
+		//System.out.println("running");
+		moveAlongPath(aPath);
+		//System.out.println("done");
 		
 	}
 	
