@@ -5,9 +5,8 @@ public class critter {
 	public  static int typeCritter;
 	public int health;
 	public boolean alive; 
-	public int positionX=0;
-	
-	public int positionY=0;
+	public int position;
+
 	
 	// assume that entry gate is at(0,0)
 	//at the beginning the critters are on path
@@ -76,7 +75,7 @@ public class critter {
 			return true;
 		}
 	}
-	public void move(double positionX,double positionY)
+	public void move(int positionX,int positionY)
 	{
 		if ( speed!=0 && health!=0 )
 		{
