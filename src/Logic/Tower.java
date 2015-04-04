@@ -1,8 +1,8 @@
 package Logic;
 
-import Critters.Game;
-import Critters.wave;
-import Critters.critter;
+import Crittters2.Game;
+import Crittters2.CritterWave;
+import Crittters2.Critter;
 
 
 public abstract class Tower {
@@ -47,10 +47,10 @@ public abstract class Tower {
 	public int targeting(){	
 		int targetcandidate = -1;
 		int distance = 0;
-		System.out.println("--targeting-possible targets"+wave.getWavelist().size());
-		for(int i = 0; i < wave.getWavelist().size(); i++) {
-			if (wave.getWavelist().get(i).alive()) {
-				critter mycritter = wave.getWavelist().get(i);
+		System.out.println("--targeting-possible targets"+CritterWave.getListCritters().size());
+		for(int i = 0; i < CritterWave.getListCritters().size(); i++) {
+			if (CritterWave.getListCritters().get(i).alive()) {
+				Critter mycritter = CritterWave.getListCritters().get(i);
 				distance = (int)(Math.pow(mycritter.getPosition() - screenx, 2) + Math.pow(mycritter.getPosition() - screeny, 2));
 				if (distance <= (int)Math.pow(range, 2)){
 					if (targetcandidate == -1){
@@ -60,23 +60,23 @@ public abstract class Tower {
 					else{
 						switch(targetingstrategy){
 							case 0://closest 
-								if(distance < (Math.pow(wave.getWavelist().get(targetcandidate).getPosition()-screenx,2) + Math.pow(wave.getWavelist().get(targetcandidate).getPosition()-screenx,2))){
+								if(distance < (Math.pow(CritterWave.getListCritters().get(targetcandidate).getPosition()-screenx,2) + Math.pow(CritterWave.getListCritters().get(targetcandidate).getPosition()-screenx,2))){
 									targetcandidate=i;
 									System.out.println("switched to"+i);
 								}
 							break;
 							case 1://farthest 
-								if(distance>((wave.getWavelist().get(targetcandidate).getPosition()-screenx)*(wave.getWavelist().get(targetcandidate).getPosition()-screenx))+((wave.getWavelist().get(targetcandidate).getPosition()-screeny)*(wave.getWavelist().get(targetcandidate).getPosition()-screeny))){
+								if(distance>((CritterWave.getListCritters().get(targetcandidate).getPosition()-screenx)*(CritterWave.getListCritters().get(targetcandidate).getPosition()-screenx))+((CritterWave.getListCritters().get(targetcandidate).getPosition()-screeny)*(CritterWave.getListCritters().get(targetcandidate).getPosition()-screeny))){
 									targetcandidate=i;						
 								}
 							break;
 							case 2://least health 
-								if(wave.getWavelist().get(i).health<wave.getWavelist().get(targetcandidate).health){
+								if(CritterWave.getListCritters().get(i).health<CritterWave.getListCritters().get(targetcandidate).health){
 									targetcandidate=i;						
 								}
 							break;
 							case 3://most health 
-								if(wave.getWavelist().get(i).health>wave.getWavelist().get(targetcandidate).health){
+								if(CritterWave.getListCritters().get(i).health>CritterWave.getListCritters().get(targetcandidate).health){
 									targetcandidate=i;						
 								}
 							break;
@@ -103,7 +103,7 @@ public abstract class Tower {
 		if (target == -1) {  //if no valid targets, firesequence fails
 			return false;
 		} else{
-			wave.getWavelist().get(target).updateHealth(shotpower);				
+			CritterWave.getListCritters().get(target).updateHealth(shotpower);				
 			return true;
 		}
 	}
