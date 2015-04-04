@@ -1,5 +1,6 @@
 package Logic;
 
+import Critters.Game;
 import Critters.wave;
 import Critters.critter;
 
@@ -19,7 +20,7 @@ public abstract class Tower {
 	public int targetingstrategy;//0=low health,1= farthest ,2=closest,3=first,4=last
 	public int screenx;
 	public int screeny;
-	public int clip;
+	public int upgraded;
 	
 	
 	//public abstract void uprgrade();
@@ -37,10 +38,8 @@ public abstract class Tower {
 			timer -= 1;		//if it was already 0 and didn't shoot (no valid targets), it stays ready to shoot
 		}
 		if (timer == 0){
-			for(int i = 0; i < clip; i++) {
-				if(firesequence()) {  //it shoots, if successful, timer resets, if not, it waits for the next gamecycle
-					timer = cooldown;
-				}
+			if(firesequence()) {  //it shoots, if successful, timer resets, if not, it waits for the next gamecycle
+				timer = cooldown;
 			}
 		}
 	}
@@ -107,6 +106,59 @@ public abstract class Tower {
 			wave.getWavelist().get(target).updateHealth(shotpower);				
 			return true;
 		}
+	}
+	
+	public boolean upgrade(){
+		System.out.println("upgrade?");
+		boolean success=false;
+		if (Game.myMoney.getMoney()>(cost-30)){
+			System.out.println("money?"+Game.myMoney.getMoney()+"already upgrade?"+upgraded);
+			switch(upgraded){
+			case 0:
+				range +=1;
+				success =  true;
+				break;
+			case 1:
+				shotpower += 1;
+				success =  true;
+				break;
+			case 2:
+				cooldown -= 10;
+				if(cooldown<10){cooldown = 10;}
+				success =  true;
+				break;
+			case 3:
+				success =  false;
+				break;
+			}
+		}
+		if (success){
+			upgraded += 1;
+			Game.myMoney.changeMoney(-(cost-30));
+			System.out.println("UPGRADE");
+		}
+		return success;
+	}
+	
+	public int getTargetingStrategy(){
+		return targetingstrategy;
+	}
+	
+	public void setTargetingStrategy(int n){
+		if ((n >= 0)&&(n <= 3)){
+			targetingstrategy = n;
+		}
+	}
+	
+	public int getX(){
+		return screenx;
+	}
+	
+	public int getY(){
+		return screeny;
+	}
+	public int getCost(){
+		return cost;
 	}
 	
 	

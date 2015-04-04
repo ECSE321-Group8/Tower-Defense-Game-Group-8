@@ -2,18 +2,18 @@ package Logic;
 
 import Critters.Game;
 
-public class TowerTest extends Tower{
+public class TowerFast extends Tower{
 
 	
 	
-	public TowerTest(int x, int y) {
+	public TowerFast(int x, int y) {
 		super();
-		cost=5;
+		cost=6;
 
 		//pos=5
-		cooldown=20;
-		timer=2;
-		range=3;
+		cooldown=15;
+		timer=cooldown;
+		range=1;
 		shotpower=1;
 		targetingstrategy=3;
 		screenx=x;
