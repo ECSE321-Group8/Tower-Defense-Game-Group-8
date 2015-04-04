@@ -1,4 +1,4 @@
-package Logic;
+package Tests;
 import static org.junit.Assert.*;
 
 import java.io.FileInputStream;
@@ -8,6 +8,8 @@ import java.io.ObjectInputStream;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import Logic.Map;
 
 
 public class MapTest {

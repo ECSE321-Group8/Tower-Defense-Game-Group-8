@@ -1,8 +1,13 @@
-package Logic;
+package Tests;
 import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import Logic.Map;
+import Logic.Path;
+import Logic.PathFactory;
+import Logic.PathType;
 
 
 public class PathConnectedTest {
