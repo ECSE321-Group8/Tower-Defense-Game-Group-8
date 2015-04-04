@@ -10,8 +10,7 @@ public class CritterWave implements IObserver{
 	private LinkedList<Critter> listCritters = new LinkedList<Critter>();
 	Map m = Map.getInstance(); 
 	private LinkedList<Path> aPath=new LinkedList<Path>();//accesses through the Map
-	
-	
+	private LinkedList<Critter> listCritters2 = new LinkedList<Critter>();
 	
 	public CritterWave(int level){
 		int nbCritters=level*5;
@@ -64,8 +63,13 @@ public class CritterWave implements IObserver{
 
 	@Override
 	public void update() {
-		for (Critter c: getListCritters()){
-			if(c.isAlive())
+		listCritters2= (LinkedList<Critter> )listCritters.clone();
+		
+		
+		for (Critter c: listCritters2){
+			if (c.getCompletion() == aPath.size())
+				removeCritter(c);
+			else if(c.isAlive())
 				c.tick();
 			else 
 				removeCritter(c);
