@@ -51,7 +51,7 @@ public abstract class Tower {
 		for(int i = 0; i < wave.getWavelist().size(); i++) {
 			if (wave.getWavelist().get(i).alive()) {
 				critter mycritter = wave.getWavelist().get(i);
-				distance = (int)(Math.pow(mycritter.positionX - screenx, 2) + Math.pow(mycritter.positionY - screeny, 2));
+				distance = (int)(Math.pow(mycritter.getPosition() - screenx, 2) + Math.pow(mycritter.getPosition() - screeny, 2));
 				if (distance <= (int)Math.pow(range, 2)){
 					if (targetcandidate == -1){
 						targetcandidate = i;
@@ -60,13 +60,13 @@ public abstract class Tower {
 					else{
 						switch(targetingstrategy){
 							case 0://closest 
-								if(distance < (Math.pow(wave.getWavelist().get(targetcandidate).positionX-screenx,2) + Math.pow(wave.getWavelist().get(targetcandidate).positionX-screenx,2))){
+								if(distance < (Math.pow(wave.getWavelist().get(targetcandidate).getPosition()-screenx,2) + Math.pow(wave.getWavelist().get(targetcandidate).getPosition()-screenx,2))){
 									targetcandidate=i;
 									System.out.println("switched to"+i);
 								}
 							break;
 							case 1://farthest 
-								if(distance>((wave.getWavelist().get(targetcandidate).positionX-screenx)*(wave.getWavelist().get(targetcandidate).positionX-screenx))+((wave.getWavelist().get(targetcandidate).positionY-screeny)*(wave.getWavelist().get(targetcandidate).positionY-screeny))){
+								if(distance>((wave.getWavelist().get(targetcandidate).getPosition()-screenx)*(wave.getWavelist().get(targetcandidate).getPosition()-screenx))+((wave.getWavelist().get(targetcandidate).getPosition()-screeny)*(wave.getWavelist().get(targetcandidate).getPosition()-screeny))){
 									targetcandidate=i;						
 								}
 							break;
