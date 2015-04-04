@@ -558,12 +558,15 @@ public class GameView extends JFrame implements KeyListener, ActionListener {
 		}
 		else if(e.getSource() == regularTower){
 			System.out.println("Adding Regular Tower");
+			mG.placeTower();
 		}
 		else if(e.getSource() == freezeTower){
 			System.out.println("Adding Freeze Tower");
+			mG.placeTower();
 		}
 		else if(e.getSource() == shotgunTower){
 			System.out.println("Adding Shotgun Tower");
+			mG.placeTower();
 		}
 		// http://stackoverflow.com/questions/13791987/keyboard-input-stops-working-in-swing-application-a-calculator-after-clicking
 		requestFocusInWindow(); // Allows for keyboard listener to work after button pressed

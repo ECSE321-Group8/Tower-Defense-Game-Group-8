@@ -10,6 +10,7 @@ import javax.swing.JTextField;
 
 import Logic.Map;
 import Logic.Path;
+import Logic.Scenery;
 
 public class MapGrid extends JPanel implements MouseListener{
 	
@@ -68,16 +69,16 @@ public class MapGrid extends JPanel implements MouseListener{
 		yOffset = (panelHeight - gridSize*gridRows)/2;
 		
 		drawGrid(g);
-		drawTowers(g);
+		// drawTowers(g);
 		}
 	}
 
-	private void drawTowers(Graphics g) {
+	private void drawTowers(Graphics g,int i, int j) {
 		// TODO Auto-generated method stub
 		// TODO Change the colors according to methods
-		if(false){ // To test; take out if statement after
-		for(int i=0;i<gridRows;i++){
-			for(int j=0;j<gridColumns;j++){
+		//if(false){ // To test; take out if statement after
+		//for(int i=0;i<gridRows;i++){
+			//for(int j=0;j<gridColumns;j++){
 				/*
 				Tower t; // Get the tower object if it exists
 				g.setColor(towerBaseColour(t));
@@ -89,9 +90,9 @@ public class MapGrid extends JPanel implements MouseListener{
 				*/
 				g.setColor(Color.RED);
 				g.fillOval(i*gridSize+xOffset+gridSize/4, j*gridSize+yOffset+gridSize/4, gridSize/2, gridSize/2);
-			}
-		}
-		}
+			//}
+		//}
+		//}
 	}
 
 	private Color towerTypeColour(Tower t) {
@@ -159,6 +160,10 @@ public class MapGrid extends JPanel implements MouseListener{
 				else{
 					g.setColor(Color.GREEN);
 					g.fillRect(i*gridSize+xOffset, j*gridSize+yOffset, gridSize, gridSize);
+					Scenery tempScenery = (Scenery)myMap.getGrid(j, i);
+					if(tempScenery.isTowerPresent()){
+						drawTowers(g, i, j);
+					}
 				}
 				g.setColor(Color.BLACK);
 				g.drawRect(i*gridSize+xOffset, j*gridSize+yOffset, gridSize, gridSize);
@@ -263,6 +268,12 @@ public class MapGrid extends JPanel implements MouseListener{
 	public void setGrid(int x, int y, int value){
 		tempGrid[x][y]= value;
 		
+	}
+	
+	public void placeTower(){
+		Scenery tempScenery = (Scenery)myMap.getGrid(xcor, ycor);
+		tempScenery.towerPlaced();
+		repaint();
 	}
 
 	@Override
