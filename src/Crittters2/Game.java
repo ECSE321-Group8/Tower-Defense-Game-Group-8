@@ -16,7 +16,7 @@ public class Game extends Subject{
 		Map m = Map.getInstance();
 		p = new Player(); 
 		wave= new CritterWave(level);
-		TowerList tower= new TowerList();
+		TowerList mytowerlist= new TowerList();
 		pathList = new LinkedList<Path>();
 		
 		for (Path p : m.getPath()){
