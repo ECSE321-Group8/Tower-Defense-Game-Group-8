@@ -12,7 +12,7 @@ public class CritterDriver {
 	//	type=getType(critterType);
 	//	Critter critter2=CritterFactory.makeCritter(type, 1);
 	
-		critter1.moveThroughPath();
+		//critter1.moveThroughPath();
 //		while(!critter1.getPath().isEmpty()){
 //			critter1.tick();
 //			
