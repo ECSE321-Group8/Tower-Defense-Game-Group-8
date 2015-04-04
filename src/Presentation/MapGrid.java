@@ -22,7 +22,7 @@ public class MapGrid extends JPanel implements MouseListener{
 	private boolean completedView = false;
 	private int xpoints[] = new int[3]; // three points for triangles
 	private int ypoints[] = new int[3];
-	
+
 	private boolean start = true;
 	private boolean playing = false;
 	private JPanel myOptions;
@@ -35,8 +35,7 @@ public class MapGrid extends JPanel implements MouseListener{
 	public void setPlaying(boolean playing) {
 		this.playing = playing;
 	}
-
-
+	
 	private Map myMap;
 	
 	
@@ -81,12 +80,12 @@ public class MapGrid extends JPanel implements MouseListener{
 			//for(int j=0;j<gridColumns;j++){
 				/*
 				Tower t; // Get the tower object if it exists
-				g.setColor(towerBaseColour(t));
+				g.setColor(towerBaseColour());
 				*/
 				g.setColor(Color.LIGHT_GRAY);
 				g.fillRect(i*gridSize+xOffset+gridSize/8, j*gridSize+yOffset+gridSize/8, 3*gridSize/4, 3*gridSize/4);
 				/*
-				g.setColor(towerTypeColour(t));
+				g.setColor(towerTypeColour());
 				*/
 				g.setColor(Color.RED);
 				g.fillOval(i*gridSize+xOffset+gridSize/4, j*gridSize+yOffset+gridSize/4, gridSize/2, gridSize/2);
@@ -95,7 +94,7 @@ public class MapGrid extends JPanel implements MouseListener{
 		//}
 	}
 
-	private Color towerTypeColour(Tower t) {
+	private Color towerTypeColour() {
 		// TODO Auto-generated method stub
 		// Would get the type of tower:
 		int towerType=1;
@@ -111,7 +110,7 @@ public class MapGrid extends JPanel implements MouseListener{
 		return null;
 	}
 
-	private Color towerBaseColour(Tower t) {
+	private Color towerBaseColour() {
 		// TODO Auto-generated method stub
 		// would get the upgrade level of the towers:
 		int upgradeLevel=1;

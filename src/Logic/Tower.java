@@ -161,6 +161,37 @@ public abstract class Tower {
 		return cost;
 	}
 	
+	public boolean isTowerRegular(){
+		if(this instanceof TowerRegular){
+			return true;
+		}
+		else
+			return false;
+	}
+	
+	public boolean isTowerSniper(){
+		if(this instanceof TowerSniper){
+			return true;
+		}
+		else
+			return false;
+	}
+	
+	public boolean isTowerStrong(){
+		if(this instanceof TowerStrong){
+			return true;
+		}
+		else
+			return false;
+	}
+	
+	public boolean isTowerFast(){
+		if(this instanceof TowerFast){
+			return true;
+		}
+		else
+			return false;
+	}
 	
 	/*
 	 * Method that returns the Row coordinate of the tower
