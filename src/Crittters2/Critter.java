@@ -6,6 +6,7 @@ import Logic.Map;
 
 public class Critter {
 
+
 	private LinkedList<Path> aPath=new LinkedList<Path>();//accesses through the Map
 
 	private int health;
@@ -19,6 +20,7 @@ public class Critter {
 	
 	private int posX;
 	private int posY;
+	private int completion=0; 
 	
 	
 //	private Thread t;
@@ -29,6 +31,7 @@ public class Critter {
 	public Critter(int ID){
 		setPosition(-1);
 		setID(ID);
+		aPath=m.getPath();
 	}
 	
 	//GETTERS
@@ -50,9 +53,9 @@ public class Critter {
 	public int getWorth(){
 		return worth;
 	}
-//	public Thread getThread(){
-//		return t;
-//	}
+	public int getCompletion(){
+		return completion;
+	}
 	public LinkedList<Path> getPath(){
 		return aPath;
 	}
@@ -60,10 +63,10 @@ public class Critter {
 		return timer;
 	}
 	public int getPosX(){
-		return posX;
+		return position/Map.getWidth();			
 	}
 	public int getPosY(){
-		return posY;
+		return position%Map.getWidth();
 	}
 	
 	
@@ -86,27 +89,11 @@ public class Critter {
 	public void setWorth(){
 		worth = 2*this.getHealth()+this.getWaitingTime()+3*this.getResistance();
 	}
-	public void setPosX(){
-		posX= position/Map.getWidth();
-	}
-	public void setPosY(){
-		posY= position%Map.getWidth();
-	}
-	
-//	public void setThread(){
-//		t=this.startMoving();
-//	}
-	
-	
-//	public void setPath(){
-//		for (Path p: m.getPath())
-//			aPath.add(p);
-//	}
 	public void setTimer(int n ){
 		timer = n;
 	}
 	
-	
+		
 	//test
 	public String toString(){
 		return "health: "+health+", waiting time: "+waitingTime+", resistance: "+resistance+".";
@@ -148,33 +135,28 @@ public class Critter {
 		System.out.println(this.getID()+": "+this.getPosition());
 		if (timer > 0)
 			timer -=1;
-		else if (timer==0)
-			if (moveToNext())
-				timer = waitingTime;
-			else
-				return;
+		else if (timer==0){
+			moveToNext();
+			timer = waitingTime;
+		}
 		else 
 			return;
 			
 	}
 	
+
+	
 	public boolean moveToNext(){
 		Path p;
-		if (!aPath.isEmpty()){
-			p = aPath.pop();
+		
+		if (completion<aPath.size()){
+			p = aPath.get(completion);
 			setPosition(p.getPos());
+			completion++;
 			return true;
 		}
-		else{
-			//setPosition(-1);
+		else 
 			return false;
-		}
-	}
-	
-	public void moveThroughPath(){
-		System.out.println("executing movethrought");
-		while(!aPath.isEmpty())
-			tick();
 	}
 	
 	
@@ -182,30 +164,6 @@ public class Critter {
 	
 	
 	
-	
-	
-	
-	
-//	public void moveAlongPath(LinkedList<Path> path){
-//
-//		Path i;
-//		while(!path.isEmpty()){
-//			i=path.pop();
-//			this.setPosition(i.getPos());
-//			try {
-//			//System.out.println("sleeping");
-//				Thread.sleep(((long)1000)/((long)this.getWaitingTime()));
-//			//System.out.println("wake up");
-//			} catch (InterruptedException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//			System.out.println(this.getID()+": "+this.getPosition());
-//		}
-//		
-//		this.setPosition(-1);	//out of bounds
-//		
-//	}
 
 	
 

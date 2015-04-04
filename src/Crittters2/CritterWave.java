@@ -37,13 +37,13 @@ public class CritterWave {
 	public LinkedList<Path> getPath(){
 		return aPath;
 	}
-	
-	public void moveWave(){
-		for (Critter c: listCritters){
-			c.moveThroughPath();
-		}
-	}
-	
+//	
+//	public void moveWave(){
+//		for (Critter c: listCritters){
+//			c.moveThroughPath();
+//		}
+//	}
+//	
 	
 	
 	
