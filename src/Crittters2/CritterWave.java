@@ -1,10 +1,17 @@
 package Crittters2;
 import java.util.*;
 
+import Logic.Map;
+import Logic.Path;
+
 
 public class CritterWave {
 
 	private LinkedList<Critter> listCritters = new LinkedList<Critter>();
+	Map m = Map.getInstance(); 
+	private LinkedList<Path> aPath=new LinkedList<Path>();//accesses through the Map
+	
+	
 	
 	public CritterWave(int level){
 		int nbCritters=level*5;
@@ -17,25 +24,23 @@ public class CritterWave {
 			c=CritterFactory.makeCritter(type, i);
 			listCritters.add(c);
 		}
+		setPath();
 		
 		
 	}
-//	public void startThreads(){
-//		for(Critter c: listCritters){
-//			c.getThread().start();
-//			
-//			try {
-//				Thread.sleep(1000);
-//			} catch (InterruptedException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//			
-//		}
-//	}
+
+	public void setPath(){
+		for (Path p: m.getPath())
+			aPath.add(p);
+	}
+	
+	public LinkedList<Path> getPath(){
+		return aPath;
+	}
+	
 	public void moveWave(){
 		for (Critter c: listCritters){
-			c.tick();
+			c.moveThroughPath();
 		}
 	}
 	

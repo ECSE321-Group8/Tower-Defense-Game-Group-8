@@ -30,9 +30,14 @@ public class CritterTest {
 		m.printPath();
 		
 		wave= new CritterWave(1);
+		for (Path p: wave.getPath())
+			System.out.println(p.getPos());
+		for (int i=0;i<30;i++){
+			for (Critter c: wave.getListCritters()){
+				c.tick();
+			}
+		}
 		
-		wave.startThreads();
-		//System.out.println("done");
 		
 	}
 	
