@@ -7,6 +7,7 @@ import java.util.ListIterator;
 public class Map {
 	
 	private static Tile grid [][]; // hold the Map path and scenery
+	private Tower towerGrid [][];
 	private int height; // height of map
 	private static int width; // Width of Map
 	
@@ -51,6 +52,7 @@ public class Map {
 		height=h;
 		width=w;
 		grid=new Tile[height][width];
+		towerGrid = new Tower[height][width];
 	}
 	public void setEntryPoint(Path p){
 		entryPoint=p;

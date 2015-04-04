@@ -21,13 +21,21 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import Crittters2.Game;
 import Logic.Map;
+import Logic.Scenery;
+import Logic.Tower;
+import Logic.TowerList;
 
 public class GameView extends JFrame implements KeyListener, ActionListener {
 
 	final static String APPNAME = "TOWER DEFENSE - GROUP 8";
 	public static Dimension size = new Dimension (700,550);
 	private MapGrid mG;
+	
+	private Scenery tempScenery;
+	private Tower tempTower;
+	private TowerList myTowerList;
 	
 	private boolean valid;
 	
@@ -97,12 +105,13 @@ public class GameView extends JFrame implements KeyListener, ActionListener {
 	
 	private JButton upgrade;
 	private JButton sell;
-	private JButton regularTower;
-	private JButton freezeTower;
-	private JButton shotgunTower;
+	private JButton FastTower;
+	private JButton strongTower;
+	private JButton sniperTower;
 	
 	private SplitPane sP;
 	private Map myMap;
+	private Game myGame;
 
 	
 	public GameView(){
@@ -122,6 +131,8 @@ public class GameView extends JFrame implements KeyListener, ActionListener {
 		realWidth = this.getContentPane().getSize().width;
 		// mainPanel.add(mG);
 		myMap=Map.getInstance();
+		myGame = Game.getInstance();
+		myTowerList = myGame.getMytowerlist();
 		leftSideOptions();
 		mG = new MapGrid(realWidth-sizeofSplit,realHeight-10,options,layout);
 		splitViewSetUp();
@@ -210,18 +221,18 @@ public class GameView extends JFrame implements KeyListener, ActionListener {
 		upgrade = new JButton ("Upgrade");
 		upgrade.addActionListener(this);
 		
-		regularTower = new JButton("Regular");
-		regularTower.addActionListener(this);
+		FastTower = new JButton("Fast");
+		FastTower.addActionListener(this);
 		
-		freezeTower = new JButton("Freeze");
-		freezeTower.addActionListener(this);
+		strongTower = new JButton("Strong");
+		strongTower.addActionListener(this);
 		
-		shotgunTower = new JButton("Shotgun");
-		shotgunTower.addActionListener(this);
+		sniperTower = new JButton("Sniper");
+		sniperTower.addActionListener(this);
 		
 		towerStats = new JTextArea("Power=\nRange=\nCool Down=");
 		
-		String [] strategyOptions = {"First","Last","Most Health","Least Health"};
+		String [] strategyOptions = {"Closest","Furthest","Least Health","Most Health"};
 		towerStrategy = new JComboBox(strategyOptions);
 		towerStrategy.setSelectedIndex(1);
 		towerStrategy.addActionListener(this);
@@ -408,17 +419,17 @@ public class GameView extends JFrame implements KeyListener, ActionListener {
 		gbc4.gridy = 0;
 		gbc4.fill = GridBagConstraints.HORIZONTAL;
 		
-		towerPurchase.add(regularTower, gbc4);
+		towerPurchase.add(FastTower, gbc4);
 		
 		gbc4.gridx = 0;
 		gbc4.gridy = 1;
 		
-		towerPurchase.add(freezeTower, gbc4);
+		towerPurchase.add(strongTower, gbc4);
 		
 		gbc4.gridx = 0;
 		gbc4.gridy = 2;
 		
-		towerPurchase.add(shotgunTower, gbc4);
+		towerPurchase.add(sniperTower, gbc4);
 		
 		gbc4.gridx = 0;
 		gbc4.gridy = 3;
@@ -565,20 +576,30 @@ public class GameView extends JFrame implements KeyListener, ActionListener {
 		else if(e.getSource() == towerStrategy){
 			System.out.println("The Selected Strategy was: " + towerStrategy.getSelectedIndex());
 		}
-		else if(e.getSource() == regularTower){
-			System.out.println("Adding Regular Tower");
+		/*
+		 * Tower IDs:
+		 * Fast Tower: 1
+		 * Strong Tower: 2
+		 * Sniper Tower: 0
+		 */
+		else if(e.getSource() == FastTower){
+			System.out.println("Adding Fast Tower");
+			tempScenery = (Scenery)myMap.getGrid(mG.getXcor(), mG.getYcor());
+			tempScenery.placeTower();
+			myTowerList = myGame.getMytowerlist();
+			myTowerList.buyTower(1, mG.getXcor(), mG.getYcor());
 			mG.placeTower();
 			layout.show(options, "Opening");
 			setVisible(true);
 		}
-		else if(e.getSource() == freezeTower){
-			System.out.println("Adding Freeze Tower");
+		else if(e.getSource() == strongTower){
+			System.out.println("Adding Strong Tower");
 			mG.placeTower();
 			layout.show(options, "Opening");
 			setVisible(true);
 		}
-		else if(e.getSource() == shotgunTower){
-			System.out.println("Adding Shotgun Tower");
+		else if(e.getSource() == sniperTower){
+			System.out.println("Adding Sniper Tower");
 			mG.placeTower();
 			layout.show(options, "Opening");
 			setVisible(true);
