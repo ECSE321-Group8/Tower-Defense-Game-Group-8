@@ -48,7 +48,7 @@ public abstract class Tower {
 		int distance = 0;
 		System.out.println("--targeting-possible targets"+g.getCritterWave().getListCritters().size());
 		for(int i = 0; i < g.getCritterWave().getListCritters().size(); i++) {
-			if (g.getCritterWave().getListCritters().get(i).isAlive()) {
+			if ((g.getCritterWave().getListCritters().get(i).isAlive())) {
 				Critter mycritter = g.getCritterWave().getListCritters().get(i);
 				distance = (int)(Math.pow(mycritter.getPosX() - screenx, 2) + Math.pow(mycritter.getPosY() - screeny, 2));
 				if (distance <= (int)Math.pow(range, 2)){

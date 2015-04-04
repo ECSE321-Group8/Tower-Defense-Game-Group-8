@@ -8,8 +8,8 @@ public class TowerList extends ArrayList<Tower>{
 	Game g = Game.getInstance();
 	
 	
-	public void buyTower(int n, int x, int y){
-		switch(n){
+	public void buyTower(int type, int x, int y){
+		switch(type){
 		case 0:
 			if (g.getMoney()>(TowerSniper.cost)){
 				this.add(new TowerSniper(x,y));
