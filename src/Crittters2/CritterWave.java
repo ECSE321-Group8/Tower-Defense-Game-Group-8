@@ -8,9 +8,11 @@ import Logic.Path;
 public class CritterWave implements IObserver{
 
 	private LinkedList<Critter> listCritters = new LinkedList<Critter>();
-	Map m = Map.getInstance(); 
+	Map m = Map.getInstance();
+	Game g = Game.getInstance();
 	private LinkedList<Path> aPath=new LinkedList<Path>();//accesses through the Map
-	private LinkedList<Critter> listCritters2 = new LinkedList<Critter>();
+	
+	
 	
 	public CritterWave(int level){
 		int nbCritters=level*5;
@@ -62,19 +64,15 @@ public class CritterWave implements IObserver{
 	}
 
 	@Override
-	public void update() {
-		listCritters2= (LinkedList<Critter> )listCritters.clone();
-		
-		
-		for (Critter c: listCritters2){
-			if (c.getCompletion() == aPath.size())
-				removeCritter(c);
-			else if(c.isAlive())
-				c.tick();
-			else 
-				removeCritter(c);
+	public void update(){
+		for(int i = listCritters.size(); i < 0; i--){
+			if(listCritters.get(i).getCompletion() == aPath.size()){
+				g.decrementLife(1);
+				removeCritter(listCritters.get(i));
+			}
+			listCritters.get(i).tick();
 		}
 		
 	}
 }
-
+ 
