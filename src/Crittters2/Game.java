@@ -9,7 +9,6 @@ public class Game extends Subject{
 	int level =1;
 	LinkedList<Path> pathList;
 	CritterWave wave;
-	Player p;
 	private static Game gameInstance= null;
 	private int Money;
 	private int Life;
@@ -23,9 +22,11 @@ public class Game extends Subject{
 
 
 	public Game(){
-		
+	
+	}
+	
+	public void setGame(){
 		Map m = Map.getInstance();
-		p = new Player(); 
 		wave= new CritterWave(level);
 		mytowerlist= new TowerList();
 		pathList = new LinkedList<Path>();
@@ -64,9 +65,13 @@ public class Game extends Subject{
 	public void addMoney(int n){
 		Money+=n;
 	}
-	
-	
-	
+
+//	public void buyTower(int n , int x, int y){
+//		mytowerlist.buyTower(n,x,y);
+//	}
+//	
+//	
+//	
 	
 	public void startGameClock(){
 		while(!wave.getListCritters().isEmpty()){
