@@ -79,15 +79,15 @@ public abstract class Tower {
 									targetcandidate=i;						
 								}
 							break;
-		/*					case 4://first
-								if(getcritteriprogress>getcrittertargetprogress){
+							case 4://first
+								if(g.getCritterWave().getListCritters().get(i).getCompletion()>g.getCritterWave().getListCritters().get(targetcandidate).getCompletion()){
 									targetcandidate=i;						
 								}
 							case 5://last 
-								if(getcritterihealth<getcrittertargethealth){
+								if(g.getCritterWave().getListCritters().get(i).getCompletion()<g.getCritterWave().getListCritters().get(targetcandidate).getCompletion()){
 									targetcandidate=i;						
 								}
-							break;*/
+							break;
 						}				
 					}			
 			}
