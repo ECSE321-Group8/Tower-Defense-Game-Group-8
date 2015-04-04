@@ -10,7 +10,7 @@ public class Game extends Subject{
 	LinkedList<Path> pathList;
 	CritterWave wave;
 	Player p;
-	private Game gameInstance= new Game();
+	private static Game gameInstance= null;
 	
 	public Game(){
 		Map m = Map.getInstance();
@@ -22,6 +22,13 @@ public class Game extends Subject{
 		for (Path p : m.getPath()){
 			pathList.add(p);
 		}
+	}
+	
+	
+	public static Game getInstance(){
+		if(gameInstance==null)
+			gameInstance=new Game();
+		return gameInstance;
 	}
 	
 	public LinkedList<Path> getPathList(){
