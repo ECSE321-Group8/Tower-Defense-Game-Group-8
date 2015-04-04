@@ -121,11 +121,13 @@ public class Critter {
 	
 	//critter is hit and loses health 
 	public void critterLosesHealth(int n){
-		if(isAlive())
-			this.health-=n;
+		if(isAlive()){
+			this.health-=n;}
+		if (this.health < 0){this.health = 0;}
 	}
 	public void updateHealth(int damage){
 		this.health=this.health-damage;
+		if (this.health < 0){this.health = 0;}
 	}
 	
 	//critter is hit and is slowed down
