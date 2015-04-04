@@ -1,6 +1,5 @@
 package Critters;
 import Logic.*;
-import Presentation.*;
 public class Game extends Subject{
 	
 	public Game(int life,double money,int wave)
