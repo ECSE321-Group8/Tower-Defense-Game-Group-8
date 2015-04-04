@@ -37,7 +37,6 @@ public class CritterTest {
 		for (int i=0;i<50;i++){//gameclock
 			System.out.println("Tick #: "+i);
 			for (Critter c: wave.getListCritters()){
-
 				c.tick();
 			}
 		}
