@@ -5,71 +5,35 @@ import java.util.*;
 
 import org.junit.*;
 
+import Logic.*;
+import Logic.Map;
 
 public class CritterTest {
-	//Initialized
-
-	public static CritterType getType(int type){
-		switch(type){
-		case 0:
-			return CritterType.SPEEDY;
-		case 1:
-			return CritterType.HEALTHY;
-		case 2:
-			return CritterType.RESISTANT;
-		default:
-			return null;//error
-		}
-	}
+	Map m;
+	CritterWave wave;
 	
 	@Before
-	public void setUp()throws Exception{
-		LinkedList<Integer> path1= new LinkedList<Integer>();
-		LinkedList<Integer> path2 = new LinkedList<Integer>();
+	public void setUp(){
+		m =Map.getInstance();
+		m.setMap(5, 5);
+		m.setCellToPath(0);
+		m.setCellToPath(5);
+		m.setCellToPath(10);
+		m.setCellToPath(15);
+		m.setCellToPath(20);
+		m.setCellToPath(21);
+		m.setCellToPath(22);
+		m.setCellToPath(23);
+		m.setCellToPath(24);
+		m.finalizePath();
+		m.printGrid();
+		m.printPath();
 		
-		int critterType =0;//speedy
-		CritterType type=getType(critterType);
-		Critter critter1=CritterFactory.makeCritter(type, 0);
-		System.out.println(critter1.getHealth());
-		System.out.println(critter1.getResistance());
-		System.out.println(critter1.getSpeed());
-		System.out.println(critter1.getWorth());
-		System.out.println(critter1.getPosition());
+		wave= new CritterWave(1);
 		
-		critterType =2;//speedy
-		type=getType(critterType);
-		Critter critter2=CritterFactory.makeCritter(type, 1);
-		System.out.println(critter2.getHealth());
-		System.out.println(critter2.getResistance());
-		System.out.println(critter2.getSpeed());
-		System.out.println(critter2.getWorth());
-		System.out.println(critter2.getPosition());
+		wave.startThreads();
+		//System.out.println("done");
 		
-		
-		path1.add(0);
-		path1.add(1);
-		path1.add(2);
-		path1.add(3);
-		path1.add(4);
-		path1.add(5);
-		path1.add(6);
-		path1.add(7);
-		path1.add(8);
-		path1.add(9);
-
-		path2.add(0);
-		path2.add(1);
-		path2.add(2);
-		path2.add(3);
-		path2.add(4);
-		path2.add(5);
-		path2.add(6);
-		path2.add(7);
-		path2.add(8);
-		path2.add(9);
-//		
-		critter1.moveAlongPath(path1);
-		critter2.moveAlongPath(path2);
 	}
 	
 	@Test

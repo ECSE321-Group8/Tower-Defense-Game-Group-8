@@ -1,20 +1,27 @@
 package Critters;
-
+import Logic.*;
+import Presentation.*;
 public class critter {
 	public int speed;
 	public  static int typeCritter;
 	public int health;
 	public boolean alive; 
-	public int positionX=0;
-	
-	public int positionY=0;
+	public int position;
+	public int getPosition() {
+		return position;
+	}
+	public static int id;
 	
 	// assume that entry gate is at(0,0)
 	//at the beginning the critters are on path
 	//abstract public int getTyper();
 	
-	public critter()
+	public static int getID() {
+		return id;
+	}
+	public critter(int id)
 	{
+		this.id=id;
 		//System.out.println("NewCritter:"+getTypeCritter());
 //		typeCritter=getType();
 	
@@ -76,14 +83,31 @@ public class critter {
 			return true;
 		}
 	}
-	public void move(double positionX,double positionY)
+	public void move(int position)
 	{
 		if ( speed!=0 && health!=0 )
 		{
+			for(int x=0;x<Game.myMap.getTemp().size();x++)
+			{
+				{
+					this.position=Game.myMap.getTemp().get(x).getPos();
+					try {
+						//System.out.println("sleeping");
+						Thread.sleep((long)1000);	
+						//System.out.println("wake up");
+					}
+					catch (InterruptedException e) 
+					{
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					System.out.println(this.getID()+": "+this.getPosition());
+				}
+			}
 			//change positionx and positiony according to the set up of the path
 			// increment one tile then multipy by speed		
 		}
-		if(positionX==10 && positionY==10)//suppose end point
+		if(position==Game.myMap.getTemp().getLast().getExit())//suppose end point
 		{
 			Game.myLife.decreaseLife(1);
 			//Game.myMoney.changeMoney(-typeCritter*3);//I DONT THINK WE LOOSE MONEY !! 

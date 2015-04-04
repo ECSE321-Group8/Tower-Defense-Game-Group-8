@@ -1,12 +1,11 @@
 package Logic;
 		
 public class Path extends Tile{
-	
+	Map m = Map.getInstance();
 	
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
 	//privacy of the attributes might change 
 	//Attributes of the tile itself
 	public int entry;
@@ -120,7 +119,7 @@ public class Path extends Tile{
 	}
 	public void storePathTile(){
 		Map.setGrid(this.getRow(),this.getCol(),this);
-		Map.temp.add(this);
+		m.addtoPathList(this);
 
 	}
 	

@@ -1,7 +1,5 @@
 package Crittters2;
 
-//import Critters.critter;
-
 public class CritterDriver {
 
 	public static void main(String[] args) {
@@ -10,8 +8,8 @@ public class CritterDriver {
 		CritterType type=getType(critterType);
 		Critter critter1=CritterFactory.makeCritter(type, 0);
 		
-		//critterType =2;//speedy
-		//type=getType(critterType);
+	//	critterType =2;//speedy
+	//	type=getType(critterType);
 		Critter critter2=CritterFactory.makeCritter(type, 1);
 		
 		
@@ -19,20 +17,11 @@ public class CritterDriver {
 
 		Thread t2= critter2.startMoving();
 		
-		t1.start();
+		//t1.start();
+		critter1.getThread().start();
 		t2.start();
 		
 		
-		try {
-			Thread.sleep(1000);
-			critter2.critterSlowedDown(10);
-			Thread.sleep(1000);
-			critter2.critterSlowedDown(-10);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
 	}
 
 	public static CritterType getType(int type){
