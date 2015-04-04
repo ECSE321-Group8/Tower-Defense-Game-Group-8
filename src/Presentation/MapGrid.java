@@ -23,16 +23,30 @@ public class MapGrid extends JPanel implements MouseListener{
 	private int ypoints[] = new int[3];
 	
 	private boolean start = true;
+	private boolean playing = false;
+	private JPanel myOptions;
+	private CardLayout layout;
 	
+	public boolean isPlaying() {
+		return playing;
+	}
+
+	public void setPlaying(boolean playing) {
+		this.playing = playing;
+	}
+
+
 	private Map myMap;
 	
 	
-	public MapGrid(int panelWidth, int panelHeight){
+	public MapGrid(int panelWidth, int panelHeight, JPanel myOptions, CardLayout layout){
 		
 		startSet = false; // Do not want to paint until the Dimension has been set
 		this.panelWidth = panelWidth;
 		this.panelHeight = panelHeight;
 		myMap=Map.getInstance();
+		this.myOptions = myOptions;
+		this.layout = layout;
 		
 		addMouseListener(this);
 		
@@ -254,12 +268,15 @@ public class MapGrid extends JPanel implements MouseListener{
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
-			
+		ycor = e.getX()-xOffset;
+		xcor = e.getY()-yOffset;
 		// TODO: Catch exception where clicked outside of area
-		if(startSet){
+		if(startSet && !playing){
 			System.out.println("X: " + e.getX() + "\tY: " + e.getY());
-			ycor = e.getX()-xOffset;
-			xcor = e.getY()-yOffset;
+			/*
+			 ycor = e.getX()-xOffset;
+			 xcor = e.getY()-yOffset;
+			*/
 			tempGrid[xcor/gridSize][ycor/gridSize] = 1;
 			xcor = xcor/gridSize;
 			ycor = ycor/gridSize;
@@ -274,9 +291,7 @@ public class MapGrid extends JPanel implements MouseListener{
 				setCompletedView(false);
 			}
 				
-			else	{
 				
-			}		
 
 			
 			myMap.printGrid();
@@ -288,7 +303,20 @@ public class MapGrid extends JPanel implements MouseListener{
 			repaint();
 			// start = false;
 		}
-		
+		else{
+			System.out.println("In the game mode!");
+			xcor = xcor/gridSize;
+			ycor = ycor/gridSize;
+			if(myMap.getGrid(xcor, ycor).isScenery()){
+				System.out.println("Is Scenery");
+				layout.show(myOptions, "Tower Purchase");
+				setVisible(true);
+			}
+			else{
+				System.out.println("Is Path");
+				layout.show(myOptions, "Critter");
+			}
+		}	
 	}
 
 

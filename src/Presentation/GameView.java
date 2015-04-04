@@ -119,10 +119,10 @@ public class GameView extends JFrame implements KeyListener, ActionListener {
 		
 		realHeight = this.getContentPane().getSize().height-10;
 		realWidth = this.getContentPane().getSize().width;
-		mG = new MapGrid(realWidth-sizeofSplit,realHeight-10);
-		myMap=Map.getInstance();
 		// mainPanel.add(mG);
+		myMap=Map.getInstance();
 		leftSideOptions();
+		mG = new MapGrid(realWidth-sizeofSplit,realHeight-10,options,layout);
 		splitViewSetUp();
 		
 		
@@ -486,6 +486,14 @@ public class GameView extends JFrame implements KeyListener, ActionListener {
 		}
 		else if(e.getSource() == play){
 			System.out.println("Start Playing Game");
+			open.setEnabled(false);
+			mG.setPlaying(true);
+			myMap.openMap(tMapName1.getText());
+			mG.setDimensions(myMap.getHeight(), myMap.getWidth());
+			mG.setCompletedView(true);
+			editAgain.setEnabled(false);
+			repaint();
+			setVisible(true);
 		}
 		else if(e.getSource()==edit){
 			save.setEnabled(false);
@@ -514,6 +522,7 @@ public class GameView extends JFrame implements KeyListener, ActionListener {
 		else if(e.getSource() == open){
 			System.out.println("Pressed Open");
 			layout.show(options, "Opening");
+			editAgain.setEnabled(true);
 			setVisible(true);
 		}
 		else if(e.getSource()==save){
@@ -525,9 +534,6 @@ public class GameView extends JFrame implements KeyListener, ActionListener {
 		}
 		else if(e.getActionCommand()== "Critter Button"){
 			System.out.println("Critter Button");
-		}
-		else if(e.getSource() == play){ // This is how to get event of a button using it's variable name
-			System.out.println("Pressed Play!");
 		}
 		else if(e.getSource() == newMap){
 			System.out.println("Starting a new Map");
