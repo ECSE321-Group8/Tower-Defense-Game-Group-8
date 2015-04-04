@@ -131,7 +131,7 @@ public class Critter implements Runnable{
 			this.setPosition(i.getPos());
 			try {
 			//System.out.println("sleeping");
-				Thread.sleep(((long)1)/((long)this.getSpeed()));
+				Thread.sleep(((long)1000)/((long)this.getSpeed()));
 			//System.out.println("wake up");
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
@@ -149,10 +149,12 @@ public class Critter implements Runnable{
 	@Override
 	public void run() {
 		//LinkedList<Integer> path = new LinkedList<Integer>();
+		/*
 		for (Path i: m.getPath()){
 			aPath.add(i);
 
 		}
+		*/
 		//System.out.println("running");
 		moveAlongPath(aPath);
 		//System.out.println("done");
