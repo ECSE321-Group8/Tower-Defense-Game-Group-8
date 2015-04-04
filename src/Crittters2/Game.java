@@ -11,12 +11,18 @@ public class Game extends Subject{
 	CritterWave wave;
 	Player p;
 	private static Game gameInstance= null;
+	TowerList mytowerlist;
 	
+	public TowerList getMytowerlist() {
+		return mytowerlist;
+	}
+
+
 	public Game(){
 		Map m = Map.getInstance();
 		p = new Player(); 
 		wave= new CritterWave(level);
-		TowerList mytowerlist= new TowerList();
+		mytowerlist= new TowerList();
 		pathList = new LinkedList<Path>();
 		
 		for (Path p : m.getPath()){

@@ -324,9 +324,12 @@ public class MapGrid extends JPanel implements MouseListener{
 					layout.show(myOptions, "Tower Purchase");
 				}
 				else{
+					/*
 					System.out.println("Removed Tower");
 					tempScenery.towerRemoved();
 					repaint();
+					*/
+					layout.show(myOptions, "Tower");
 				}
 				setVisible(true);
 			}
