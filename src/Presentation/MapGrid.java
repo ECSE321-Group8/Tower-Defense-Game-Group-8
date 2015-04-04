@@ -61,7 +61,7 @@ public class MapGrid extends JPanel implements MouseListener{
 	private void drawTowers(Graphics g) {
 		// TODO Auto-generated method stub
 		// TODO Change the colors according to methods
-		if(true){ // To test; take out if statement after
+		if(false){ // To test; take out if statement after
 		for(int i=0;i<gridRows;i++){
 			for(int j=0;j<gridColumns;j++){
 				/*

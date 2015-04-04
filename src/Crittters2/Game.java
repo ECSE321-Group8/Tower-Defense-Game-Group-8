@@ -12,10 +12,10 @@ public class Game {
 	
 	
 	public Game(){
-		pathList = new LinkedList<Path>();
+		
 		wave= new CritterWave(level);
 		Map m = Map.getInstance();
-	
+		pathList = new LinkedList<Path>();
 		
 		for (Path p : m.getPath()){
 			pathList.add(p);

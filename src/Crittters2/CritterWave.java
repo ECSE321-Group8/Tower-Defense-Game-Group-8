@@ -23,6 +23,14 @@ public class CritterWave {
 	public void startThreads(){
 		for(Critter c: listCritters){
 			c.getThread().start();
+			/*
+			try {
+				Thread.sleep(10000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			*/
 		}
 	}
 	
