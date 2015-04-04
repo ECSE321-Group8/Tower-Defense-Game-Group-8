@@ -51,7 +51,7 @@ public abstract class Tower {
 		for(int i = 0; i < CritterWave.getListCritters().size(); i++) {
 			if (CritterWave.getListCritters().get(i).alive()) {
 				Critter mycritter = CritterWave.getListCritters().get(i);
-				distance = (int)(Math.pow(mycritter.getPosition() - screenx, 2) + Math.pow(mycritter.getPosition() - screeny, 2));
+				distance = (int)(Math.pow(mycritter.getPosX() - screenx, 2) + Math.pow(mycritter.getPosY() - screeny, 2));
 				if (distance <= (int)Math.pow(range, 2)){
 					if (targetcandidate == -1){
 						targetcandidate = i;
@@ -60,7 +60,7 @@ public abstract class Tower {
 					else{
 						switch(targetingstrategy){
 							case 0://closest 
-								if(distance < (Math.pow(CritterWave.getListCritters().get(targetcandidate).getPosition()-screenx,2) + Math.pow(CritterWave.getListCritters().get(targetcandidate).getPosition()-screenx,2))){
+								if(distance < (Math.pow(CritterWave.getListCritters().get(targetcandidate).getPosX()-screenx,2) + Math.pow(CritterWave.getListCritters().get(targetcandidate).getPosY()-screenx,2))){
 									targetcandidate=i;
 									System.out.println("switched to"+i);
 								}

@@ -3,12 +3,11 @@ package Logic;
 import Critters.Game;
 
 public class TowerRegular extends Tower{
-
+	static final int cost = 6;
 	
 	
 	public TowerRegular(int x, int y) {
 		super();
-		cost=5;
 
 		//pos=5
 		cooldown=25;

@@ -4,11 +4,11 @@ import Critters.Game;
 
 public class TowerStrong extends Tower{
 
-	
+	static final int cost=10;	
 	
 	public TowerStrong(int x, int y) {
 		super();
-		cost=10;
+
 
 		//pos=5
 		cooldown=30;
