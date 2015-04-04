@@ -6,14 +6,15 @@ public class critter {
 	public int health;
 	public boolean alive; 
 	public int position;
-
+	public static int id;
 	
 	// assume that entry gate is at(0,0)
 	//at the beginning the critters are on path
 	//abstract public int getTyper();
 	
-	public critter()
+	public critter(int id)
 	{
+		this.id=id;
 		//System.out.println("NewCritter:"+getTypeCritter());
 //		typeCritter=getType();
 	
