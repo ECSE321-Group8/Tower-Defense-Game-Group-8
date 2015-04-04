@@ -11,7 +11,7 @@ public class Map {
 	private static int width; // Width of Map
 	
 	//private
-	static LinkedList <Path> temp = new LinkedList<Path>(); // List of the Path
+	private LinkedList <Path> temp = new LinkedList<Path>(); // List of the Path
 	private Path entryPoint; // Entry point
 	private Path exitPoint; // Exit point
 	
@@ -55,6 +55,10 @@ public class Map {
 		completePath=n;
 	}
 	
+	public void addtoPathList(Path p){
+		temp.add(p);
+	}
+	
 	
 	
 	
@@ -77,6 +81,9 @@ public class Map {
 	}
 	public int getCurrentPos() {
 		return currentPos;
+	}
+	public LinkedList<Path> getPath(){
+		return temp;
 	}
 
 	

@@ -22,12 +22,8 @@ public class CritterDriver {
 		t1.start();
 		t2.start();
 		
-		
 		try {
-			Thread.sleep(1000);
-			critter2.critterSlowedDown(10);
-			Thread.sleep(1000);
-			critter2.critterSlowedDown(-10);
+			t1.sleep(5000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

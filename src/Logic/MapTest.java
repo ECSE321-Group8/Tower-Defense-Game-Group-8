@@ -30,7 +30,7 @@ public class MapTest {
 //			a)entryPoint=exitPoint=NULL
 			assertTrue("the entryPoint and/or exitPoint aren't define properly",(m.getEntryPoint()==null&&m.getExitPoint()==null));
 //			b)linked list isEmpty
-			assertTrue("LinkedList is not empty", Map.temp.isEmpty());
+			assertTrue("LinkedList is not empty", m.getPath().isEmpty());
 //			c)grid should be initialized all to null
 			m.printGrid();
 //			d)check if the following methods can handle this condition 
@@ -46,7 +46,7 @@ public class MapTest {
 //			a)entryPoint!=NULL && exitPoint=NULL
 			assertTrue("the entryPoint and/or exitPoint aren't define properly",(m.getEntryPoint()!= null && m.getExitPoint()== null));
 //			b)linked list isEmpty
-			assertTrue("LinkedList is not empty", Map.temp.isEmpty());
+			assertTrue("LinkedList is not empty", m.getPath().isEmpty());
 //			c)grid should be initialized all to null, expect entryPoint
 			m.printGrid();
 //			d)check if the following methods can handle this condition 
@@ -67,7 +67,7 @@ public class MapTest {
 //			a)entryPoint!=NULL && exitPoint=NULL
 			assertTrue("the entryPoint and/or exitPoint aren't define properly",(m.getEntryPoint()!=null&&m.getExitPoint()==null));
 //			b)linked list !isEmpty
-			assertFalse("LinkedList is not empty", Map.temp.isEmpty());
+			assertFalse("LinkedList is not empty", m.getPath().isEmpty());
 			System.out.print("This is the linked list: ");
 			m.printPath();
 			System.out.println();
@@ -108,7 +108,7 @@ public class MapTest {
 //			a)entryPoint!=NULL && exitPoint!=NULL
 			assertTrue("the entryPoint and/or exitPoint aren't define properly",(m.getEntryPoint()!=null&&m.getExitPoint()!=null));
 //			b)linked list !isEmpty
-			assertFalse("LinkedList is not empty", Map.temp.isEmpty());
+			assertFalse("LinkedList is not empty", m.getPath().isEmpty());
 			System.out.print("This is the linked list of the finalized Path: ");
 			m.printPath();
 			System.out.println();
@@ -138,7 +138,7 @@ public class MapTest {
 //			a)entryPoint!=NULL && exitPoint!=NULL
 			assertTrue("the entryPoint and/or exitPoint aren't define properly",(m.getEntryPoint()!=null&&m.getExitPoint()!=null));
 //			b)linked list !isEmpty
-			assertFalse("LinkedList is not empty", Map.temp.isEmpty());
+			assertFalse("LinkedList is not empty", m.getPath().isEmpty());
 //			c)path on the grid should be initialized, rest should be scenery
 			m.setRemainingToScenery();
 			System.out.println("Map after setting rest to Scenery");
@@ -164,7 +164,7 @@ public class MapTest {
 //			a)entryPoint!=NULL && exitPoint=NULL
 			assertTrue("the entryPoint and/or exitPoint aren't define properly",(m.getEntryPoint()!=null&&m.getExitPoint()==null));
 //			b)linked list !isEmpty
-			assertFalse("LinkedList is not empty", Map.temp.isEmpty());
+			assertFalse("LinkedList is not empty", m.getPath().isEmpty());
 //			c)path on the grid should be initialized +mix of scenery and null
 
 			System.out.println("Map after editing w/o finalizing");
