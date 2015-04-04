@@ -1,8 +1,6 @@
 package Logic;
 
-import Crittters2.Game;
-import Crittters2.CritterWave;
-import Crittters2.Critter;
+import Crittters2.*;
 
 
 public abstract class Tower {
@@ -22,6 +20,7 @@ public abstract class Tower {
 	public int screeny;
 	public int upgraded;
 	
+	Game g= Game.getInstance();
 	
 	//public abstract void uprgrade();
 	

@@ -11,8 +11,12 @@ public class Game extends Subject{
 	CritterWave wave;
 	Player p;
 	private static Game gameInstance= null;
+	private int Money;
+	private int Life;
+	
 	
 	public Game(){
+		
 		Map m = Map.getInstance();
 		p = new Player(); 
 		wave= new CritterWave(level);
@@ -36,6 +40,19 @@ public class Game extends Subject{
 	}
 	public CritterWave getCritterWave(){
 		return wave;
+	}
+	public int getMoney(){
+		return Money;
+	}
+	public int getLife(){
+		return Life;
+	}
+	
+	public void setMoney(int n){
+		Money=n;
+	}
+	public void setLife(int n){
+		Life=n;
 	}
 	
 	
