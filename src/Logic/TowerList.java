@@ -2,25 +2,26 @@ package Logic;
 
 import java.util.ArrayList;
 
-import Critters.Game;
+import Crittters2.*;
 
 public class TowerList extends ArrayList<Tower>{
-
+	Game g = Game.getInstance();
+	
 	
 	public void buyTower(int n, int x, int y){
 		switch(n){
 		case 0:
-			if (Game.myMoney.getMoney()>(TowerSniper.cost)){
+			if (g.getMoney()>(TowerSniper.cost)){
 				this.add(new TowerSniper(x,y));
 			}			
 			break;
 		case 1:
-			if (Game.myMoney.getMoney()>(TowerFast.cost)){
+			if (g.getMoney()>(TowerFast.cost)){
 				this.add(new TowerFast(x,y));
 			}			
 		break;
 		case 2:
-			if (Game.myMoney.getMoney()>(TowerStrong.cost)){
+			if (g.getMoney()>(TowerStrong.cost)){
 				this.add(new TowerStrong(x,y));
 			}			
 			break;
@@ -37,7 +38,7 @@ public class TowerList extends ArrayList<Tower>{
 	}
 	
 	public void sellTower(int i){
-		Game.myMoney.changeMoney((this.get(i).getCost())-20);
+		g.addMoney((int)(this.get(i).getCost()*0.75));
 		this.remove(i);
 	}	
 	public void update(){

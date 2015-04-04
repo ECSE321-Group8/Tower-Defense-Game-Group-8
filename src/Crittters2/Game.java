@@ -11,7 +11,11 @@ public class Game extends Subject{
 	CritterWave wave;
 	Player p;
 	private static Game gameInstance= null;
+	private int Money;
+	private int Life;
+	
 	TowerList mytowerlist;
+
 	
 	public TowerList getMytowerlist() {
 		return mytowerlist;
@@ -19,6 +23,7 @@ public class Game extends Subject{
 
 
 	public Game(){
+		
 		Map m = Map.getInstance();
 		p = new Player(); 
 		wave= new CritterWave(level);
@@ -43,17 +48,31 @@ public class Game extends Subject{
 	public CritterWave getCritterWave(){
 		return wave;
 	}
+	public int getMoney(){
+		return Money;
+	}
+	public int getLife(){
+		return Life;
+	}
+	
+	public void setMoney(int n){
+		Money=n;
+	}
+	public void setLife(int n){
+		Life=n;
+	}
+	public void addMoney(int n){
+		Money+=n;
+	}
 	
 	
 	
 	
 	public void startGameClock(){
-		while(true){
-			System.out.println("looping");
+		while(!wave.getListCritters().isEmpty()){
 			try {
 				Thread.sleep(1000);
 				notifyObservers();
-				System.out.println("notify");
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				//e.printStackTrace();

@@ -65,7 +65,10 @@ public class CritterWave implements IObserver{
 	@Override
 	public void update() {
 		for (Critter c: getListCritters()){
-			c.tick();
+			if(c.isAlive())
+				c.tick();
+			else 
+				removeCritter(c);
 		}
 		
 	}

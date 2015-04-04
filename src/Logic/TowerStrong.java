@@ -1,7 +1,5 @@
 package Logic;
 
-import Critters.Game;
-
 public class TowerStrong extends Tower{
 
 	static final int cost=10;	
@@ -19,7 +17,7 @@ public class TowerStrong extends Tower{
 		screenx=x;
 		screeny=y;
 		upgraded=0;
-		Game.myMoney.changeMoney(-cost);
+		g.addMoney(-cost);
 		// TODO Auto-generated constructor stub
 	}	
 	

@@ -1,8 +1,6 @@
 package Logic;
 
-import Crittters2.Game;
-import Crittters2.CritterWave;
-import Crittters2.Critter;
+import Crittters2.*;
 
 
 public abstract class Tower {
@@ -22,6 +20,7 @@ public abstract class Tower {
 	public int screeny;
 	public int upgraded;
 	
+	Game g= Game.getInstance();
 	
 	//public abstract void uprgrade();
 	
@@ -47,10 +46,10 @@ public abstract class Tower {
 	public int targeting(){	
 		int targetcandidate = -1;
 		int distance = 0;
-		System.out.println("--targeting-possible targets"+CritterWave.getListCritters().size());
-		for(int i = 0; i < CritterWave.getListCritters().size(); i++) {
-			if (CritterWave.getListCritters().get(i).alive()) {
-				Critter mycritter = CritterWave.getListCritters().get(i);
+		System.out.println("--targeting-possible targets"+g.getCritterWave().getListCritters().size());
+		for(int i = 0; i < g.getCritterWave().getListCritters().size(); i++) {
+			if (g.getCritterWave().getListCritters().get(i).isAlive()) {
+				Critter mycritter = g.getCritterWave().getListCritters().get(i);
 				distance = (int)(Math.pow(mycritter.getPosX() - screenx, 2) + Math.pow(mycritter.getPosY() - screeny, 2));
 				if (distance <= (int)Math.pow(range, 2)){
 					if (targetcandidate == -1){
@@ -60,23 +59,23 @@ public abstract class Tower {
 					else{
 						switch(targetingstrategy){
 							case 0://closest 
-								if(distance < (Math.pow(CritterWave.getListCritters().get(targetcandidate).getPosX()-screenx,2) + Math.pow(CritterWave.getListCritters().get(targetcandidate).getPosY()-screenx,2))){
+								if(distance < (Math.pow(g.getCritterWave().getListCritters().get(targetcandidate).getPosX()-screenx,2) + Math.pow(g.getCritterWave().getListCritters().get(targetcandidate).getPosY()-screenx,2))){
 									targetcandidate=i;
 									System.out.println("switched to"+i);
 								}
 							break;
 							case 1://farthest 
-								if(distance>((CritterWave.getListCritters().get(targetcandidate).getPosition()-screenx)*(CritterWave.getListCritters().get(targetcandidate).getPosition()-screenx))+((CritterWave.getListCritters().get(targetcandidate).getPosition()-screeny)*(CritterWave.getListCritters().get(targetcandidate).getPosition()-screeny))){
+								if(distance>((g.getCritterWave().getListCritters().get(targetcandidate).getPosition()-screenx)*(g.getCritterWave().getListCritters().get(targetcandidate).getPosition()-screenx))+((g.getCritterWave().getListCritters().get(targetcandidate).getPosition()-screeny)*(g.getCritterWave().getListCritters().get(targetcandidate).getPosition()-screeny))){
 									targetcandidate=i;						
 								}
 							break;
 							case 2://least health 
-								if(CritterWave.getListCritters().get(i).health<CritterWave.getListCritters().get(targetcandidate).health){
+								if(g.getCritterWave().getListCritters().get(i).getHealth()<g.getCritterWave().getListCritters().get(targetcandidate).getHealth()){
 									targetcandidate=i;						
 								}
 							break;
 							case 3://most health 
-								if(CritterWave.getListCritters().get(i).health>CritterWave.getListCritters().get(targetcandidate).health){
+								if(g.getCritterWave().getListCritters().get(i).getHealth()>g.getCritterWave().getListCritters().get(targetcandidate).getHealth()){
 									targetcandidate=i;						
 								}
 							break;
@@ -103,7 +102,7 @@ public abstract class Tower {
 		if (target == -1) {  //if no valid targets, firesequence fails
 			return false;
 		} else{
-			CritterWave.getListCritters().get(target).updateHealth(shotpower);				
+			g.getCritterWave().getListCritters().get(target).updateHealth(shotpower);				
 			return true;
 		}
 	}
@@ -111,8 +110,8 @@ public abstract class Tower {
 	public boolean upgrade(){
 		System.out.println("upgrade?");
 		boolean success=false;
-		if (Game.myMoney.getMoney()>(cost-30)){
-			System.out.println("money?"+Game.myMoney.getMoney()+"already upgrade?"+upgraded);
+		if (g.getMoney()>(cost-30)){
+			System.out.println("money?"+g.getMoney()+"already upgrade?"+upgraded);
 			switch(upgraded){
 			case 0:
 				range +=1;
@@ -134,7 +133,7 @@ public abstract class Tower {
 		}
 		if (success){
 			upgraded += 1;
-			Game.myMoney.changeMoney(-(cost-30));
+			g.addMoney((int)(-cost*0.5));
 			System.out.println("UPGRADE");
 		}
 		return success;
