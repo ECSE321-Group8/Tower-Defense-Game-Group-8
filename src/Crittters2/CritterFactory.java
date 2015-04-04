@@ -7,19 +7,19 @@ public class CritterFactory {
 		switch (type){
 		case SPEEDY:
 			critter.setHealth(10);
-			critter.setSpeed(30);
+			critter.setWaitingTime(5);
 			critter.setResistance(20);
 			critter.setWorth();
 			break;
 		case HEALTHY:
 			critter.setHealth(30);
-			critter.setSpeed(20);
+			critter.setWaitingTime(7);
 			critter.setResistance(10);
 			critter.setWorth();
 			break;
 		case RESISTANT:
 			critter.setHealth(20);
-			critter.setSpeed(10);
+			critter.setWaitingTime(9);
 			critter.setResistance(30);
 			critter.setWorth();
 			break;

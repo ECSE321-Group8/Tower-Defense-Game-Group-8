@@ -39,7 +39,9 @@ public class CritterWave {
 		return listCritters;
 	}
 	
-	
+	public void removeCritter(Critter c){
+		listCritters.remove(c);
+	}
 	
 	
 	public static CritterType getType(int type){
