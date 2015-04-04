@@ -10,18 +10,13 @@ public class CritterDriver {
 		
 	//	critterType =2;//speedy
 	//	type=getType(critterType);
-		Critter critter2=CritterFactory.makeCritter(type, 1);
-		
-		
-		Thread t1=critter1.startMoving();
-
-		Thread t2= critter2.startMoving();
-		
-		//t1.start();
-		critter1.getThread().start();
-		t2.start();
-		
-		
+	//	Critter critter2=CritterFactory.makeCritter(type, 1);
+	
+		critter1.moveThroughPath();
+//		while(!critter1.getPath().isEmpty()){
+//			critter1.tick();
+//			
+//		}
 	}
 
 	public static CritterType getType(int type){

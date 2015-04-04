@@ -20,19 +20,26 @@ public class CritterWave {
 		
 		
 	}
-	public void startThreads(){
-		for(Critter c: listCritters){
-			c.getThread().start();
-			
-			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
+//	public void startThreads(){
+//		for(Critter c: listCritters){
+//			c.getThread().start();
+//			
+//			try {
+//				Thread.sleep(1000);
+//			} catch (InterruptedException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//			
+//		}
+//	}
+	public void moveWave(){
+		for (Critter c: listCritters){
+			c.tick();
 		}
 	}
+	
+	
 	
 	
 	public LinkedList<Critter> getListCritters(){

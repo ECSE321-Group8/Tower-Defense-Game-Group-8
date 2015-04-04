@@ -15,17 +15,31 @@ public class Critter {
 	
 	private int position;
 	private int ID;
-	private int timer;
+	private int timer=0;
 	
 	private Thread t;
 	Map m = Map.getInstance();
+
 	
 	
 	public Critter(int ID){
 		setPosition(-1);
 		setID(ID);
 		//setThread();
+
+		//for testing 
+		m.setMap(4,4);
+		m.setCellToPath(0);
+		m.setCellToPath(1);
+		m.setCellToPath(2);
+		m.setCellToPath(3);
+		m.setCellToPath(7);
+		m.setCellToPath(11);
+		m.setCellToPath(15);
+		m.finalizePath();
+		m.printPath();
 		setPath();
+		
 	}
 	
 	//GETTERS
@@ -128,11 +142,16 @@ public class Critter {
 	}
 	
 	public void tick(){
+		System.out.println(this.getPosition());
 		if (timer > 0)
 			timer -=1;
 		else if (timer==0)
 			if (moveToNext())
 				timer = waitingTime;
+			else
+				return;
+		else 
+			return;
 			
 	}
 	
@@ -143,12 +162,17 @@ public class Critter {
 			setPosition(p.getPos());
 			return true;
 		}
-		else 
+		else{
+			//setPosition(-1);
 			return false;
-		
+		}
 	}
 	
-	
+	public void moveThroughPath(){
+		System.out.println("executing movethrought");
+		while(!aPath.isEmpty())
+			tick();
+	}
 	
 	
 	
