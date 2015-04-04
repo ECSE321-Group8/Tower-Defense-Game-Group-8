@@ -62,6 +62,9 @@ public class Game extends Subject{
 	public void setLife(int n){
 		Life=n;
 	}
+	public void decrementLife(int n){
+		Life-=n;
+	}
 	public void addMoney(int n){
 		Money+=n;
 	}
