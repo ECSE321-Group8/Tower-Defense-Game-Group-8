@@ -25,7 +25,7 @@ public class Game extends Subject{
 		return myWave.getNumberOfCritters();
 	}
 	protected static Life myLife;
-	protected static Money myMoney;
+	public static Money myMoney;
 	protected static wave myWave;
 	
 }

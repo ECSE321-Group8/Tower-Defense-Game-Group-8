@@ -8,7 +8,7 @@ public class Critter implements Runnable{
 	private int speed;
 	private int resistance;
 	private int worth;
-	/////private int Speeddmg;
+	private int Speeddmg=0;
 	private int position;
 	private int ID;
 	
@@ -47,13 +47,16 @@ public class Critter implements Runnable{
 	public int getWorth(){
 		return worth;
 	}
-	/////public int getSpeeddmg(){
-	/////	return Speeddmg;
-	/////}	
+	public int getSpeeddmg(){
+		return Speeddmg;
+	}	
 	
 	//SETTERS
 	public void setHealth(int n){
 		health=n;
+	}
+	public void reduceHealth(int n){
+		health-=n;
 	}
 	public void setSpeed(int n){
 		speed=n;
@@ -70,13 +73,13 @@ public class Critter implements Runnable{
 	public void setWorth(){
 		worth = 2*this.getHealth()+this.getSpeed()+3*this.getResistance();
 	}
-	/////public void addSpeeddmg(int n){
-	/////	Speeddmg=Speeddmg + n;
-	/////	if (Speeddmg>1000){Speeddmg=1000;}//just caps it so it can't freeze forever
-	/////}
-	/////public void resetSpeeddmg(){
-	/////	Speeddmg=0;
-	/////}
+	public void addSpeeddmg(int n){
+		Speeddmg=Speeddmg + n;
+		if (Speeddmg>100000){Speeddmg=100000;}//just caps it so it can't freeze forever
+	}
+	public void resetSpeeddmg(){
+		Speeddmg=0;
+	}
 	
 	
 	//test
@@ -111,16 +114,17 @@ public class Critter implements Runnable{
 	public void moveAlongPath(LinkedList<Integer> path){
 
 		int i;
+		long temp;
 		while(!path.isEmpty()){
 			i=path.pop();
 			long startTime = System.nanoTime();
 			this.setPosition(i);
 			try {
 				//System.out.println("sleeping");
-				Thread.sleep(((long)100000)/((long)this.getSpeed()));
+				temp=(((long)10000)/((long)this.getSpeed()))+Speeddmg;
+				this.resetSpeeddmg();
+				Thread.sleep(temp);
 				
-				/////Thread.sleep((long)Speeddmg);
-				/////this.resetSpeeddmg();
 				
 				
 				//System.out.println("wake up");
@@ -128,7 +132,7 @@ public class Critter implements Runnable{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			System.out.println(this.getID()+": "+this.getPosition()+" time: "+(System.nanoTime()-startTime));
+			System.out.println(this.getID()+": "+this.getPosition()+" time: "+(System.nanoTime()-startTime)+" health: "+this.getHealth());
 		}
 		
 		this.setPosition(-1);	//out of bounds
