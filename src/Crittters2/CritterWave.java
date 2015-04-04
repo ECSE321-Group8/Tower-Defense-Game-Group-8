@@ -5,7 +5,7 @@ import Logic.Map;
 import Logic.Path;
 
 
-public class CritterWave {
+public class CritterWave implements IObserver{
 
 	private LinkedList<Critter> listCritters = new LinkedList<Critter>();
 	Map m = Map.getInstance(); 
@@ -60,6 +60,14 @@ public class CritterWave {
 		default:
 			return null;//error
 		}
+	}
+
+	@Override
+	public void update() {
+		for (Critter c: getListCritters()){
+			c.tick();
+		}
+		
 	}
 }
 
