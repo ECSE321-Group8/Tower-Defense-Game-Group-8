@@ -1,6 +1,5 @@
 package Logic;
 
-import Critters.Game;
 
 public class TowerSniper extends Tower{
 
@@ -18,7 +17,7 @@ public class TowerSniper extends Tower{
 		screenx=x;
 		screeny=y;
 		upgraded=0;
-		Game.myMoney.changeMoney(-cost);
+		g.addMoney(-cost);
 		// TODO Auto-generated constructor stub
 	}	
 	
