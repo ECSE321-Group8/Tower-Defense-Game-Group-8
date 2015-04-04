@@ -10,6 +10,7 @@ import javax.swing.JTextField;
 
 import Logic.Map;
 import Logic.Path;
+import Logic.Scenery;
 
 public class MapGrid extends JPanel implements MouseListener{
 	
@@ -23,16 +24,30 @@ public class MapGrid extends JPanel implements MouseListener{
 	private int ypoints[] = new int[3];
 	
 	private boolean start = true;
+	private boolean playing = false;
+	private JPanel myOptions;
+	private CardLayout layout;
 	
+	public boolean isPlaying() {
+		return playing;
+	}
+
+	public void setPlaying(boolean playing) {
+		this.playing = playing;
+	}
+
+
 	private Map myMap;
 	
 	
-	public MapGrid(int panelWidth, int panelHeight){
+	public MapGrid(int panelWidth, int panelHeight, JPanel myOptions, CardLayout layout){
 		
 		startSet = false; // Do not want to paint until the Dimension has been set
 		this.panelWidth = panelWidth;
 		this.panelHeight = panelHeight;
 		myMap=Map.getInstance();
+		this.myOptions = myOptions;
+		this.layout = layout;
 		
 		addMouseListener(this);
 		
@@ -54,16 +69,16 @@ public class MapGrid extends JPanel implements MouseListener{
 		yOffset = (panelHeight - gridSize*gridRows)/2;
 		
 		drawGrid(g);
-		drawTowers(g);
+		// drawTowers(g);
 		}
 	}
 
-	private void drawTowers(Graphics g) {
+	private void drawTowers(Graphics g,int i, int j) {
 		// TODO Auto-generated method stub
 		// TODO Change the colors according to methods
-		if(false){ // To test; take out if statement after
-		for(int i=0;i<gridRows;i++){
-			for(int j=0;j<gridColumns;j++){
+		//if(false){ // To test; take out if statement after
+		//for(int i=0;i<gridRows;i++){
+			//for(int j=0;j<gridColumns;j++){
 				/*
 				Tower t; // Get the tower object if it exists
 				g.setColor(towerBaseColour(t));
@@ -75,9 +90,9 @@ public class MapGrid extends JPanel implements MouseListener{
 				*/
 				g.setColor(Color.RED);
 				g.fillOval(i*gridSize+xOffset+gridSize/4, j*gridSize+yOffset+gridSize/4, gridSize/2, gridSize/2);
-			}
-		}
-		}
+			//}
+		//}
+		//}
 	}
 
 	private Color towerTypeColour(Tower t) {
@@ -145,6 +160,10 @@ public class MapGrid extends JPanel implements MouseListener{
 				else{
 					g.setColor(Color.GREEN);
 					g.fillRect(i*gridSize+xOffset, j*gridSize+yOffset, gridSize, gridSize);
+					Scenery tempScenery = (Scenery)myMap.getGrid(j, i);
+					if(tempScenery.isTowerPresent()){
+						drawTowers(g, i, j);
+					}
 				}
 				g.setColor(Color.BLACK);
 				g.drawRect(i*gridSize+xOffset, j*gridSize+yOffset, gridSize, gridSize);
@@ -250,16 +269,25 @@ public class MapGrid extends JPanel implements MouseListener{
 		tempGrid[x][y]= value;
 		
 	}
+	
+	public void placeTower(){
+		Scenery tempScenery = (Scenery)myMap.getGrid(xcor, ycor);
+		tempScenery.towerPlaced();
+		repaint();
+	}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
-			
+		ycor = e.getX()-xOffset;
+		xcor = e.getY()-yOffset;
 		// TODO: Catch exception where clicked outside of area
-		if(startSet){
+		if(startSet && !playing){
 			System.out.println("X: " + e.getX() + "\tY: " + e.getY());
-			ycor = e.getX()-xOffset;
-			xcor = e.getY()-yOffset;
+			/*
+			 ycor = e.getX()-xOffset;
+			 xcor = e.getY()-yOffset;
+			*/
 			tempGrid[xcor/gridSize][ycor/gridSize] = 1;
 			xcor = xcor/gridSize;
 			ycor = ycor/gridSize;
@@ -274,9 +302,7 @@ public class MapGrid extends JPanel implements MouseListener{
 				setCompletedView(false);
 			}
 				
-			else	{
 				
-			}		
 
 			
 			myMap.printGrid();
@@ -288,7 +314,28 @@ public class MapGrid extends JPanel implements MouseListener{
 			repaint();
 			// start = false;
 		}
-		
+		else{
+			System.out.println("In the game mode!");
+			xcor = xcor/gridSize;
+			ycor = ycor/gridSize;
+			if(myMap.getGrid(xcor, ycor).isScenery()){
+				Scenery tempScenery = (Scenery)myMap.getGrid(xcor, ycor);
+				System.out.println("Is Scenery");
+				if(!tempScenery.isTowerPresent()){
+					layout.show(myOptions, "Tower Purchase");
+				}
+				else{
+					System.out.println("Removed Tower");
+					tempScenery.towerRemoved();
+					repaint();
+				}
+				setVisible(true);
+			}
+			else{
+				System.out.println("Is Path");
+				layout.show(myOptions, "Critter");
+			}
+		}	
 	}
 
 

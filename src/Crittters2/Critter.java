@@ -17,7 +17,11 @@ public class Critter {
 	private int ID;
 	private int timer=0;
 	
-	private Thread t;
+	private int posX;
+	private int posY;
+	
+	
+//	private Thread t;
 	Map m = Map.getInstance();
 
 	
@@ -25,21 +29,6 @@ public class Critter {
 	public Critter(int ID){
 		setPosition(-1);
 		setID(ID);
-		//setThread();
-
-		//for testing 
-		m.setMap(4,4);
-		m.setCellToPath(0);
-		m.setCellToPath(1);
-		m.setCellToPath(2);
-		m.setCellToPath(3);
-		m.setCellToPath(7);
-		m.setCellToPath(11);
-		m.setCellToPath(15);
-		m.finalizePath();
-		m.printPath();
-		setPath();
-		
 	}
 	
 	//GETTERS
@@ -61,14 +50,20 @@ public class Critter {
 	public int getWorth(){
 		return worth;
 	}
-	public Thread getThread(){
-		return t;
-	}
+//	public Thread getThread(){
+//		return t;
+//	}
 	public LinkedList<Path> getPath(){
 		return aPath;
 	}
 	public int getTimer(){
 		return timer;
+	}
+	public int getPosX(){
+		return posX;
+	}
+	public int getPosY(){
+		return posY;
 	}
 	
 	
@@ -91,16 +86,22 @@ public class Critter {
 	public void setWorth(){
 		worth = 2*this.getHealth()+this.getWaitingTime()+3*this.getResistance();
 	}
+	public void setPosX(){
+		posX= position/Map.getWidth();
+	}
+	public void setPosY(){
+		posY= position%Map.getWidth();
+	}
 	
 //	public void setThread(){
 //		t=this.startMoving();
 //	}
 	
 	
-	public void setPath(){
-		for (Path p: m.getPath())
-			aPath.add(p);
-	}
+//	public void setPath(){
+//		for (Path p: m.getPath())
+//			aPath.add(p);
+//	}
 	public void setTimer(int n ){
 		timer = n;
 	}
@@ -144,7 +145,7 @@ public class Critter {
 	}
 	
 	public void tick(){
-		System.out.println(this.getPosition());
+		System.out.println(this.getID()+": "+this.getPosition());
 		if (timer > 0)
 			timer -=1;
 		else if (timer==0)

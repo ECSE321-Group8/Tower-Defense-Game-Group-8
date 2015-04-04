@@ -86,6 +86,7 @@ public class GameView extends JFrame implements KeyListener, ActionListener {
 	private JButton play;
 	private JButton editAgain;
 	private JButton back2;
+	private JButton cancel;
 	
 	// For Tower Info:
 	private JLabel towerName;
@@ -119,10 +120,10 @@ public class GameView extends JFrame implements KeyListener, ActionListener {
 		
 		realHeight = this.getContentPane().getSize().height-10;
 		realWidth = this.getContentPane().getSize().width;
-		mG = new MapGrid(realWidth-sizeofSplit,realHeight-10);
-		myMap=Map.getInstance();
 		// mainPanel.add(mG);
+		myMap=Map.getInstance();
 		leftSideOptions();
+		mG = new MapGrid(realWidth-sizeofSplit,realHeight-10,options,layout);
 		splitViewSetUp();
 		
 		
@@ -160,6 +161,9 @@ public class GameView extends JFrame implements KeyListener, ActionListener {
 		towerName = new JLabel("Tower");
 		
 		nameOfMaps = new JTextArea(myMap.printMapRecords());
+		
+		cancel = new JButton("Cancel");
+		cancel.addActionListener(this);
 		
 		open = new JButton("Open");
 		open.addActionListener(this);
@@ -416,6 +420,11 @@ public class GameView extends JFrame implements KeyListener, ActionListener {
 		
 		towerPurchase.add(shotgunTower, gbc4);
 		
+		gbc4.gridx = 0;
+		gbc4.gridy = 3;
+		
+		towerPurchase.add(cancel, gbc4);
+		
 		options.add("Game",gameOptions);
 		options.add("Tower", towerInfo);
 		options.add("Critter", critterInfo);
@@ -486,6 +495,14 @@ public class GameView extends JFrame implements KeyListener, ActionListener {
 		}
 		else if(e.getSource() == play){
 			System.out.println("Start Playing Game");
+			open.setEnabled(false);
+			mG.setPlaying(true);
+			myMap.openMap(tMapName1.getText());
+			mG.setDimensions(myMap.getHeight(), myMap.getWidth());
+			mG.setCompletedView(true);
+			editAgain.setEnabled(false);
+			repaint();
+			setVisible(true);
 		}
 		else if(e.getSource()==edit){
 			save.setEnabled(false);
@@ -514,6 +531,7 @@ public class GameView extends JFrame implements KeyListener, ActionListener {
 		else if(e.getSource() == open){
 			System.out.println("Pressed Open");
 			layout.show(options, "Opening");
+			editAgain.setEnabled(true);
 			setVisible(true);
 		}
 		else if(e.getSource()==save){
@@ -525,9 +543,6 @@ public class GameView extends JFrame implements KeyListener, ActionListener {
 		}
 		else if(e.getActionCommand()== "Critter Button"){
 			System.out.println("Critter Button");
-		}
-		else if(e.getSource() == play){ // This is how to get event of a button using it's variable name
-			System.out.println("Pressed Play!");
 		}
 		else if(e.getSource() == newMap){
 			System.out.println("Starting a new Map");
@@ -552,12 +567,25 @@ public class GameView extends JFrame implements KeyListener, ActionListener {
 		}
 		else if(e.getSource() == regularTower){
 			System.out.println("Adding Regular Tower");
+			mG.placeTower();
+			layout.show(options, "Opening");
+			setVisible(true);
 		}
 		else if(e.getSource() == freezeTower){
 			System.out.println("Adding Freeze Tower");
+			mG.placeTower();
+			layout.show(options, "Opening");
+			setVisible(true);
 		}
 		else if(e.getSource() == shotgunTower){
 			System.out.println("Adding Shotgun Tower");
+			mG.placeTower();
+			layout.show(options, "Opening");
+			setVisible(true);
+		}
+		else if(e.getSource() == cancel){
+			layout.show(options, "Opening");
+			setVisible(true);
 		}
 		// http://stackoverflow.com/questions/13791987/keyboard-input-stops-working-in-swing-application-a-calculator-after-clicking
 		requestFocusInWindow(); // Allows for keyboard listener to work after button pressed
