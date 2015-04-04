@@ -9,7 +9,7 @@ public class TestGameClock {
 		m.openMap("test2");
 		m.printGrid();
 		m.printPath();
-		Game game = new Game();
+		Game game = Game.getInstance();
 		
 		game.addObserver(game.getCritterWave());
 		game.startGameClock();

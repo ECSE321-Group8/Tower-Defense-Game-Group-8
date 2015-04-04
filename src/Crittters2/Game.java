@@ -10,7 +10,7 @@ public class Game extends Subject{
 	LinkedList<Path> pathList;
 	CritterWave wave;
 	Player p;
-	
+	private Game gameInstance= new Game();
 	
 	public Game(){
 		Map m = Map.getInstance();
