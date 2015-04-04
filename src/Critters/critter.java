@@ -7,9 +7,7 @@ public class critter {
 	public int health;
 	public boolean alive; 
 	public int position;
-	public int getPosition() {
-		return position;
-	}
+	
 	public static int id;
 	
 	// assume that entry gate is at(0,0)
@@ -21,7 +19,7 @@ public class critter {
 	}
 	public critter(int id)
 	{
-		this.id=id;
+		critter.id=id;
 		//System.out.println("NewCritter:"+getTypeCritter());
 //		typeCritter=getType();
 	
@@ -29,6 +27,9 @@ public class critter {
 	private int getTypeCritter() {
 		// TODO Auto-generated method stub
 		return typeCritter;
+	}
+	public int getPosition() {
+		return position;
 	}
 	//when critters are inspected
 	public void inspect()
@@ -49,7 +50,7 @@ public class critter {
 		if(this.health<=0)
 		{
 			Game.myMoney.changeMoney(typeCritter*3);
-			Game.myWave.decrementCritter();
+			Game.myWave.decrementCritter(id);
 			//decrementCritter();
 			
 			//reward player money
@@ -111,7 +112,7 @@ public class critter {
 		{
 			Game.myLife.decreaseLife(1);
 			//Game.myMoney.changeMoney(-typeCritter*3);//I DONT THINK WE LOOSE MONEY !! 
-			Game.myWave.decrementCritter();
+			Game.myWave.decrementCritter(id);
 		}
 	}
 
