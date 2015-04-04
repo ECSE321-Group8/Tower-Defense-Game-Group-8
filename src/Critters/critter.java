@@ -1,17 +1,24 @@
 package Critters;
-
+import Logic.*;
+import Presentation.*;
 public class critter {
 	public int speed;
 	public  static int typeCritter;
 	public int health;
 	public boolean alive; 
 	public int position;
+	public int getPosition() {
+		return position;
+	}
 	public static int id;
 	
 	// assume that entry gate is at(0,0)
 	//at the beginning the critters are on path
 	//abstract public int getTyper();
 	
+	public static int getID() {
+		return id;
+	}
 	public critter(int id)
 	{
 		this.id=id;
@@ -100,7 +107,7 @@ public class critter {
 			//change positionx and positiony according to the set up of the path
 			// increment one tile then multipy by speed		
 		}
-		if(positionX==10 && positionY==10)//suppose end point
+		if(position==Game.myMap.getTemp().getLast().getExit())//suppose end point
 		{
 			Game.myLife.decreaseLife(1);
 			//Game.myMoney.changeMoney(-typeCritter*3);//I DONT THINK WE LOOSE MONEY !! 

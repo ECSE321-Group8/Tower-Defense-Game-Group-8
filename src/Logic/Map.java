@@ -12,6 +12,14 @@ public class Map {
 	
 	//private
 	private LinkedList <Path> temp = new LinkedList<Path>(); // List of the Path
+	
+
+
+
+
+
+
+
 	private Path entryPoint; // Entry point
 	private Path exitPoint; // Exit point
 	
@@ -734,6 +742,11 @@ public class Map {
 		}
 	//	System.out.println(allS);
 		return allS;
+	}
+
+	public LinkedList<Path> getTemp() {
+		// TODO Auto-generated method stub
+		return this.temp;
 	}
 	
 	
