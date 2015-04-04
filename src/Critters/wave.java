@@ -23,8 +23,8 @@ public class wave extends Subject{
 		{
 			for(int p=0;p<3;p++)
 			{
-				new critter1();
-				wavelist.add(new critter1());
+				int size=wavelist.size();
+				wavelist.add(new critter1(size));
 				numberOfCritters++;
 //				try {
 //					Thread.sleep(2000);
