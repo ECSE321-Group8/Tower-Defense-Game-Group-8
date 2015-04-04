@@ -7,6 +7,7 @@ public class Game extends Subject{
 		myLife=new Life(life);
 		myMoney=new Money(money);
 		myWave=new wave(wave);
+		myMap=Map.getInstance();
 	}
 	public void getGame()
 	{
@@ -24,8 +25,11 @@ public class Game extends Subject{
 		// TODO Auto-generated method stub
 		return myWave.getNumberOfCritters();
 	}
+	public static Map getMyMap(){
+		return myMap;
+	}
 	protected static Life myLife;
 	public static Money myMoney;
 	protected static wave myWave;
-	
+	protected static Map myMap;
 }
