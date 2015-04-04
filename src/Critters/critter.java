@@ -76,10 +76,27 @@ public class critter {
 			return true;
 		}
 	}
-	public void move(int positionX,int positionY)
+	public void move(int position)
 	{
 		if ( speed!=0 && health!=0 )
 		{
+			for(int x=0;x<Game.myMap.getTemp().size();x++)
+			{
+				{
+					this.position=Game.myMap.getTemp().get(x).getPos();
+					try {
+						//System.out.println("sleeping");
+						Thread.sleep((long)1000);	
+						//System.out.println("wake up");
+					}
+					catch (InterruptedException e) 
+					{
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					System.out.println(this.getID()+": "+this.getPosition());
+				}
+			}
 			//change positionx and positiony according to the set up of the path
 			// increment one tile then multipy by speed		
 		}
