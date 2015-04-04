@@ -42,12 +42,10 @@ public class Game extends Subject{
 	
 	
 	public void startGameClock(){
-		while(true){
-			System.out.println("looping");
+		while(!wave.getListCritters().isEmpty()){
 			try {
 				Thread.sleep(1000);
 				notifyObservers();
-				System.out.println("notify");
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				//e.printStackTrace();

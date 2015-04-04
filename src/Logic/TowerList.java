@@ -37,7 +37,7 @@ public class TowerList extends ArrayList<Tower>{
 	}
 	
 	public void sellTower(int i){
-		Game.myMoney.changeMoney((this.get(i).getCost())-20);
+		Game.myMoney.changeMoney(((int)(this.get(i).getCost())*0.75));
 		this.remove(i);
 	}	
 	public void update(){
