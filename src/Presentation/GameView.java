@@ -86,6 +86,7 @@ public class GameView extends JFrame implements KeyListener, ActionListener {
 	private JButton play;
 	private JButton editAgain;
 	private JButton back2;
+	private JButton cancel;
 	
 	// For Tower Info:
 	private JLabel towerName;
@@ -160,6 +161,9 @@ public class GameView extends JFrame implements KeyListener, ActionListener {
 		towerName = new JLabel("Tower");
 		
 		nameOfMaps = new JTextArea(myMap.printMapRecords());
+		
+		cancel = new JButton("Cancel");
+		cancel.addActionListener(this);
 		
 		open = new JButton("Open");
 		open.addActionListener(this);
@@ -416,6 +420,11 @@ public class GameView extends JFrame implements KeyListener, ActionListener {
 		
 		towerPurchase.add(shotgunTower, gbc4);
 		
+		gbc4.gridx = 0;
+		gbc4.gridy = 3;
+		
+		towerPurchase.add(cancel, gbc4);
+		
 		options.add("Game",gameOptions);
 		options.add("Tower", towerInfo);
 		options.add("Critter", critterInfo);
@@ -559,14 +568,24 @@ public class GameView extends JFrame implements KeyListener, ActionListener {
 		else if(e.getSource() == regularTower){
 			System.out.println("Adding Regular Tower");
 			mG.placeTower();
+			layout.show(options, "Opening");
+			setVisible(true);
 		}
 		else if(e.getSource() == freezeTower){
 			System.out.println("Adding Freeze Tower");
 			mG.placeTower();
+			layout.show(options, "Opening");
+			setVisible(true);
 		}
 		else if(e.getSource() == shotgunTower){
 			System.out.println("Adding Shotgun Tower");
 			mG.placeTower();
+			layout.show(options, "Opening");
+			setVisible(true);
+		}
+		else if(e.getSource() == cancel){
+			layout.show(options, "Opening");
+			setVisible(true);
 		}
 		// http://stackoverflow.com/questions/13791987/keyboard-input-stops-working-in-swing-application-a-calculator-after-clicking
 		requestFocusInWindow(); // Allows for keyboard listener to work after button pressed

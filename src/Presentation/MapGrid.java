@@ -319,8 +319,16 @@ public class MapGrid extends JPanel implements MouseListener{
 			xcor = xcor/gridSize;
 			ycor = ycor/gridSize;
 			if(myMap.getGrid(xcor, ycor).isScenery()){
+				Scenery tempScenery = (Scenery)myMap.getGrid(xcor, ycor);
 				System.out.println("Is Scenery");
-				layout.show(myOptions, "Tower Purchase");
+				if(!tempScenery.isTowerPresent()){
+					layout.show(myOptions, "Tower Purchase");
+				}
+				else{
+					System.out.println("Removed Tower");
+					tempScenery.towerRemoved();
+					repaint();
+				}
 				setVisible(true);
 			}
 			else{
