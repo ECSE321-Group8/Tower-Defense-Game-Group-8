@@ -46,5 +46,13 @@ public class TowerList extends ArrayList<Tower>{
 		}//++t put in gameclock
 	}
 	
-	
+	public void upgradeat(int x, int y){
+		for(int i=0; i<this.size(); i++){
+			if(this.get(i).getX() == x){
+				if(this.get(i).getY() == y){
+					this.get(i).upgrade();		
+				}
+			}
+		}
+	}	
 }

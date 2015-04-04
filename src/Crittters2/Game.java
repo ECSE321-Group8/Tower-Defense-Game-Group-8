@@ -14,13 +14,20 @@ public class Game extends Subject{
 	private int Money;
 	private int Life;
 	
+	TowerList mytowerlist;
+
 	
+	public TowerList getMytowerlist() {
+		return mytowerlist;
+	}
+
+
 	public Game(){
 		
 		Map m = Map.getInstance();
 		p = new Player(); 
 		wave= new CritterWave(level);
-		TowerList tower= new TowerList();
+		mytowerlist= new TowerList();
 		pathList = new LinkedList<Path>();
 		
 		for (Path p : m.getPath()){

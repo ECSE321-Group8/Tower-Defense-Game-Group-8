@@ -4,6 +4,7 @@ public class Scenery extends Tile{
 	
 	
 	private boolean towerPresent;
+	private Tower t;
 	
 	public Scenery(int pos){
 		this.setPos(pos);	
@@ -24,11 +25,14 @@ public class Scenery extends Tile{
 	 */
 	public boolean towerPlaced(){
 		if(!isTowerPresent()){//if there are no towers 
+			return false;
+			/*
 			towerPresent=true;// a tower is placed 
 			return true;//tower was successfully added
+			*/
 		}
 		else//there is already a tower there 
-			return false;//can't add another tower
+			return true;//can't add another tower
 	}	
 	
 	/*
@@ -43,7 +47,16 @@ public class Scenery extends Tile{
 			return false;//there is no tower to remove
 	}
 	
+	public void placeTower(){
+		towerPresent = true;
+	}
+	public void setTower(Tower t){
+		this.t = t;
+	}
 	
+	public Tower getTower(){
+		return t;
+	}
 	
 	
 }
