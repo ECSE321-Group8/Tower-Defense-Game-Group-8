@@ -135,6 +135,7 @@ public class GameView extends JFrame implements KeyListener, ActionListener {
 		myTowerList = myGame.getMytowerlist();
 		leftSideOptions();
 		mG = new MapGrid(realWidth-sizeofSplit,realHeight-10,options,layout);
+		myGame.addObserver(mG);
 		splitViewSetUp();
 		
 		

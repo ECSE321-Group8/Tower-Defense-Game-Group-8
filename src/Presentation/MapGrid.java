@@ -1,4 +1,8 @@
 package Presentation;
+import Crittters2.Critter;
+import Crittters2.CritterWave;
+import Crittters2.Game;
+import Crittters2.IObserver;
 import Logic.Tower;
 
 import java.awt.*;
@@ -12,7 +16,7 @@ import Logic.Map;
 import Logic.Path;
 import Logic.Scenery;
 
-public class MapGrid extends JPanel implements MouseListener{
+public class MapGrid extends JPanel implements MouseListener, IObserver{
 	
 	private int panelWidth,panelHeight, gridRows, gridColumns;
 	private int gridSize;
@@ -27,6 +31,8 @@ public class MapGrid extends JPanel implements MouseListener{
 	private boolean playing = false;
 	private JPanel myOptions;
 	private CardLayout layout;
+	private Game myGame;
+	private CritterWave myWave;
 	
 	public boolean isPlaying() {
 		return playing;
@@ -47,6 +53,8 @@ public class MapGrid extends JPanel implements MouseListener{
 		myMap=Map.getInstance();
 		this.myOptions = myOptions;
 		this.layout = layout;
+		myGame.getInstance();
+		myWave.getListCritters();
 		
 		addMouseListener(this);
 		
@@ -169,6 +177,8 @@ public class MapGrid extends JPanel implements MouseListener{
 			}
 		}
 		
+		drawCritters(g);
+		
 		// how polygons are drawn
 		/*
 		int xpoints[] = {0,10,0};
@@ -177,6 +187,29 @@ public class MapGrid extends JPanel implements MouseListener{
 		*/
 	}
 	
+	private void drawCritters(Graphics g) {
+		// TODO Auto-generated method stub
+		myWave = myGame.getCritterWave();
+		for(Critter c: myWave.getListCritters()){
+			g.setColor(critterColour(c.getID()));
+			g.drawOval(x, y, width, height);
+		}
+	}
+
+	private Color critterColour(int id) {
+		// TODO Auto-generated method stub
+		if(id%3==0){
+			return Color.RED;
+		}
+		if(id%3==1){
+			return Color.WHITE;
+		}
+		if(id%3==2){
+			return Color.CYAN;
+		}
+		return null;
+	}
+
 	public void drawTriangle(int exitPoint, int icoor, int jcoor, Graphics g){
 		switch(exitPoint){
 			// North
@@ -373,6 +406,12 @@ public class MapGrid extends JPanel implements MouseListener{
 		this.gridColumns = gridColumns;
 		tempGrid = new int[gridRows][gridColumns];
 		startSet = true;
+		repaint();
+	}
+
+	@Override
+	public void update() {
+		// TODO Auto-generated method stub
 		repaint();
 	}
 

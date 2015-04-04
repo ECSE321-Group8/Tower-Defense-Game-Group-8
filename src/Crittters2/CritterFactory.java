@@ -18,8 +18,8 @@ public class CritterFactory {
 			critter.setWorth();
 			break;
 		case RESISTANT:
-			critter.setHealth(20);
-			critter.setWaitingTime(3);
+			critter.setHealth(30);
+			critter.setWaitingTime(1);
 			critter.setResistance(30);
 			critter.setWorth();
 			break;
