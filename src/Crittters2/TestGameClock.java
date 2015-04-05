@@ -1,6 +1,9 @@
-package Tests;
+package Crittters2;
 
+<<<<<<< HEAD:src/Tests/TestGameClock.java
 import Logic.*;
+=======
+>>>>>>> parent of d77b3bc... comments added:src/Crittters2/TestGameClock.java
 import Logic.Map;
 
 public class TestGameClock {

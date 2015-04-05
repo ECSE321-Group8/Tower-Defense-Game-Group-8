@@ -1,6 +1,10 @@
+<<<<<<< HEAD:src/Tests/CritterTest.java
 package Tests;
 
 import Logic.*;
+=======
+package Crittters2;
+>>>>>>> parent of d77b3bc... comments added:src/Crittters2/CritterTest.java
 import static org.junit.Assert.*;
 
 import java.util.*;

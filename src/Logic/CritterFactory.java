@@ -1,12 +1,6 @@
 package Logic;
 
 public class CritterFactory {
-	/**
-	 * Create a Critter with different characteristics 
-	 * @param type
-	 * @param ID
-	 * @return : the critter created 
-	 */
 	public static Critter makeCritter(CritterType type, int ID){
 		Critter critter = new Critter(ID);
 		
