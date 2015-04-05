@@ -21,10 +21,6 @@ public class GameTimer {
 			//System.out.println("test");
 			game.tick();
 			if (game.getCritterWave().getListCritters().isEmpty()){
-<<<<<<< HEAD
-				//this.cancel();
-=======
->>>>>>> 43878e55355384c341d3d978ee1efe4bb05b43ab
 				endGameTimer();
 			}
 				
