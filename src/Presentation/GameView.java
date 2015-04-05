@@ -612,8 +612,8 @@ public class GameView extends JFrame implements KeyListener, ActionListener {
 		}
 		else if(e.getSource() == sell){
 			myTowerList = myGame.getMytowerlist();
-			tempTower = myTowerList.getTower(mG.getXcor(), mG.getYcor());
-			//
+			// tempTower = myTowerList.getTower(mG.getXcor(), mG.getYcor());
+			myTowerList.sellTower(myTowerList.getTowerID(mG.getXcor(), mG.getYcor()));
 		}
 		/*
 		 * Tower IDs:

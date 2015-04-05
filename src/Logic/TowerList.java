@@ -89,6 +89,22 @@ public class TowerList extends ArrayList<Tower> implements IObserver{
 		return null;
 	}	
 
+	
+	public int getTowerID(int x, int y){
+		for(int i=0; i<this.size(); i++){
+			if(this.get(i).getX() == x){
+				if(this.get(i).getY() == y){
+					System.out.println("MUCH SELECTING OF TOWER "+i);
+					return i;		
+				}
+			}
+		}
+		return -1;
+	}	
+
+	
+	
+	
 	public boolean buildtick(){
 
 		int [] a;
