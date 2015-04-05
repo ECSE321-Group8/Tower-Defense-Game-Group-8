@@ -1,5 +1,6 @@
-package Crittters2;
+package Tests;
 
+import Crittters2.*;
 import Logic.Map;
 
 public class TestGameClock {

@@ -1,4 +1,6 @@
-package Crittters2;
+package Tests;
+
+import Crittters2.*;
 import static org.junit.Assert.*;
 
 import java.util.*;
