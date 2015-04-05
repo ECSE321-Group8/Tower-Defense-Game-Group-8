@@ -132,6 +132,7 @@ public class GameView extends JFrame implements KeyListener, ActionListener {
 		// mainPanel.add(mG);
 		myMap=Map.getInstance();
 		myGame = Game.getInstance();
+		myGame.setGame();
 		myTowerList = myGame.getMytowerlist();
 		leftSideOptions();
 		mG = new MapGrid(realWidth-sizeofSplit,realHeight-10,options,layout);
@@ -514,6 +515,8 @@ public class GameView extends JFrame implements KeyListener, ActionListener {
 			mG.setCompletedView(true);
 			editAgain.setEnabled(false);
 			repaint();
+			myGame.addObserver(myGame.getCritterWave());
+			myGame.startGameClock();
 			setVisible(true);
 		}
 		else if(e.getSource()==edit){
