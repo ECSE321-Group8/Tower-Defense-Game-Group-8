@@ -1,4 +1,5 @@
-package Crittters2;
+package Tests;
+import Crittters2.*;
 
 public class CritterDriver {
 

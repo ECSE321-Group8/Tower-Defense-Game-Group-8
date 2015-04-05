@@ -8,22 +8,33 @@ import Logic.Path;
 public class CritterWave implements IObserver{
 
 	private LinkedList<Critter> listCritters = new LinkedList<Critter>();
+	
+	
+	//Instance of the game and the map 
 	Map m = Map.getInstance();
 	Game g = Game.getInstance();
+	
+	
 	private LinkedList<Path> aPath=new LinkedList<Path>();//accesses through the Map
-//	private LinkedList<Critter> listCritters2;
 	private int cycles;
 	private Critter c;
+	private LinkedList<Critter> addProgressive= new LinkedList<Critter>();
+	
+	//Variables used internally to generate critters and push them. 
+	private int nbCritters;
+	private int critterType;
+	private CritterType type;
+	private Critter	b;
+	
+	
 	
 	public CritterWave(int level){
-		int nbCritters=level*5;
-		int critterType;
-		CritterType type;
-		Critter c;
+		
+		nbCritters=level*5;
 		for (int i=0;i<nbCritters; i++){
 			critterType = i%3;
 			type=getType(critterType);
-			c=CritterFactory.makeCritter(type, i);
+			b=CritterFactory.makeCritter(type, i);
 			listCritters.add(c);
 		}
 		setPath();
@@ -31,26 +42,36 @@ public class CritterWave implements IObserver{
 		
 	}
 
+	/**
+	 * Copied Map Path from the instance of the Map
+	 */
 	public void setPath(){
 		for (Path p: m.getPath())
 			aPath.add(p);
 	}
 	
+	//GETTERS
 	public LinkedList<Path> getPath(){
 		return aPath;
-	}
-
-	
-	
+	}	
 	public LinkedList<Critter> getListCritters(){
 		return listCritters;
 	}
 	
+	/**
+	 * Method remove a specific Critter from the List of Critters 
+	 * @param c: Critter to be removed 
+	 */
 	public void removeCritter(Critter c){
 		listCritters.remove(c);
 	}
 	
 	
+	/**
+	 * Generate a type of Critter 
+	 * @param type
+	 * @return
+	 */
 	public static CritterType getType(int type){
 		switch(type){
 		case 0:
@@ -63,19 +84,19 @@ public class CritterWave implements IObserver{
 			return null;//error
 		}
 	}
-	
 
-	LinkedList<Critter> addProgressive= new LinkedList<Critter>();
-
-	
 	@Override
+	/**
+	 * Method that will be implemented to when ever the Game clock ticks.
+	 * It checks the status of the Critters (Health & Position)
+	 */
 	public void update(){
 		if(cycles>0){
 			 c =listCritters.get(cycles-1);
 			addProgressive.add(c);
 			cycles--;
 		}
-		//System.out.println("is it stuck");
+		//System.out.println("is it stuck")	;
 		//System.out.println("list size"+listCritters.size());
 		if(addProgressive.size()>=1){
 			for(int i = addProgressive.size()-1; i >= 0; i--){
