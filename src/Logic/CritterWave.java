@@ -15,7 +15,7 @@ public class CritterWave implements IObserver{
 	private int cycles;
 	private Critter c;
 
-	public LinkedList<Critter> addProgressive= new LinkedList<Critter>();
+	private LinkedList<Critter> addProgressive= new LinkedList<Critter>();
 	
 	//Variables used internally to generate critters and push them. 
 	private int nbCritters;
@@ -23,11 +23,10 @@ public class CritterWave implements IObserver{
 	private CritterType type;
 	private Critter	b;
 	
-	
+
 	
 	public CritterWave(int level){
-		int nbCritters=level*5;
-		int critterType;
+		nbCritters=level*5;
 		CritterType type;
 		Critter c;
 		for (int i=0;i<nbCritters; i++){
@@ -60,6 +59,11 @@ public class CritterWave implements IObserver{
 		listCritters.remove(c);
 	}
 	
+	public LinkedList<Critter> getCritterInField(){
+		return addProgressive;
+	}
+	
+	
 	
 	public static CritterType getType(int type){
 		switch(type){
@@ -73,6 +77,7 @@ public class CritterWave implements IObserver{
 			return null;//error
 		}
 	}
+	
 	
 
 //	LinkedList<Critter> addProgressive= new LinkedList<Critter>();
