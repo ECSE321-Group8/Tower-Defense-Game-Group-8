@@ -109,7 +109,7 @@ public abstract class Tower {
 					}			
 			}
 		}}
-		//System.out.println("targeting: "+targetcandidate);
+		System.out.println("targeting: "+targetcandidate);
 		return targetcandidate;//returns coordinates of the target
 		}
 	
@@ -140,9 +140,9 @@ public abstract class Tower {
 				success =  true;
 				break;
 			case 2:
-				cooldown -= 1;
-				if(cooldown<1){cooldown = 1;}
-				success =  true;
+				//cooldown -= 1;
+				//if(cooldown<1){cooldown = 1;}
+				success =  false;
 				break;
 			case 3:
 				success =  false;

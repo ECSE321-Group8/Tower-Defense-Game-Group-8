@@ -13,7 +13,7 @@ public class TowerList extends ArrayList<Tower> implements IObserver{
 	 * @param x
 	 * @param y
 	 */
-	public boolean buyTower(int type, int x, int y){
+	public boolean buyTower(int type, int y, int x){
 		boolean wasBought = false;
 		int [] toAdd = {type,x,y};
 		switch(type){
@@ -82,7 +82,7 @@ public class TowerList extends ArrayList<Tower> implements IObserver{
 		this.buildtick();
 	}
 	
-	public Tower getTower(int x, int y){
+	public Tower getTower(int y, int x){
 		for(int i=0; i<this.size(); i++){
 			if(this.get(i).getX() == x){
 				if(this.get(i).getY() == y){
@@ -113,8 +113,8 @@ public class TowerList extends ArrayList<Tower> implements IObserver{
 	public boolean buildtick(){
 
 		int [] a;
-		if(buildlog.size() != 0){
-		System.out.println("--enter buildtick "+buildlog.size());}
+		//if(buildlog.size() != 0){
+		System.out.println("--enter buildtick "+buildlog.size());//}
 		if (buildlog.size() == 0) {return false;}
 		for (int i = buildlog.size()-1; i >= 0;i--){
 			a = buildlog.get(i);

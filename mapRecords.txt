@@ -6,4 +6,4 @@ Map15x15
 test5
 test6
 Map 1
-test7
+test7test10

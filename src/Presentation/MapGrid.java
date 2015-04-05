@@ -107,88 +107,7 @@ public class MapGrid extends JPanel implements MouseListener, IObserver{
 		// drawTowers(g);
 		}
 	}
-	
-	/**
-	 * Prints all the Tower
-	 * @param g The Graphics component
-	 * @param i The x coordinate of the Tower
-	 * @param j The y coordinate of the Tower
-	 */
-	private void drawTowers(Graphics g,int i, int j) {
-		// TODO Auto-generated method stub
-		// TODO Change the colors according to methods
-		//if(false){ // To test; take out if statement after
-		//for(int i=0;i<gridRows;i++){
-			//for(int j=0;j<gridColumns;j++){
-		myTowerList = myGame.getMytowerlist();
-				
-				//Tower t; // Get the tower object if it exists
-				g.setColor(towerBaseColour(myTowerList.getTower(i, j)));
-				
-				// g.setColor(Color.LIGHT_GRAY);
-				g.fillRect(i*gridSize+xOffset+gridSize/8, j*gridSize+yOffset+gridSize/8, 3*gridSize/4, 3*gridSize/4);
-				
-				g.setColor(towerTypeColour(myTowerList.getTower(i, j)));
-				
-				g.setColor(Color.RED);
-				g.fillOval(i*gridSize+xOffset+gridSize/4, j*gridSize+yOffset+gridSize/4, gridSize/2, gridSize/2);
-			//}
-		//}
-		//}
-	}
-	
-	/**
-	 * Setting the Colour of the Tower
-	 * @param t The tower which needs to be displayed
-	 * @return The colour of the Tower depending on the type of Tower
-	 */
-	private Color towerTypeColour(Tower t) {
-		// TODO Auto-generated method stub
-		// Would get the type of tower:
-		//int towerType=t.getType();
-		if(t.isTowerFast()){ // Regular
-			return Color.RED;
-		}
-		else if(t.isTowerSniper()){
-			return Color.BLUE;
-		}
-		else if(t.isTowerStrong()){
-			return Color.YELLOW;
-		}
-		return null;
-	}
-	
-	/**
-	 * Setting the Colour of the Tower base
-	 * @param t The tower which needs to be displayed
-	 * @return The colour of the base depending on the type of Tower
-	 */
-	private Color towerBaseColour(Tower t) {
-		// TODO Auto-generated method stub
-		// would get the upgrade level of the towers:
-		Tower tempTower;
-		if(t.isTowerFast()){
-			tempTower = (TowerFast)t;
-		}
-		else if(t.isTowerSniper()){
-			tempTower = (TowerSniper)t;
-		}
-		else if(t.isTowerStrong()){
-			tempTower = (TowerStrong)t;
-		}
-		int upgradeLevel=t.getUpgraded();
-		if(upgradeLevel==0){ // Level 1
-			return Color.LIGHT_GRAY;
-		}
-		else if(upgradeLevel==1){
-			return Color.DARK_GRAY;
-		}
-		else if(upgradeLevel==2){
-			return Color.BLACK;
-		}
-		return null;
-	}
-	
+		
 	/**
 	 * Draws all the items which should be on the Map: Map, Critters, and Towers
 	 * @param g The Graphics component
@@ -230,11 +149,11 @@ public class MapGrid extends JPanel implements MouseListener, IObserver{
 //					g.fillRect(i*gridSize+xOffset, j*gridSize+yOffset, gridSize, gridSize);
 					g.drawImage(myGrass, i*gridSize+xOffset, j*gridSize+yOffset,gridSize, gridSize, observer);
 					Scenery tempScenery = (Scenery)myMap.getGrid(j, i);
-					if(tempScenery.isTowerPresent()){
-						if(playing){
-							drawTowers(g, i, j);
-						}
-					}
+//					if(tempScenery.isTowerPresent()){
+//						if(playing){
+//							drawTowers(g, i, j);
+//						}
+//					}
 				}
 				if(!completedView){
 					g.setColor(Color.BLACK);
@@ -244,6 +163,7 @@ public class MapGrid extends JPanel implements MouseListener, IObserver{
 		}
 		if(playing){
 			drawCritters(g);
+			drawTowers(g);
 		}
 		
 		
@@ -286,6 +206,91 @@ public class MapGrid extends JPanel implements MouseListener, IObserver{
 		}
 		else if(id%3==2){
 			return Color.CYAN;
+		}
+		return null;
+	}
+	
+	/**
+	 * Prints all the Tower
+	 * @param g The Graphics component
+	 * @param i The x coordinate of the Tower
+	 * @param j The y coordinate of the Tower
+	 */
+	private void drawTowers(Graphics g) {
+		// TODO Auto-generated method stub
+		// TODO Change the colors according to methods
+		//if(false){ // To test; take out if statement after
+		//for(int i=0;i<gridRows;i++){
+			//for(int j=0;j<gridColumns;j++){
+		myTowerList = myGame.getMytowerlist();
+		
+		for(int i= 0;i<myTowerList.size();i++){
+			//Tower t; // Get the tower object if it exists
+			g.setColor(towerBaseColour(myTowerList.get(i)));
+			
+			// g.setColor(Color.LIGHT_GRAY);
+			g.fillRect(myTowerList.get(i).getX()*gridSize+xOffset+gridSize/8, myTowerList.get(i).getY()*gridSize+yOffset+gridSize/8, 3*gridSize/4, 3*gridSize/4);
+			
+			g.setColor(towerTypeColour(myTowerList.get(i)));
+			
+			g.setColor(Color.RED);
+			g.fillOval(myTowerList.get(i).getX()*gridSize+xOffset+gridSize/4, myTowerList.get(i).getY()*gridSize+yOffset+gridSize/4, gridSize/2, gridSize/2);
+		}
+				
+			//}
+		//}
+		//}
+	}
+	
+	/**
+	 * Setting the Colour of the Tower
+	 * @param t The tower which needs to be displayed
+	 * @return The colour of the Tower depending on the type of Tower
+	 */
+	private Color towerTypeColour(Tower t) {
+		// TODO Auto-generated method stub
+		// Would get the type of tower:
+		//int towerType=t.getType();
+		if(t.getType()==1){ // Fast
+			return Color.RED;
+		}
+		else if(t.getType()==0){ // Sniper
+			return Color.BLUE;
+		}
+		else if(t.getType()==2){ // Strong
+			return Color.YELLOW;
+		}
+		return null;
+	}
+	
+	/**
+	 * Setting the Colour of the Tower base
+	 * @param t The tower which needs to be displayed
+	 * @return The colour of the base depending on the type of Tower
+	 */
+	private Color towerBaseColour(Tower t) {
+		// TODO Auto-generated method stub
+		// would get the upgrade level of the towers:
+		Tower tempTower;
+		// System.out.println(t.isTowerFast());
+		if(t.isTowerFast()){
+			tempTower = (TowerFast)t;
+		}
+		else if(t.isTowerSniper()){
+			tempTower = (TowerSniper)t;
+		}
+		else if(t.isTowerStrong()){
+			tempTower = (TowerStrong)t;
+		}
+		int upgradeLevel=t.getUpgraded();
+		if(upgradeLevel==0){ // Level 1
+			return Color.LIGHT_GRAY;
+		}
+		else if(upgradeLevel==1){
+			return Color.DARK_GRAY;
+		}
+		else if(upgradeLevel==2){
+			return Color.BLACK;
 		}
 		return null;
 	}
@@ -437,7 +442,7 @@ public class MapGrid extends JPanel implements MouseListener, IObserver{
 		xcor = e.getY()-yOffset;
 		// TODO: Catch exception where clicked outside of area
 		if(startSet && !playing){
-			System.out.println("X: " + e.getX() + "\tY: " + e.getY());
+			// System.out.println("X: " + e.getX() + "\tY: " + e.getY());
 			/*
 			 ycor = e.getX()-xOffset;
 			 xcor = e.getY()-yOffset;
@@ -445,6 +450,7 @@ public class MapGrid extends JPanel implements MouseListener, IObserver{
 			tempGrid[xcor/gridSize][ycor/gridSize] = 1;
 			xcor = xcor/gridSize;
 			ycor = ycor/gridSize;
+			System.out.println("X: " + xcor + "\tY: " + ycor);
 			
 			//X AND Y COORDINATE ARE INVERTED!!! 
 			//Y=WIDTH and X=HEIGHT
