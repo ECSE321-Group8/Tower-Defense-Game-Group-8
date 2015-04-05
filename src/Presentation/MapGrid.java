@@ -231,7 +231,9 @@ public class MapGrid extends JPanel implements MouseListener, IObserver{
 					g.drawImage(myGrass, i*gridSize+xOffset, j*gridSize+yOffset,gridSize, gridSize, observer);
 					Scenery tempScenery = (Scenery)myMap.getGrid(j, i);
 					if(tempScenery.isTowerPresent()){
-						// drawTowers(g, i, j);
+						if(playing){
+							drawTowers(g, i, j);
+						}
 					}
 				}
 				if(!completedView){
