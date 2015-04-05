@@ -350,7 +350,10 @@ public class MapGrid extends JPanel implements MouseListener, IObserver{
 			System.out.println(xpoints[i]+ " " + ypoints[i]);
 		}
 		*/
-		g.setColor(Color.WHITE); // Always set a color before drawing
+		// g.setColor(Color.WHITE); // Always set a color before drawing
+		float[] triangleColour = new float[3];
+		triangleColour = Color.RGBtoHSB(198, 99, 0, new float[3]);
+		g.setColor(Color.getHSBColor(triangleColour[0], triangleColour[1], triangleColour[2]));
 		g.drawPolygon(xpoints, ypoints, 3);
 	}
 	
