@@ -11,7 +11,7 @@ public class CritterWave implements IObserver{
 	Map m = Map.getInstance();
 	Game g = Game.getInstance();
 	private LinkedList<Path> aPath=new LinkedList<Path>();//accesses through the Map
-	
+	private LinkedList<Critter> listCritters2;
 	
 	
 	public CritterWave(int level){
@@ -69,7 +69,7 @@ public class CritterWave implements IObserver{
 		System.out.println("list size"+listCritters.size());
 		if(listCritters.size()>=1){
 			for(int i = listCritters.size()-1; i >= 0; i--){
-				System.out.println("Maybe?"+i);
+				System.out.println("Maybe?"+i+"   where is it? "+listCritters.get(i).getCompletion());
 				if(listCritters.get(i).getCompletion() == aPath.size()){
 					g.decrementLife(1);
 					System.out.println("remove"+i);					
@@ -80,4 +80,5 @@ public class CritterWave implements IObserver{
 			}
 		}
 	}
+	
 }
