@@ -59,7 +59,7 @@ public class wave extends Subject{
 //			for(int i=0;i<=5;i++)
 //			{
 //				getWavelist().add(new critter1());
-//				//System.out.println(wavelist.size());
+//				System.out.println(wavelist.size());
 //			}
 //
 //		}
