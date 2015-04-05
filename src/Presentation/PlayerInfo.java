@@ -19,13 +19,19 @@ public class PlayerInfo extends JPanel implements IObserver{
 		myGame = Game.getInstance();
 		this.playerMoney = myGame.getMoney();
 		this.playerHealth = myGame.getLife();
-		this.setLayout(new GridLayout());
+		this.setLayout(new GridLayout(1,2));
+		lPlayerHealth = new JLabel(String.valueOf(playerHealth));
+		lPlayerMoney = new JLabel(String.valueOf(playerMoney));
+		this.add(lPlayerHealth);
+		this.add(lPlayerMoney);
+		setVisible(true);
 	}
 
 	@Override
 	public void update() {
 		// TODO Auto-generated method stub
-		
+		lPlayerHealth.setText(String.valueOf(myGame.getLife()));
+		lPlayerMoney.setText(String.valueOf(myGame.getMoney()));
 	}
 	
 }

@@ -95,6 +95,7 @@ public class GameView extends JFrame implements KeyListener, ActionListener {
 	private SplitPane sP;
 	private Map myMap;
 	private Game myGame;
+	private PlayerInfo myInfo;
 
 	/**
 	 * Constructor initializes the display of all the different situations for the Tower Defense Game.
@@ -117,8 +118,8 @@ public class GameView extends JFrame implements KeyListener, ActionListener {
 		realWidth = this.getContentPane().getSize().width;
 		// mainPanel.add(mG);
 		myMap=Map.getInstance();
-		//myGame = Game.getInstance();
-		// myGame.setGame();
+		myGame = Game.getInstance();
+		myGame.setGame();
 		// myTowerList = myGame.getMytowerlist();
 		leftSideOptions();
 		mG = new MapGrid(realWidth-sizeofSplit,realHeight-10,options,layout);
@@ -453,7 +454,10 @@ public class GameView extends JFrame implements KeyListener, ActionListener {
 	 */
 	private void splitViewSetUp() {
 		// TODO Auto-generated method stub
-		sP = new SplitPane(options,mG, sizeofSplit);
+		mainPanel.add(options, BorderLayout.CENTER);
+		myInfo = new PlayerInfo();
+		mainPanel.add(myInfo, BorderLayout.SOUTH);
+		sP = new SplitPane(mainPanel,mG, sizeofSplit);
 		add(sP);
 		setVisible(true);
 	}
@@ -524,6 +528,7 @@ public class GameView extends JFrame implements KeyListener, ActionListener {
 			myGame.setGame();
 			myGame.addObserver(myGame.getCritterWave());
 			// myGame.addObserver(myGame.getMytowerlist());
+			myGame.addObserver(myInfo);
 			myGame.addObserver(mG);
 			new GameTimer(myGame);
 			// myGame();

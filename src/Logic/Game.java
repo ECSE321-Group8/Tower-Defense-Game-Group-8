@@ -33,7 +33,7 @@ public class Game extends Subject{
 		wave= new CritterWave(level);
 		mytowerlist= new TowerList();
 		pathList = new LinkedList<Path>();
-		money = 6;
+		money = 100;
 		Life = 10;
 		for (Path p : m.getPath()){
 			pathList.add(p);
