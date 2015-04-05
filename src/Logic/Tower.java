@@ -61,47 +61,47 @@ public abstract class Tower {
 	public int targeting(){	
 		int targetcandidate = -1;
 		int distance = 0;
-		System.out.println("--targeting-possible targets"+g.getCritterWave().getCrittersInField().size());
-		for(int i = 0; i < g.getCritterWave().getCrittersInField().size(); i++) {
-			if ((g.getCritterWave().getCrittersInField().get(i).isAlive())) {
-				Critter mycritter = g.getCritterWave().getCrittersInField().get(i);
+		//System.out.println("--targeting-possible targets"+g.getCritterWave().getCritterInField().size());
+		for(int i = 0; i < g.getCritterWave().getCritterInField().size(); i++) {
+			if ((g.getCritterWave().getCritterInField().get(i).isAlive())) {
+				Critter mycritter = g.getCritterWave().getCritterInField().get(i);
 				distance = (int)(Math.pow(mycritter.getPosX() - screenx, 2) + Math.pow(mycritter.getPosY() - screeny, 2));
 				if (distance <= (int)Math.pow(range, 2)){
-					System.out.println("in range"+i);
+					//System.out.println("in range"+i);
 					if (targetcandidate == -1){
 						targetcandidate = i;
-						System.out.println("found valid target"+i);
+						//System.out.println("found valid target"+i);
 					}
 					else{
 						switch(targetingstrategy){
 							case 0://closest 
-								if(distance < (Math.pow(g.getCritterWave().getCrittersInField().get(targetcandidate).getPosX()-screenx,2) + Math.pow(g.getCritterWave().getCrittersInField().get(targetcandidate).getPosY()-screenx,2))){
+								if(distance < (Math.pow(g.getCritterWave().getCritterInField().get(targetcandidate).getPosX()-screenx,2) + Math.pow(g.getCritterWave().getCritterInField().get(targetcandidate).getPosY()-screenx,2))){
 									targetcandidate=i;
-									System.out.println("switched to"+i);
+									//System.out.println("switched to"+i);
 								}
 							break;
 							case 1://farthest 
-								if(distance>((g.getCritterWave().getCrittersInField().get(targetcandidate).getPosition()-screenx)*(g.getCritterWave().getCrittersInField().get(targetcandidate).getPosition()-screenx))+((g.getCritterWave().getCrittersInField().get(targetcandidate).getPosition()-screeny)*(g.getCritterWave().getCrittersInField().get(targetcandidate).getPosition()-screeny))){
+								if(distance>((g.getCritterWave().getCritterInField().get(targetcandidate).getPosition()-screenx)*(g.getCritterWave().getCritterInField().get(targetcandidate).getPosition()-screenx))+((g.getCritterWave().getCritterInField().get(targetcandidate).getPosition()-screeny)*(g.getCritterWave().getCritterInField().get(targetcandidate).getPosition()-screeny))){
 									targetcandidate=i;						
 								}
 							break;
 							case 2://least health 
-								if(g.getCritterWave().getCrittersInField().get(i).getHealth()<g.getCritterWave().getCrittersInField().get(targetcandidate).getHealth()){
+								if(g.getCritterWave().getCritterInField().get(i).getHealth()<g.getCritterWave().getCritterInField().get(targetcandidate).getHealth()){
 									targetcandidate=i;						
 								}
 							break;
 							case 3://most health 
-								if(g.getCritterWave().getCrittersInField().get(i).getHealth()>g.getCritterWave().getCrittersInField().get(targetcandidate).getHealth()){
+								if(g.getCritterWave().getCritterInField().get(i).getHealth()>g.getCritterWave().getCritterInField().get(targetcandidate).getHealth()){
 									targetcandidate=i;						
 								}
 							break;
 							case 4://first
-								if(g.getCritterWave().getCrittersInField().get(i).getCompletion()>g.getCritterWave().getCrittersInField().get(targetcandidate).getCompletion()){
+								if(g.getCritterWave().getCritterInField().get(i).getCompletion()>g.getCritterWave().getCritterInField().get(targetcandidate).getCompletion()){
 									targetcandidate=i;						
 								}
 							break;
 							case 5://last 
-								if(g.getCritterWave().getCrittersInField().get(i).getCompletion()<g.getCritterWave().getCrittersInField().get(targetcandidate).getCompletion()){
+								if(g.getCritterWave().getCritterInField().get(i).getCompletion()<g.getCritterWave().getCritterInField().get(targetcandidate).getCompletion()){
 									targetcandidate=i;						
 								}
 							break;
@@ -109,7 +109,7 @@ public abstract class Tower {
 					}			
 			}
 		}}
-		System.out.println("targeting: "+targetcandidate);
+		//System.out.println("targeting: "+targetcandidate);
 		return targetcandidate;//returns coordinates of the target
 		}
 	
@@ -119,17 +119,17 @@ public abstract class Tower {
 		if (target == -1) {  //if no valid targets, firesequence fails
 			return false;
 		} else{
-			g.getCritterWave().getCrittersInField().get(target).updateHealth(shotpower);
-			System.out.println("--shot"+target);
+			g.getCritterWave().getCritterInField().get(target).updateHealth(shotpower);
+			//System.out.println("--shot"+target);
 			return true;
 		}
 	}
 	
 	public boolean upgrade(){
-		System.out.println("upgrade?");
+		System.out.println("upgrade?money?"+g.getMoney()+"already upgrade?"+upgraded);
 		boolean success=false;
 		if (g.getMoney()>(cost-30)){
-			System.out.println("money?"+g.getMoney()+"already upgrade?"+upgraded);
+			//System.out.println("money?"+g.getMoney()+"already upgrade?"+upgraded);
 			switch(upgraded){
 			case 0:
 				range +=1;
@@ -141,7 +141,7 @@ public abstract class Tower {
 				break;
 			case 2:
 				cooldown -= 1;
-				if(cooldown<10){cooldown = 10;}
+				if(cooldown<1){cooldown = 1;}
 				success =  true;
 				break;
 			case 3:
