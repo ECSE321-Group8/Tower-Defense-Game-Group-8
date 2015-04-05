@@ -12,7 +12,8 @@ public class CritterWave implements IObserver{
 	Game g = Game.getInstance();
 	private LinkedList<Path> aPath=new LinkedList<Path>();//accesses through the Map
 //	private LinkedList<Critter> listCritters2;
-	int cycles;
+	private int cycles;
+	private Critter c;
 	
 	public CritterWave(int level){
 		int nbCritters=level*5;
@@ -69,7 +70,6 @@ public class CritterWave implements IObserver{
 	
 	@Override
 	public void update(){
-		Critter c;
 		if(cycles>0){
 			 c =listCritters.get(cycles-1);
 			addProgressive.add(c);
