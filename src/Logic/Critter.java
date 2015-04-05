@@ -14,7 +14,7 @@ public class Critter {
 	//Critter Characteristic 
 	private int health;
 	private int waitingTime;//speed
-	private int resistance;
+	//private int resistance;
 	private int worth;
 	
 	private int position;
@@ -31,6 +31,7 @@ public class Critter {
 		setPosition(-1);
 		setID(ID);
 		aPath=m.getPath();
+		setWorth();
 	}
 	
 	//GETTERS
@@ -40,9 +41,9 @@ public class Critter {
 	public int getWaitingTime(){
 		return waitingTime;
 	}
-	public int getResistance(){
-		return resistance;
-	}
+//	public int getResistance(){
+//		return resistance;
+//	}
 	public int getPosition(){
 		return position;
 	}
@@ -76,9 +77,9 @@ public class Critter {
 	public void setWaitingTime(int n){
 		waitingTime=n;
 	}
-	public void setResistance(int n){
-		resistance=n;
-	}
+//	public void setResistance(int n){
+//		resistance=n;
+//	}
 	public void setPosition(int n){
 		position=n;
 	}
@@ -86,7 +87,7 @@ public class Critter {
 		ID=n;
 	}
 	public void setWorth(){
-		worth = 2*this.getHealth()+this.getWaitingTime()+3*this.getResistance();
+		worth = 2*this.getHealth()-this.getWaitingTime();
 	}
 	public void setTimer(int n ){
 		timer = n;
@@ -96,7 +97,7 @@ public class Critter {
 	 * Returns the characteristics of the Critter
 	 */
 	public String toString(){
-		return "health: "+health+", waiting time: "+waitingTime+", resistance: "+resistance+".";
+		return "health: "+health+", waiting time: "+waitingTime+".";
 	}
 	
 	/**
@@ -139,15 +140,15 @@ public class Critter {
 		else 
 			this.waitingTime+=n;
 	}
-	/**
-	* resistance is reduced by n. 
-	* @param n
-	*/
-	public void critterLosesResistance(int n){
-		if(this.getResistance()>1)//has to be a positive integer
-			this.resistance-=n;
-	}
-	
+//	/**
+//	* resistance is reduced by n. 
+//	* @param n
+//	*/
+//	public void critterLosesResistance(int n){
+//		if(this.getResistance()>1)//has to be a positive integer
+//			this.resistance-=n;
+//	}
+//	
 	/**
 	* What will the critter do when the clock ticks 
 	*/
