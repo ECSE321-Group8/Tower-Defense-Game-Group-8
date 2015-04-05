@@ -8,6 +8,12 @@ public class TowerList extends ArrayList<Tower> implements IObserver{
 	Game g = Game.getInstance();
 	ArrayList<int []> buildlog = new ArrayList<int []>();
 	
+	/**
+	 * This is to buy towers
+	 * @param type
+	 * @param x
+	 * @param y
+	 */
 	public void buyTower(int type, int x, int y){
 		int [] toAdd = {type,x,y};
 		switch(type){
@@ -34,17 +40,15 @@ public class TowerList extends ArrayList<Tower> implements IObserver{
 			}			
 			break;
 		}
-		System.out.println("--exit buytower");
 		int [] a;
 		for (int i = buildlog.size()-1; i >= 0;i--){
 			a = buildlog.get(i);
 			System.out.println(a[0]);
 			System.out.println(a[1]);
-			System.out.println(a[2]);
-			
-			
+			System.out.println(a[2]);			
 		}
-		
+		System.out.println("--exit buytower");
+
 		
 		
 		return;	
@@ -63,6 +67,7 @@ public class TowerList extends ArrayList<Tower> implements IObserver{
 		this.remove(i);
 	}	
 	public void update(){
+		System.out.println("--enter update");
 		for(int i=0; i<this.size(); i++){//++to put in gameclock		
 			this.get(i).tick();//++to put in gameclock
 		}//++t put in gameclock
@@ -73,6 +78,7 @@ public class TowerList extends ArrayList<Tower> implements IObserver{
 		for(int i=0; i<this.size(); i++){
 			if(this.get(i).getX() == x){
 				if(this.get(i).getY() == y){
+					System.out.println("MUCH SELECTING OF TOWER "+i);
 					return this.get(i);		
 				}
 			}

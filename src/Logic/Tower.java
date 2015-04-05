@@ -57,6 +57,7 @@ public abstract class Tower {
 				Critter mycritter = g.getCritterWave().getListCritters().get(i);
 				distance = (int)(Math.pow(mycritter.getPosX() - screenx, 2) + Math.pow(mycritter.getPosY() - screeny, 2));
 				if (distance <= (int)Math.pow(range, 2)){
+					System.out.println("in range"+i);
 					if (targetcandidate == -1){
 						targetcandidate = i;
 						System.out.println("found valid target"+i);
@@ -107,7 +108,8 @@ public abstract class Tower {
 		if (target == -1) {  //if no valid targets, firesequence fails
 			return false;
 		} else{
-			g.getCritterWave().getListCritters().get(target).updateHealth(shotpower);				
+			g.getCritterWave().getListCritters().get(target).updateHealth(shotpower);
+			System.out.println("--shot"+target);
 			return true;
 		}
 	}
@@ -127,7 +129,7 @@ public abstract class Tower {
 				success =  true;
 				break;
 			case 2:
-				cooldown -= 10;
+				cooldown -= 1;
 				if(cooldown<10){cooldown = 10;}
 				success =  true;
 				break;

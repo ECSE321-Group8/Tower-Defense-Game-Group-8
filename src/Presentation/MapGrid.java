@@ -184,7 +184,7 @@ public class MapGrid extends JPanel implements MouseListener, IObserver{
 					g.fillRect(i*gridSize+xOffset, j*gridSize+yOffset, gridSize, gridSize);
 					Scenery tempScenery = (Scenery)myMap.getGrid(j, i);
 					if(tempScenery.isTowerPresent()){
-						drawTowers(g, i, j);
+						//drawTowers(g, i, j);
 					}
 				}
 				g.setColor(Color.BLACK);
@@ -431,7 +431,7 @@ public class MapGrid extends JPanel implements MouseListener, IObserver{
 	public void update() {
 		// TODO Auto-generated method stub
 		System.out.println("Printing from Game");
-		myGame.getMytowerlist().buildtick();
+		myGame.getMytowerlist().update();
 		this.repaint();
 		setVisible(true);
 	}

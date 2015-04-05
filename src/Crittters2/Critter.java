@@ -1,5 +1,6 @@
 package Crittters2;
 import java.util.*;
+
 import Logic.*;
 import Logic.Map;
 
@@ -116,6 +117,7 @@ public class Critter {
 	public void updateHealth(int damage){
 		this.health=this.health-damage;
 		if (this.health < 0){this.health = 0;}
+		System.out.println("--target at "+this.health+" hp");
 	}
 	
 	//critter is hit and is slowed down
@@ -132,7 +134,7 @@ public class Critter {
 	}
 	
 	public void tick(){
-		System.out.println(this.getID()+": "+this.getPosition());
+		System.out.println(this.getID()+": "+this.getPosition()+" at "+this.health+" hp");
 		if (timer > 0)
 			timer -=1;
 		else if (timer==0){
