@@ -37,6 +37,19 @@ public abstract class Tower {
 		this.pos=pos;
 	}*/
 	
+	public int getCooldown() {
+		return cooldown;
+	}
+
+	public int getRange() {
+		return range;
+	}
+
+	public int getShotpower() {
+		return shotpower;
+	}
+	
+
 	public void tick() {		//every gamecycle
 		if (timer > 0) {		//the countdown timer goes down (getting ready to shoot)
 			timer -= 1;		//if it was already 0 and didn't shoot (no valid targets), it stays ready to shoot
@@ -89,6 +102,7 @@ public abstract class Tower {
 								if(g.getCritterWave().getListCritters().get(i).getCompletion()>g.getCritterWave().getListCritters().get(targetcandidate).getCompletion()){
 									targetcandidate=i;						
 								}
+							break;
 							case 5://last 
 								if(g.getCritterWave().getListCritters().get(i).getCompletion()<g.getCritterWave().getListCritters().get(targetcandidate).getCompletion()){
 									targetcandidate=i;						

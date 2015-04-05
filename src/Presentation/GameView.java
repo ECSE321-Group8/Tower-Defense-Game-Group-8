@@ -241,7 +241,7 @@ public class GameView extends JFrame implements KeyListener, ActionListener {
 		
 		towerStats = new JTextArea("Power=\nRange=\nCool Down=");
 		
-		String [] strategyOptions = {"Closest","Furthest","Least Health","Most Health"};
+		String [] strategyOptions = {"Closest","Furthest","Least Health","Most Health","First","Last"};
 		towerStrategy = new JComboBox(strategyOptions);
 		towerStrategy.setSelectedIndex(1);
 		towerStrategy.addActionListener(this);
@@ -410,16 +410,19 @@ public class GameView extends JFrame implements KeyListener, ActionListener {
 		gbc3.gridy = 3;
 		
 		towerInfo.add(towerStrategy,gbc3);
+		towerStrategy.setEnabled(false);
 		
 		gbc3.gridx = 0;
 		gbc3.gridy = 4;
 		
 		towerInfo.add(upgrade, gbc3);
+		upgrade.setEnabled(false);
 		
 		gbc3.gridx = 0;
 		gbc3.gridy = 5;
 		
 		towerInfo.add(sell, gbc3);
+		sell.setEnabled(false);
 		
 		// Tower Purchase
 		
@@ -573,8 +576,23 @@ public class GameView extends JFrame implements KeyListener, ActionListener {
 			myMap.saveMap(tMapName.getText());
 			nameOfMaps.setText(myMap.printMapRecords());
 		}
-		else if(e.getActionCommand()== "Tower Button"){
-			System.out.println("Tower Button");
+//		else if(e.getActionCommand()== "Tower Button"){
+//			System.out.println("Tower Button");
+//		}
+		else if(e.getSource() == towerb){
+			System.out.println("Pressing Tower Name");
+			sell.setEnabled(true);
+			upgrade.setEnabled(true);
+			towerStrategy.setEnabled(true);
+			myTowerList = myGame.getMytowerlist();
+			tempTower = myTowerList.getTower(mG.getXcor(), mG.getYcor());
+			fillTowerInfo(tempTower);
+		}
+		else if(e.getSource() == upgrade){
+			myTowerList = myGame.getMytowerlist();
+			tempTower = myTowerList.getTower(mG.getXcor(), mG.getYcor());
+			tempTower.upgrade();
+			fillTowerInfo(tempTower);
 		}
 		else if(e.getActionCommand()== "Critter Button"){
 			System.out.println("Critter Button");
@@ -599,6 +617,11 @@ public class GameView extends JFrame implements KeyListener, ActionListener {
 		}
 		else if(e.getSource() == towerStrategy){
 			System.out.println("The Selected Strategy was: " + towerStrategy.getSelectedIndex());
+			myTowerList = myGame.getMytowerlist();
+			tempTower = myTowerList.getTower(mG.getXcor(), mG.getYcor());
+			tempTower.setTargetingStrategy(towerStrategy.getSelectedIndex());
+			fillTowerInfo(tempTower);
+			setVisible(true);
 		}
 		/*
 		 * Tower IDs:
@@ -638,6 +661,13 @@ public class GameView extends JFrame implements KeyListener, ActionListener {
 		requestFocusInWindow(); // Allows for keyboard listener to work after button pressed
 	}
 	
+	private void fillTowerInfo(Tower t) {
+		// TODO Auto-generated method stub3
+		// System.out.println("Range: " + t.getRange() + "\nCooldown: " + t.getCooldown() + "\nShot Power: "+t.getShotpower());
+		towerStats.setText("Range: " + t.getRange() + "\nCooldown: " + t.getCooldown() + "\nShot Power: "+t.getShotpower()+ "\nUpgrade Level: " + t.getUpgraded()+"\nStrategy: "+t.getTargetingStrategy());
+		setVisible(true);
+	}
+
 	/**
 	 * Handling all the keyboard inputs which are valid
 	 */
