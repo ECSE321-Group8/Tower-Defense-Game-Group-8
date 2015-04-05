@@ -63,10 +63,10 @@ public class Critter {
 		return timer;
 	}
 	public int getPosX(){
-		return position/Map.getWidth();			
+		return position%Map.getWidth();			
 	}
 	public int getPosY(){
-		return position%Map.getWidth();
+		return position/Map.getWidth();
 	}
 	
 	
