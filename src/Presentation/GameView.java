@@ -131,9 +131,9 @@ public class GameView extends JFrame implements KeyListener, ActionListener {
 		realWidth = this.getContentPane().getSize().width;
 		// mainPanel.add(mG);
 		myMap=Map.getInstance();
-		myGame = Game.getInstance();
-		myGame.setGame();
-		myTowerList = myGame.getMytowerlist();
+		//myGame = Game.getInstance();
+		// myGame.setGame();
+		// myTowerList = myGame.getMytowerlist();
 		leftSideOptions();
 		mG = new MapGrid(realWidth-sizeofSplit,realHeight-10,options,layout);
 		// myGame.addObserver(mG);
@@ -514,11 +514,15 @@ public class GameView extends JFrame implements KeyListener, ActionListener {
 			mG.setDimensions(myMap.getHeight(), myMap.getWidth());
 			mG.setCompletedView(true);
 			editAgain.setEnabled(false);
-			repaint();
+			mG.repaint();
+			setVisible(true);
+			
+			myGame = Game.getInstance();
+			myGame.setGame();
 			myGame.addObserver(myGame.getCritterWave());
 			myGame.addObserver(mG);
 			myGame.startGameClock();
-			setVisible(true);
+			
 		}
 		else if(e.getSource()==edit){
 			save.setEnabled(false);
@@ -614,7 +618,7 @@ public class GameView extends JFrame implements KeyListener, ActionListener {
 			setVisible(true);
 		}
 		// http://stackoverflow.com/questions/13791987/keyboard-input-stops-working-in-swing-application-a-calculator-after-clicking
-		requestFocusInWindow(); // Allows for keyboard listener to work after button pressed
+//		requestFocusInWindow(); // Allows for keyboard listener to work after button pressed
 	}
 
 	@Override

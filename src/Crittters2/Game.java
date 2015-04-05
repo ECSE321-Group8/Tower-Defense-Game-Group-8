@@ -80,10 +80,11 @@ public class Game extends Subject{
 		while(!wave.getListCritters().isEmpty()){
 			try {
 				Thread.sleep(1000);
+				
 				notifyObservers();
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
-				//e.printStackTrace();
+				e.printStackTrace();
 			}
 		}
 	}
