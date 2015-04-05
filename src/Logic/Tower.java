@@ -61,10 +61,10 @@ public abstract class Tower {
 	public int targeting(){	
 		int targetcandidate = -1;
 		int distance = 0;
-		System.out.println("--targeting-possible targets"+g.getCritterWave().getListCritters().size());
-		for(int i = 0; i < g.getCritterWave().getListCritters().size(); i++) {
-			if ((g.getCritterWave().getListCritters().get(i).isAlive())) {
-				Critter mycritter = g.getCritterWave().getListCritters().get(i);
+		System.out.println("--targeting-possible targets"+g.getCritterWave().getCrittersInField().size());
+		for(int i = 0; i < g.getCritterWave().getCrittersInField().size(); i++) {
+			if ((g.getCritterWave().getCrittersInField().get(i).isAlive())) {
+				Critter mycritter = g.getCritterWave().getCrittersInField().get(i);
 				distance = (int)(Math.pow(mycritter.getPosX() - screenx, 2) + Math.pow(mycritter.getPosY() - screeny, 2));
 				if (distance <= (int)Math.pow(range, 2)){
 					System.out.println("in range"+i);
@@ -75,33 +75,33 @@ public abstract class Tower {
 					else{
 						switch(targetingstrategy){
 							case 0://closest 
-								if(distance < (Math.pow(g.getCritterWave().getListCritters().get(targetcandidate).getPosX()-screenx,2) + Math.pow(g.getCritterWave().getListCritters().get(targetcandidate).getPosY()-screenx,2))){
+								if(distance < (Math.pow(g.getCritterWave().getCrittersInField().get(targetcandidate).getPosX()-screenx,2) + Math.pow(g.getCritterWave().getCrittersInField().get(targetcandidate).getPosY()-screenx,2))){
 									targetcandidate=i;
 									System.out.println("switched to"+i);
 								}
 							break;
 							case 1://farthest 
-								if(distance>((g.getCritterWave().getListCritters().get(targetcandidate).getPosition()-screenx)*(g.getCritterWave().getListCritters().get(targetcandidate).getPosition()-screenx))+((g.getCritterWave().getListCritters().get(targetcandidate).getPosition()-screeny)*(g.getCritterWave().getListCritters().get(targetcandidate).getPosition()-screeny))){
+								if(distance>((g.getCritterWave().getCrittersInField().get(targetcandidate).getPosition()-screenx)*(g.getCritterWave().getCrittersInField().get(targetcandidate).getPosition()-screenx))+((g.getCritterWave().getCrittersInField().get(targetcandidate).getPosition()-screeny)*(g.getCritterWave().getCrittersInField().get(targetcandidate).getPosition()-screeny))){
 									targetcandidate=i;						
 								}
 							break;
 							case 2://least health 
-								if(g.getCritterWave().getListCritters().get(i).getHealth()<g.getCritterWave().getListCritters().get(targetcandidate).getHealth()){
+								if(g.getCritterWave().getCrittersInField().get(i).getHealth()<g.getCritterWave().getCrittersInField().get(targetcandidate).getHealth()){
 									targetcandidate=i;						
 								}
 							break;
 							case 3://most health 
-								if(g.getCritterWave().getListCritters().get(i).getHealth()>g.getCritterWave().getListCritters().get(targetcandidate).getHealth()){
+								if(g.getCritterWave().getCrittersInField().get(i).getHealth()>g.getCritterWave().getCrittersInField().get(targetcandidate).getHealth()){
 									targetcandidate=i;						
 								}
 							break;
 							case 4://first
-								if(g.getCritterWave().getListCritters().get(i).getCompletion()>g.getCritterWave().getListCritters().get(targetcandidate).getCompletion()){
+								if(g.getCritterWave().getCrittersInField().get(i).getCompletion()>g.getCritterWave().getCrittersInField().get(targetcandidate).getCompletion()){
 									targetcandidate=i;						
 								}
 							break;
 							case 5://last 
-								if(g.getCritterWave().getListCritters().get(i).getCompletion()<g.getCritterWave().getListCritters().get(targetcandidate).getCompletion()){
+								if(g.getCritterWave().getCrittersInField().get(i).getCompletion()<g.getCritterWave().getCrittersInField().get(targetcandidate).getCompletion()){
 									targetcandidate=i;						
 								}
 							break;
@@ -119,7 +119,7 @@ public abstract class Tower {
 		if (target == -1) {  //if no valid targets, firesequence fails
 			return false;
 		} else{
-			g.getCritterWave().getListCritters().get(target).updateHealth(shotpower);
+			g.getCritterWave().getCrittersInField().get(target).updateHealth(shotpower);
 			System.out.println("--shot"+target);
 			return true;
 		}
@@ -152,7 +152,7 @@ public abstract class Tower {
 		if (success){
 			upgraded += 1;
 			g.addMoney((int)(-cost*0.5));
-			System.out.println("UPGRADE");
+			System.out.println("###UPGRADE");
 		}
 		return success;
 	}
@@ -162,8 +162,10 @@ public abstract class Tower {
 	}
 	
 	public void setTargetingStrategy(int n){
-		if ((n >= 0)&&(n <= 3)){
+		if ((n >= 0)&&(n <= 5)){
 			targetingstrategy = n;
+			System.out.println("###changed strategy");
+			
 		}
 	}
 	
