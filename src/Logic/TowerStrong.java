@@ -18,6 +18,7 @@ public class TowerStrong extends Tower{
 		screeny=y;
 		upgraded=0;
 		g.addMoney(-cost);
+		type=2;
 		// TODO Auto-generated constructor stub
 	}	
 	

@@ -10,7 +10,7 @@ public class Game extends Subject{
 	LinkedList<Path> pathList;
 	CritterWave wave;
 	private static Game gameInstance= null;
-	private int Money;
+	private int money;
 	private int Life;
 //	Timer timer = new Timer();
 	TowerList mytowerlist;
@@ -30,7 +30,7 @@ public class Game extends Subject{
 		wave= new CritterWave(level);
 		mytowerlist= new TowerList();
 		pathList = new LinkedList<Path>();
-		
+		money = 1000;
 		for (Path p : m.getPath()){
 			pathList.add(p);
 		}
@@ -51,14 +51,14 @@ public class Game extends Subject{
 		return wave;
 	}
 	public int getMoney(){
-		return Money;
+		return money;
 	}
 	public int getLife(){
 		return Life;
 	}
 	
 	public void setMoney(int n){
-		Money=n;
+		money=n;
 	}
 	public void setLife(int n){
 		Life=n;
@@ -67,7 +67,7 @@ public class Game extends Subject{
 		Life-=n;
 	}	
 	public void addMoney(int n){
-		Money+=n;
+		money+=n;
 	}
 
 //	public void buyTower(int n , int x, int y){

@@ -19,7 +19,12 @@ public abstract class Tower {
 	public int screenx;
 	public int screeny;
 	public int upgraded;
+	public int type;
 	
+	public int getType() {
+		return type;
+	}
+
 	Game g= Game.getInstance();
 	
 	//public abstract void uprgrade();
@@ -190,6 +195,10 @@ public abstract class Tower {
 		}
 		else
 			return false;
+	}
+
+	public int getUpgraded() {
+		return upgraded;
 	}
 	
 	/*

@@ -521,7 +521,7 @@ public class GameView extends JFrame implements KeyListener, ActionListener {
 			myGame = Game.getInstance();
 			myGame.setGame();
 			myGame.addObserver(myGame.getCritterWave());
-			myGame.addObserver(myGame.getMytowerlist());
+			// myGame.addObserver(myGame.getMytowerlist());
 			myGame.addObserver(mG);
 			new GameTimer(myGame);
 			// myGame();

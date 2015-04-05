@@ -14,23 +14,39 @@ public class TowerList extends ArrayList<Tower> implements IObserver{
 		case 0:
 			if (g.getMoney()>(TowerSniper.cost)){
 				buildlog.add(toAdd);
+				System.out.println("--added sniper to buildlog");
 				//buildlog.get(buildlog.size())={1,1,1};
-				this.add(new TowerSniper(x,y));
+				//this.add(new TowerSniper(x,y));
 			}			
 			break;
 		case 1:
 			if (g.getMoney()>(TowerFast.cost)){
 				buildlog.add(toAdd);
-				this.add(new TowerFast(x,y));
+				System.out.println("--added fast to buildlog");
+				//this.add(new TowerFast(x,y));
 			}			
 		break;
 		case 2:
 			if (g.getMoney()>(TowerStrong.cost)){
 				buildlog.add(toAdd);
-				this.add(new TowerStrong(x,y));
+				System.out.println("--added strong to buildlog");				
+				//this.add(new TowerStrong(x,y));
 			}			
 			break;
 		}
+		System.out.println("--exit buytower");
+		int [] a;
+		for (int i = buildlog.size()-1; i >= 0;i--){
+			a = buildlog.get(i);
+			System.out.println(a[0]);
+			System.out.println(a[1]);
+			System.out.println(a[2]);
+			
+			
+		}
+		
+		
+		
 		return;	
 	}
 	/**
@@ -64,24 +80,30 @@ public class TowerList extends ArrayList<Tower> implements IObserver{
 		return null;
 	}	
 
-	public void buildtick(){
+	public boolean buildtick(){
+
 		int [] a;
+		System.out.println("--enter buildtick "+buildlog.size());
+		if (buildlog.size() == 0) {return false;}
 		for (int i = buildlog.size()-1; i >= 0;i--){
 			a = buildlog.get(i);
 			switch(a[0]){
 			case 0:
+				System.out.println("--built a sniper");
 				this.add(new TowerSniper(a[1],a[2]));		
 				break;
 			case 1:
+				System.out.println("--built a fast");
 				this.add(new TowerFast(a[1],a[2]));		
 				break;
 			case 2:
+				System.out.println("--built a strong");
 				this.add(new TowerStrong(a[1],a[2]));		
 				break;
 			}
 			buildlog.remove(i);
 		}
-			
+		return true;	
 	}
 
 

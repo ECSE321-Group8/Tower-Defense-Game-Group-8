@@ -4,6 +4,7 @@ import Crittters2.CritterWave;
 import Crittters2.Game;
 import Crittters2.IObserver;
 import Logic.Tower;
+import Logic.*;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -15,6 +16,7 @@ import javax.swing.JTextField;
 import Logic.Map;
 import Logic.Path;
 import Logic.Scenery;
+import Logic.TowerList;
 
 public class MapGrid extends JPanel implements MouseListener, IObserver{
 	
@@ -33,6 +35,7 @@ public class MapGrid extends JPanel implements MouseListener, IObserver{
 	private CardLayout layout;
 	private Game myGame;
 	private CritterWave myWave;
+	private TowerList myTowerList;
 	
 	public boolean isPlaying() {
 		return playing;
@@ -86,15 +89,16 @@ public class MapGrid extends JPanel implements MouseListener, IObserver{
 		//if(false){ // To test; take out if statement after
 		//for(int i=0;i<gridRows;i++){
 			//for(int j=0;j<gridColumns;j++){
-				/*
-				Tower t; // Get the tower object if it exists
-				g.setColor(towerBaseColour());
-				*/
-				g.setColor(Color.LIGHT_GRAY);
+		myTowerList = myGame.getMytowerlist();
+				
+				//Tower t; // Get the tower object if it exists
+				g.setColor(towerBaseColour(myTowerList.getTower(i, j)));
+				
+				// g.setColor(Color.LIGHT_GRAY);
 				g.fillRect(i*gridSize+xOffset+gridSize/8, j*gridSize+yOffset+gridSize/8, 3*gridSize/4, 3*gridSize/4);
-				/*
-				g.setColor(towerTypeColour());
-				*/
+				
+				g.setColor(towerTypeColour(myTowerList.getTower(i, j)));
+				
 				g.setColor(Color.RED);
 				g.fillOval(i*gridSize+xOffset+gridSize/4, j*gridSize+yOffset+gridSize/4, gridSize/2, gridSize/2);
 			//}
@@ -102,33 +106,43 @@ public class MapGrid extends JPanel implements MouseListener, IObserver{
 		//}
 	}
 
-	private Color towerTypeColour() {
+	private Color towerTypeColour(Tower t) {
 		// TODO Auto-generated method stub
 		// Would get the type of tower:
-		int towerType=1;
-		if(towerType==1){ // Regular
+		//int towerType=t.getType();
+		if(t.isTowerFast()){ // Regular
 			return Color.RED;
 		}
-		else if(towerType==2){
+		else if(t.isTowerSniper()){
 			return Color.BLUE;
 		}
-		else if(towerType==3){
+		else if(t.isTowerStrong()){
 			return Color.YELLOW;
 		}
 		return null;
 	}
 
-	private Color towerBaseColour() {
+	private Color towerBaseColour(Tower t) {
 		// TODO Auto-generated method stub
 		// would get the upgrade level of the towers:
-		int upgradeLevel=1;
-		if(upgradeLevel==1){ // Level 1
+		Tower tempTower;
+		if(t.isTowerFast()){
+			tempTower = (TowerFast)t;
+		}
+		else if(t.isTowerSniper()){
+			tempTower = (TowerSniper)t;
+		}
+		else if(t.isTowerStrong()){
+			tempTower = (TowerStrong)t;
+		}
+		int upgradeLevel=t.getUpgraded();
+		if(upgradeLevel==0){ // Level 1
 			return Color.LIGHT_GRAY;
 		}
-		else if(upgradeLevel==2){
+		else if(upgradeLevel==1){
 			return Color.DARK_GRAY;
 		}
-		else if(upgradeLevel==3){
+		else if(upgradeLevel==2){
 			return Color.BLACK;
 		}
 		return null;
@@ -137,6 +151,7 @@ public class MapGrid extends JPanel implements MouseListener, IObserver{
 	private void drawGrid(Graphics g) {
 		// TODO Auto-generated method stub
 		Path tempPath;
+		
 		g.clearRect(0, 0, getWidth(), getHeight()); // Clear the screen
 		
 		for(int i=0;i<gridColumns;i++){
@@ -416,6 +431,7 @@ public class MapGrid extends JPanel implements MouseListener, IObserver{
 	public void update() {
 		// TODO Auto-generated method stub
 		System.out.println("Printing from Game");
+		myGame.getMytowerlist().buildtick();
 		this.repaint();
 		setVisible(true);
 	}

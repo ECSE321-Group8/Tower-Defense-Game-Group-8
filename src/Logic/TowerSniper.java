@@ -18,6 +18,7 @@ public class TowerSniper extends Tower{
 		screeny=y;
 		upgraded=0;
 		g.addMoney(-cost);
+		type=0;
 		// TODO Auto-generated constructor stub
 	}	
 	
