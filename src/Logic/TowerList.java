@@ -66,7 +66,8 @@ public class TowerList extends ArrayList<Tower> implements IObserver{
 	}
 	
 	public void sellTower(int i){
-		System.out.println("###selling tower "+i);	
+		System.out.println("###selling tower "+i+" for "+((this.get(i).getCost())));
+		
 		g.addMoney((int)(this.get(i).getCost()*0.75));
 		this.remove(i);
 	}	

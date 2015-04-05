@@ -61,7 +61,7 @@ public class CritterWave implements IObserver{
 		listCritters.remove(c);
 	}
 	
-	public LinkedList<Critter> getCrittersInField(){
+	public LinkedList<Critter> getCritterInField(){
 		return addProgressive;
 	}
 	
