@@ -1,5 +1,7 @@
 package Presentation;
 
+import java.awt.GridLayout;
+
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -17,6 +19,7 @@ public class PlayerInfo extends JPanel implements IObserver{
 		myGame = Game.getInstance();
 		this.playerMoney = myGame.getMoney();
 		this.playerHealth = myGame.getLife();
+		this.setLayout(new GridLayout());
 	}
 
 	@Override

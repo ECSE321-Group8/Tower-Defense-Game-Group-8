@@ -635,13 +635,23 @@ public class GameView extends JFrame implements KeyListener, ActionListener {
 		}
 		else if(e.getSource() == strongTower){
 			System.out.println("Adding Strong Tower");
-			mG.placeTower();
+			myTowerList = myGame.getMytowerlist();
+			if(myTowerList.buyTower(2, mG.getXcor(), mG.getYcor())){
+				tempScenery = (Scenery)myMap.getGrid(mG.getXcor(), mG.getYcor());
+				tempScenery.placeTower();
+				mG.placeTower();
+			}
 			layout.show(options, "Opening");
 			setVisible(true);
 		}
 		else if(e.getSource() == sniperTower){
 			System.out.println("Adding Sniper Tower");
-			mG.placeTower();
+			myTowerList = myGame.getMytowerlist();
+			if(myTowerList.buyTower(0, mG.getXcor(), mG.getYcor())){
+				tempScenery = (Scenery)myMap.getGrid(mG.getXcor(), mG.getYcor());
+				tempScenery.placeTower();
+				mG.placeTower();
+			}
 			layout.show(options, "Opening");
 			setVisible(true);
 		}
