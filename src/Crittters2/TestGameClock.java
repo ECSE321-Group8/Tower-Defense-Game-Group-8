@@ -14,7 +14,7 @@ public class TestGameClock {
 		
 		game.addObserver(game.getCritterWave());
 		
-		new GameTimer(game);
+		new GameTimer(game);	
 		
 		System.out.println("end");
 		
