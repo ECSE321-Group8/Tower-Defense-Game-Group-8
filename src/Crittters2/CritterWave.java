@@ -11,7 +11,7 @@ public class CritterWave implements IObserver{
 	Map m = Map.getInstance();
 	Game g = Game.getInstance();
 	private LinkedList<Path> aPath=new LinkedList<Path>();//accesses through the Map
-	
+	private LinkedList<Critter> listCritters2;
 	
 	
 	public CritterWave(int level){
@@ -80,4 +80,5 @@ public class CritterWave implements IObserver{
 			}
 		}
 	}
+	
 }

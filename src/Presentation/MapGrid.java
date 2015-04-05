@@ -53,8 +53,8 @@ public class MapGrid extends JPanel implements MouseListener, IObserver{
 		myMap=Map.getInstance();
 		this.myOptions = myOptions;
 		this.layout = layout;
-		myGame.getInstance();
-		myWave.getListCritters();
+		myGame = Game.getInstance();
+		// myWave.getListCritters();
 		
 		addMouseListener(this);
 		
@@ -192,7 +192,7 @@ public class MapGrid extends JPanel implements MouseListener, IObserver{
 		myWave = myGame.getCritterWave();
 		for(Critter c: myWave.getListCritters()){
 			g.setColor(critterColour(c.getID()));
-			g.drawOval(x, y, width, height);
+			g.drawOval(c.getPosX()*gridSize+xOffset+gridSize/4,c.getPosY()*gridSize+yOffset+gridSize/4 , gridSize/2, gridSize/2);
 		}
 	}
 
