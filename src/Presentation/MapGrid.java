@@ -3,12 +3,16 @@ import Crittters2.Critter;
 import Crittters2.CritterWave;
 import Crittters2.Game;
 import Crittters2.IObserver;
-import Logic.Tower;
 import Logic.*;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.image.BufferedImage;
+import java.awt.image.ImageObserver;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -36,6 +40,9 @@ public class MapGrid extends JPanel implements MouseListener, IObserver{
 	private Game myGame;
 	private CritterWave myWave;
 	private TowerList myTowerList;
+	private BufferedImage myGrass;
+	private BufferedImage myPath;
+	private ImageObserver observer;
 	
 	/**
 	 * This method returns if the Player is in the Game mode or not
@@ -73,6 +80,16 @@ public class MapGrid extends JPanel implements MouseListener, IObserver{
 		myGame = Game.getInstance();
 		// myWave.getListCritters();
 		
+		String path = new File (".").getAbsolutePath();
+		String grassPath = path.concat("//Assets//grass.png");
+		String pathPath = path.concat("//Assets//path.png");
+		try {
+			myGrass = ImageIO.read(new File (grassPath));
+			myPath = ImageIO.read(new File(pathPath));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		addMouseListener(this);
 		
 		setVisible(true);
@@ -203,8 +220,9 @@ public class MapGrid extends JPanel implements MouseListener, IObserver{
 				else if(myMap.getGrid(j, i).isPath()){
 					tempPath = (Path)myMap.getGrid(j, i);
 					if(tempPath.getPos()!=myMap.getCurrentPos()||completedView){
-						g.setColor(Color.BLUE);
-						g.fillRect(i*gridSize+xOffset, j*gridSize+yOffset, gridSize, gridSize);
+//						g.setColor(Color.BLUE);
+//						g.fillRect(i*gridSize+xOffset, j*gridSize+yOffset, gridSize, gridSize);
+						g.drawImage(myPath, i*gridSize+xOffset, j*gridSize+yOffset,gridSize, gridSize, observer);
 						// drawTriangle(3, i, j, g); // Testing to see if each case works
 						drawTriangle(tempPath.getDirection(tempPath.getExit()), i, j, g); // Drawing triangle to show direction of path
 						// http://forum.processing.org/one/topic/the-opposite-of-a-color.html
@@ -217,15 +235,18 @@ public class MapGrid extends JPanel implements MouseListener, IObserver{
 					}
 				}
 				else{
-					g.setColor(Color.GREEN);
-					g.fillRect(i*gridSize+xOffset, j*gridSize+yOffset, gridSize, gridSize);
+//					g.setColor(Color.GREEN);
+//					g.fillRect(i*gridSize+xOffset, j*gridSize+yOffset, gridSize, gridSize);
+					g.drawImage(myGrass, i*gridSize+xOffset, j*gridSize+yOffset,gridSize, gridSize, observer);
 					Scenery tempScenery = (Scenery)myMap.getGrid(j, i);
 					if(tempScenery.isTowerPresent()){
 						// drawTowers(g, i, j);
 					}
 				}
-				g.setColor(Color.BLACK);
-				g.drawRect(i*gridSize+xOffset, j*gridSize+yOffset, gridSize, gridSize);
+				if(!completedView){
+					g.setColor(Color.BLACK);
+					g.drawRect(i*gridSize+xOffset, j*gridSize+yOffset, gridSize, gridSize);
+				}
 			}
 		}
 		if(playing){
