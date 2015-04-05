@@ -18,7 +18,7 @@ public class Critter {
 	private int position;
 	private int ID;
 	
-	private int timer=0;
+	public int timer=0;
 	private int completion=0; 
 		
 

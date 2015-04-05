@@ -18,7 +18,7 @@ public class CritterWave implements IObserver{
 	private LinkedList<Path> aPath=new LinkedList<Path>();//accesses through the Map
 	private int cycles;
 	private Critter c;
-	private LinkedList<Critter> addProgressive= new LinkedList<Critter>();
+	public LinkedList<Critter> addProgressive= new LinkedList<Critter>();
 	
 	//Variables used internally to generate critters and push them. 
 	private int nbCritters;
