@@ -608,11 +608,13 @@ public class GameView extends JFrame implements KeyListener, ActionListener {
 		 */
 		else if(e.getSource() == FastTower){
 			System.out.println("Adding Fast Tower");
-			tempScenery = (Scenery)myMap.getGrid(mG.getXcor(), mG.getYcor());
-			tempScenery.placeTower();
+			
 			myTowerList = myGame.getMytowerlist();
-			myTowerList.buyTower(1, mG.getXcor(), mG.getYcor());
-			mG.placeTower();
+			if(myTowerList.buyTower(1, mG.getXcor(), mG.getYcor())){
+				tempScenery = (Scenery)myMap.getGrid(mG.getXcor(), mG.getYcor());
+				tempScenery.placeTower();
+				mG.placeTower();
+			}
 			layout.show(options, "Opening");
 			setVisible(true);
 		}

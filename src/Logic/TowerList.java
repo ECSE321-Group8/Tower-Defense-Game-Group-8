@@ -14,29 +14,33 @@ public class TowerList extends ArrayList<Tower> implements IObserver{
 	 * @param x
 	 * @param y
 	 */
-	public void buyTower(int type, int x, int y){
+	public boolean buyTower(int type, int x, int y){
+		boolean wasBought = false;
 		int [] toAdd = {type,x,y};
 		switch(type){
 		case 0:
-			if (g.getMoney()>(TowerSniper.cost)){
+			if (g.getMoney()>=(TowerSniper.cost)){
 				buildlog.add(toAdd);
 				System.out.println("--added sniper to buildlog");
 				//buildlog.get(buildlog.size())={1,1,1};
 				//this.add(new TowerSniper(x,y));
+				wasBought=true;
 			}			
 			break;
 		case 1:
-			if (g.getMoney()>(TowerFast.cost)){
+			if (g.getMoney()>=(TowerFast.cost)){
 				buildlog.add(toAdd);
 				System.out.println("--added fast to buildlog");
 				//this.add(new TowerFast(x,y));
+				wasBought=true;
 			}			
 		break;
 		case 2:
-			if (g.getMoney()>(TowerStrong.cost)){
+			if (g.getMoney()>=(TowerStrong.cost)){
 				buildlog.add(toAdd);
 				System.out.println("--added strong to buildlog");				
 				//this.add(new TowerStrong(x,y));
+				wasBought=true;
 			}			
 			break;
 		}
@@ -51,7 +55,7 @@ public class TowerList extends ArrayList<Tower> implements IObserver{
 
 		
 		
-		return;	
+		return wasBought;	
 	}
 	/**
 	 * 
