@@ -38,6 +38,7 @@ public class Game extends Subject{
 		for (Path p : m.getPath()){
 			pathList.add(p);
 		}
+		this.addObserver(mytowerlist);
 		
 	}
 	
