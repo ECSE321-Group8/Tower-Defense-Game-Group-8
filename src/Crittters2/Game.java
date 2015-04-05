@@ -12,7 +12,7 @@ public class Game extends Subject{
 	private static Game gameInstance= null;
 	private int Money;
 	private int Life;
-	
+//	Timer timer = new Timer();
 	TowerList mytowerlist;
 
 	
@@ -34,6 +34,7 @@ public class Game extends Subject{
 		for (Path p : m.getPath()){
 			pathList.add(p);
 		}
+		
 	}
 	
 	
@@ -75,16 +76,24 @@ public class Game extends Subject{
 //	
 //	
 //	
+
+
+
 	
-	public void startGameClock(){
-		while(!wave.getListCritters().isEmpty()){
-			try {
-				Thread.sleep(1000);
-				notifyObservers();
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				//e.printStackTrace();
-			}
-		}
+	
+	public void tick(){
+		notifyObservers();
 	}
+//
+//		while(!wave.getListCritters().isEmpty()){
+////			try {
+//				//Thread.sleep(1000);
+//				new GameTimer();
+//				notifyObservers();
+//	//		} catch (InterruptedException e) {
+//				// TODO Auto-generated catch block
+//		//		e.printStackTrace();
+//			//}
+//		}
+//	}
 }

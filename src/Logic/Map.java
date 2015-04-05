@@ -1,5 +1,6 @@
 package Logic;
 import java.io.*;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.ListIterator;
 
@@ -14,11 +15,6 @@ public class Map {
 	//private
 	private LinkedList <Path> temp = new LinkedList<Path>(); // List of the Path
 	
-
-
-
-
-
 
 
 	private Path entryPoint; // Entry point
