@@ -11,7 +11,7 @@ public class CritterWave implements IObserver{
 	Map m = Map.getInstance();
 	Game g = Game.getInstance();
 	private LinkedList<Path> aPath=new LinkedList<Path>();//accesses through the Map
-	
+	private LinkedList<Critter> listCritters2;
 	
 	
 	public CritterWave(int level){
@@ -63,18 +63,33 @@ public class CritterWave implements IObserver{
 		}
 	}
 
+//	@Override
+//	public void update(){
+//		System.out.println("is it stuck");
+//		System.out.println("list size"+listCritters.size());
+//		for(int i = listCritters.size()-1; i >= 0; i--){
+//			System.out.println("Maybe?");
+//			if(listCritters.get(i).getCompletion() == aPath.size()){
+//				g.decrementLife(1);
+//				removeCritter(listCritters.get(i));
+//			}
+//			listCritters.get(i).tick();
+//			
+//		}
+//		
+//	}
+	
 	@Override
 	public void update(){
-		System.out.println("is it stuck");
-		System.out.println("list size"+listCritters.size());
-		for(int i = listCritters.size()-1; i >= 0; i--){
-			System.out.println("Maybe?");
-			if(listCritters.get(i).getCompletion() == aPath.size()){
-				g.decrementLife(1);
-				removeCritter(listCritters.get(i));
-			}
-			listCritters.get(i).tick();
-			
+		listCritters2= (LinkedList<Critter> )listCritters.clone();
+	
+		for (Critter c: listCritters2){
+			if (c.getCompletion() == aPath.size())
+				removeCritter(c);
+			else if(c.isAlive())
+				c.tick();
+			else 
+				removeCritter(c);
 		}
 		
 	}
