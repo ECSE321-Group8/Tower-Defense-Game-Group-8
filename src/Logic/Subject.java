@@ -1,4 +1,4 @@
-package Crittters2;
+package Logic;
 
 import java.util.*;
 

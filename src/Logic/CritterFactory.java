@@ -1,4 +1,4 @@
-package Crittters2;
+package Logic;
 
 public class CritterFactory {
 	/**

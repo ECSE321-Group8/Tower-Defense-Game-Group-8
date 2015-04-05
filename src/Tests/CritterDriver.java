@@ -1,5 +1,5 @@
 package Tests;
-import Crittters2.*;
+import Logic.*;
 
 public class CritterDriver {
 

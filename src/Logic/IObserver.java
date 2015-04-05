@@ -1,4 +1,4 @@
-package Crittters2;
+package Logic;
 
 public interface IObserver {
 	public void update();

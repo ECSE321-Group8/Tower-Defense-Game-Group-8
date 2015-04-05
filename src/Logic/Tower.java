@@ -1,8 +1,5 @@
 package Logic;
 
-import Crittters2.*;
-
-
 public abstract class Tower {
 
 	public Tower(){}

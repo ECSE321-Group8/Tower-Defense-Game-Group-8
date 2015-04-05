@@ -2,7 +2,6 @@ package Logic;
 
 import java.util.ArrayList;
 
-import Crittters2.*;
 
 public class TowerList extends ArrayList<Tower> implements IObserver{
 	Game g = Game.getInstance();

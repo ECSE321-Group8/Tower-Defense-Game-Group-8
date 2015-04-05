@@ -1,26 +1,17 @@
 package Presentation;
-import Crittters2.Critter;
-import Crittters2.CritterWave;
-import Crittters2.Game;
-import Crittters2.IObserver;
+
 import Logic.*;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.awt.image.BufferedImage;
-import java.awt.image.ImageObserver;
-import java.io.File;
-import java.io.IOException;
+import java.awt.image.*;
+import java.io.*;
 
 import javax.imageio.ImageIO;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
+import javax.swing.*;
 
 import Logic.Map;
-import Logic.Path;
-import Logic.Scenery;
-import Logic.TowerList;
+import Logic.*;
 
 public class MapGrid extends JPanel implements MouseListener, IObserver{
 	

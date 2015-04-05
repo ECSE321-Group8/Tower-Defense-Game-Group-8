@@ -20,7 +20,6 @@ public class TowerTest extends Tower{
 		upgraded=0;
 		g.addMoney(-cost);
 		type=5;
-		// TODO Auto-generated constructor stub
 	}	
 	
 	

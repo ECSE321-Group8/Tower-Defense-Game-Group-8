@@ -1,6 +1,6 @@
 package Tests;
 
-import Crittters2.*;
+import Logic.*;
 import static org.junit.Assert.*;
 
 import java.util.*;
