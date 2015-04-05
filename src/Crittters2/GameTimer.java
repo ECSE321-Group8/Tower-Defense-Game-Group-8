@@ -20,7 +20,7 @@ public class GameTimer {
 			// TODO Auto-generated method stub
 			//System.out.println("test");
 			game.tick();
-			if (game.getCritterWave().getListCritters().isEmpty()){
+			if (game.getCritterWave().getListCritters().isEmpty()||game.getLife()<=0){
 				// cancel();
 				endGameTimer();
 			}
