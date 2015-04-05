@@ -13,7 +13,12 @@ public class TestGameClock {
 		game.setGame(); 
 		
 		game.addObserver(game.getCritterWave());
+		
 		new GameTimer(game);
+		
+		System.out.println("end");
+		
+
 	}
 
 }
