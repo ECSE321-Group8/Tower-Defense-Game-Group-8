@@ -177,7 +177,7 @@ public class MapGrid extends JPanel implements MouseListener, IObserver{
 			}
 		}
 		
-		// drawCritters(g);
+		drawCritters(g);
 		
 		// how polygons are drawn
 		/*
@@ -192,8 +192,10 @@ public class MapGrid extends JPanel implements MouseListener, IObserver{
 		myWave = myGame.getCritterWave();
 		for(Critter c: myWave.getListCritters()){
 			g.setColor(critterColour(c.getID()));
-			//g.drawOval(c.getPosX()*gridSize+xOffset+gridSize/4,c.getPosY()*gridSize+yOffset+gridSize/4 , gridSize/2, gridSize/2);
-			g.drawOval(0, 0, gridSize/2, gridSize/2);
+			if(c.getPosition()>=0){
+				g.drawOval(c.getPosX()*gridSize+xOffset+gridSize/4,c.getPosY()*gridSize+yOffset+gridSize/4 , gridSize/2, gridSize/2);
+			}
+			// g.drawOval(0, 0, gridSize/2, gridSize/2);
 		}
 	}
 
@@ -202,10 +204,10 @@ public class MapGrid extends JPanel implements MouseListener, IObserver{
 		if(id%3==0){
 			return Color.RED;
 		}
-		if(id%3==1){
+		else if(id%3==1){
 			return Color.WHITE;
 		}
-		if(id%3==2){
+		else if(id%3==2){
 			return Color.CYAN;
 		}
 		return null;
@@ -413,9 +415,9 @@ public class MapGrid extends JPanel implements MouseListener, IObserver{
 	@Override
 	public void update() {
 		// TODO Auto-generated method stub
-		//System.out.println("Printing from Game");
-		//this.repaint();
-		// setVisible(true);
+		System.out.println("Printing from Game");
+		this.repaint();
+		setVisible(true);
 	}
 
 

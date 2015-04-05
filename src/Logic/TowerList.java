@@ -50,6 +50,7 @@ public class TowerList extends ArrayList<Tower>{
 		for(int i=0; i<this.size(); i++){//++to put in gameclock		
 			this.get(i).tick();//++to put in gameclock
 		}//++t put in gameclock
+		this.buildtick();
 	}
 	
 	public Tower getTower(int x, int y){

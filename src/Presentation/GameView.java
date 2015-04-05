@@ -22,6 +22,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import Crittters2.Game;
+import Crittters2.GameTimer;
 import Logic.Map;
 import Logic.Scenery;
 import Logic.Tower;
@@ -520,8 +521,10 @@ public class GameView extends JFrame implements KeyListener, ActionListener {
 			myGame = Game.getInstance();
 			myGame.setGame();
 			myGame.addObserver(myGame.getCritterWave());
+			myGame.addObserver(myGame.getMytowerlist());
 			myGame.addObserver(mG);
-			myGame.startGameClock();
+			new GameTimer(myGame);
+			// myGame();
 			
 		}
 		else if(e.getSource()==edit){
