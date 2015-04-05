@@ -9,10 +9,10 @@ public class TowerStrong extends Tower{
 
 
 		//pos=5
-		cooldown=30;
+		cooldown=5;
 		timer=cooldown;
-		range=1;
-		shotpower=4;
+		range=3;
+		shotpower=20;
 		targetingstrategy=3;
 		screenx=x;
 		screeny=y;

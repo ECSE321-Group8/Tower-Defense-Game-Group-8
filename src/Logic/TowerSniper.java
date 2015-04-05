@@ -3,16 +3,16 @@ package Logic;
 
 public class TowerSniper extends Tower{
 
-	static final int cost = 8;	
+	static final int cost = 6;	
 	
 	public TowerSniper(int x, int y) {
 		super();
 
 		//pos=5
-		cooldown=30;
+		cooldown=4;
 		timer=cooldown;
-		range=6;
-		shotpower=1;
+		range=7;
+		shotpower=10;
 		targetingstrategy=3;
 		screenx=x;
 		screeny=y;

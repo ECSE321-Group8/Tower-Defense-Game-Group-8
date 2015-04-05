@@ -1,7 +1,7 @@
 package Logic;
 
 public class TowerFast extends Tower{
-	static final int cost = 6;
+	static final int cost = 8;
 	
 	
 	public TowerFast(int x, int y) {
@@ -11,7 +11,7 @@ public class TowerFast extends Tower{
 		//pos=5
 		cooldown=3;
 		timer=cooldown;
-		range=10;
+		range=4;
 		shotpower=10;
 		targetingstrategy=5;
 		screenx=x;
