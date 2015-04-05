@@ -62,9 +62,13 @@ public class CritterWave implements IObserver{
 			return null;//error
 		}
 	}
-
+	
+	int cycles;
+	LinkedList<Critter> addProgessive= new LinkedList<Critter>();
+	
 	@Override
 	public void update(){
+		//if()
 		//System.out.println("is it stuck");
 		//System.out.println("list size"+listCritters.size());
 		if(listCritters.size()>=1){
