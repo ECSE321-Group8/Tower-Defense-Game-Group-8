@@ -67,16 +67,17 @@ public class CritterWave implements IObserver{
 	public void update(){
 		System.out.println("is it stuck");
 		System.out.println("list size"+listCritters.size());
-		for(int i = listCritters.size()-1; i >= 0; i--){
-			System.out.println("Maybe?");
-			if(listCritters.get(i).getCompletion() == aPath.size()){
-				g.decrementLife(1);
-				removeCritter(listCritters.get(i));
+		if(listCritters.size()>=1){
+			for(int i = listCritters.size()-1; i >= 0; i--){
+				System.out.println("Maybe?"+i);
+				if(listCritters.get(i).getCompletion() == aPath.size()){
+					g.decrementLife(1);
+					System.out.println("remove"+i);					
+					removeCritter(listCritters.get(i));
+				}else{
+				listCritters.get(i).tick();
+				}
 			}
-			listCritters.get(i).tick();
-			
 		}
-		
 	}
 }
- 
