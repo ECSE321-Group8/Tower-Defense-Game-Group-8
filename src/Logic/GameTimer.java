@@ -2,7 +2,6 @@ package Logic;
 import java.util.*;
 
 public class GameTimer {
-	
 	Timer timer; 
 	Game game;
 	public GameTimer(Game game){
@@ -15,16 +14,14 @@ public class GameTimer {
 		timer.cancel();
 	}
 	
-	
 	public class Tick extends TimerTask {
-	
-		/**
-		 * Method that will be called when the timer starts 
-		 */
 		public void run() {
-//			System.out.println("running");
+			System.out.println("running");
+			// TODO Auto-generated method stub
+			//System.out.println("test");
 			game.tick();
 			if (game.getCritterWave().getListCritters().isEmpty()||game.getLife()<=0){
+				// cancel();
 				endGameTimer();
 			}
 				

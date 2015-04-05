@@ -6,8 +6,7 @@ import Logic.Map;
 
 
 public class Game extends Subject{
-	
-	private int level =4;
+	int level =4;
 	LinkedList<Path> pathList;
 	CritterWave wave;
 	private static Game gameInstance= null;
@@ -26,14 +25,6 @@ public class Game extends Subject{
 	
 	}
 	
-	public static Game getInstance(){
-		if(gameInstance==null)
-			gameInstance=new Game();
-		return gameInstance;
-	}
-	/**
-	 * Initialized the Main components and variables for the Game
-	 */
 	public void setGame(){
 		Map m = Map.getInstance();
 		wave= new CritterWave(level);
@@ -46,13 +37,14 @@ public class Game extends Subject{
 		}
 		
 	}
-	public void setLevel(int n){
-		level = n;
+	
+	
+	public static Game getInstance(){
+		if(gameInstance==null)
+			gameInstance=new Game();
+		return gameInstance;
 	}
-	public int getLevel(){
-		return level;
-	}
-		
+	
 	public LinkedList<Path> getPathList(){
 		return pathList;
 	}
@@ -79,16 +71,31 @@ public class Game extends Subject{
 		money+=n;
 	}
 
+//	public void buyTower(int n , int x, int y){
+//		mytowerlist.buyTower(n,x,y);
+//	}
+//	
+//	
+//	
 
 
 
 	
-	/**
-	 * The game will notify Tower and Critters every time the clock ticks 
-	 */
+	
 	public void tick(){
 		notifyObservers();
 		System.out.println("Money: " + getMoney() + "\nLife: " + getLife());
 	}
-
+//
+//		while(!wave.getListCritters().isEmpty()){
+////			try {
+//				//Thread.sleep(1000);
+//				new GameTimer();
+//				notifyObservers();
+//	//		} catch (InterruptedException e) {
+//				// TODO Auto-generated catch block
+//		//		e.printStackTrace();
+//			//}
+//		}
+//	}
 }

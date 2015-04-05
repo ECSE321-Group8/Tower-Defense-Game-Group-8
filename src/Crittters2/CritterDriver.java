@@ -1,5 +1,9 @@
+<<<<<<< HEAD:src/Tests/CritterDriver.java
 package Tests;
 import Logic.*;
+=======
+package Crittters2;
+>>>>>>> parent of d77b3bc... comments added:src/Crittters2/CritterDriver.java
 
 public class CritterDriver {
 
