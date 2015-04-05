@@ -541,7 +541,7 @@ public class MapGrid extends JPanel implements MouseListener, IObserver{
 	@Override
 	public void update() {
 		// TODO Auto-generated method stub
-		System.out.println("Printing from Game");
+//		System.out.println("Printing from Game");
 		myGame.getMytowerlist().update();
 		this.repaint();
 		setVisible(true);

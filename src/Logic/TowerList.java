@@ -66,11 +66,12 @@ public class TowerList extends ArrayList<Tower> implements IObserver{
 	}
 	
 	public void sellTower(int i){
+		System.out.println("###selling tower "+i);	
 		g.addMoney((int)(this.get(i).getCost()*0.75));
 		this.remove(i);
 	}	
 	public void update(){
-		System.out.println("--enter update");
+		//System.out.println("--enter update");
 		for(int i=0; i<this.size(); i++){//++to put in gameclock		
 			this.get(i).tick();//++to put in gameclock
 		}//++t put in gameclock
@@ -92,7 +93,8 @@ public class TowerList extends ArrayList<Tower> implements IObserver{
 	public boolean buildtick(){
 
 		int [] a;
-		System.out.println("--enter buildtick "+buildlog.size());
+		if(buildlog.size() != 0){
+		System.out.println("--enter buildtick "+buildlog.size());}
 		if (buildlog.size() == 0) {return false;}
 		for (int i = buildlog.size()-1; i >= 0;i--){
 			a = buildlog.get(i);
