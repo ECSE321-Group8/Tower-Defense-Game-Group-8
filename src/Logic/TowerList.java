@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import Crittters2.*;
 
-public class TowerList extends ArrayList<Tower>{
+public class TowerList extends ArrayList<Tower> implements IObserver{
 	Game g = Game.getInstance();
 	ArrayList<int []> buildlog = new ArrayList<int []>();
 	
