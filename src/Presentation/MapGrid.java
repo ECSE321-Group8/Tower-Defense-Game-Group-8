@@ -251,7 +251,7 @@ public class MapGrid extends JPanel implements MouseListener, IObserver{
 		for(Critter c: myWave.getListCritters()){
 			g.setColor(critterColour(c.getID()));
 			if(c.getPosition()>=0){
-				g.drawOval(c.getPosX()*gridSize+xOffset+gridSize/4,c.getPosY()*gridSize+yOffset+gridSize/4 , gridSize/2, gridSize/2);
+				g.fillOval(c.getPosX()*gridSize+xOffset+gridSize/4,c.getPosY()*gridSize+yOffset+gridSize/4 , gridSize/2, gridSize/2);
 			}
 			// g.drawOval(0, 0, gridSize/2, gridSize/2);
 		}
@@ -329,7 +329,7 @@ public class MapGrid extends JPanel implements MouseListener, IObserver{
 			System.out.println(xpoints[i]+ " " + ypoints[i]);
 		}
 		*/
-		g.setColor(Color.BLACK); // Always set a color before drawing
+		g.setColor(Color.WHITE); // Always set a color before drawing
 		g.drawPolygon(xpoints, ypoints, 3);
 	}
 	
