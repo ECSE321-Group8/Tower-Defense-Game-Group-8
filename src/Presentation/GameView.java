@@ -502,6 +502,11 @@ public class GameView extends JFrame implements KeyListener, ActionListener {
 				// myMap.setMap(rows,columns);
 				mG.setDimensions(rows, columns);
 				myMap.setMap(rows, columns);
+				myMap.setCompletePath(false);
+				mG.setCompletedView(false);
+				mG.setStartSet(true);
+				mG.setPlaying(false);
+				setVisible(true);
 			}
 		}
 		else if(e.getSource() == play){

@@ -8,8 +8,10 @@ import Logic.Map;
 public class Critter {
 
 
-	private LinkedList<Path> aPath=new LinkedList<Path>();//accesses through the Map
+	private LinkedList<Path> aPath=new LinkedList<Path>();//Path that has been definer for the Map
 
+	
+	//Critter Characteristic 
 	private int health;
 	private int waitingTime;//speed
 	private int resistance;
@@ -17,22 +19,14 @@ public class Critter {
 	
 	private int position;
 	private int ID;
-
-	
-	public int timer=0;
-
-	
-	private int posX;
-	private int posY;
+	private int timer=0;
 
 	private int completion=0; 
-	
-	
-//	private Thread t;
+
+	//obtain the instance of the Map already created 
 	Map m = Map.getInstance();
 
-	
-	
+		
 	public Critter(int ID){
 		setPosition(-1);
 		setID(ID);
@@ -98,13 +92,17 @@ public class Critter {
 		timer = n;
 	}
 	
-		
-	//test
+	/**
+	 * Returns the characteristics of the Critter
+	 */
 	public String toString(){
 		return "health: "+health+", waiting time: "+waitingTime+", resistance: "+resistance+".";
 	}
 	
-	//check if it is still alive
+	/**
+	 * Method returns true if the Critter is alive
+	 * @return
+	 */
 	public boolean isAlive(){
 		if(health<=0)
 			return false;
@@ -112,31 +110,47 @@ public class Critter {
 			return true;
 	}
 	
+	
 	//critter is hit and loses health 
-	public void critterLosesHealth(int n){
-		if(isAlive()){
-			this.health-=n;}
-		if (this.health < 0){this.health = 0;}
-	}
+//	public void critterLosesHealth(int n){
+//		if(isAlive()){
+//			this.health-=n;}
+//		if (this.health < 0){this.health = 0;}
+//	}
+	
+	
+	/**
+	* Method decreases the critter's health
+	* @param damage: damage inflicted to the critter
+	*/
 	public void updateHealth(int damage){
 		this.health=this.health-damage;
 		if (this.health < 0){this.health = 0;}
 		System.out.println("--target at "+this.health+" hp");
 	}
 	
-	//critter is hit and is slowed down
+	/**
+	* The waiting period before moving is increased/reduced 
+	* @param n: how much it is increased by
+	*/
 	public void critterSlowedDown(int n){
-		if(this.getWaitingTime()+n<0)//can't have speed zero
+		if(this.getWaitingTime()+n<0)//can't have negative waiting time
 			return;
 		else 
 			this.waitingTime+=n;
 	}
-	//critter is hit and loses resistance
+	/**
+	* resistance is reduced by n. 
+	* @param n
+	*/
 	public void critterLosesResistance(int n){
-		if(this.getResistance()>1)
+		if(this.getResistance()>1)//has to be a positive integer
 			this.resistance-=n;
 	}
 	
+	/**
+	* What will the critter do when the clock ticks 
+	*/
 	public void tick(){
 		System.out.println(this.getID()+": "+this.getPosition()+" at "+this.health+" hp");
 		if (timer > 0)
@@ -151,7 +165,10 @@ public class Critter {
 	}
 	
 
-	
+	/**
+	* Method changes the position of the critter to the next Tile in the Path
+	* @return true is the critter was successfully moved to the next position 
+	*/
 	public boolean moveToNext(){
 		Path p;
 		
