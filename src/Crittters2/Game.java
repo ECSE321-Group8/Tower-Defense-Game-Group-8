@@ -31,7 +31,7 @@ public class Game extends Subject{
 		mytowerlist= new TowerList();
 		pathList = new LinkedList<Path>();
 		money = 6;
-		Life = 100;
+		Life = 10;
 		for (Path p : m.getPath()){
 			pathList.add(p);
 		}
