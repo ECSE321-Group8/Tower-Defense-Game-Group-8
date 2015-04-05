@@ -114,7 +114,10 @@ public class GameView extends JFrame implements KeyListener, ActionListener {
 	private Map myMap;
 	private Game myGame;
 
-	
+	/**
+	 * Constructor initializes the display of all the different situations for the Tower Defense Game.
+	 * Starts with Displaying the main menu
+	 */
 	public GameView(){
 		setTitle(APPNAME);
 		setSize(size);
@@ -144,6 +147,9 @@ public class GameView extends JFrame implements KeyListener, ActionListener {
 		
 	}
 	
+	/**
+	 * Initializing all the different components which can be displayed on the left side of the SplitPane
+	 */
 	private void leftSideOptions() {
 		// TODO Create different grid bag constraints for each panel
 		// Create different JComponents for each panel
@@ -456,7 +462,10 @@ public class GameView extends JFrame implements KeyListener, ActionListener {
 		layout.show(options, "Game");
 		setVisible(true);
 	}
-
+	
+	/**
+	 * Adding components and position of the divider for the JSplitPane
+	 */
 	private void splitViewSetUp() {
 		// TODO Auto-generated method stub
 		sP = new SplitPane(options,mG, sizeofSplit);
@@ -468,7 +477,10 @@ public class GameView extends JFrame implements KeyListener, ActionListener {
 		// TODO Auto-generated method stub
 		GameView gV = new GameView();
 	}
-
+	
+	/**
+	 * Handling all the events to take place when a button is pressed
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
@@ -621,9 +633,12 @@ public class GameView extends JFrame implements KeyListener, ActionListener {
 			setVisible(true);
 		}
 		// http://stackoverflow.com/questions/13791987/keyboard-input-stops-working-in-swing-application-a-calculator-after-clicking
-//		requestFocusInWindow(); // Allows for keyboard listener to work after button pressed
+		requestFocusInWindow(); // Allows for keyboard listener to work after button pressed
 	}
-
+	
+	/**
+	 * Handling all the keyboard inputs which are valid
+	 */
 	@Override
 	public void keyPressed(KeyEvent b) {
 		// TODO Auto-generated method stub

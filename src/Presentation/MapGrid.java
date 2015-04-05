@@ -37,17 +37,31 @@ public class MapGrid extends JPanel implements MouseListener, IObserver{
 	private CritterWave myWave;
 	private TowerList myTowerList;
 	
+	/**
+	 * This method returns if the Player is in the Game mode or not
+	 * @return Returns a boolean. If it is true, Player is in Game Mode
+	 */
 	public boolean isPlaying() {
 		return playing;
 	}
-
+	
+	/**
+	 * This method sets if the Player is in Game Mode or not
+	 * @param playing Takes in a boolean; if true, the Player is in Game Mode
+	 */
 	public void setPlaying(boolean playing) {
 		this.playing = playing;
 	}
 	
 	private Map myMap;
 	
-	
+	/**
+	 * The constructor for the MapGrid.
+	 * @param panelWidth The real width of the panel; excluding the frame's border
+	 * @param panelHeight The real height of the panel; excluding the frame's border
+	 * @param myOptions The panel which includes the different layouts on the left side of the SplitPane
+	 * @param layout The Layout Manager which allows to switch between the different views in the left side of the SplitPane
+	 */
 	public MapGrid(int panelWidth, int panelHeight, JPanel myOptions, CardLayout layout){
 		
 		startSet = false; // Do not want to paint until the Dimension has been set
@@ -63,7 +77,10 @@ public class MapGrid extends JPanel implements MouseListener, IObserver{
 		
 		setVisible(true);
 	}
-
+	
+	/**
+	 * Method paints all the necessary items
+	 */
 	public void paintComponent(Graphics g){
 		
 		
@@ -82,7 +99,13 @@ public class MapGrid extends JPanel implements MouseListener, IObserver{
 		// drawTowers(g);
 		}
 	}
-
+	
+	/**
+	 * Prints all the Tower
+	 * @param g The Graphics component
+	 * @param i The x coordinate of the Tower
+	 * @param j The y coordinate of the Tower
+	 */
 	private void drawTowers(Graphics g,int i, int j) {
 		// TODO Auto-generated method stub
 		// TODO Change the colors according to methods
@@ -105,7 +128,12 @@ public class MapGrid extends JPanel implements MouseListener, IObserver{
 		//}
 		//}
 	}
-
+	
+	/**
+	 * Setting the Colour of the Tower
+	 * @param t The tower which needs to be displayed
+	 * @return The colour of the Tower depending on the type of Tower
+	 */
 	private Color towerTypeColour(Tower t) {
 		// TODO Auto-generated method stub
 		// Would get the type of tower:
@@ -121,7 +149,12 @@ public class MapGrid extends JPanel implements MouseListener, IObserver{
 		}
 		return null;
 	}
-
+	
+	/**
+	 * Setting the Colour of the Tower base
+	 * @param t The tower which needs to be displayed
+	 * @return The colour of the base depending on the type of Tower
+	 */
 	private Color towerBaseColour(Tower t) {
 		// TODO Auto-generated method stub
 		// would get the upgrade level of the towers:
@@ -147,7 +180,11 @@ public class MapGrid extends JPanel implements MouseListener, IObserver{
 		}
 		return null;
 	}
-
+	
+	/**
+	 * Draws all the items which should be on the Map: Map, Critters, and Towers
+	 * @param g The Graphics component
+	 */
 	private void drawGrid(Graphics g) {
 		// TODO Auto-generated method stub
 		Path tempPath;
@@ -184,15 +221,17 @@ public class MapGrid extends JPanel implements MouseListener, IObserver{
 					g.fillRect(i*gridSize+xOffset, j*gridSize+yOffset, gridSize, gridSize);
 					Scenery tempScenery = (Scenery)myMap.getGrid(j, i);
 					if(tempScenery.isTowerPresent()){
-						//drawTowers(g, i, j);
+						// drawTowers(g, i, j);
 					}
 				}
 				g.setColor(Color.BLACK);
 				g.drawRect(i*gridSize+xOffset, j*gridSize+yOffset, gridSize, gridSize);
 			}
 		}
+		if(playing){
+			drawCritters(g);
+		}
 		
-		drawCritters(g);
 		
 		// how polygons are drawn
 		/*
@@ -202,6 +241,10 @@ public class MapGrid extends JPanel implements MouseListener, IObserver{
 		*/
 	}
 	
+	/**
+	 * Draws all the Critters
+	 * @param g The Critter Component
+	 */
 	private void drawCritters(Graphics g) {
 		// TODO Auto-generated method stub
 		myWave = myGame.getCritterWave();
@@ -213,7 +256,12 @@ public class MapGrid extends JPanel implements MouseListener, IObserver{
 			// g.drawOval(0, 0, gridSize/2, gridSize/2);
 		}
 	}
-
+	
+	/**
+	 * Selecting the colour of the Critter depending on its Type 
+	 * @param id Used to determine the Type of the Critter
+	 * @return Colour of the Critter depending on its Type
+	 */
 	private Color critterColour(int id) {
 		// TODO Auto-generated method stub
 		if(id%3==0){
@@ -227,7 +275,14 @@ public class MapGrid extends JPanel implements MouseListener, IObserver{
 		}
 		return null;
 	}
-
+	
+	/**
+	 * Draws an arrow to show the direction of the Path
+	 * @param exitPoint Integer which shows which direction the Path is going in
+	 * @param icoor The x coordinate of the Path
+	 * @param jcoor The y coordinate of the Path
+	 * @param g The Graphics component
+	 */
 	public void drawTriangle(int exitPoint, int icoor, int jcoor, Graphics g){
 		switch(exitPoint){
 			// North
@@ -278,15 +333,26 @@ public class MapGrid extends JPanel implements MouseListener, IObserver{
 		g.drawPolygon(xpoints, ypoints, 3);
 	}
 	
-	
+	/**
+	 * To see if the Map has been completed or if the Player is in the Game Mode; both situations set True. If the map is being edited, set False
+	 * @param completedView If the Map is done editing
+	 */
 	public void setCompletedView(boolean completedView) {
 		this.completedView = completedView;
 	}
-
+	
+	/**
+	 * Get the x coordinate of the the Map Grid
+	 * @return The x coordinate of the Map Grid
+	 */
 	public int getXcor() {
 		return xcor;
 	}
-
+	
+	/**
+	 * Set the x coordinate of the Map Grid to avoid errors
+	 * @param xcor Taking the current x coordinate
+	 */
 	public void setXcor(int xcor) {
 		if(xcor<0){
 			this.xcor=0;
@@ -298,11 +364,19 @@ public class MapGrid extends JPanel implements MouseListener, IObserver{
 			this.xcor = xcor;
 		}
 	}
-
+	
+	/**
+	 * Get the y coordinate of the the Map Grid
+	 * @return The y coordinate of the Map Grid
+	 */
 	public int getYcor() {
 		return ycor;
 	}
-
+	
+	/**
+	 * Set the y coordinate of the Map Grid to avoid errors
+	 * @param ycor Taking the current y coordinate
+	 */
 	public void setYcor(int ycor) {
 		if(ycor<0){
 			this.ycor = 0;
@@ -315,17 +389,30 @@ public class MapGrid extends JPanel implements MouseListener, IObserver{
 		}
 	}
 	
+	/**
+	 * Sets the Grid of the Map grid to a certain value; for Testing
+	 * @param x The x coordinate of the grid
+	 * @param y The y coordinate of the grid
+	 * @param value The type of Tile of the Grid
+	 */
 	public void setGrid(int x, int y, int value){
 		tempGrid[x][y]= value;
 		
 	}
 	
+	/**
+	 * Place the Tower in the Map
+	 */
 	public void placeTower(){
 		Scenery tempScenery = (Scenery)myMap.getGrid(xcor, ycor);
 		tempScenery.towerPlaced();
-		repaint();
+		// repaint();
 	}
-
+	
+	/**
+	 * Creating events to place the Path in the Editing Mode.
+	 * If in the Game Mode, allowing user to receive Critter information of to place or edit Towers
+	 */
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
@@ -361,6 +448,7 @@ public class MapGrid extends JPanel implements MouseListener, IObserver{
 			//add path Tile METHOD
 			//delete 
 			
+			//TODO Might have to move this
 			repaint();
 			// start = false;
 		}
@@ -419,6 +507,11 @@ public class MapGrid extends JPanel implements MouseListener, IObserver{
 	
 	// TODO Need to change the way dimensions are taken;
 	// Different case for when we open a file or a new map
+	/**
+	 * Set the Dimensions of the tempGrid for the GridView
+	 * @param gridRows Number of Rows in the Map
+	 * @param gridColumns Number of Columns in the Map
+	 */
 	public void setDimensions(int gridRows, int gridColumns){
 		this.gridRows = gridRows;
 		this.gridColumns = gridColumns;
@@ -426,7 +519,10 @@ public class MapGrid extends JPanel implements MouseListener, IObserver{
 		startSet = true;
 		repaint();
 	}
-
+	
+	/**
+	 * Painting any update from the Map by Observing the Game
+	 */
 	@Override
 	public void update() {
 		// TODO Auto-generated method stub

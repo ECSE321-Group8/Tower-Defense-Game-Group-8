@@ -31,6 +31,7 @@ public class Game extends Subject{
 		mytowerlist= new TowerList();
 		pathList = new LinkedList<Path>();
 		money = 1000;
+		Life = 100;
 		for (Path p : m.getPath()){
 			pathList.add(p);
 		}
@@ -83,6 +84,7 @@ public class Game extends Subject{
 	
 	public void tick(){
 		notifyObservers();
+		System.out.println("Money: " + getMoney() + "\nLife: " + getLife());
 	}
 //
 //		while(!wave.getListCritters().isEmpty()){

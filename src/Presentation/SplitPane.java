@@ -10,6 +10,12 @@ public class SplitPane extends JSplitPane{
 	private JSplitPane splitPane;
 	private int splitPosition;
 	
+	/**
+	 * 
+	 * @param leftPanel
+	 * @param RightPanel
+	 * @param splitSize
+	 */
 	public SplitPane(JPanel leftPanel, JPanel RightPanel,int splitSize){
 		
 		splitPosition = splitSize-this.getInsets().right-this.getDividerSize();
