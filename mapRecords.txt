@@ -5,3 +5,6 @@ MapTest1
 Map15x15
 10x10
 test5
+test6
+Map 1
+test7

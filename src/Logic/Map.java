@@ -49,6 +49,9 @@ public class Map {
 		width=w;
 		grid=new Tile[height][width];
 		towerGrid = new Tower[height][width];
+		temp = new LinkedList<Path>();
+		currentPos=-1;
+		currentPath = new Path(currentPos);
 	}
 	public void setEntryPoint(Path p){
 		entryPoint=p;

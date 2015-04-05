@@ -495,6 +495,14 @@ public class MapGrid extends JPanel implements MouseListener, IObserver{
 	}
 
 
+	public boolean isStartSet() {
+		return startSet;
+	}
+
+	public void setStartSet(boolean startSet) {
+		this.startSet = startSet;
+	}
+
 	@Override
 	public void mouseEntered(MouseEvent e) {
 		// TODO Auto-generated method stub
