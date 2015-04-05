@@ -27,13 +27,11 @@ public class CritterWave implements IObserver{
 	
 	public CritterWave(int level){
 		nbCritters=level*5;
-		CritterType type;
-		Critter c;
 		for (int i=0;i<nbCritters; i++){
 			critterType = i%3;
 			type=getType(critterType);
-			c=CritterFactory.makeCritter(type, i);
-			listCritters.add(c);
+			b=CritterFactory.makeCritter(type, i);
+			listCritters.add(b);
 		}
 		setPath();
 		cycles= listCritters.size();
@@ -45,16 +43,20 @@ public class CritterWave implements IObserver{
 			aPath.add(p);
 	}
 	
+	
+	//GETTERS
 	public LinkedList<Path> getPath(){
 		return aPath;
 	}
-
-	
 	
 	public LinkedList<Critter> getListCritters(){
 		return listCritters;
 	}
 	
+	/**
+	 * Method remove a specific Critter from the List of Critters 
+	 * @param c: Critter to be removed 
+	 */
 	public void removeCritter(Critter c){
 		listCritters.remove(c);
 	}
@@ -64,7 +66,11 @@ public class CritterWave implements IObserver{
 	}
 	
 	
-	
+	/**
+	 * Generate a type of Critter 
+	 * @param type
+	 * @return
+	 */
 	public static CritterType getType(int type){
 		switch(type){
 		case 0:
@@ -78,12 +84,14 @@ public class CritterWave implements IObserver{
 		}
 	}
 	
-	
 
-//	LinkedList<Critter> addProgressive= new LinkedList<Critter>();
 
 	
 	@Override
+	/**
+	* Method that will be implemented to when ever the Game clock ticks.
+	* It checks the status of the Critters (Health & Position)
+	*/
 	public void update(){
 		if(cycles>0){
 			 c =listCritters.get(cycles-1);

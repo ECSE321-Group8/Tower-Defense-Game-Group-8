@@ -182,18 +182,4 @@ public class Critter {
 			return false;
 	}
 	
-	
-	
-	
-	
-	
-
-	
-
-
-		
-	
-	
-
-	
 }
