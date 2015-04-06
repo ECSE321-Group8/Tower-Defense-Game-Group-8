@@ -684,6 +684,7 @@ public class GameView extends JFrame implements KeyListener, ActionListener, IOb
 			myTowerList.sellTower(myTowerList.getTowerID(mG.getXcor(), mG.getYcor()));
 			if(!myGame.isInWave()){
 				mG.repaint();
+				this.update();
 			}
 		}
 		/*
@@ -703,6 +704,7 @@ public class GameView extends JFrame implements KeyListener, ActionListener, IOb
 			}
 			if(!myGame.isInWave()){
 				myTowerList.buildtick();
+				this.update();
 				mG.repaint();
 			}
 		}
@@ -716,6 +718,7 @@ public class GameView extends JFrame implements KeyListener, ActionListener, IOb
 			}
 			if(!myGame.isInWave()){
 				myTowerList.buildtick();
+				this.update();
 				mG.repaint();
 			}
 			layout.show(options, "Opening");
@@ -731,6 +734,7 @@ public class GameView extends JFrame implements KeyListener, ActionListener, IOb
 			}
 			if(!myGame.isInWave()){
 				myTowerList.buildtick();
+				this.update();
 				mG.repaint();
 			}
 			layout.show(options, "Opening");
@@ -830,12 +834,17 @@ public class GameView extends JFrame implements KeyListener, ActionListener, IOb
 	@Override
 	public void update() {
 		// TODO Auto-generated method stub
-		myCritterWave = myGame.getCritterWave();
-		String toDisplay = "";
-		for(int i=0; i < myCritterWave.getListCritters().size();i++){
-			toDisplay+= "Critter: " + myCritterWave.getListCritters().get(i).getID()+"\nCritter Health: "+ myCritterWave.getListCritters().get(i).getHealth() + "\nPosition:" + myCritterWave.getListCritters().get(i).getPosition()+"\n\n";		
+		if(myGame.isInWave()){
+			myCritterWave = myGame.getCritterWave();
+			String toDisplay = "";
+			for(int i=0; i < myCritterWave.getListCritters().size();i++){
+				toDisplay+= "Critter: " + myCritterWave.getListCritters().get(i).getID()+"\nCritter Health: "+ myCritterWave.getListCritters().get(i).getHealth() + "\nPosition:" + myCritterWave.getListCritters().get(i).getPosition()+"\n\n";		
+			}
+			allCrittersInfo.setText(toDisplay);
 		}
-		allCrittersInfo.setText(toDisplay);
+		else{
+			myInfo.update();
+		}
 	}
 
 }
