@@ -233,7 +233,7 @@ public class MapGrid extends JPanel implements MouseListener, IObserver{
 			
 			g.setColor(towerTypeColour(myTowerList.get(i)));
 			
-			g.setColor(Color.RED);
+			// g.setColor(Color.RED);
 			g.fillOval(myTowerList.get(i).getX()*gridSize+xOffset+gridSize/4, myTowerList.get(i).getY()*gridSize+yOffset+gridSize/4, gridSize/2, gridSize/2);
 		}
 				
