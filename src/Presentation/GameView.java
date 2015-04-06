@@ -10,7 +10,7 @@ import Logic.Map;
 import Logic.*;
 
 
-public class GameView extends JFrame implements KeyListener, ActionListener {
+public class GameView extends JFrame implements KeyListener, ActionListener, IObserver {
 
 	final static String APPNAME = "TOWER DEFENSE - GROUP 8";
 	public static Dimension size = new Dimension (700,550);
@@ -57,6 +57,7 @@ public class GameView extends JFrame implements KeyListener, ActionListener {
 	private JTextField tColumns;
 	
 	private JTextArea nameOfMaps;
+	private JTextArea allCrittersInfo;
 	
 	private final int sizeofSplit = 200;
 	private int realHeight, realWidth;
@@ -100,6 +101,7 @@ public class GameView extends JFrame implements KeyListener, ActionListener {
 	private Map myMap;
 	private Game myGame;
 	private PlayerInfo myInfo;
+	private CritterWave myCritterWave;
 
 	/**
 	 * Constructor initializes the display of all the different situations for the Tower Defense Game.
@@ -124,6 +126,7 @@ public class GameView extends JFrame implements KeyListener, ActionListener {
 		myMap=Map.getInstance();
 		myGame = Game.getInstance();
 		myGame.setGame();
+		myGame.addObserver(this);
 		// myTowerList = myGame.getMytowerlist();
 		leftSideOptions();
 		mG = new MapGrid(realWidth-sizeofSplit,realHeight-10,options,layout);
@@ -153,6 +156,7 @@ public class GameView extends JFrame implements KeyListener, ActionListener {
 		opening.setLayout(new GridBagLayout());
 		towerPurchase = new JPanel();
 		towerPurchase.setLayout(new GridBagLayout());
+		scrollSection = new ScrollPane();
 		
 		layout = new CardLayout();
 		options.setLayout(layout);
@@ -166,6 +170,8 @@ public class GameView extends JFrame implements KeyListener, ActionListener {
 		lMapName1 = new JLabel("Map Name: ");
 		tMapName1 = new JTextField("Map 1");
 		towerName = new JLabel("Tower");
+		
+		allCrittersInfo = new JTextArea("Critter Info");
 		
 		nameOfMaps = new JTextArea(myMap.printMapRecords());
 		
@@ -248,6 +254,12 @@ public class GameView extends JFrame implements KeyListener, ActionListener {
 		gameOptions.add(newMap,gbc);
 		towerInfo.add(towerb, gbc);
 		critterInfo.add(critterb, gbc);
+		
+		gbc.fill = GridBagConstraints.HORIZONTAL;
+		gbc.gridx = 0;
+		gbc.gridy = 1;
+		scrollSection.add(allCrittersInfo);
+		critterInfo.add(scrollSection,gbc);
 		
 		// Setting up the Map Editing View
 		
@@ -792,6 +804,17 @@ public class GameView extends JFrame implements KeyListener, ActionListener {
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public void update() {
+		// TODO Auto-generated method stub
+		myCritterWave = myGame.getCritterWave();
+		String toDisplay = "";
+		for(int i=0; i < myCritterWave.getListCritters().size();i++){
+			toDisplay+= "Critter: " + myCritterWave.getListCritters().get(i).getID()+"\nCritter Health: "+ myCritterWave.getListCritters().get(i).getHealth() + "\nPosition:" + myCritterWave.getListCritters().get(i).getPosition()+"\n\n";		
+		}
+		allCrittersInfo.setText(toDisplay);
 	}
 
 }
