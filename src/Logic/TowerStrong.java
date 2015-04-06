@@ -14,7 +14,7 @@ public class TowerStrong extends Tower{
 		timer=cooldown;
 		range=2;
 		shotpower=20;
-		targetingstrategy=1;
+		targetingstrategy=2;
 		screenx=x;
 		screeny=y;
 		upgraded=0;

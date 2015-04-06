@@ -13,7 +13,7 @@ public class TowerFast extends Tower{
 		timer=cooldown;
 		range=4;
 		shotpower=10;
-		targetingstrategy=1;
+		targetingstrategy=2;
 		screenx=x;
 		screeny=y;
 		upgraded=0;
