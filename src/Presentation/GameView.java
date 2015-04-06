@@ -660,6 +660,11 @@ public class GameView extends JFrame implements KeyListener, ActionListener, IOb
 			layout.show(options, "Game");
 			setVisible(true);
 		}
+		else if(e.getSource() == back3){
+			System.out.println("Going back to main Menu");
+			layout.show(options, "Opening");
+			setVisible(true);
+		}
 		else if(e.getSource() == towerStrategy){
 			System.out.println("The Selected Strategy was: " + towerStrategy.getSelectedIndex());
 			myTowerList = myGame.getMytowerlist();
