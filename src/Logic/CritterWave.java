@@ -25,7 +25,25 @@ public class CritterWave implements IObserver{
 	
 
 	
-	public CritterWave(int level){
+	public CritterWave(){
+//		nbCritters=level*5;
+//		for (int i=0;i<nbCritters; i++){)
+//			critterType = i%3;
+//			type=getType(critterType);
+//			b=CritterFactory.makeCritter(type, i);
+//			listCritters.add(b);
+//		}
+		setPath();
+//		cycles= listCritters.size();
+		
+	}
+
+	public void setPath(){
+		for (Path p: m.getPath())
+			aPath.add(p);
+	}
+	
+	public void setWave(int level){
 		nbCritters=level*5;
 		for (int i=0;i<nbCritters; i++){
 			critterType = i%3;
@@ -33,14 +51,7 @@ public class CritterWave implements IObserver{
 			b=CritterFactory.makeCritter(type, i);
 			listCritters.add(b);
 		}
-		setPath();
 		cycles= listCritters.size();
-		
-	}
-
-	public void setPath(){
-		for (Path p: m.getPath())
-			aPath.add(p);
 	}
 	
 	

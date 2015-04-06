@@ -14,6 +14,7 @@ public class GameTimer {
 	}
 
 	public void endGameTimer(){
+		game.setInWave(false);
 		timer.cancel();
 	}
 	

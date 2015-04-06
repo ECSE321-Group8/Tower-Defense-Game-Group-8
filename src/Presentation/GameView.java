@@ -63,6 +63,8 @@ public class GameView extends JFrame implements KeyListener, ActionListener {
 	private int changeCounter = 0;
 	private int rows;
 	private int columns;
+	private int currentLevel;
+	private int nextLevel;
 	
 	private JButton newMap;
 	private JButton open;
@@ -78,6 +80,8 @@ public class GameView extends JFrame implements KeyListener, ActionListener {
 	private JButton editAgain;
 	private JButton back2;
 	private JButton cancel;
+	private JButton startNewWave;
+	private JButton back3;
 	
 	// For Tower Info:
 	private JLabel towerName;
@@ -222,6 +226,13 @@ public class GameView extends JFrame implements KeyListener, ActionListener {
 		sniperTower = new JButton("Sniper");
 		sniperTower.addActionListener(this);
 		
+		startNewWave = new JButton("Next Wave");
+		startNewWave.addActionListener(this);
+		startNewWave.setEnabled(false);
+		
+		back3 = new JButton("Cancel");
+		back3.addActionListener(this);
+		
 		towerStats = new JTextArea("Power=\nRange=\nCool Down=");
 		
 		String [] strategyOptions = {"Closest","Furthest","Least Health","Most Health","First","Last"};
@@ -344,7 +355,7 @@ public class GameView extends JFrame implements KeyListener, ActionListener {
 		gbc2.gridy = 2;
 		gbc2.gridwidth = 2;
 		
-		opening.add(back2,gbc2);
+		opening.add(startNewWave,gbc2);
 		
 		/*
 		gbc.gridx = 0;
@@ -360,8 +371,15 @@ public class GameView extends JFrame implements KeyListener, ActionListener {
 		
 		opening.add(play,gbc2);
 		
+		gbc2.fill = GridBagConstraints.HORIZONTAL;
 		gbc2.gridx = 0;
 		gbc2.gridy = 4;
+		gbc2.gridwidth = 2;
+		
+		opening.add(back2,gbc2);
+		
+		gbc2.gridx = 0;
+		gbc2.gridy = 5;
 		gbc2.gridwidth = 2;
 		
 		opening.add(nameOfMaps, gbc2);
@@ -406,6 +424,11 @@ public class GameView extends JFrame implements KeyListener, ActionListener {
 		
 		towerInfo.add(sell, gbc3);
 		sell.setEnabled(false);
+		
+		gbc3.gridx = 0;
+		gbc3.gridy = 6;
+		
+		towerInfo.add(back3, gbc3);
 		
 		// Tower Purchase
 		
@@ -522,17 +545,33 @@ public class GameView extends JFrame implements KeyListener, ActionListener {
 			mG.setCompletedView(true);
 			editAgain.setEnabled(false);
 			mG.repaint();
+			startNewWave.setEnabled(true);
 			setVisible(true);
 			
 			myGame = Game.getInstance();
 			myGame.setGame();
-			myGame.addObserver(myGame.getCritterWave());
+			//myGame.addObserver(myGame.getCritterWave());
 			// myGame.addObserver(myGame.getMytowerlist());
 			myGame.addObserver(myInfo);
 			myGame.addObserver(mG);
-			new GameTimer(myGame);
+			currentLevel = myGame.getLevel();
+			myGame.startLevel();
+//			new GameTimer(myGame);
 			// myGame();
-			
+			play.setEnabled(false);
+			setVisible(true);
+		}
+		else if(e.getSource() == startNewWave){
+//			if(myGame.getLevel()==0){
+//				startNewWave.setEnabled(false);
+//			}
+			if(myGame.getLevel()!=1 && !myGame.isInWave()){
+				myGame.startLevel();
+			}
+			if(myGame.getLevel()==1 && !myGame.isInWave()){
+				startNewWave.setEnabled(false);
+				play.setEnabled(true);
+			}
 		}
 		else if(e.getSource()==edit){
 			save.setEnabled(false);

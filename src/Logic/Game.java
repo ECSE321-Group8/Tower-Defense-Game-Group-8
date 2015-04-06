@@ -12,6 +12,7 @@ public class Game extends Subject{
 	private static Game gameInstance= null;
 	private int money;
 	private int Life;
+	private boolean inWave;
 //	Timer timer = new Timer();
 	TowerList mytowerlist;
 
@@ -22,7 +23,7 @@ public class Game extends Subject{
 
 
 	public Game(){
-	
+		
 	}
 	
 	/**
@@ -39,7 +40,8 @@ public class Game extends Subject{
 			pathList.add(p);
 		}
 		this.addObserver(mytowerlist);
-		
+		wave=new CritterWave();
+		this.addObserver(getCritterWave());
 	}
 	
 	
@@ -87,16 +89,26 @@ public class Game extends Subject{
 
 
 	public void startLevel(){
-		wave=new CritterWave(getLevel());
-		this.addObserver(getCritterWave());
+		this.wave.setWave(level);
+		inWave = true;
 		//this.addObserver(getMytowerlist());//should be initialized once with Game
 		new GameTimer(this);
 	}
 	
-
+	
 
 
 	
+	public boolean isInWave() {
+		return inWave;
+	}
+
+
+	public void setInWave(boolean inWave) {
+		this.inWave = inWave;
+	}
+
+
 	/**
 	 * The game will notify Tower and Critters every time the clock ticks 
 	 */
