@@ -640,6 +640,7 @@ public class GameView extends JFrame implements KeyListener, ActionListener, IOb
 			fillTowerInfo(tempTower);
 			if(!myGame.isInWave()){
 				mG.repaint();
+				this.update();
 			}
 		}
 		else if(e.getActionCommand()== "Critter Button"){
