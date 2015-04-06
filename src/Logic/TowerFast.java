@@ -17,7 +17,7 @@ public class TowerFast extends Tower{
 		screenx=x;
 		screeny=y;
 		upgraded=0;
-		g.addMoney(-cost);
+		//g.addMoney(-cost);
 		type=1;
 		// TODO Auto-generated constructor stub
 	}	

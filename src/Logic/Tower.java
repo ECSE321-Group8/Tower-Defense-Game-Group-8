@@ -151,8 +151,10 @@ public abstract class Tower {
 		}
 		if (success){
 			upgraded += 1;
-			g.addMoney((int)(-cost*0.5));
 			System.out.println("###UPGRADE");
+			if (this.isTowerFast()){g.addMoney((int)((-0.5)*(TowerFast.cost)));}
+			if (this.isTowerStrong()){g.addMoney((int)((-0.5)*(TowerStrong.cost)));}
+			if (this.isTowerSniper()){g.addMoney((int)((-0.5)*(TowerSniper.cost)));}
 		}
 		return success;
 	}

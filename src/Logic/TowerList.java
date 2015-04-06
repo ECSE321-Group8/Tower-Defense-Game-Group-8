@@ -20,6 +20,7 @@ public class TowerList extends ArrayList<Tower> implements IObserver{
 		case 0:
 			if (g.getMoney()>=(TowerSniper.cost)){
 				buildlog.add(toAdd);
+				g.addMoney(-TowerSniper.cost);
 				System.out.println("--added sniper to buildlog");
 				//buildlog.get(buildlog.size())={1,1,1};
 				//this.add(new TowerSniper(x,y));
@@ -29,6 +30,7 @@ public class TowerList extends ArrayList<Tower> implements IObserver{
 		case 1:
 			if (g.getMoney()>=(TowerFast.cost)){
 				buildlog.add(toAdd);
+				g.addMoney(-TowerFast.cost);
 				System.out.println("--added fast to buildlog");
 				//this.add(new TowerFast(x,y));
 				wasBought=true;
@@ -37,6 +39,7 @@ public class TowerList extends ArrayList<Tower> implements IObserver{
 		case 2:
 			if (g.getMoney()>=(TowerStrong.cost)){
 				buildlog.add(toAdd);
+				g.addMoney(-TowerStrong.cost);
 				System.out.println("--added strong to buildlog");				
 				//this.add(new TowerStrong(x,y));
 				wasBought=true;
@@ -67,6 +70,7 @@ public class TowerList extends ArrayList<Tower> implements IObserver{
 	
 	public void sellTower(int i){
 		int refund = 0;
+		System.out.println("###trying to sell"+i);
 		if (this.get(i).isTowerFast()){refund=(int)(0.75*(TowerFast.cost));}
 		if (this.get(i).isTowerStrong()){refund=(int)(0.75*(TowerStrong.cost));}
 		if (this.get(i).isTowerSniper()){refund=(int)(0.75*(TowerSniper.cost));}
@@ -95,7 +99,7 @@ public class TowerList extends ArrayList<Tower> implements IObserver{
 	}	
 
 	
-	public int getTowerID(int x, int y){
+	public int getTowerID(int y, int x){
 		for(int i=0; i<this.size(); i++){
 			if(this.get(i).getX() == x){
 				if(this.get(i).getY() == y){
