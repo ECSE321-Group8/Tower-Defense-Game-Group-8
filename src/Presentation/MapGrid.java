@@ -70,6 +70,7 @@ public class MapGrid extends JPanel implements MouseListener, IObserver{
 		myGame = Game.getInstance();
 		// myWave.getListCritters();
 		
+		// Loading the images for the Path and the Scenery
 		String path = new File (".").getAbsolutePath();
 		String grassPath = path.concat("//Assets//grass.png");
 		String pathPath = path.concat("//Assets//path.png");
@@ -80,6 +81,8 @@ public class MapGrid extends JPanel implements MouseListener, IObserver{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		// Enabling the ability to get mouse clicks
 		addMouseListener(this);
 		
 		setVisible(true);
@@ -90,15 +93,15 @@ public class MapGrid extends JPanel implements MouseListener, IObserver{
 	 */
 	public void paintComponent(Graphics g){
 		
-		
+		// Choose the correct size for the GridSize
 		if(startSet){
-		// Works for a square sized Window
 		if(panelHeight/gridRows>=panelWidth/gridColumns){
 			gridSize = panelWidth/gridColumns;
 		}
 		else{
 			gridSize = panelHeight/gridRows;
 		}
+		// To center the Grid
 		xOffset = (panelWidth - gridSize*gridColumns)/2;
 		yOffset = (panelHeight - gridSize*gridRows)/2;
 		
@@ -112,25 +115,23 @@ public class MapGrid extends JPanel implements MouseListener, IObserver{
 	 * @param g The Graphics component
 	 */
 	private void drawGrid(Graphics g) {
-		// TODO Auto-generated method stub
+
 		Path tempPath;
 		
 		g.clearRect(0, 0, getWidth(), getHeight()); // Clear the screen
 		
 		for(int i=0;i<gridColumns;i++){
 			for(int j=0;j<gridRows;j++){
-				// g.drawRect(i*gridSize, j*gridSize, gridSize, gridSize);
 				//MAP GRID (LOGIC)
 				if(myMap.getGrid(j, i)==null){
+					// When nothing has been set yet
 					g.setColor(Color.WHITE);
 					g.fillRect(i*gridSize+xOffset, j*gridSize+yOffset, gridSize, gridSize);
-
 				}
 				else if(myMap.getGrid(j, i).isPath()){
 					tempPath = (Path)myMap.getGrid(j, i);
 					if(tempPath.getPos()!=myMap.getCurrentPos()||completedView){
-//						g.setColor(Color.BLUE);
-//						g.fillRect(i*gridSize+xOffset, j*gridSize+yOffset, gridSize, gridSize);
+						// Draw the Path Image
 						g.drawImage(myPath, i*gridSize+xOffset, j*gridSize+yOffset,gridSize, gridSize, observer);
 						// drawTriangle(3, i, j, g); // Testing to see if each case works
 						drawTriangle(tempPath.getDirection(tempPath.getExit()), i, j, g); // Drawing triangle to show direction of path
@@ -144,23 +145,18 @@ public class MapGrid extends JPanel implements MouseListener, IObserver{
 					}
 				}
 				else{
-//					g.setColor(Color.GREEN);
-//					g.fillRect(i*gridSize+xOffset, j*gridSize+yOffset, gridSize, gridSize);
+					// Draw the Scenery Image
 					g.drawImage(myGrass, i*gridSize+xOffset, j*gridSize+yOffset,gridSize, gridSize, observer);
-					Scenery tempScenery = (Scenery)myMap.getGrid(j, i);
-//					if(tempScenery.isTowerPresent()){
-//						if(playing){
-//							drawTowers(g, i, j);
-//						}
-//					}
 				}
 				if(!completedView){
+					// While Editing the Map, to see the actual grid
 					g.setColor(Color.BLACK);
 					g.drawRect(i*gridSize+xOffset, j*gridSize+yOffset, gridSize, gridSize);
 				}
 			}
 		}
 		if(playing){
+			// During the Game Mode, to display the Critters and Towers
 			drawCritters(g);
 			drawTowers(g);
 		}
@@ -179,11 +175,12 @@ public class MapGrid extends JPanel implements MouseListener, IObserver{
 	 * @param g The Critter Component
 	 */
 	private void drawCritters(Graphics g) {
-		// TODO Auto-generated method stub
+
 		myWave = myGame.getCritterWave();
-		for(Critter c: myWave.getListCritters()){
+		// Get the critters from the Wave
+		for(Critter c: myWave.getListCritters()){ // Iterate through the Wave
 			g.setColor(critterColour(c.getID()));
-			if(c.getPosition()>=0){
+			if(c.getPosition()>=0){ // Display the Critters as circles of different colours
 				g.fillOval(c.getPosX()*gridSize+xOffset+gridSize/4,c.getPosY()*gridSize+yOffset+gridSize/4 , gridSize/2, gridSize/2);
 			}
 			// g.drawOval(0, 0, gridSize/2, gridSize/2);
@@ -196,7 +193,8 @@ public class MapGrid extends JPanel implements MouseListener, IObserver{
 	 * @return Colour of the Critter depending on its Type
 	 */
 	private Color critterColour(int id) {
-		// TODO Auto-generated method stub
+
+		// Select the colour of the Critters using their ID number
 		if(id%3==0){
 			return Color.RED;
 		}
@@ -216,29 +214,19 @@ public class MapGrid extends JPanel implements MouseListener, IObserver{
 	 * @param j The y coordinate of the Tower
 	 */
 	private void drawTowers(Graphics g) {
-		// TODO Auto-generated method stub
-		// TODO Change the colors according to methods
-		//if(false){ // To test; take out if statement after
-		//for(int i=0;i<gridRows;i++){
-			//for(int j=0;j<gridColumns;j++){
+
 		myTowerList = myGame.getMytowerlist();
 		
 		for(int i= 0;i<myTowerList.size();i++){
-			//Tower t; // Get the tower object if it exists
+			// Draw the base of the Towers depending on their upgrade Level
 			g.setColor(towerBaseColour(myTowerList.get(i)));
-			
-			// g.setColor(Color.LIGHT_GRAY);
 			g.fillRect(myTowerList.get(i).getX()*gridSize+xOffset+gridSize/8, myTowerList.get(i).getY()*gridSize+yOffset+gridSize/8, 3*gridSize/4, 3*gridSize/4);
 			
+			// Draw the top of the Towers depending on their sublass of Tower
 			g.setColor(towerTypeColour(myTowerList.get(i)));
-			
-			// g.setColor(Color.RED);
 			g.fillOval(myTowerList.get(i).getX()*gridSize+xOffset+gridSize/4, myTowerList.get(i).getY()*gridSize+yOffset+gridSize/4, gridSize/2, gridSize/2);
 		}
-				
-			//}
-		//}
-		//}
+
 	}
 	
 	/**
@@ -247,15 +235,18 @@ public class MapGrid extends JPanel implements MouseListener, IObserver{
 	 * @return The colour of the Tower depending on the type of Tower
 	 */
 	private Color towerTypeColour(Tower t) {
-		// TODO Auto-generated method stub
-		// Would get the type of tower:
-		//int towerType=t.getType();
-
-		if (t.isTowerSniper()){return Color.BLUE;}
-		if (t.isTowerFast()){return Color.RED;}
-		if (t.isTowerStrong()){return Color.YELLOW;}
-
 		
+		// Using the Type of Subclass of Tower to determine the colour of the tower
+		if (t.isTowerSniper()){
+			return Color.BLUE;
+			}
+		if (t.isTowerFast()){
+			return Color.RED;
+			}
+		if (t.isTowerStrong()){
+			return Color.YELLOW;
+			}
+
 		return null;
 	}
 	
@@ -265,10 +256,9 @@ public class MapGrid extends JPanel implements MouseListener, IObserver{
 	 * @return The colour of the base depending on the type of Tower
 	 */
 	private Color towerBaseColour(Tower t) {
-		// TODO Auto-generated method stub
+		
 		// would get the upgrade level of the towers:
 		Tower tempTower;
-		// System.out.println(t.isTowerFast());
 		if(t.isTowerFast()){
 			tempTower = (TowerFast)t;
 		}
@@ -278,6 +268,7 @@ public class MapGrid extends JPanel implements MouseListener, IObserver{
 		else if(t.isTowerStrong()){
 			tempTower = (TowerStrong)t;
 		}
+		// Gets the upgrade level of the tower and chooses the correct colour for the base
 		int upgradeLevel=t.getUpgraded();
 		if(upgradeLevel==0){ // Level 1
 			return Color.LIGHT_GRAY;
@@ -299,6 +290,8 @@ public class MapGrid extends JPanel implements MouseListener, IObserver{
 	 * @param g The Graphics component
 	 */
 	public void drawTriangle(int exitPoint, int icoor, int jcoor, Graphics g){
+		// Setting up the x and y points for to draw triangles depending on which direction the path is going to
+		// The exit does not have an exit point so there is no triangle to show direction
 		switch(exitPoint){
 			// North
 			case 0:
@@ -339,12 +332,7 @@ public class MapGrid extends JPanel implements MouseListener, IObserver{
 			default:
 				break;
 		}
-		/*
-		for(int i=0;i<xpoints.length;i++){
-			System.out.println(xpoints[i]+ " " + ypoints[i]);
-		}
-		*/
-		// g.setColor(Color.WHITE); // Always set a color before drawing
+
 		float[] triangleColour = new float[3];
 		triangleColour = Color.RGBtoHSB(198, 99, 0, new float[3]);
 		g.setColor(Color.getHSBColor(triangleColour[0], triangleColour[1], triangleColour[2]));
@@ -433,10 +421,10 @@ public class MapGrid extends JPanel implements MouseListener, IObserver{
 	 */
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
+		// These were fliped so that xcor 
 		ycor = e.getX()-xOffset;
 		xcor = e.getY()-yOffset;
-		// TODO: Catch exception where clicked outside of area
+
 		if(startSet && !playing){
 			// System.out.println("X: " + e.getX() + "\tY: " + e.getY());
 			/*
