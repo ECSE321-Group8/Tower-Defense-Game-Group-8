@@ -421,7 +421,7 @@ public class MapGrid extends JPanel implements MouseListener, IObserver{
 	 */
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		// These were fliped so that xcor 
+		// These were flipped so that xcor could represent the columns of the 2-D array and ycor the rows
 		ycor = e.getX()-xOffset;
 		xcor = e.getY()-yOffset;
 
@@ -436,50 +436,42 @@ public class MapGrid extends JPanel implements MouseListener, IObserver{
 			ycor = ycor/gridSize;
 			System.out.println("X: " + xcor + "\tY: " + ycor);
 			
-			//X AND Y COORDINATE ARE INVERTED!!! 
-			//Y=WIDTH and X=HEIGHT
-
-			if (myMap.getGrid(xcor,ycor)==null)//||myMap.getGrid(ycor, xcor).isScenery())
+			// To place or remove a path during the editing of a Map (in case the keyboard listener stops working; had that issue before)
+			if (myMap.getGrid(xcor,ycor)==null)
 				myMap.setCellToPath(xcor*Map.getWidth()+ycor);
 			else if(myMap.getGrid(xcor, ycor).isPath()){
 				myMap.deleteLastPathTile();
 				setCompletedView(false);
 			}
-				
-				
+			
+			// For debugging purposes: To see if the correct thing was added to the Map
+//			myMap.printGrid();
+//			myMap.printPath();
+//			System.out.println();
 
-			
-			myMap.printGrid();
-			myMap.printPath();
-			System.out.println();
-			//add path Tile METHOD
-			//delete 
-			
-			//TODO Might have to move this
 			repaint();
-			// start = false;
 		}
 		else{
-			System.out.println("In the game mode!");
+			// When in the game mode ... 
+			// System.out.println("In the game mode!");
 			xcor = xcor/gridSize;
 			ycor = ycor/gridSize;
+			// If the Scenery is selected ...
 			if(myMap.getGrid(xcor, ycor).isScenery()){
 				Scenery tempScenery = (Scenery)myMap.getGrid(xcor, ycor);
 				System.out.println("Is Scenery");
-				if(!tempScenery.isTowerPresent()){
+				if(!tempScenery.isTowerPresent()){ // To purchase a tower
 					layout.show(myOptions, "Tower Purchase");
 				}
-				else{
+				else{ // To change tower options
 					/*
 					System.out.println("Removed Tower");
-					tempScenery.towerRemoved();
-					repaint();
 					*/
 					layout.show(myOptions, "Tower");
 				}
 				setVisible(true);
 			}
-			else{
+			else{// Inspect the critters
 				System.out.println("Is Path");
 				layout.show(myOptions, "Critter");
 			}

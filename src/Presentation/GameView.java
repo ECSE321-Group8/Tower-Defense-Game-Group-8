@@ -507,18 +507,20 @@ public class GameView extends JFrame implements KeyListener, ActionListener, IOb
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		if(e.getActionCommand() == "Change"){
-			System.out.println("Changed!");
-			changeCounter++;
-			if(changeCounter>cardLayoutLabels.size()-1){
-				changeCounter = 0;
-			}
-			layout.show(options, cardLayoutLabels.get(changeCounter));
-			setVisible(true);
-		}
-		else if(e.getSource() == start){
-			System.out.println("Pressed Start");
+		
+		// This button was used to see how all the views would look like on the left side of the SplitPane
+//		if(e.getActionCommand() == "Change"){
+//			System.out.println("Changed!");
+//			changeCounter++;
+//			if(changeCounter>cardLayoutLabels.size()-1){
+//				changeCounter = 0;
+//			}
+//			layout.show(options, cardLayoutLabels.get(changeCounter));
+//			setVisible(true);
+//		}
+		// To start the Editing the Map
+		if(e.getSource() == start){
+			// System.out.println("Pressed Start");
 			try{
 				rows = Integer.parseInt(tRows.getText());
 				columns =  Integer.parseInt(tColumns.getText());
@@ -537,8 +539,6 @@ public class GameView extends JFrame implements KeyListener, ActionListener, IOb
 				edit.setEnabled(true);
 				tRows.setEditable(false);
 				tColumns.setEditable(false);
-				//myMap=Map.getInstance();
-				// myMap.setMap(rows,columns);
 				mG.setDimensions(rows, columns);
 				myMap.setMap(rows, columns);
 				myMap.setCompletePath(false);
@@ -548,8 +548,9 @@ public class GameView extends JFrame implements KeyListener, ActionListener, IOb
 				setVisible(true);
 			}
 		}
+		// Start Playing the Game
 		else if(e.getSource() == play){
-			System.out.println("Start Playing Game");
+			// System.out.println("Start Playing Game");
 			open.setEnabled(false);
 			mG.setPlaying(true);
 			myMap.openMap(tMapName1.getText());
@@ -562,21 +563,15 @@ public class GameView extends JFrame implements KeyListener, ActionListener, IOb
 			
 			myGame = Game.getInstance();
 			myGame.setGame();
-			//myGame.addObserver(myGame.getCritterWave());
-			// myGame.addObserver(myGame.getMytowerlist());
 			myGame.addObserver(myInfo);
 			myGame.addObserver(mG);
 			currentLevel = myGame.getLevel();
 			myGame.startLevel();
-//			new GameTimer(myGame);
-			// myGame();
 			play.setEnabled(false);
 			setVisible(true);
 		}
+		// Start New Wave
 		else if(e.getSource() == startNewWave){
-//			if(myGame.getLevel()==0){
-//				startNewWave.setEnabled(false);
-//			}
 			if(myGame.getLevel()!=1 && !myGame.isInWave()){
 				myGame.startLevel();
 			}
@@ -585,9 +580,11 @@ public class GameView extends JFrame implements KeyListener, ActionListener, IOb
 				play.setEnabled(true);
 			}
 		}
+		// Edit the Map
 		else if(e.getSource()==edit){
 			save.setEnabled(false);
 		}
+		// Edit a Map which was already saved
 		else if(e.getSource()==editAgain){
 			// This is were we open the Map to re edit
 			myMap.openMap(tMapName1.getText());
@@ -602,6 +599,7 @@ public class GameView extends JFrame implements KeyListener, ActionListener, IOb
 			layout.show(options, "Editing");
 			setVisible(true);
 		}
+		// Finalize the Map
 		else if(e.getSource() == finalize){
 			save.setEnabled(true);
 			edit.setEnabled(true);
@@ -609,21 +607,21 @@ public class GameView extends JFrame implements KeyListener, ActionListener, IOb
 			mG.setCompletedView(true);
 			mG.repaint();
 		}
+		// Open the Map
 		else if(e.getSource() == open){
-			System.out.println("Pressed Open");
+			// System.out.println("Pressed Open");
 			layout.show(options, "Opening");
 			editAgain.setEnabled(true);
 			setVisible(true);
 		}
+		// Save the Map
 		else if(e.getSource()==save){
 			myMap.saveMap(tMapName.getText());
 			nameOfMaps.setText(myMap.printMapRecords());
 		}
-//		else if(e.getActionCommand()== "Tower Button"){
-//			System.out.println("Tower Button");
-//		}
+		// Update the Tower Info
 		else if(e.getSource() == towerb){
-			System.out.println("Pressing Tower Name");
+			// System.out.println("Pressing Tower Name");
 			sell.setEnabled(true);
 			upgrade.setEnabled(true);
 			towerStrategy.setEnabled(true);
@@ -633,6 +631,7 @@ public class GameView extends JFrame implements KeyListener, ActionListener, IOb
 			towerStrategy.setSelectedIndex(tempTower.getTargetingStrategy());
 			setVisible(true);
 		}
+		// Upgrade the Tower
 		else if(e.getSource() == upgrade){
 			myTowerList = myGame.getMytowerlist();
 			tempTower = myTowerList.getTower(mG.getXcor(), mG.getYcor());
@@ -643,9 +642,11 @@ public class GameView extends JFrame implements KeyListener, ActionListener, IOb
 				this.update();
 			}
 		}
+		// Critter View
 		else if(e.getActionCommand()== "Critter Button"){
-			System.out.println("Critter Button");
+			// System.out.println("Critter Button");
 		}
+		// Go into the Editing View
 		else if(e.getSource() == newMap){
 			System.out.println("Starting a new Map");
 			tRows.setEditable(true);
@@ -654,29 +655,33 @@ public class GameView extends JFrame implements KeyListener, ActionListener, IOb
 			layout.show(options, "Editing");
 			setVisible(true);
 		}
+		// Going back to Main Menu from Editing View
 		else if(e.getSource() == back){
-			System.out.println("Going back to main Menu");
+			// System.out.println("Going back to main Menu");
 			layout.show(options, "Game");
 			setVisible(true);
 		}
+		// Going back to Main Menu from Game View
 		else if(e.getSource() == back2){
-			System.out.println("Going back to main Menu");
+			// System.out.println("Going back to main Menu");
 			layout.show(options, "Game");
 			setVisible(true);
 		}
+		// Going Make the Game View from the Tower View
 		else if(e.getSource() == back3){
-			System.out.println("Going back to main Menu");
 			layout.show(options, "Opening");
 			setVisible(true);
 		}
+		// Selecting Tower Strategy
 		else if(e.getSource() == towerStrategy){
-			System.out.println("The Selected Strategy was: " + towerStrategy.getSelectedIndex());
+			// System.out.println("The Selected Strategy was: " + towerStrategy.getSelectedIndex());
 			myTowerList = myGame.getMytowerlist();
 			tempTower = myTowerList.getTower(mG.getXcor(), mG.getYcor());
 			tempTower.setTargetingStrategy(towerStrategy.getSelectedIndex());
 			fillTowerInfo(tempTower);
 			setVisible(true);
 		}
+		// Selling Tower
 		else if(e.getSource() == sell){
 			myTowerList = myGame.getMytowerlist();
 			tempScenery = (Scenery)myMap.getGrid(mG.getXcor(), mG.getYcor());
@@ -694,8 +699,9 @@ public class GameView extends JFrame implements KeyListener, ActionListener, IOb
 		 * Strong Tower: 2
 		 * Sniper Tower: 0
 		 */
+		// Buying Fast Tower
 		else if(e.getSource() == FastTower){
-			System.out.println("Adding Fast Tower");
+			// System.out.println("Adding Fast Tower");
 			
 			myTowerList = myGame.getMytowerlist();
 			if(myTowerList.buyTower(1, mG.getXcor(), mG.getYcor())){
@@ -709,6 +715,7 @@ public class GameView extends JFrame implements KeyListener, ActionListener, IOb
 				mG.repaint();
 			}
 		}
+		// Buying Strong Tower
 		else if(e.getSource() == strongTower){
 			System.out.println("Adding Strong Tower");
 			myTowerList = myGame.getMytowerlist();
@@ -725,6 +732,7 @@ public class GameView extends JFrame implements KeyListener, ActionListener, IOb
 			layout.show(options, "Opening");
 			setVisible(true);
 		}
+		// Buying Sniper Tower
 		else if(e.getSource() == sniperTower){
 			System.out.println("Adding Sniper Tower");
 			myTowerList = myGame.getMytowerlist();
@@ -741,6 +749,7 @@ public class GameView extends JFrame implements KeyListener, ActionListener, IOb
 			layout.show(options, "Opening");
 			setVisible(true);
 		}
+		// Going back from the Tower Purchase to the Game opening
 		else if(e.getSource() == cancel){
 			layout.show(options, "Opening");
 			setVisible(true);
@@ -750,7 +759,6 @@ public class GameView extends JFrame implements KeyListener, ActionListener, IOb
 	}
 	
 	private void fillTowerInfo(Tower t) {
-		// TODO Auto-generated method stub3
 		// System.out.println("Range: " + t.getRange() + "\nCooldown: " + t.getCooldown() + "\nShot Power: "+t.getShotpower());
 		towerStats.setText("Range: " + t.getRange() + "\nCooldown: " + t.getCooldown() + "\nShot Power: "+t.getShotpower()+ "\nUpgrade Level: " + t.getUpgraded()+"\nStrategy: "+t.getTargetingStrategy());
 		setVisible(true);
@@ -761,49 +769,29 @@ public class GameView extends JFrame implements KeyListener, ActionListener, IOb
 	 */
 	@Override
 	public void keyPressed(KeyEvent b) {
-		// TODO Auto-generated method stub
+		// Arrow keys use to place the Map
 		if(b.getKeyCode() == KeyEvent.VK_UP){
-			System.out.println("UP!");
-			/*
-			mG.setXcor(mG.getXcor()-1);
-			mG.setGrid(mG.getXcor(), mG.getYcor(), 1);
-			mG.repaint();
-			*/
+			// System.out.println("UP!");
 			myMap.setCellToPath(myMap.getCurrentPos()-myMap.getWidth());
 			mG.repaint();
 		}
 		if(b.getKeyCode() == KeyEvent.VK_DOWN){
-			System.out.println("DOWN!");
-			/*
-			mG.setXcor(mG.getXcor()+1);
-			mG.setGrid(mG.getXcor(), mG.getYcor(), 1);
-			mG.repaint();
-			*/
+			// System.out.println("DOWN!");
 			myMap.setCellToPath(myMap.getCurrentPos()+myMap.getWidth());
 			mG.repaint();
 		}
 		if(b.getKeyCode() == KeyEvent.VK_LEFT){
-			System.out.println("LEFT!");
-			/*
-			mG.setYcor(mG.getYcor()-1);
-			mG.setGrid(mG.getXcor(), mG.getYcor(), 1);
-			mG.repaint();
-			*/
+			// System.out.println("LEFT!");
 			myMap.setCellToPath(myMap.getCurrentPos()-1);
 			mG.repaint();
 		}
 		if(b.getKeyCode() == KeyEvent.VK_RIGHT){
-			System.out.println("RIGHT!");
-			/*
-			mG.setYcor(mG.getYcor()+1);
-			mG.setGrid(mG.getXcor(), mG.getYcor(), 1);
-			mG.repaint();
-			*/
+			// System.out.println("RIGHT!");
 			myMap.setCellToPath(myMap.getCurrentPos()+1);
 			mG.repaint();
 		}
 		if(b.getKeyCode() == KeyEvent.VK_BACK_SPACE){
-			System.out.println("BACKSPACE!");
+			// System.out.println("BACKSPACE!");
 			save.setEnabled(false);
 			edit.setEnabled(false);
 			myMap.deleteLastPathTile();
@@ -811,7 +799,7 @@ public class GameView extends JFrame implements KeyListener, ActionListener, IOb
 			mG.repaint();
 		}
 		if(b.getKeyCode() == KeyEvent.VK_ENTER){
-			System.out.println("ENTER!");
+			// System.out.println("ENTER!");
 			save.setEnabled(true);
 			edit.setEnabled(true);
 			myMap.finalizePath();
