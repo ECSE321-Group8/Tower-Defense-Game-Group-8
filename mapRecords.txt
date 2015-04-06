@@ -7,3 +7,7 @@ test5
 test6
 Map 1
 test7test10
+funmap
+funmap2
+test8
+test9
