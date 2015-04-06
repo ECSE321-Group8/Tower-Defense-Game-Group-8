@@ -22,7 +22,7 @@ public class Game extends Subject{
 	}
 
 
-	public Game(){
+	private Game(){
 		
 	}
 	
