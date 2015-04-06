@@ -638,6 +638,9 @@ public class GameView extends JFrame implements KeyListener, ActionListener, IOb
 			tempTower = myTowerList.getTower(mG.getXcor(), mG.getYcor());
 			tempTower.upgrade();
 			fillTowerInfo(tempTower);
+			if(!myGame.isInWave()){
+				mG.repaint();
+			}
 		}
 		else if(e.getActionCommand()== "Critter Button"){
 			System.out.println("Critter Button");
@@ -679,6 +682,9 @@ public class GameView extends JFrame implements KeyListener, ActionListener, IOb
 			tempScenery.towerRemoved();
 			// tempTower = myTowerList.getTower(mG.getXcor(), mG.getYcor());
 			myTowerList.sellTower(myTowerList.getTowerID(mG.getXcor(), mG.getYcor()));
+			if(!myGame.isInWave()){
+				mG.repaint();
+			}
 		}
 		/*
 		 * Tower IDs:
@@ -695,8 +701,10 @@ public class GameView extends JFrame implements KeyListener, ActionListener, IOb
 				tempScenery.placeTower();
 				mG.placeTower();
 			}
-			layout.show(options, "Opening");
-			setVisible(true);
+			if(!myGame.isInWave()){
+				myTowerList.buildtick();
+				mG.repaint();
+			}
 		}
 		else if(e.getSource() == strongTower){
 			System.out.println("Adding Strong Tower");
@@ -705,6 +713,10 @@ public class GameView extends JFrame implements KeyListener, ActionListener, IOb
 				tempScenery = (Scenery)myMap.getGrid(mG.getXcor(), mG.getYcor());
 				tempScenery.placeTower();
 				mG.placeTower();
+			}
+			if(!myGame.isInWave()){
+				myTowerList.buildtick();
+				mG.repaint();
 			}
 			layout.show(options, "Opening");
 			setVisible(true);
@@ -716,6 +728,10 @@ public class GameView extends JFrame implements KeyListener, ActionListener, IOb
 				tempScenery = (Scenery)myMap.getGrid(mG.getXcor(), mG.getYcor());
 				tempScenery.placeTower();
 				mG.placeTower();
+			}
+			if(!myGame.isInWave()){
+				myTowerList.buildtick();
+				mG.repaint();
 			}
 			layout.show(options, "Opening");
 			setVisible(true);
