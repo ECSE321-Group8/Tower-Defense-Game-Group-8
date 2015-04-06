@@ -10,7 +10,6 @@ import java.io.*;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
-import Logic.Map;
 import Logic.*;
 
 public class MapGrid extends JPanel implements MouseListener, IObserver{
@@ -251,15 +250,12 @@ public class MapGrid extends JPanel implements MouseListener, IObserver{
 		// TODO Auto-generated method stub
 		// Would get the type of tower:
 		//int towerType=t.getType();
-		if(t.getType()==1){ // Fast
-			return Color.RED;
-		}
-		else if(t.getType()==0){ // Sniper
-			return Color.BLUE;
-		}
-		else if(t.getType()==2){ // Strong
-			return Color.YELLOW;
-		}
+
+		if (t.isTowerSniper()){return Color.BLUE;}
+		if (t.isTowerFast()){return Color.RED;}
+		if (t.isTowerStrong()){return Color.YELLOW;}
+
+		
 		return null;
 	}
 	
