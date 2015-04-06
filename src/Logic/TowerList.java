@@ -79,7 +79,7 @@ public class TowerList extends ArrayList<Tower> implements IObserver{
 		this.remove(i);
 	}	
 	public void update(){
-		//System.out.println("--enter update");
+		System.out.println("--enter update");
 		for(int i=0; i<this.size(); i++){//++to put in gameclock		
 			this.get(i).tick();//++to put in gameclock
 		}//++t put in gameclock
@@ -87,6 +87,7 @@ public class TowerList extends ArrayList<Tower> implements IObserver{
 	}
 	
 	public Tower getTower(int y, int x){
+		System.out.println("trying to select");
 		for(int i=0; i<this.size(); i++){
 			if(this.get(i).getX() == x){
 				if(this.get(i).getY() == y){
