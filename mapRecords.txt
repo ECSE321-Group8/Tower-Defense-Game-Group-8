@@ -6,7 +6,8 @@ Map15x15
 test5
 test6
 Map 1
-test7test10
+test7
+test10
 funmap
 funmap2
 test8

@@ -6,7 +6,7 @@ import Logic.Map;
 
 
 public class Game extends Subject{
-	private int level =1;
+	private int level;
 	private LinkedList<Path> pathList;
 	private CritterWave wave;
 	private static Game gameInstance= null;
@@ -34,6 +34,7 @@ public class Game extends Subject{
 		//wave= new CritterWave(level);
 		mytowerlist= new TowerList();
 		pathList = new LinkedList<Path>();
+		level =1;
 		money = 100;
 		Life = 10;
 		for (Path p : m.getPath()){

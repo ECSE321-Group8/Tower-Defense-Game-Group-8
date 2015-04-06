@@ -10,7 +10,7 @@ public class GameTimer {
 	public GameTimer(Game game){
 		this.game = game;
 		timer = new Timer();
-		timer.schedule(new Tick(), 0, 100);
+		timer.schedule(new Tick(), 0, 1000);
 	}
 
 	public void endGameTimer(){
