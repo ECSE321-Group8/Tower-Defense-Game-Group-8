@@ -618,6 +618,8 @@ public class GameView extends JFrame implements KeyListener, ActionListener {
 			myTowerList = myGame.getMytowerlist();
 			tempTower = myTowerList.getTower(mG.getXcor(), mG.getYcor());
 			fillTowerInfo(tempTower);
+			towerStrategy.setSelectedIndex(tempTower.getTargetingStrategy());
+			setVisible(true);
 		}
 		else if(e.getSource() == upgrade){
 			myTowerList = myGame.getMytowerlist();
