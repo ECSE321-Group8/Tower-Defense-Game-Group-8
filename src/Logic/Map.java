@@ -539,7 +539,7 @@ public class Map {
 	 * @param name: name given to the Map 
 	 * 
 	 */
-	public void openMap(String name){
+	public boolean openMap(String name){
 		ObjectInputStream inputStream;
 		String path = new File (".").getAbsolutePath();
 		String fileName=path.concat("//Maps//"+name+".txt");
@@ -579,7 +579,7 @@ public class Map {
 			
 			inputStream.close();
 			m.finalizePath();
-	
+			return true; 
 		
 		
 		} catch (FileNotFoundException e) {
@@ -590,7 +590,7 @@ public class Map {
 		//	e.printStackTrace();
 		}
 		
-		
+		return false;
 
 	}
 	/**

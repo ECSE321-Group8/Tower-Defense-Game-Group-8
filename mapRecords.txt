@@ -12,3 +12,4 @@ funmap2
 test8
 test9
 test11
+20x20
