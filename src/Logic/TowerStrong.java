@@ -3,6 +3,7 @@ package Logic;
 public class TowerStrong extends Tower{
 
 	static final int cost=10;	
+	static final int type = 2;	
 	
 	public TowerStrong(int x, int y) {
 		super();
@@ -18,7 +19,7 @@ public class TowerStrong extends Tower{
 		screeny=y;
 		upgraded=0;
 		//g.addMoney(-cost);
-		type=2;
+
 		// TODO Auto-generated constructor stub
 	}	
 	

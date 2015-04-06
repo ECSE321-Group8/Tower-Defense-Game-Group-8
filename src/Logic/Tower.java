@@ -16,11 +16,7 @@ public abstract class Tower {
 	public int screenx;
 	public int screeny;
 	public int upgraded;
-	public int type;
-	
-	public int getType() {
-		return type;
-	}
+
 
 	Game g= Game.getInstance();
 	
