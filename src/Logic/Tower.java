@@ -105,7 +105,8 @@ public abstract class Tower {
 					}			
 			}
 		}}
-		System.out.println("targeting: "+targetcandidate);
+		
+		if(targetcandidate != -1){System.out.println("targeting: "+targetcandidate+" distance of x "+(g.getCritterWave().getCritterInField().get(targetcandidate).getPosX())+" at "+screenx+" "+screeny);}
 		return targetcandidate;//returns coordinates of the target
 		}
 	
