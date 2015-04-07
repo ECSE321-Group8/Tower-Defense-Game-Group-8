@@ -6,39 +6,27 @@ public abstract class Tower {
 	
 	//variables
 	public static int cost;
-
-//	public int pos;//following grid mechanics
 	public int cooldown;//time between shots
 	public int timer;//count down timer to next shot
-	public int range;
-	public int shotpower;
-	public int targetingstrategy;//0=low health,1= farthest ,2=closest,3=first,4=last
-	public int screenx;
-	public int screeny;
-	public int upgraded;
+	public int range;//how far it can shoot
+	public int shotpower;//how much damage
+	public int targetingstrategy;//which targeting strategy
+	public int screenx;//x coord
+	public int screeny;//ycoord
+	public int upgraded;//how upgraded is it
 
 
 	Game g= Game.getInstance();
 	
-	//public abstract void uprgrade();
-	
-	
-/*	public int getPos(){
-		return pos;
-	}
-	public void setPos(int pos){
-		this.pos=pos;
-	}*/
-	
-	public int getCooldown() {
+	public int getCooldown() {//cooldown getter
 		return cooldown;
 	}
 
-	public int getRange() {
+	public int getRange() {//range getter
 		return range;
 	}
 
-	public int getShotpower() {
+	public int getShotpower() {//damage getter
 		return shotpower;
 	}
 	
@@ -54,21 +42,20 @@ public abstract class Tower {
 		}
 	}
 
-	public int targeting(){	
-		int targetcandidate = -1;
+	public int targeting(){	//this method pick a critter id that satisfis the in range alive and on the field criteria and is the best target depending on the strategy
+		int targetcandidate = -1;//default is no valid target
 		int distance = 0;
-		//System.out.println("--targeting-possible targets"+g.getCritterWave().getCritterInField().size());
-		for(int i = 0; i < g.getCritterWave().getCritterInField().size(); i++) {
-			if ((g.getCritterWave().getCritterInField().get(i).isAlive())) {
+		for(int i = 0; i < g.getCritterWave().getCritterInField().size(); i++) {//cycles through all the critters on the field
+			if ((g.getCritterWave().getCritterInField().get(i).isAlive())) {//will not proceed with already dead criters
 				Critter mycritter = g.getCritterWave().getCritterInField().get(i);
-				distance = (int)(Math.pow(mycritter.getPosX() - screenx, 2) + Math.pow(mycritter.getPosY() - screeny, 2));
+				distance = (int)(Math.pow(mycritter.getPosX() - screenx, 2) + Math.pow(mycritter.getPosY() - screeny, 2));//checks if inn range
 				if (distance <= (int)Math.pow(range, 2)){
 					//System.out.println("in range"+i);
-					if (targetcandidate == -1){
+					if (targetcandidate == -1){//it has met criteria, if there are no other valid targets found yet, it is the target
 						targetcandidate = i;
 						//System.out.println("found valid target"+i);
 					}
-					else{
+					else{// these cases will compare the current target with the next valid criter in the list to see which is a better target, depending on the targeting strategy
 						switch(targetingstrategy){
 							case 0://closest 
 								if(distance < (Math.pow(g.getCritterWave().getCritterInField().get(targetcandidate).getPosX()-screenx,2) + Math.pow(g.getCritterWave().getCritterInField().get(targetcandidate).getPosY()-screenx,2))){
@@ -116,7 +103,7 @@ public abstract class Tower {
 		if (target == -1) {  //if no valid targets, firesequence fails
 			return false;
 		} else{
-			g.getCritterWave().getCritterInField().get(target).updateHealth(shotpower);
+			g.getCritterWave().getCritterInField().get(target).updateHealth(shotpower);//if there is a target, shoot it
 			//System.out.println("--shot"+target);
 			return true;
 		}
@@ -125,25 +112,28 @@ public abstract class Tower {
 	public boolean upgrade(){
 		System.out.println("upgrade?money?"+g.getMoney()+"already upgrade?"+upgraded);
 		boolean success=false;
-		if (g.getMoney()>(cost-30)){
-			//System.out.println("money?"+g.getMoney()+"already upgrade?"+upgraded);
+		boolean allowable = false;//check the cost, depending on the type of tower
+		if ((this.isTowerFast()) && ((int)((0.5)*(TowerFast.cost)))<= g.getMoney()){allowable=true;}
+		if ((this.isTowerSniper()) && ((int)((0.5)*(TowerSniper.cost)))<= g.getMoney()){allowable=true;}
+		if ((this.isTowerStrong()) && ((int)((0.5)*(TowerStrong.cost)))<= g.getMoney()){allowable=true;}
+		if (allowable){
 			switch(upgraded){
-			case 0:
+			case 0://level 1 increase range
 				range +=1;
 				success =  true;
 				break;
-			case 1:
+			case 1://level 2 increase damage
 				shotpower += 1;
 				success =  true;
 				break;
-			case 2:
+			case 2://maxfor now
 				//cooldown -= 1;
 				//if(cooldown<1){cooldown = 1;}
 				success =  false;
 				break;
-			case 3:
-				success =  false;
-				break;
+			//case 3:
+				//success =  false;
+				//break;
 			}
 		}
 		if (success){
@@ -156,11 +146,11 @@ public abstract class Tower {
 		return success;
 	}
 	
-	public int getTargetingStrategy(){
+	public int getTargetingStrategy(){//getter tagetingstrategr
 		return targetingstrategy;
 	}
 	
-	public void setTargetingStrategy(int n){
+	public void setTargetingStrategy(int n){//setter tagetingstrategr
 		if ((n >= 0)&&(n <= 5)){
 			targetingstrategy = n;
 			System.out.println("###changed strategy");
@@ -168,14 +158,14 @@ public abstract class Tower {
 		}
 	}
 	
-	public int getX(){
+	public int getX(){//getter screenx
 		return screenx;
 	}
 	
-	public int getY(){
+	public int getY(){//getter screeny
 		return screeny;
 	}
-	public int getCost(){
+	public int getCost(){//getter of cost
 		return cost;
 	}
 	
@@ -204,22 +194,8 @@ public abstract class Tower {
 			return false;
 	}
 
-	public int getUpgraded() {
+	public int getUpgraded() {//getter upgraded
 		return upgraded;
 	}
-	
-	/*
-	 * Method that returns the Row coordinate of the tower
-	 */
-//	public int getRow(){
-//		return (pos/Map.getWidth());
-//	}
-
-	/*
-	 * Method that returns the Col coordinate of the tower 
-	 */
-//	public int getCol(){
-//		return pos%(Map.getWidth());
-//	}
 	
 }
