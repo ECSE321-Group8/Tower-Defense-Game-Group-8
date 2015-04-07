@@ -179,13 +179,6 @@ public abstract class Tower {
 		return cost;
 	}
 	
-	public boolean isTowerRegular(){
-		if(this instanceof TowerRegular){
-			return true;
-		}
-		else
-			return false;
-	}
 	
 	public boolean isTowerSniper(){
 		if(this instanceof TowerSniper){
