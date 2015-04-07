@@ -1,7 +1,6 @@
 test1
 test2
 test3
-Map15x15
 10x10
 test5
 test6
@@ -15,3 +14,4 @@ test9
 test11
 20x20
 big
+map
