@@ -32,7 +32,8 @@ public class CritterTest {
 		m.printGrid();
 		m.printPath();
 		
-		wave= new CritterWave(1);
+		wave= new CritterWave();
+		wave.setWave(2);
 		for (Path p: wave.getPath())
 			System.out.println(p.getPos());
 
